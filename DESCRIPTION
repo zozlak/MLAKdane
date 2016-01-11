@@ -7,10 +7,10 @@ Description: Pakiet do zlaczania danych z rejestrow ZUS i uczelni.
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends:
+Imports:
   dplyr,
-  foreign,
-  reshape2,
-  openxlsx,
-  multidplyr
+  openxlsx
 Suggests:
-  testthat
+  testthat,
+  multidplyr
+Encoding: UTF-8

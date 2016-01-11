@@ -1,4 +1,6 @@
 #' Przygotowuje słownik jednostek
+#' @param rok rok, który zostanie przypisany jednostkom (gdy NA, obecny rok)
+#' @export
 #' @import dplyr
 przygotuj_jednostki = function(rok = NA){
   sl_jednostki = openxlsx::readWorkbook('dane/sl_instytucje.xlsx')

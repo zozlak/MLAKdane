@@ -1,3 +1,9 @@
+#' oblicza zmienne NMLE oraz NMLEP
+#' @param okienko dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
+#' @param utrataEtatu dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 oblicz_utrata_etatu = function(okienko, utrataEtatu){
   stopifnot(
     is(okienko, 'okienko_df'),

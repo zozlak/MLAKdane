@@ -1,3 +1,9 @@
+#' oblicza zmienne wywodzone z wcześniej policzonych zmiennych
+#' @param dane połączone dane na poziomie (zdau) wygenerowane za pomocą innych
+#'   funkcji
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 oblicz_zmienne_pochodne = function(dane){
   stopifnot(
     is(dane, 'absolwent_df')
@@ -21,8 +27,8 @@ oblicz_zmienne_pochodne = function(dane){
       ezard       = ~ sz / nmp,
       ezard_v2    = ~ sz / len,
       ezubazyd    = ~ sze / nme,
-      mnprd       = ~ nmb / len,
-      mnprud      = ~ (len - nme) / len,
+      mnprd       = ~ (len - czasprd) / len,
+      mnprud      = ~ (len - czasprud) / len,
       pbezd       = ~ nmb / len,
       pbezd_v2    = ~ nmb_v2 / len,
       zilorazd    = ~ ezard / gezbazyd,
@@ -30,20 +36,20 @@ oblicz_zmienne_pochodne = function(dane){
       bilod       = ~ pbezd / gbezd
     ) %>%
     mutate_(
-      eem         = ~ ifelse(is.finite(eem), eem, 0),
-      eemp        = ~ ifelse(is.finite(eemp), eemp, 0),
-      emle        = ~ ifelse(is.finite(emle), emle, 0),
-      endn        = ~ ifelse(is.finite(endn), endn, 0),
-      ennn        = ~ ifelse(is.finite(ennn), ennn, 0),
+      eem         = ~ ifelse(is.finite(eem), eem, NA),
+      eemp        = ~ ifelse(is.finite(eemp), eemp, NA),
+      emle        = ~ ifelse(is.finite(emle), emle, NA),
+      endn        = ~ ifelse(is.finite(endn), endn, NA),
+      ennn        = ~ ifelse(is.finite(ennn), ennn, NA),
       eprndawd    = ~ ifelse(is.finite(eprndawd), eprndawd, 0),
       eprudawd    = ~ ifelse(is.finite(eprudawd), eprudawd, 0),
       ezard       = ~ ifelse(is.finite(ezard), ezard, 0),
-      ezard_v2    = ~ ifelse(is.finite(ezard_v2), ezard_v2, 0),
+      ezard_v2    = ~ ifelse(is.finite(ezard_v2), ezard_v2, NA),
       ezubazyd    = ~ ifelse(is.finite(ezubazyd), ezubazyd, 0),
-      mnprd       = ~ ifelse(is.finite(mnprd), mnprd, 0),
-      mnprud      = ~ ifelse(is.finite(mnprud), mnprud, 0),
-      pbezd       = ~ ifelse(is.finite(pbezd), pbezd, 0),
-      pbezd_v2    = ~ ifelse(is.finite(pbezd_v2), pbezd_v2, 0),
+      mnprd       = ~ ifelse(is.finite(mnprd), mnprd, NA),
+      mnprud      = ~ ifelse(is.finite(mnprud), mnprud, NA),
+      pbezd       = ~ ifelse(is.finite(pbezd), pbezd, NA),
+      pbezd_v2    = ~ ifelse(is.finite(pbezd_v2), pbezd_v2, NA),
       zilorazd    = ~ ifelse(is.finite(zilorazd), zilorazd, 0),
       zilorazd_v2 = ~ ifelse(is.finite(zilorazd_v2), zilorazd_v2, 0),
       bilod       = ~ ifelse(is.finite(bilod), bilod, 0)

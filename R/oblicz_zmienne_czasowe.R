@@ -1,3 +1,9 @@
+#' oblicza zmienne związane z czasem, który upłynął od momentu uzyskania dyplomu
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
+#' @param utrataEtatu dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 oblicz_zmienne_czasowe = function(dane, utrataEtatu){
   stopifnot(
     is(dane, 'okienko_df')

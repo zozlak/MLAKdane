@@ -1,3 +1,8 @@
+#' oblicza zmienne KONT oraz STUDYP*
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 oblicz_studyp = function(dane){
   stopifnot(
     is(dane, 'zdau_df')
@@ -15,7 +20,7 @@ oblicz_studyp = function(dane){
     filter_(~ poziom %in% 1 & typ %in% 'A') %>%
     select_('id_zdau', 'id', 'uczelnia_id', 'jednostka_id') %>%
     left_join(
-      zdau %>%
+      dane %>%
         filter_(~ poziom %in% 2) %>%
         select_('id', 'uczelnia_id', 'jednostka_id', 'forma') %>%
         rename_(uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma')

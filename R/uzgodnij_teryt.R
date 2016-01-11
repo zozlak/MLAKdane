@@ -1,3 +1,10 @@
+#' uzgadnia TERYT
+#' @description
+#' W razie niezgodności zwraca najbliższą wspólną JST (powiat, województwo bądz
+#' Polskę)
+#' @param teryt wektor kodów TERYT
+#' @return numeric uzgodniony kod TERYT
+#' @export
 uzgodnij_teryt = function(teryt){
   potega = 0
   while(length(unique(teryt)) > 1){

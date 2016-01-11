@@ -1,3 +1,12 @@
+#' przyłącza dane powiatów do danych PNA i agreguje je tak, by (rok, pna) było
+#' unikalne
+#' @param pna dane PNA wygenerowane za pomocą funkcji \code{\link{przygotuj_pna}}
+#' @param powiaty dane powiatów wygenerowane za pomocą funkcji \code{\link{przygotuj_powiaty}}
+#' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')
+#' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')
+#' @return data.frame wyliczone dane
+#' @export
+#' @import dplyr
 polacz_pna_powiaty = function(pna, powiaty, dataMin, dataMax){
   stopifnot(
     is(pna, 'pna_df'),

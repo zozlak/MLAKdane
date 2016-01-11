@@ -1,37 +1,79 @@
+---
+title: "Generowanie danych"
+author: "Mateusz Żółtak"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+```
+
+# Przygotowanie danych
+
+## Przygotowujemy dane zus, statystyki z BNL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
+
+```{r}
 dataMin = '2014-01-01'
 dataMax = '2015-09-30'
+
 pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 jednostki = przygotuj_jednostki() # t2
-# zus = przygotuj_zus(dataMin, dataMax) # t3
-# save(zus, file = 'cache/ZUS.RData', compress = TRUE)
-load('cache/ZUS.RData')
-# utrataEtatu = przygotuj_utrata_pracy(zus, dataMax) # t4
-# save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
-load('cache/utrataEtatu.RData')
 zdau = przygotuj_zdau() # t5
-baza = polacz_zus_zdau(zus, zdau, pnaPowiaty) # t6
+zus = przygotuj_zus(dataMin, dataMax) # t3
+# save(zus, file = 'cache/ZUS.RData', compress = TRUE)
+# load('cache/ZUS.RData')
+```
 
+## Wyliczamy pomocniczy zbiór etat etatu i złączamy dane ZUS z danymi OPI
+
+```{r}
+utrataEtatu = przygotuj_utrata_pracy(zus, dataMax) # t4
+# save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
+# load('cache/utrataEtatu.RData')
+baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax) # t6
+```
+
+# Wyliczamy zmienne
+
+## Zmienne z grupy STUDYP
+
+Zmienne KONT oraz STUDYP* są niezależne od okienka czasu, wyliczamy je więc oddzielnie:
+```{r}
 studyp = oblicz_studyp(zdau) # t7
+```
 
-okienkoMin = 0
-okienkoMax = 1000
-okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax) # t8
-# save(okienko, file = 'cache/okienko.RData', compress = TRUE)
-# load('cache/okienko.RData')
+## Zmienne zależące od okienka czasu
 
-czas = oblicz_zmienne_czasowe(okienko, utrataEtatu) # t9
-abs1 = oblicz_absolwent(okienko) # t10
-abs2 = oblicz_absolwent_okres(okienko) # t11
-nnn  = oblicz_nowi_pracodawcy(okienko) # t12
-nmle = oblicz_utrata_etatu(okienko, utrataEtatu) # t13
-zam  = oblicz_zamieszkanie(okienko, jednostki, okienkoMin) # t14
-razem = abs1 %>% # t15
-  full_join(abs2) %>%
-  full_join(nnn) %>%
-  full_join(nmle) %>%
-  full_join(zam) %>%
-  full_join(czas) %>%
-  left_join(oblicz_okienko(zdau, okienkoMin, okienkoMax, dataMin, dataMax)) # left_join, bo zdau zawiera też nieabsolwentów
-#rm(abs1, abs2, nnn, nmle, zam, czas)
-razem = oblicz_zmienne_pochodne(razem) # t16
-save(razem, file = 'cache/razem.RData', compress = TRUE)
+```{r}
+okienkaMin = c(-11, 1, 13, 1)
+okienkaMax = c(0, 12, 24, 1000)
+magazyn = list()
+for(i in seq_along(okienkaMin)){
+  okienkoMin = okienkaMin[i]
+  okienkoMax = okienkaMax[i]
+  cat(okienkoMin, '-', okienkoMax)
+
+  okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax) # t8
+
+  czas = oblicz_zmienne_czasowe(okienko, utrataEtatu) # t9
+  abs1 = oblicz_absolwent(okienko) # t10
+  abs2 = oblicz_absolwent_okres(okienko) # t11
+  nnn  = oblicz_nowi_pracodawcy(okienko) # t12
+  nmle = oblicz_utrata_etatu(okienko, utrataEtatu) # t13
+  zam  = oblicz_zamieszkanie(okienko, jednostki, okienkoMax == 1000) # t14
+  razem = abs1 %>% # t15
+    full_join(abs2) %>%
+    full_join(nnn) %>%
+    full_join(nmle) %>%
+    full_join(zam) %>%
+    full_join(czas) %>%
+    left_join(oblicz_okienko(zdau, okienkoMin, okienkoMax, dataMin, dataMax)) # left_join, bo zdau zawiera też nieabsolwentów
+  rm(czas, abs1, abs2, nnn, nmle, zam)
+  magazyn[[i]] = oblicz_zmienne_pochodne(razem) # t16
+  # save(razem, file = 'cache/razem.RData', compress = TRUE)
+}
+```
+
+## Złączamy zmienne zależne od okienka czasu
+
+# Dołączamy dane jednostek i zapisujemy wynik

@@ -1,5 +1,9 @@
-#' oblicza zmienne NMLE oraz NMLEP
-#' @param dane zbiór zdau (plus zmienne okresMin i okresMax) zus
+#' oblicza zmienne utraty pracy, używane do wyliczania zmiennych NMLE oraz NMLEP
+#' @param zus dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zus}}
+#' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 przygotuj_utrata_pracy = function(zus, dataMax){
   stopifnot(
     is(zus, 'zus_df')

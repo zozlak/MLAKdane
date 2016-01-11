@@ -1,4 +1,13 @@
-polacz_zus_zdau = function(zus, zdau, pnaPowiaty){
+#' łączy dane zus i zdau
+#' @param zus dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zus}}
+#' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
+#' @param pnaPowiaty dane wygenerowane za pomocą funkcji \code{\link{polacz_pna_powiaty}}
+#' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')
+#' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
+polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
   stopifnot(
     is(zus, 'zus_df'),
     is(zdau, 'zdau_df')
@@ -25,7 +34,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty){
       etat     = ~ ifelse(is.na(etat), 0, etat),
       netat    = ~ ifelse(is.na(netat), 0, netat),
       samoz    = ~ ifelse(is.na(samoz), 0, samoz),
-      bezrob   = ~ ifelse(is.na(bezrob), 0, bezrob),
+      bezrob   = ~ ifelse(is.na(bezrob), 1, bezrob),
       rentemer = ~ ifelse(is.na(rentemer), 0, rentemer),
       student  = ~ ifelse(is.na(student), 0, student),
       prawnik  = ~ ifelse(is.na(prawnik), 0, prawnik),

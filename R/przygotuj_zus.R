@@ -4,8 +4,10 @@
 #' tytułach ubezpieczeń, itp.
 #' @param dataMin pierwszy uwzględniany okres składkowy
 #' @param dataMax ostatni uwzględniany okres składkowy
+#' @export
+#' @import dplyr
 przygotuj_zus = function(dataMin, dataMax){
-  zus_tytuly_ubezp = readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
+  zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%
     rename_(id_tytulu = 'KOD') %>%
     mutate_each(funs_('as.numeric'))

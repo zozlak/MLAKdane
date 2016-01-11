@@ -1,3 +1,13 @@
+#' ustawia zmienne okienka czasowego (okres_min, okres_max, len)
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
+#'   lub \code{\link{przygotuj_zdau}}
+#' @param okienkoMin pierwszy miesiąc okienka względem daty uzyskania dyplomu
+#' @param okienkoMax ostatni miesiąc okienka względem daty uzyskania dyplomu
+#' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')
+#' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 oblicz_okienko = function(dane, okienkoMin, okienkoMax, dataMin, dataMax){
   stopifnot(
     is(dane, 'baza_df') | is(dane, 'zdau_df'),

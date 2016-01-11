@@ -1,4 +1,6 @@
-#' Przygotowuje powiatowe dane o bezrobociu i zarobkach
+#' przygotowuje powiatowe dane o bezrobociu i zarobkach
+#' @export
+#' @import dplyr
 przygotuj_powiaty = function(){
   miesiace = setNames(1:12, c('styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień'))
 

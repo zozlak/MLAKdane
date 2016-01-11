@@ -1,3 +1,8 @@
+#' oblicza zmienne generowane z poziomu (zus x zdau) przez poziom (zdau x okres) na poziom (zdau)
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 oblicz_absolwent_okres = function(dane){
   stopifnot(
     is(dane, 'okienko_df')

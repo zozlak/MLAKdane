@@ -1,4 +1,11 @@
-oblicz_zamieszkanie = function(dane, jednostki, okienkoMin){
+#' oblicza zmienne związane z miejscem zamieszkania
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
+#' @param jednostki dane wygenerowane za pomocą funkcji \code{\link{przygotuj_jednostki}}
+#' @param wMomDyplomu czy wyliczyć w momencie dyplomu czy dla końca okienka
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
+oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu){
   stopifnot(
     is(dane, 'okienko_df')
   )
@@ -12,7 +19,7 @@ oblicz_zamieszkanie = function(dane, jednostki, okienkoMin){
     select_('-teryt')
 
   dane = dane %>%
-    filter_(~ okres == ifelse(okienkoMin == 0, okres_min, okres_max)) %>%
+    filter_(~ okres == ifelse(wMomDyplomu, data_zak, okres_max)) %>%
     left_join(jednostki) %>%
     mutate_(
       jpdzam = ~ ifelse(

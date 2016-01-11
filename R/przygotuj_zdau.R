@@ -1,6 +1,8 @@
 #' Przygotowuje plik ZDAU
 #' @description
 #' ZDAU to plik z uczelni, w którym jednostką jest student na kierunku studiów
+#' @export
+#' @import dplyr
 przygotuj_zdau = function(){
   zdau = read.csv2('dane/ZDAU.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
   colnames(zdau) = tolower(c('ID', 'CZY_PESEL', 'TYP', 'CUDZOZIEMIEC', 'LICZBA_REKORDÓW', 'UCZELNIA_ID', 'JEDNOSTKA_ID', 'KIERUNEK_ID', 'ISM_ID', 'FORMA', 'POZIOM', 'PROFIL', 'ROK_OD', 'MIES_OD', 'ROK_DO', 'MIES_DO'))

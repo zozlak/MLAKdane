@@ -1,5 +1,8 @@
 #' oblicza zmienne NNDN oraz NNNN
-#' @param połączone zbiory zdau (plus zmienna okresMin) oraz zus
+#' @param dane zbiór danych wygenerowany funkcją \code{\link{oblicz_okienko}}
+#' @return data.frame wyliczone zmienne
+#' @export
+#' @import dplyr
 oblicz_nowi_pracodawcy = function(dane){
   stopifnot(
     is(dane, 'okienko_df')
@@ -25,7 +28,7 @@ oblicz_nowi_pracodawcy = function(dane){
     )
 
   nnnn = nnn %>%
-    filter_(~ etat %in% 0 & przed == FALSE) %>%
+    filter_(~ netat %in% 1 & przed == FALSE) %>%
     anti_join(poprzedni) %>%
     group_by_('id_zdau') %>%
     summarize_(
