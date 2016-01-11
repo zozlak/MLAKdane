@@ -1,6 +1,6 @@
 oblicz_okienko = function(dane, okienkoMin, okienkoMax, dataMin, dataMax){
   stopifnot(
-    is(dane, 'baza_df'),
+    is(dane, 'baza_df') | is(dane, 'zdau_df'),
     is.vector(okienkoMin), is.numeric(okienkoMin), length(okienkoMin) == 1, all(!is.na(okienkoMin)),
     is.vector(okienkoMax), is.numeric(okienkoMax), length(okienkoMax) == 1, all(!is.na(okienkoMax)),
     is.vector(dataMin), is.character(dataMin), length(dataMin) == 1, all(!is.na(dataMin)),

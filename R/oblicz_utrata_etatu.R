@@ -14,6 +14,6 @@ oblicz_utrata_etatu = function(okienko, utrataEtatu){
       nmlep = ~ sum(utretatu_v2, na.rm = TRUE)
     )
 
-  class(nmle) = c('absolwent_df', class(dane))
+  class(nmle) = c('absolwent_df', class(nmle))
   return(nmle)
 }
