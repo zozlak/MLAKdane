@@ -4,9 +4,11 @@
 #' tytułach ubezpieczeń, itp.
 #' @param dataMin pierwszy uwzględniany okres składkowy
 #' @param dataMax ostatni uwzględniany okres składkowy
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
+#'   multidplyr
 #' @export
 #' @import dplyr
-przygotuj_zus = function(dataMin, dataMax){
+przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%
     rename_(id_tytulu = 'KOD') %>%
@@ -40,7 +42,8 @@ przygotuj_zus = function(dataMin, dataMax){
       pna = ~ifelse(is.na(pna), 0, pna),
       data_od = ~ substring(as.character(data_od), 1, 7),
       data_do = ~ substring(as.character(data_do), 1, 7)
-    )
+    ) %>%
+    collect()
 
   # dane z rozliczeń
   zdu3 = read.csv2('dane/ZDU3.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
@@ -55,9 +58,13 @@ przygotuj_zus = function(dataMin, dataMax){
     zdu3 %>% select_('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_em') %>% rename_(podst = 'podst_em') %>% mutate_(podst_typ = '"emerytalne"'),
     zdu3 %>% select_('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_zdr') %>% rename_(podst = 'podst_zdr') %>% mutate_(podst_typ = '"zdrowotne"')
   )
+  if(multidplyr){
+    zdu3 = multidplyr::partition(zdu3, id)
+  }
   zdu3 = zdu3 %>%
     group_by_('id', 'id_platnika', 'okres', 'id_tytulu') %>%
-    summarize_(podst = 'max(podst, na.rm = TRUE)')
+    summarize_(podst = 'max(podst, na.rm = TRUE)') %>%
+    collect()
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n())
   stopifnot(
     zdu3 %>% group_by_('id', 'id_platnika', 'okres', 'id_tytulu', 'okres') %>% summarize_(n = ~ n()) %>% filter_(~ n > 1) %>% nrow() == 0
@@ -76,10 +83,15 @@ przygotuj_zus = function(dataMin, dataMax){
 
   zus = zdu3 %>%
     left_join(zdu2) %>%
+    arrange_('data_od')
+  if(multidplyr){
+    zus = multidplyr::partition(zus, id)
+  }
+  zus = zus %>%
     group_by_('id', 'id_platnika', 'okres', 'id_tytulu', 'okres') %>%
     filter_(~ data_do >= okres | okres > max(data_do) & data_do == max(data_do) | is.na(pna)) %>%
-    arrange_('data_od') %>%
     filter_(~ row_number() == 1) %>%
+    collect() %>%
     ungroup() %>%
     select_('-data_od', '-data_do') %>%
     distinct()

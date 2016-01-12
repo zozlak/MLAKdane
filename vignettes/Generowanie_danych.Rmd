@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ## Przygotowujemy dane zus, statystyki z BNL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
 
 ```{r}
+library(dplyr)
 dataMin = '2014-01-01'
 dataMax = '2015-09-30'
 
@@ -47,7 +48,8 @@ studyp = oblicz_studyp(zdau) # t7
 ```{r}
 okienkaMin = c(-11, 1, 13, 1)
 okienkaMax = c(0, 12, 24, 1000)
-magazyn = list()
+okienkaSufiksy = c('_m1', '_p1', '_p2', '')
+magazyn = list(studyp)
 for(i in seq_along(okienkaMin)){
   okienkoMin = okienkaMin[i]
   okienkoMax = okienkaMax[i]
@@ -69,11 +71,19 @@ for(i in seq_along(okienkaMin)){
     full_join(czas) %>%
     left_join(oblicz_okienko(zdau, okienkoMin, okienkoMax, dataMin, dataMax)) # left_join, bo zdau zawiera też nieabsolwentów
   rm(czas, abs1, abs2, nnn, nmle, zam)
-  magazyn[[i]] = oblicz_zmienne_pochodne(razem) # t16
-  # save(razem, file = 'cache/razem.RData', compress = TRUE)
+  razem = oblicz_zmienne_pochodne(razem) # t16
+  
+  filtr = colnames(razem)[! colnames(razem) %in% colnames(okienko)]
+  razem = razem[, c('id_zdau', filtr)]
+  colnames(razem) = paste0(colnames(razem), okienkaSufiksy[i])
+  colnames(razem)[1] = 'id_zdau'
+  save(razem, file = paste0('cache/razem', i, '.RData'), compress = TRUE)
+  magazyn = append(magazyn, razem)
 }
 ```
 
 ## Złączamy zmienne zależne od okienka czasu
 
 # Dołączamy dane jednostek i zapisujemy wynik
+
+system.time(oblicz_absolwent(okienko))

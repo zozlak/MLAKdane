@@ -1,10 +1,11 @@
 #' oblicza zmienne związane z czasem, który upłynął od momentu uzyskania dyplomu
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
 #' @param utrataEtatu dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_zmienne_czasowe = function(dane, utrataEtatu){
+oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
   stopifnot(
     is(dane, 'okienko_df')
   )
@@ -15,8 +16,13 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu){
     mutate_(
       roznica = ~ okres - data_zak,
       utrpracy = ~ ifelse(is.na(utrpracy), FALSE, utrpracy)
-    ) %>%
-    group_by_('id_zdau') %>%
+    )
+  if(multidplyr){
+    dane = multidplyr::partition(dane, id_zdau)
+  }else{
+    dane = group_by_(dane, 'id_zdau')
+  }
+  dane = dane %>%
     summarize_(
       czasmun     = ~ max(0, min(ifelse(mundur > 0, roznica, NA), na.rm = TRUE)),
       czaspraw    = ~ max(0, min(ifelse(prawnik > 0, roznica, NA), na.rm = TRUE)),
@@ -44,7 +50,8 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu){
       czasprsd_v2 = ~ ifelse(is.infinite(czasprsd_v2), NA, czasprsd_v2),
       czasprud_v2 = ~ ifelse(is.infinite(czasprud_v2), NA, czasprud_v2),
       czaszat_v2  = ~ ifelse(is.infinite(czaszat_v2),  NA, czaszat_v2)
-    )
+    ) %>%
+    collect()
   class(dane) = c('absolwent_df', class(dane))
   return(dane)
 }

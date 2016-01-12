@@ -2,10 +2,11 @@
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
 #' @param jednostki dane wygenerowane za pomocą funkcji \code{\link{przygotuj_jednostki}}
 #' @param wMomDyplomu czy wyliczyć w momencie dyplomu czy dla końca okienka
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu){
+oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE){
   stopifnot(
     is(dane, 'okienko_df')
   )
@@ -28,8 +29,13 @@ oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu){
             teryt > 0, 3, NA)
           )
         )
-    ) %>%
-    group_by_('id_zdau') %>%
+    )
+  if(multidplyr){
+    dane = multidplyr::partition(dane, id_zdau)
+  }else{
+    dane = group_by_(dane, 'id_zdau')
+  }
+  dane = dane %>%
     summarize_(
       powiat      = ~ uzgodnij_teryt(teryt),
       klasazam    = ~ ifelse(n_distinct(klasazam) == 1, klasazam, NA),
@@ -42,7 +48,8 @@ oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu){
     mutate_(
       powiat    = ~ ifelse(powiat %% 100 > 0, powiat, NA),
       nrwoj     = ~ ifelse(powiat > 0, floor(powiat / 100), NA)
-    )
+    ) %>%
+    collect()
 
   class(dane) = c('absolwent_df', class(dane))
   return(dane)

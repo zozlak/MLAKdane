@@ -1,10 +1,11 @@
 #' oblicza zmienne NMLE oraz NMLEP
 #' @param okienko dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
 #' @param utrataEtatu dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_utrata_etatu = function(okienko, utrataEtatu){
+oblicz_utrata_etatu = function(okienko, utrataEtatu, multidplyr = TRUE){
   stopifnot(
     is(okienko, 'okienko_df'),
     is(utrataEtatu, 'utrata_etatu_df')
@@ -13,12 +14,18 @@ oblicz_utrata_etatu = function(okienko, utrataEtatu){
   nmle = okienko %>%
     filter_(~ okres >= okres_min & okres <= okres_max) %>%
     select_('id_zdau', 'id', 'okres') %>%
-    left_join(utrataEtatu) %>%
-    group_by_('id_zdau') %>%
+    left_join(utrataEtatu)
+  if(multidplyr){
+    nmle = multidplyr::partition(nmle, id_zdau)
+  }else{
+    nmle = group_by_(nmle, 'id_zdau')
+  }
+  nmle = nmle %>%
     summarize_(
       nmle  = ~ sum(utretatu, na.rm = TRUE),
       nmlep = ~ sum(utretatu_v2, na.rm = TRUE)
-    )
+    ) %>%
+    collect()
 
   class(nmle) = c('absolwent_df', class(nmle))
   return(nmle)

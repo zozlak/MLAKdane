@@ -1,0 +1,4 @@
+# 0.2.0
+
+* obliczenia równoległe z wykorzystaniem pakietu multidplyr
+* korekty definicji kilku zmiennych
