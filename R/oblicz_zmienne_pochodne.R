@@ -6,7 +6,8 @@
 #' @import dplyr
 oblicz_zmienne_pochodne = function(dane){
   stopifnot(
-    is(dane, 'absolwent_df')
+    'id_zdau' %in% colnames(dane),
+    length(unique(dane[, 'id_zdau'])) == nrow(dane)
   )
   dane = dane %>%
     mutate_(

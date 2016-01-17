@@ -7,7 +7,10 @@ przygotuj_jednostki = function(rok = NA){
   colnames(sl_jednostki) = tolower(colnames(sl_jednostki))
 
   sl_jednostki = sl_jednostki %>%
-    rename_(teryt = 'kod_lokalizacji') %>%
+    rename_(
+      teryt     = 'kod_lokalizacji',
+      jednostka = 'jednostka_podstawowa'
+    ) %>%
     mutate_(teryt = ~ floor(as.numeric(teryt) / 10))
 
   nazwy2teryt = read.csv2('dane/nazwy2teryt.csv', stringsAsFactors = FALSE)
