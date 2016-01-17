@@ -80,7 +80,7 @@ studyp = oblicz_studyp(zdau) # t7
 czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
 ```
 
-## Złączamy zmienne zależne od okienka czasu
+# Złączamy wszystko razem i zapisujemy
 
 ```{r}
 wszystko = zdau %>%
@@ -96,5 +96,8 @@ for(i in seq_along(okienkaMin)){
 stopifnot(
   nrow(wszystko) == nrow(zdau %>% filter_(~ typ %in% 'A'))
 )
+colnames(wszystko) = toupper(colnames(wszystko))
+save(wszystko, file = 'cache/złączone.RData', compress = TRUE)
+write.csv2(wszystko, 'cache/złączone.csv', row.names = FALSE, fileEncoding = 'Windows-1250')
 ```
 
