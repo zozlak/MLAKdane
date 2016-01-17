@@ -4,10 +4,12 @@
 \alias{oblicz_absolwent}
 \title{oblicza zmienne generowane w jednym kroku z poziomu (zus x zdau) na poziom (zdau)}
 \usage{
-oblicz_absolwent(dane)
+oblicz_absolwent(dane, multidplyr = TRUE)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
+
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

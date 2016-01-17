@@ -4,12 +4,14 @@
 \alias{oblicz_zmienne_czasowe}
 \title{oblicza zmienne związane z czasem, który upłynął od momentu uzyskania dyplomu}
 \usage{
-oblicz_zmienne_czasowe(dane, utrataEtatu)
+oblicz_zmienne_czasowe(dane, utrataEtatu, multidplyr = TRUE)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
 
 \item{utrataEtatu}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}}
+
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```{r}
 library(dplyr)
 dataMin = '2014-01-01'
-dataMax = '2015-09-30'
+dataMax = '2015-09-30' # 2015-03-31 dla starych danych
 
 pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 jednostki = przygotuj_jednostki() # t2
@@ -41,6 +41,7 @@ baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax) # t6
 Zmienne KONT oraz STUDYP* są niezależne od okienka czasu, wyliczamy je więc oddzielnie:
 ```{r}
 studyp = oblicz_studyp(zdau) # t7
+czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
 ```
 
 ## Zmienne zależące od okienka czasu
@@ -49,15 +50,13 @@ studyp = oblicz_studyp(zdau) # t7
 okienkaMin = c(-11, 1, 13, 1)
 okienkaMax = c(0, 12, 24, 1000)
 okienkaSufiksy = c('_m1', '_p1', '_p2', '')
-magazyn = list(studyp)
 for(i in seq_along(okienkaMin)){
   okienkoMin = okienkaMin[i]
   okienkoMax = okienkaMax[i]
   cat(okienkoMin, '-', okienkoMax)
 
-  okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax) # t8
+  okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax) # t9
 
-  czas = oblicz_zmienne_czasowe(okienko, utrataEtatu) # t9
   abs1 = oblicz_absolwent(okienko) # t10
   abs2 = oblicz_absolwent_okres(okienko) # t11
   nnn  = oblicz_nowi_pracodawcy(okienko) # t12
@@ -71,6 +70,7 @@ for(i in seq_along(okienkaMin)){
     full_join(czas) %>%
     left_join(oblicz_okienko(zdau, okienkoMin, okienkoMax, dataMin, dataMax)) # left_join, bo zdau zawiera też nieabsolwentów
   rm(czas, abs1, abs2, nnn, nmle, zam)
+  gc()
   razem = oblicz_zmienne_pochodne(razem) # t16
   
   filtr = colnames(razem)[! colnames(razem) %in% colnames(okienko)]
@@ -78,7 +78,8 @@ for(i in seq_along(okienkaMin)){
   colnames(razem) = paste0(colnames(razem), okienkaSufiksy[i])
   colnames(razem)[1] = 'id_zdau'
   save(razem, file = paste0('cache/razem', i, '.RData'), compress = TRUE)
-  magazyn = append(magazyn, razem)
+  rm(razem)
+  gc()
 }
 ```
 

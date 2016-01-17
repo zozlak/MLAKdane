@@ -4,10 +4,12 @@
 \alias{oblicz_absolwent_okres}
 \title{oblicza zmienne generowane z poziomu (zus x zdau) przez poziom (zdau x okres) na poziom (zdau)}
 \usage{
-oblicz_absolwent_okres(dane)
+oblicz_absolwent_okres(dane, multidplyr = TRUE)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
+
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

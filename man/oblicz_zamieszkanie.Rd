@@ -4,7 +4,7 @@
 \alias{oblicz_zamieszkanie}
 \title{oblicza zmienne związane z miejscem zamieszkania}
 \usage{
-oblicz_zamieszkanie(dane, jednostki, wMomDyplomu)
+oblicz_zamieszkanie(dane, jednostki, wMomDyplomu, multidplyr = FALSE)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
@@ -12,6 +12,8 @@ oblicz_zamieszkanie(dane, jednostki, wMomDyplomu)
 \item{jednostki}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_jednostki}}}
 
 \item{wMomDyplomu}{czy wyliczyć w momencie dyplomu czy dla końca okienka}
+
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

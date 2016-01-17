@@ -4,12 +4,15 @@
 \alias{przygotuj_zus}
 \title{Przygotowuje dane z ZUS}
 \usage{
-przygotuj_zus(dataMin, dataMax)
+przygotuj_zus(dataMin, dataMax, multidplyr = TRUE)
 }
 \arguments{
 \item{dataMin}{pierwszy uwzględniany okres składkowy}
 
 \item{dataMax}{ostatni uwzględniany okres składkowy}
+
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
+multidplyr}
 }
 \description{
 Do danych o składkach dołączane są dane o miejscu zamieszkania, płatniku,

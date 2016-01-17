@@ -4,12 +4,14 @@
 \alias{oblicz_utrata_etatu}
 \title{oblicza zmienne NMLE oraz NMLEP}
 \usage{
-oblicz_utrata_etatu(okienko, utrataEtatu)
+oblicz_utrata_etatu(okienko, utrataEtatu, multidplyr = TRUE)
 }
 \arguments{
 \item{okienko}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
 
 \item{utrataEtatu}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}}
+
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
 data.frame wyliczone zmienne
