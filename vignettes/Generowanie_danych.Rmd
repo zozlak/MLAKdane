@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```{r}
 library(dplyr)
 dataMin = '2014-01-01'
-dataMax = '2015-09-30' # 2015-03-31 dla starych danych
+dataMax = '2015-03-31' # 2015-03-31 dla starych danych
 
 pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 jednostki = przygotuj_jednostki() # t2
@@ -36,20 +36,12 @@ baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax) # t6
 
 # Wyliczamy zmienne
 
-## Zmienne z grupy STUDYP
-
-Zmienne KONT oraz STUDYP* są niezależne od okienka czasu, wyliczamy je więc oddzielnie:
-```{r}
-studyp = oblicz_studyp(zdau) # t7
-czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
-```
-
 ## Zmienne zależące od okienka czasu
 
 ```{r}
-okienkaMin = c(-11, 1, 13, 1)
-okienkaMax = c(0, 12, 24, 1000)
-okienkaSufiksy = c('_m1', '_p1', '_p2', '')
+okienkaMin = c(1, 1)
+okienkaMax = c(12, 1000)
+okienkaSufiksy = c('_p1', '')
 for(i in seq_along(okienkaMin)){
   okienkoMin = okienkaMin[i]
   okienkoMax = okienkaMax[i]
@@ -62,29 +54,47 @@ for(i in seq_along(okienkaMin)){
   nnn  = oblicz_nowi_pracodawcy(okienko) # t12
   nmle = oblicz_utrata_etatu(okienko, utrataEtatu) # t13
   zam  = oblicz_zamieszkanie(okienko, jednostki, okienkoMax == 1000) # t14
-  razem = abs1 %>% # t15
+  razem = oblicz_okienko(zdau, okienkoMin, okienkoMax, dataMin, dataMax) %>%  # t15
+    select(id_zdau, len) %>%
+    right_join(abs1) %>%
     full_join(abs2) %>%
     full_join(nnn) %>%
     full_join(nmle) %>%
-    full_join(zam) %>%
-    full_join(czas) %>%
-    left_join(oblicz_okienko(zdau, okienkoMin, okienkoMax, dataMin, dataMax)) # left_join, bo zdau zawiera też nieabsolwentów
-  rm(czas, abs1, abs2, nnn, nmle, zam)
+    full_join(zam)
+  rm(abs1, abs2, nnn, nmle, zam)
   gc()
   razem = oblicz_zmienne_pochodne(razem) # t16
   
-  filtr = colnames(razem)[! colnames(razem) %in% colnames(okienko)]
-  razem = razem[, c('id_zdau', filtr)]
-  colnames(razem) = paste0(colnames(razem), okienkaSufiksy[i])
-  colnames(razem)[1] = 'id_zdau'
+  colnames(razem) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(razem), okienkaSufiksy[i]))
   save(razem, file = paste0('cache/razem', i, '.RData'), compress = TRUE)
   rm(razem)
   gc()
 }
 ```
 
+## Zmienne z grupy STUDYP oraz CZAS*
+
+Zmienne KONT, STUDYP* oraz CZAS* są niezależne od okienka czasu, wyliczamy je więc oddzielnie:
+```{r}
+studyp = oblicz_studyp(zdau) # t7
+czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
+```
+
 ## Złączamy zmienne zależne od okienka czasu
 
-# Dołączamy dane jednostek i zapisujemy wynik
+```{r}
+wszystko = zdau %>%
+  filter_(~ typ %in% 'A') %>%
+  full_join(studyp) %>%
+  full_join(czas) %>%
+  left_join(przygotuj_kierunki()) %>%
+  left_join(jednostki %>% select(jednostka_id, jednostka, uczelnia))
+for(i in seq_along(okienkaMin)){
+  load(paste0('cache/razem', i, '.RData'))
+  wszystko = full_join(wszystko, razem)
+}
+stopifnot(
+  nrow(wszystko) == nrow(zdau %>% filter_(~ typ %in% 'A'))
+)
+```
 
-system.time(oblicz_absolwent(okienko))

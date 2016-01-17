@@ -66,6 +66,7 @@ oblicz_studyp = function(dane){
     )
 
   wynik = dane %>%
+    filter_(~ typ == 'A') %>%
     select_('id_zdau') %>%
     left_join(kont) %>%
     left_join(studyp) %>%
@@ -79,10 +80,7 @@ oblicz_studyp = function(dane){
       studyp2 = ~ ifelse(is.na(studyp2), 0, studyp2),
       studyp3 = ~ ifelse(is.na(studyp3), 0, studyp3)
     )
-  stopifnot(
-    nrow(wynik) == nrow(dane)
-  )
 
-  class(dane) = c('absolwent_df', class(dane))
-  return(dane)
+  class(dane) = c('absolwent_df', class(wynik))
+  return(wynik)
 }
