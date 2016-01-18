@@ -35,7 +35,7 @@ oblicz_absolwent_okres = function(dane, multidplyr = TRUE){
       gbezd       = ~ ifelse(is.finite(gbezd), gbezd, NA),
       gezbazyd    = ~ ifelse(is.finite(gezbazyd), gezbazyd, NA),
       gezbazyd_v2 = ~ ifelse(is.finite(gezbazyd_v2), gezbazyd_v2, NA)
-    )
+    ) %>%
     collect()
   class(dane) = c('absolwent_df', class(dane))
   return(dane)

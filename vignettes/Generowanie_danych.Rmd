@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```{r}
 library(dplyr)
 dataMin = '2014-01-01'
-dataMax = '2015-03-31' # 2015-03-31 dla starych danych
+dataMax = '2015-09-30' # 2015-09-30/2015-03-31 dla nowych/starych danych
 
 pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 jednostki = przygotuj_jednostki() # t2
@@ -39,10 +39,10 @@ baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax) # t6
 ## Zmienne zależące od okienka czasu
 
 ```{r}
-okienkaMin = c(1, 1)
-okienkaMax = c(12, 1000)
-okienkaSufiksy = c('_p1', '')
-for(i in seq_along(okienkaMin)){
+okienkaMin = c(-11, 1, 13, 1)
+okienkaMax = c(0, 12, 24, 1000)
+okienkaSufiksy = c('_m1', '_p1', '_p2', '')
+for(i in c(2, 4)){
   okienkoMin = okienkaMin[i]
   okienkoMax = okienkaMax[i]
   cat(okienkoMin, '-', okienkoMax)

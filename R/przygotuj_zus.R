@@ -24,8 +24,8 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   colnames(zdu2) = c('id', 'data_od', 'data_do', 'pna_mel', 'pna_zam', 'pna_kor', 'zm_mel', 'zm_zam', 'zm_kor')
   zdu2 = zdu2 %>%
     mutate_(
-      data_od = ~as.Date(data_od),
-      data_do = ~as.Date(ifelse(data_do == '', dataMax, data_do))
+      data_od = ~ as.Date(data_od),
+      data_do = ~ as.Date(ifelse(data_do == '', dataMax, data_do))
     )
   zdu2$data_do[zdu2$data_do > Sys.Date()] = Sys.Date()
   zdu2 = bind_rows(
