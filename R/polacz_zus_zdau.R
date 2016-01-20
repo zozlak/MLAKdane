@@ -1,4 +1,10 @@
-#' łączy dane zus i zdau
+#' łączy dane zus, zdau oraz statystyki powiatów
+#' @description
+#' Aby poprawnie przyłączyć statystyki powiatów macierz danych uzupełniana jest
+#' tak, aby dla każdego absolwenta zawierała informacje o każdym okrsie w
+#' zadanym przedziale czasu (zakładając zamieszkanie absolwenta w uzupełnianych
+#' okresach "w Polsce", kodowane jako pna = -1, oraz wszelkie cechy tytułu
+#' ubezpieczenia ZUS równe 0, w szczególności także bezrob = 0).
 #' @param zus dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zus}}
 #' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
 #' @param pnaPowiaty dane wygenerowane za pomocą funkcji \code{\link{polacz_pna_powiaty}}
@@ -34,7 +40,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
       etat     = ~ ifelse(is.na(etat), 0, etat),
       netat    = ~ ifelse(is.na(netat), 0, netat),
       samoz    = ~ ifelse(is.na(samoz), 0, samoz),
-      bezrob   = ~ ifelse(is.na(bezrob), 1, bezrob),
+      bezrob   = ~ ifelse(is.na(bezrob), 0, bezrob),
       rentemer = ~ ifelse(is.na(rentemer), 0, rentemer),
       student  = ~ ifelse(is.na(student), 0, student),
       prawnik  = ~ ifelse(is.na(prawnik), 0, prawnik),

@@ -2,7 +2,7 @@
 % Please edit documentation in R/polacz_zus_zdau.R
 \name{polacz_zus_zdau}
 \alias{polacz_zus_zdau}
-\title{łączy dane zus i zdau}
+\title{łączy dane zus, zdau oraz statystyki powiatów}
 \usage{
 polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
 }
@@ -21,6 +21,10 @@ polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
 data.frame wyliczone zmienne
 }
 \description{
-łączy dane zus i zdau
+Aby poprawnie przyłączyć statystyki powiatów macierz danych uzupełniana jest
+tak, aby dla każdego absolwenta zawierała informacje o każdym okrsie w
+zadanym przedziale czasu (zakładając zamieszkanie absolwenta w uzupełnianych
+okresach "w Polsce", kodowane jako pna = -1, oraz wszelkie cechy tytułu
+ubezpieczenia ZUS równe 0, w szczególności także bezrob = 0).
 }
 

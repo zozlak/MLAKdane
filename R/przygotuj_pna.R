@@ -65,7 +65,7 @@ przygotuj_pna = function(){
     ) %>%
     distinct()
 
-  # dodaj "nieznany kod pocztowy"
+  # dodaj "nieznany kod pocztowy" kodowany jako -1
   lata = min(pna$rok):max(pna$rok)
   pna = bind_rows(
     pna,
