@@ -48,7 +48,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   # dane z rozliczeń
   zdu3 = read.csv2('dane/ZDU3.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
   colnames(zdu3) = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
-  zdu3 = zdu3 %>% 
+  zdu3 = zdu3 %>%
     filter_(~ okres >= substr(dataMin, 1, 7) & okres <= substr(dataMax, 1, 7)) %>%
     mutate_(id_zdu3 = ~ row_number())
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
@@ -89,10 +89,11 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     left_join(zdu2) %>%
     arrange_('data_od')
   if(multidplyr){
-    zus = multidplyr::partition(zus, id)
+    zus = multidplyr::partition(zus, id_zdu3)
+  }else{
+    zus = group_by_('id_zdu3')
   }
   zus = zus %>%
-    group_by_('id', 'id_platnika', 'okres', 'id_tytulu', 'okres') %>%
     filter_(~ data_do >= okres | okres > max(data_do) & data_do == max(data_do) | is.na(pna)) %>%
     filter_(~ row_number() == 1) %>%
     collect() %>%
