@@ -48,27 +48,31 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   # dane z rozliczeń
   zdu3 = read.csv2('dane/ZDU3.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
   colnames(zdu3) = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
-  zdu3 = zdu3 %>% filter_(~ okres >= substr(dataMin, 1, 7) & okres <= substr(dataMax, 1, 7))
+  zdu3 = zdu3 %>% 
+    filter_(~ okres >= substr(dataMin, 1, 7) & okres <= substr(dataMax, 1, 7)) %>%
+    mutate_(id_zdu3 = ~ row_number())
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
   # zdu3 %>% group_by(id, id_platnika, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
   # zdu3 %>% group_by(id, id_platnika, okres, id_tytulu) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
+  zdu3tmp = zdu3 %>%
+    select_('id_zdu3', 'id', 'id_platnika', 'okres', 'id_tytulu')
   zdu3 = bind_rows(
-    zdu3 %>% select_('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor') %>% rename_(podst = 'podst_chor') %>% mutate_(podst_typ = '"chorobowe"'),
-    zdu3 %>% select_('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_wyp') %>% rename_(podst = 'podst_wyp') %>% mutate_(podst_typ = '"wypadkowe"'),
-    zdu3 %>% select_('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_em') %>% rename_(podst = 'podst_em') %>% mutate_(podst_typ = '"emerytalne"'),
-    zdu3 %>% select_('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_zdr') %>% rename_(podst = 'podst_zdr') %>% mutate_(podst_typ = '"zdrowotne"')
+    zdu3 %>% select_('id_zdu3', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor') %>% rename_(podst = 'podst_chor') %>% mutate_(podst_typ = '"chorobowe"'),
+    zdu3 %>% select_('id_zdu3', 'podst_wyp') %>% rename_(podst = 'podst_wyp') %>% mutate_(podst_typ = '"wypadkowe"'),
+    zdu3 %>% select_('id_zdu3', 'podst_em') %>% rename_(podst = 'podst_em') %>% mutate_(podst_typ = '"emerytalne"'),
+    zdu3 %>% select_('id_zdu3', 'podst_zdr') %>% rename_(podst = 'podst_zdr') %>% mutate_(podst_typ = '"zdrowotne"')
   )
   if(multidplyr){
-    zdu3 = multidplyr::partition(zdu3, id)
+    zdu3 = multidplyr::partition(zdu3, id_zdu3)
+  }else{
+    zdu3 = group_by_(zdu3, 'id_zdu3')
   }
   zdu3 = zdu3 %>%
-    group_by_('id', 'id_platnika', 'okres', 'id_tytulu') %>%
-    summarize_(podst = 'max(podst, na.rm = TRUE)') %>%
-    collect()
+    summarize_(podst = ~ max(podst, na.rm = TRUE)) %>%
+    collect() %>%
+    inner_join(zdu3tmp)
+  rm(zdu3tmp)
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n())
-  stopifnot(
-    zdu3 %>% group_by_('id', 'id_platnika', 'okres', 'id_tytulu', 'okres') %>% summarize_(n = ~ n()) %>% filter_(~ n > 1) %>% nrow() == 0
-  )
 
   # dane płatników
   zdu4 = read.csv2('dane/ZDU4.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)

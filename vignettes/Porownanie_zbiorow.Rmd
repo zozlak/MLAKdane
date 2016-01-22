@@ -1,0 +1,63 @@
+---
+title: "Porównanie zbiorów"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+load('dane/stare/daneMS.RData')
+load('dane/stare/moje.RData')
+daneMS = daneMS %>% group_by(ID, KIERUNEK_ID, JEDNOSTKA_ID, UCZELNIA_ID) %>% mutate(n = n()) %>% filter(n == 1) %>% select(-n)
+wszystko = wszystko %>% group_by(ID, KIERUNEK_ID, JEDNOSTKA_ID, UCZELNIA_ID) %>% mutate(n = n()) %>% filter(n == 1) %>% select(-n)
+daneMS = wszystko %>% 
+  select(ID, KIERUNEK_ID, JEDNOSTKA_ID, UCZELNIA_ID, ID_ZDAU) %>%
+  right_join(daneMS)
+stopifnot(
+  nrow(daneMS) == nrow(wszystko),
+  all(!is.na(daneMS$ID_ZDAU))
+)
+# odfiltruj osobników, którzy uzyskali dyplom w ostatnim miesiącu okresu
+wszystko = wszystko %>% filter(!is.na(NME))
+daneMS = daneMS %>% semi_join(wszystko) 
+load('cache/ZUS.RData')
+zdau = przygotuj_zdau()
+pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), '2014-01-01', '2015-03-31')
+zdu3 = read.csv2('dane/ZDU3.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
+colnames(zdu3) = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
+```
+
+```{r}
+porownaj(daneMS, wszystko, 'NME') %>% group_by(d) %>% summarize(n = n())
+```
+
+```{r}
+porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% filter(d > 7)
+zus %>% filter(id == 15045163) %>% arrange(okres) %>% as.data.frame() %>% select(okres, etat, netat, samoz, bezrob, rentemer, student) # MS najwyraźniej nie wyklucza po rentemer
+porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% filter(d == 3)
+zus %>% filter(id == 221631525) %>% arrange(okres) %>% as.data.frame() %>% select(okres, etat, netat, samoz, bezrob, rentemer, student) # MS najwyraźniej nie wyklucza po samoz
+```
+
+```{r}
+summary((porownaj(daneMS, wszystko, 'SZE'))$d)
+porownaj(daneMS, wszystko, 'SZE') %>% filter(d > 1) %>% arrange(desc(d))
+zus %>% filter(id == 202848906) %>% arrange(okres) %>% as.data.frame() %>% select(id, okres, etat, podst) %>% left_join(zdau %>% select(id, data_zak))
+zdu3 %>% filter(id == 202848906) %>% arrange(okres) %>% as.data.frame() %>% left_join(zdau %>% select(id, data_zak))
+```
+
+```{r}
+porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n())
+```
+
+```{r}
+porownaj(daneMS, wszystko, 'CZASPRD') %>% group_by(d) %>% summarize(n = n())
+```
+
+```{r}
+porownaj(daneMS, wszystko, 'KONT') %>% group_by(d) %>% summarize(n = n())
+```
+
+```{r}
+hist((porownaj(daneMS, wszystko, 'GBEZD'))$d)
+porownaj(daneMS, wszystko, 'GBEZD') %>% filter(abs(d) < 0.1) %>% nrow()
+```
