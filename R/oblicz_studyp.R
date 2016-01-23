@@ -18,13 +18,14 @@ oblicz_studyp = function(dane){
 
   kont = dane %>%
     filter_(~ poziom %in% 1 & typ %in% 'A') %>%
-    select_('id_zdau', 'id', 'uczelnia_id', 'jednostka_id') %>%
+    select_('id_zdau', 'id', 'uczelnia_id', 'jednostka_id', 'data_rozp', 'data_zak') %>%
     left_join(
       dane %>%
         filter_(~ poziom %in% 2) %>%
-        select_('id', 'uczelnia_id', 'jednostka_id', 'forma') %>%
-        rename_(uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma')
+        select_('id', 'uczelnia_id', 'jednostka_id', 'forma', 'data_rozp', 'data_zak') %>%
+        rename_(uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma', data_rozp_ = 'data_rozp', data_zak_ = 'data_zak')
     ) %>%
+    filter_(~ data_rozp_ >= data_zak) %>%
     group_by_('id_zdau') %>%
     summarize_(
       kont = ~ min(skalaRelKier(uczelnia_id, uczelnia_id_, jednostka_id, jednostka_id_, forma_))

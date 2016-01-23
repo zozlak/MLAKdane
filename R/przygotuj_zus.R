@@ -101,7 +101,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     select_('-data_od', '-data_do') %>%
     distinct()
   stopifnot(
-    zus %>% select_('id', 'id_platnika', 'okres', 'id_tytulu') %>% distinct_() %>% nrow() == nrow(zus), # unikalność {id, id_platnika, okres, id_tytulu}
+    # {id, id_platnika, okres, id_tytulu} nie jest unikalne!
     zus %>% select_('id', 'okres', 'pna') %>% distinct() %>% nrow() == zus %>% select_('id', 'okres') %>% distinct() %>% nrow(), # unikalność {id, okres, pna}
     nrow(zus) == nrow(zdu3), # nie zgubiliśmy żadnego okresu składkowego,
     all(!is.na(zus$id_platnika)) # wszyscy płatnicy są znani

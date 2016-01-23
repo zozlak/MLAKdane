@@ -18,7 +18,7 @@ stopifnot(
 )
 # odfiltruj osobników, którzy uzyskali dyplom w ostatnim miesiącu okresu
 wszystko = wszystko %>% filter(!is.na(NME))
-daneMS = daneMS %>% semi_join(wszystko) 
+daneMS = daneMS %>% semi_join(wszystko %>% select(ID_ZDAU)) 
 load('cache/ZUS.RData')
 zdau = przygotuj_zdau()
 pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), '2014-01-01', '2015-03-31')
@@ -40,13 +40,14 @@ zus %>% filter(id == 221631525) %>% arrange(okres) %>% as.data.frame() %>% selec
 
 ```{r}
 summary((porownaj(daneMS, wszystko, 'SZE'))$d)
-porownaj(daneMS, wszystko, 'SZE') %>% filter(d > 1) %>% arrange(desc(d))
-zus %>% filter(id == 202848906) %>% arrange(okres) %>% as.data.frame() %>% select(id, okres, etat, podst) %>% left_join(zdau %>% select(id, data_zak))
-zdu3 %>% filter(id == 202848906) %>% arrange(okres) %>% as.data.frame() %>% left_join(zdau %>% select(id, data_zak))
 ```
 
 ```{r}
 porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% filter(d != 0)
+zdau %>% filter(id_zdau == 152193)
+# MS liczy do ostatniej informacji z ZUS-u, ja liczę do końca okresu
+# zaskakujące jest, że rozbieżności występują tylko dla 26 osób
 ```
 
 ```{r}
@@ -55,6 +56,8 @@ porownaj(daneMS, wszystko, 'CZASPRD') %>% group_by(d) %>% summarize(n = n())
 
 ```{r}
 porownaj(daneMS, wszystko, 'KONT') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'KONT') %>% filter(d == -1)
+zdau %>% filter(id == 116)
 ```
 
 ```{r}
