@@ -18,7 +18,7 @@ oblicz_absolwent_okres = function(dane, multidplyr = TRUE){
     summarize_(
       bezrob      = ~ sum(bezrob),
       nbezrob     = ~ sum(etat + netat + samoz + rentemer + student),
-      nem         = ~ length(unique(id_platnika[!is.na(id_platnika)])),
+      nem         = ~ length(unique(id_platnika[!is.na(id_platnika) & etat == 1])),
       gbezd       = ~ mean(powpbezd_sr, na.rm = TRUE),
       gezbazyd    = ~ mean(powezar_sr[etat + netat + samoz > 0], na.rm = TRUE),
       gezbazyd_v2 = ~ mean(powezar_sr, na.rm = TRUE)

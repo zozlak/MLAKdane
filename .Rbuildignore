@@ -3,3 +3,4 @@
 ^dane$
 ^cache$
 ^dropbox$
+^vignettes/.*_cache$

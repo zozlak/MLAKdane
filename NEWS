@@ -1,3 +1,9 @@
+# 0.3.0
+
+* większość zmiennych sprawdzona ze zbiorem Marka Stycznia
+    * korekty w sposobie wyliczania wielu zmiennych
+    * przygotowana winietka w markdown wykonująca porównanie
+
 # 0.2.0
 
 * obliczenia równoległe z wykorzystaniem pakietu multidplyr

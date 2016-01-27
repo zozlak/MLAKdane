@@ -3,5 +3,7 @@
 .Rhistory
 .RData
 dropbox
-cache
-dane
+*cache
+dane/stare
+dane/nowe
+dane/ZD*

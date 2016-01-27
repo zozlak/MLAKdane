@@ -98,7 +98,7 @@ stopifnot(
   nrow(wszystko) == nrow(zdau %>% filter_(~ typ %in% 'A'))
 )
 colnames(wszystko) = toupper(colnames(wszystko))
-save(wszystko, file = 'cache/złączone.RData', compress = TRUE)
-write.csv2(wszystko, 'cache/złączone.csv', row.names = FALSE, fileEncoding = 'Windows-1250')
+save(wszystko, file = 'cache/zlaczone.RData', compress = TRUE)
+write.csv2(wszystko, 'cache/zlaczone.csv', row.names = FALSE, fileEncoding = 'Windows-1250')
 ```
 

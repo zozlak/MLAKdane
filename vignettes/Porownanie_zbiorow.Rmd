@@ -3,10 +3,14 @@ title: "Porównanie zbiorów"
 output: html_document
 ---
 
-```{r}
+```{r, echo = FALSE, results = 'hide', warning = FALSE, message = FALSE, cache = TRUE}
+setwd('../')
 library(dplyr)
+devtools::load_all(".")
 load('dane/stare/daneMS.RData')
-load('dane/stare/moje.RData')
+load('dane/stare/zlaczone.RData')
+nUsun1 = daneMS %>% group_by(ID, KIERUNEK_ID, JEDNOSTKA_ID, UCZELNIA_ID) %>% mutate(n = n()) %>% filter(n > 1) %>% nrow()
+nUsun2 = wszystko %>% filter(DATA_ZAK == data2okres('2015-03')) %>% nrow()
 daneMS = daneMS %>% group_by(ID, KIERUNEK_ID, JEDNOSTKA_ID, UCZELNIA_ID) %>% mutate(n = n()) %>% filter(n == 1) %>% select(-n)
 wszystko = wszystko %>% group_by(ID, KIERUNEK_ID, JEDNOSTKA_ID, UCZELNIA_ID) %>% mutate(n = n()) %>% filter(n == 1) %>% select(-n)
 daneMS = wszystko %>% 
@@ -20,47 +24,237 @@ stopifnot(
 wszystko = wszystko %>% filter(!is.na(NME))
 daneMS = daneMS %>% semi_join(wszystko %>% select(ID_ZDAU)) 
 load('cache/ZUS.RData')
+load('cache/utrataEtatu.RData')
 zdau = przygotuj_zdau()
 pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), '2014-01-01', '2015-03-31')
-zdu3 = read.csv2('dane/ZDU3.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
-colnames(zdu3) = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
 ```
 
-```{r}
+# Wstęp
+
+## Obserwacje pominięte w porównaniu
+
+### Z uwagi na brak unikalnego id pomiędzy zbiorami
+
+Porównując dane wyliczone przez MS i przeze mnie złączam je po kombinacji {ID, KIERUNEK_ID, JEDNOSTKA_ID, UCZELNIA_ID}.
+
+Ponieważ kombinacja ta nie pozwala na unikalną identyfikację obserwacji w zbiorze absolwentów (ale też nie mamy do dyspozycji żadnego lepszego klucza podstawowego), obserwacje nieunikalne są wcześniej usuwane. Liczba usuniętych obserwacji wynosi `r nUsun1` (`r round(nUsun1 * 100 / nrow(daneMS), 2)`%), a więc można się nimi specjalnie nie przejmować.
+
+### Absolwenci, którzy otrzymali dyplom w miesiącu końca obserwacji
+
+Zmiennym liczonym "od miesiąca po uzyskaniu dyplomu do końca obserwacji" wyliczanym dla absolwentów, którzy uzyskali dyplom w miesiącu kończącym obserwację, MS przypisuje wartość 0, ja natomiast brak danych (wychodząc z założenia, że skoro okres opisywany przez te zmienne wychodzi poza "okienko obserwacji", to w ogóle nie da się ich policzyć).
+
+Ponieważ jest to różnica systematyczna i globalna (niezwiązana ze sposobem wyliczania konkretnej zmiennej), obserwacje takie również zostały usunięte z porównania. Jest ich `r nUsun2` (`r round(nUsun2 * 100 / nrow(daneMS), 2)`%), a więc można się nimi specjalnie nie przejmować.
+
+## Sposób porównania
+
+Funkcja *porownaj(zbiorA, zbiorB, zmienna)* (opcjonalnie *porownaj(zbiorA, zbiorB, zmiennaWZbiorzeA, zmiennaWZbiorzeB)*, jeśli nazwy zmiennych różnią się między zbiorami) zwraca tablicę, w której:
+
+* jednostką jest absolwent
+* kolumna *a* zawiera wartość porównywanej zmiennej w zbiorze A (dalej konsekwentnie będzie to zbiór MS)
+* kolumna *b* zawiera wartość porównywanej zmiennej w zbiorze B (dalej konsekwentnie będzie to mój zbiór)
+* kolumna *d* zawiera różnicę wartości kolumn *a* i *b* (*d = a - b*)
+* kolumny *ID* oraz *ID_ZDAU* pozwalają zidentyfikować absolwenta
+
+# Pełna zgodność
+
+## NME
+```{r, warning = FALSE, message = FALSE}
 porownaj(daneMS, wszystko, 'NME') %>% group_by(d) %>% summarize(n = n())
 ```
 
-```{r}
-porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% group_by(d) %>% summarize(n = n())
-porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% filter(d > 7)
-zus %>% filter(id == 15045163) %>% arrange(okres) %>% as.data.frame() %>% select(okres, etat, netat, samoz, bezrob, rentemer, student) # MS najwyraźniej nie wyklucza po rentemer
-porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% filter(d == 3)
-zus %>% filter(id == 221631525) %>% arrange(okres) %>% as.data.frame() %>% select(okres, etat, netat, samoz, bezrob, rentemer, student) # MS najwyraźniej nie wyklucza po samoz
-```
-
-```{r}
+## SZE
+```{r, warning = FALSE, message = FALSE}
 summary((porownaj(daneMS, wszystko, 'SZE'))$d)
 ```
 
-```{r}
+# Dobra zgodność
+
+# NMP
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NMP') %>% group_by(d) %>% summarize(n = n())
+```
+
+## NMJ
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NMJ') %>% group_by(d) %>% summarize(n = n())
+```
+
+## NMM
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NMM') %>% group_by(d) %>% summarize(n = n())
+```
+
+## LEN
+```{r, warning = FALSE, message = FALSE}
 porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n())
+
 porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% filter(d != 0)
 zdau %>% filter(id_zdau == 152193)
-# MS liczy do ostatniej informacji z ZUS-u, ja liczę do końca okresu
-# zaskakujące jest, że rozbieżności występują tylko dla 26 osób
+zus %>% filter(id == 196338524) %>% select(okres) %>% distinct() %>% arrange(okres)
 ```
+Wygląda na to, że MS liczy tylko do ostatniej informacji z ZUS-u? (ja liczę do końca rozważanego okresu)  
+W sumie zaskakujące, że rozbieżności występują tylko dla 26 osób.
 
-```{r}
-porownaj(daneMS, wszystko, 'CZASPRD') %>% group_by(d) %>% summarize(n = n())
+## NMS (samoz)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NMS') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'NMS') %>% filter(d == 2)
+zdau %>% filter(id == 4828272)
+zus %>% filter(id == 4828272, okres >= 24174, samoz == 1) %>% select(okres) %>% distinct() %>% arrange(okres)
+zdau %>% filter(id == 198443994)
+zus %>% filter(id == 198443994, okres >= 24174, samoz == 1) %>% select(okres) %>% distinct() %>% arrange(okres)
 ```
+Na losowo wybranych przykładach wydaje mi się, że liczę dobrze i nie mam pomysłu, skąd się wzięły wartości MS.  
+Wymaga dyskusji.
 
-```{r}
-porownaj(daneMS, wszystko, 'KONT') %>% group_by(d) %>% summarize(n = n())
+## NMB (bezrobocie)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% group_by(d) %>% summarize(n = n())
+
+porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% filter(d > 7)
+zus %>% filter(id == 15045163) %>% arrange(okres) %>% as.data.frame() %>% select(okres, etat, netat, samoz, bezrob, rentemer, student) # MS najwyraźniej nie wyklucza po rentemer
+
+porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% filter(d == 3)
+zus %>% filter(id == 221631525) %>% arrange(okres) %>% as.data.frame() %>% select(okres, etat, netat, samoz, bezrob, rentemer, student) # MS najwyraźniej nie wyklucza po samoz
+```
+Wygląda na to, że NMB wg MS to coś pomiędzy naszym NMB (tylko po *bezrob*) a naszym NMB_V2 (*bezrob* i żadno z *etat, netat, samoz, rentemer, student*)
+
+# Kiepska zgodność
+
+## KONT
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'KONT') %>% group_by(d, is.na(a), is.na(b)) %>% summarize(n = n())
+
 porownaj(daneMS, wszystko, 'KONT') %>% filter(d == -1)
-zdau %>% filter(id == 116)
+zdau %>% filter(id == 57) 
+zdau %>% filter(id == 69) 
 ```
+Na losowo wybranych przykładach wydaje mi się, że liczę dobrze i nie mam pomysłu, skąd się wzięły wartości MS (nie tylko różnice w wartościach, ale też liczba braków danych u MS).  
+Wymaga dyskusji.
 
-```{r}
+## GBEZD
+
+```{r, warning = FALSE, message = FALSE}
 hist((porownaj(daneMS, wszystko, 'GBEZD'))$d)
-porownaj(daneMS, wszystko, 'GBEZD') %>% filter(abs(d) < 0.1) %>% nrow()
+porownaj(daneMS, wszystko, 'GBEZD') %>% group_by(abs(d) < 0.1) %>% summarize(n = n())
+
+porownaj(daneMS, wszystko, 'GBEZD') %>% filter(abs(d) > 30)
+zus %>% filter(id == 196758920) %>% select(okres, pna) %>% left_join(pnaPowiaty %>% select(pna, okres, powpbezd, powpbezd_sr))
 ```
+Tutaj pole do rozbieżności jest szerokie, począwszy od sposobu identyfikacji powiatów (własne id PEJK-u versus TERYT), poprzez sposób agregacji/zastępowania przy niejednoznacznym mapowaniu PNA na powiat, skończywszy na jakichś drobniejszych różnicach.  
+Do dyskusji.
+
+## NMLE (liczba utrat etatu)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NMLE') %>% group_by(d) %>% summarize(n = n()) %>% as.data.frame()
+
+porownaj(daneMS, wszystko, 'NMLE') %>% filter(d == 4)
+zdau %>% filter(id == 2020720)
+zus %>% filter(id == 2020720, okres > 24175) %>% select(id_platnika, okres, etat) %>% arrange(id_platnika, okres) %>% as.data.frame()
+utrataEtatu %>% filter(id == 2020720, utretatu == TRUE) %>% ungroup() %>%arrange(okres)
+
+porownaj(daneMS, wszystko, 'NMLE') %>% filter(d == -3)
+zdau %>% filter(id == 209459645)
+zus %>% filter(id == 209459645, okres >= 24173) %>% select(id_platnika, okres, etat) %>% arrange(id_platnika, okres) %>% as.data.frame()
+utrataEtatu %>% filter(id == 209459645, utretatu == TRUE) %>% ungroup() %>% arrange(okres)
+```
+Na losowo wybranych przykładach wydaje mi się, że liczę dobrze i nie mam pomysłu, skąd się wzięły wartości MS.  
+Wymaga dyskusji.
+
+## CZASPRD (czas do etat/netat/samoz)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'CZASPRD') %>% group_by(d, is.na(a), is.na(b)) %>% summarize(n = n()) %>% as.data.frame()
+
+porownaj(daneMS, wszystko, 'CZASPRD') %>% filter(d == 3)
+
+zdau %>% filter(id == 2767003)
+zus %>% filter(id == 2767003, okres >= 24175) %>% arrange(id_platnika, okres) %>% select(id_platnika, okres, etat, netat, samoz)
+
+zdau %>% filter(id == 3618686)
+zus %>% filter(id == 3618686, okres >= 24172) %>% arrange(id_platnika, okres) %>% select(id_platnika, okres, etat, netat, samoz)
+```
+Czyżby MS pomijał pracę posiadaną w momencie uzyskania dyplomu? A może nie wlicza samozatrudnienia?  
+Wymaga dyskusji
+
+## NMN (netat)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NMN') %>% group_by(d) %>% summarize(n = n())
+
+porownaj(daneMS, wszystko, 'NMN') %>% filter(d == -3)
+zdau %>% filter(id == 2020720)
+zus %>% filter(id == 2020720, okres > 24175, netat == 1) %>% select(okres, netat, etat, samoz) %>% distinct() %>% arrange(okres)
+
+porownaj(daneMS, wszystko, 'NMN') %>% filter(d == -3, b == 11)
+zdau %>% filter(id == 9504381)
+zus %>% filter(id == 9504381, okres > 24172, netat == 1) %>% select(okres, netat, etat, samoz) %>% distinct() %>% arrange(okres)
+```
+Na losowo wybranych przykładach wydaje mi się, że liczę dobrze i nie mam pomysłu, skąd się wzięły wartości MS.  
+Wymaga dyskusji.
+
+## NEM (etatodawcomiesiące)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NEM') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'NEM') %>% filter(d == 10)
+zdau %>% filter(id == 3377711)
+zus %>% filter(id == 3377711, okres > 24171, etat == 1) %>% select(okres, id_platnika, etat) %>% arrange(okres) %>% as.data.frame()
+```
+Wygląda na to, że w wypadku wielu rekordów od jednego pracodawcy w jednym okresie MS zliczał je oddzielnie, ja natomiast redukuję je do jednego "etatodacomiesiąca" dla danego okresu.
+
+## NDE (różni dawcy etatu)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NDE') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'NDE') %>% filter(d == 2)
+zdau %>% filter(id == 2760309)
+zus %>% filter(id == 2760309, etat == 1) %>% select(okres, id_platnika, etat) %>% distinct() %>% arrange(id_platnika, okres)
+zdau %>% filter(id == 193048437)
+zus %>% filter(id == 193048437, etat == 1) %>% select(okres, id_platnika, etat) %>% distinct() %>% arrange(id_platnika, okres)
+```
+Wygląda na to, że MS liczy NDE dla całego badanego okresu, a nie od pierwszego miesiąca po uzyskaniu dyplomu.
+
+## NDN (różni dawcy nieetatu)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NDN') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'NDN') %>% filter(d == 2)
+zdau %>% filter(id == 14237862)
+zus %>% filter(id == 14237862, netat == 1) %>% select(okres, id_platnika, netat) %>% distinct() %>% arrange(id_platnika, okres)
+zdau %>% filter(id == 190210781)
+zus %>% filter(id == 190210781, netat == 1) %>% select(okres, id_platnika, netat) %>% distinct() %>% arrange(id_platnika, okres)
+```
+Wygląda na to, że MS liczy NDN dla całego badanego okresu, a nie od pierwszego miesiąca po uzyskaniu dyplomu.
+
+### NNNN (nowi pracodawcy na netat)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NNNN1', 'NNNN_P1') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'NNNN1', 'NNNN_P1') %>% filter(d == 1)
+zdau %>% filter(id == 2031468)
+zus %>% filter(id == 2031468) %>% select(okres, id_platnika, netat) %>% distinct() %>% arrange(id_platnika, okres)
+zdau %>% filter(id == 2209367)
+zus %>% filter(id == 2209367) %>% select(okres, id_platnika, netat) %>% distinct() %>% arrange(id_platnika, okres)
+```
+MS najwyraźniej liczy pracodawcę jako znanego jeśli zatrudniał on wcześniej absolwenta na netat, ja natomiast dostałem informację, że "znaność" pracodawcy należy wyliczać bez względu na formę zatrudnienia.
+
+### NNDN (nowi pracodawcy na etat)
+
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NNDN1', 'NNDN_P1') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'NNDN1', 'NNDN_P1') %>% filter(d == -2)
+zdau %>% filter(id == 2840128)
+zus %>% filter(id == 2840128) %>% select(okres, id_platnika, etat) %>% distinct() %>% arrange(id_platnika, okres)
+zdau %>% filter(id == 14183396)
+zus %>% filter(id == 14183396) %>% select(okres, id_platnika, etat) %>% distinct() %>% arrange(id_platnika, okres) %>% as.data.frame()
+```
+Na losowo wybranych przykładach wydaje mi się, że liczę dobrze i nie mam pomysłu, skąd się wzięły wartości MS.  
+Wymaga dyskusji.

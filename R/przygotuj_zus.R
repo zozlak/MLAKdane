@@ -15,6 +15,11 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     mutate_each(funs_('as.numeric'))
   colnames(zus_tytuly_ubezp) = tolower(colnames(zus_tytuly_ubezp))
 
+  pna = przygotuj_pna() %>%
+    select_('rok', 'pna') %>%
+    distinct() %>%
+    mutate_(popr_pna = TRUE)
+
   # dane ewidencyjne osoby
   zdu1 = read.csv2('dane/ZDU1.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)[, c(1, 5:8)]
   colnames(zdu1) = c('id', 'rok_ur', 'plec', 'koniec_r', 'koniec_m')
@@ -39,7 +44,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     summarize_(pna = ~first(pna)) %>%
     ungroup() %>%
     mutate_(
-      pna = ~ifelse(is.na(pna), 0, pna),
+      pna =     ~ ifelse(is.na(pna), 0, pna),
       data_od = ~ substring(as.character(data_od), 1, 7),
       data_do = ~ substring(as.character(data_do), 1, 7)
     ) %>%
@@ -114,8 +119,14 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     left_join(zus_tytuly_ubezp) %>%
     mutate_(
       okres       = ~ data2okres(okres),
-      platnik_kon = ~ data2okres(platnik_kon)
-    )
+      platnik_kon = ~ data2okres(platnik_kon),
+      rok         = ~ floor(okres / 12)
+    ) %>%
+    left_join(pna) %>%
+    mutate_(
+      pna = ~ ifelse(is.na(popr_pna), -1, pna)
+    ) %>%
+    select_('-rok', '-popr_pna')
 
   class(zus) = c('zus_df', class(zus))
   return(zus)

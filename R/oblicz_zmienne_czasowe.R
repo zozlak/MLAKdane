@@ -10,12 +10,13 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
     is(dane, 'baza_df')
   )
 
+  # liczone do dupy, to trzeba liczyć w podziale na pracodawców, bo tylko tam ma sens utratapracy!
+
   dane = dane %>%
     filter_(~ okres >= data_zak) %>%
     left_join(utrataEtatu) %>%
     mutate_(
-      roznica   = ~ okres - data_zak,
-      nutrpracy = ~ ifelse(is.na(utrpracy) | okres != data_zak, TRUE, !utrpracy)
+      roznica   = ~ okres - data_zak
     )
   if(multidplyr){
     dane = multidplyr::partition(dane, id_zdau)
@@ -24,12 +25,12 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
   }
   dane = dane %>%
     summarize_(
-      czasmun_v2  = ~ min(ifelse(nutrpracy & mundur > 0, roznica, NA_integer_), na.rm = TRUE),
-      czaspraw_v2 = ~ min(ifelse(nutrpracy & prawnik > 0, roznica, NA_integer_), na.rm = TRUE),
-      czasprd_v2  = ~ min(ifelse(nutrpracy & etat + netat + samoz > 0, roznica, NA_integer_), na.rm = TRUE),
-      czasprsd_v2 = ~ min(ifelse(nutrpracy & samoz > 0, roznica, NA_integer_), na.rm = TRUE),
-      czasprud_v2 = ~ min(ifelse(nutrpracy & etat > 0, roznica, NA_integer_), na.rm = TRUE),
-      czaszat_v2  = ~ min(ifelse(nutrpracy & etat + netat > 0, roznica, NA_integer_), na.rm = TRUE)
+      czasmun_v2  = ~ min(ifelse((roznica == 0 & is.na(utrmundur)  | roznica > 0) & mundur > 0, roznica, NA_integer_), na.rm = TRUE),
+      czaspraw_v2 = ~ min(ifelse((roznica == 0 & is.na(utrprawnik) | roznica > 0) & prawnik > 0, roznica, NA_integer_), na.rm = TRUE),
+      czasprd_v2  = ~ min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & etat + netat + samoz > 0, roznica, NA_integer_), na.rm = TRUE),
+      czasprsd_v2 = ~ min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & samoz > 0, roznica, NA_integer_), na.rm = TRUE),
+      czasprud_v2 = ~ min(ifelse((roznica == 0 & is.na(utretatu)   | roznica > 0) & etat > 0, roznica, NA_integer_), na.rm = TRUE),
+      czaszat_v2  = ~ min(ifelse((roznica == 0 & is.na(utrzatr)    | roznica > 0) & etat + netat > 0, roznica, NA_integer_), na.rm = TRUE)
     ) %>%
     mutate_(
       czasmun_v2  = ~ ifelse(is.infinite(czasmun_v2),  NA_integer_, czasmun_v2),
@@ -38,12 +39,12 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
       czasprsd_v2 = ~ ifelse(is.infinite(czasprsd_v2), NA_integer_, czasprsd_v2),
       czasprud_v2 = ~ ifelse(is.infinite(czasprud_v2), NA_integer_, czasprud_v2),
       czaszat_v2  = ~ ifelse(is.infinite(czaszat_v2),  NA_integer_, czaszat_v2),
-      czasmun     = ~ max(0, czasmun_v2),
-      czaspraw    = ~ max(0, czaspraw_v2),
-      czasprd     = ~ max(0, czasprd_v2),
-      czasprsd    = ~ max(0, czasprsd_v2),
-      czasprud    = ~ max(0, czasprud_v2),
-      czaszat     = ~ max(0, czaszat_v2)
+      czasmun     = ~ ifelse(czasmun_v2  > 0, czasmun_v2  - 1, 0), # działa poprawnie także dla czas*_v2 równego NA
+      czaspraw    = ~ ifelse(czaspraw_v2 > 0, czaspraw_v2 - 1, 0),
+      czasprd     = ~ ifelse(czasprd_v2  > 0, czasprd_v2  - 1, 0),
+      czasprsd    = ~ ifelse(czasprsd_v2 > 0, czasprsd_v2 - 1, 0),
+      czasprud    = ~ ifelse(czasprud_v2 > 0, czasprud_v2 - 1, 0),
+      czaszat     = ~ ifelse(czaszat_v2  > 0, czaszat_v2  - 1, 0)
     ) %>%
     collect()
   class(dane) = c('absolwent_df', class(dane))

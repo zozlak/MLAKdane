@@ -2,7 +2,8 @@
 % Please edit documentation in R/przygotuj_utrata_pracy.R
 \name{przygotuj_utrata_pracy}
 \alias{przygotuj_utrata_pracy}
-\title{oblicza zmienne utraty pracy, używane do wyliczania zmiennych NMLE oraz NMLEP}
+\title{oblicza zmienne utraty pracy, używane do wyliczania zmiennych NMLE, NMLEP
+oraz zmiennych czasowych}
 \usage{
 przygotuj_utrata_pracy(zus, dataMax, multidplyr = TRUE)
 }
@@ -19,6 +20,7 @@ multidplyr}
 data.frame wyliczone zmienne
 }
 \description{
-oblicza zmienne utraty pracy, używane do wyliczania zmiennych NMLE oraz NMLEP
+oblicza zmienne utraty pracy, używane do wyliczania zmiennych NMLE, NMLEP
+oraz zmiennych czasowych
 }
 
