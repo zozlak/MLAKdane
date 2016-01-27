@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ## Przygotowujemy dane zus, statystyki z BNL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
 
 ```{r}
+devtools::load_all(".")
 library(dplyr)
 dataMin = '2014-01-01'
 dataMax = '2015-03-31' # 2015-09-30/2015-03-31 dla nowych/starych danych
