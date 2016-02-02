@@ -23,6 +23,9 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   # dane ewidencyjne osoby
   zdu1 = read.csv2('dane/ZDU1.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)[, c(1, 5:8)]
   colnames(zdu1) = c('id', 'rok_ur', 'plec', 'koniec_r', 'koniec_m')
+  zdu1 = zdu1 %>%
+    mutate_(koniec = ~ as.numeric(koniec_r) * 12 + as.numeric(koniec_m)) %>%
+    select_('-koniec_r', '-koniec_m')
 
   # dane adresowe w poszczególnych okresach
   zdu2 = read.csv2('dane/ZDU2.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
@@ -115,7 +118,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
 
   zus = zus %>%
     left_join(zdu4 %>% select_('id_platnika', 'pkd', 'platnik_kon')) %>%
-    left_join(zdu1 %>% select_('id', 'rok_ur', 'plec')) %>%
+    left_join(zdu1 %>% select_('id', 'rok_ur', 'plec', 'koniec')) %>%
     left_join(zus_tytuly_ubezp) %>%
     mutate_(
       okres       = ~ data2okres(okres),

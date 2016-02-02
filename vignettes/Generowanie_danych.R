@@ -1,49 +1,41 @@
----
-title: "Generowanie danych"
-author: "Mateusz Żółtak"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
-```
-
-# Przygotowanie danych
-
-## Przygotowujemy dane zus, statystyki z BNL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
-
-```{r}
+##########
+# Ładujemy pakiety i ustawiamy stałe
+# Zmienne "okienkaMin", "okienkaMax" i "okienkaSufiksy" określają możliwe okienka czasowe,
+#   np. kombinacja wartości -11 z okienkaMin, 0 z okienkaMax i "_m1" z okienkaSufiksy
+#   oznacza okienko czasowe od 11 miesięcy przed dyplomem do miesiąca dyplomu (włącznie)
+#   oraz że zmienne wyliczone dla tego okienka dostaną sufiks "_m1".
+# Zmienna "okienkaIter" oznacza natomiast, które z możliwych okienek mają zostać wyliczone
 devtools::load_all(".")
 library(dplyr)
-dataMin = '2014-01-01'
-dataMax = '2015-03-31' # 2015-09-30/2015-03-31 dla nowych/starych danych
 
+dataMin = '2014-01-01'
+dataMax = '2015-09-30' # 2015-09-30/2015-03-31 dla nowych/starych danych
+okienkaMin = c(-11, 1, 13, 1)
+okienkaMax = c(0, 12, 24, 1000)
+okienkaSufiksy = c('_m1', '_p1', '_p2', '')
+okienkaIter = c(2, 4)
+
+##########
+# Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
 pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 jednostki = przygotuj_jednostki() # t2
 zdau = przygotuj_zdau() # t5
 zus = przygotuj_zus(dataMin, dataMax) # t3
 # save(zus, file = 'cache/ZUS.RData', compress = TRUE)
 # load('cache/ZUS.RData')
-```
 
-## Wyliczamy pomocniczy zbiór etat etatu i złączamy dane ZUS z danymi OPI
-
-```{r}
+##########
+# Wyliczamy pomocniczy zbiór utrataEtatu
 utrataEtatu = przygotuj_utrata_pracy(zus, dataMax) # t4
 # save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
 # load('cache/utrataEtatu.RData')
+
+##########
+# złączamy dane ZUS z danymi OPI i statystykami powiatów z BDL
 baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax) # t6
-```
 
-# Wyliczamy zmienne
-
-## Zmienne zależące od okienka czasu
-
-```{r}
-okienkaMin = c(-11, 1, 13, 1)
-okienkaMax = c(0, 12, 24, 1000)
-okienkaSufiksy = c('_m1', '_p1', '_p2', '')
-okienkaIter = c(2, 4)
+##########
+# Wyliczamy zmienne w poszczególnych okienkach czasu
 for(i in okienkaIter){
   okienkoMin = okienkaMin[i]
   okienkoMax = okienkaMax[i]
@@ -72,19 +64,14 @@ for(i in okienkaIter){
   rm(razem)
   gc()
 }
-```
 
-## Zmienne z grupy STUDYP oraz CZAS*
-
-Zmienne KONT, STUDYP* oraz CZAS* są niezależne od okienka czasu, wyliczamy je więc oddzielnie:
-```{r}
+##########
+# Wyliczamy zmienne niezależne od okienka czasu (KONT, STUDYP* oraz CZAS*)
 studyp = oblicz_studyp(zdau) # t7
 czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
-```
 
-# Złączamy wszystko razem i zapisujemy
-
-```{r}
+##########
+# Złączamy wszystko, cośmy policzyli i zapisujemy
 wszystko = zdau %>%
   filter_(~ typ %in% 'A') %>%
   full_join(studyp) %>%
@@ -101,5 +88,4 @@ stopifnot(
 colnames(wszystko) = toupper(colnames(wszystko))
 save(wszystko, file = 'cache/zlaczone.RData', compress = TRUE)
 write.csv2(wszystko, 'cache/zlaczone.csv', row.names = FALSE, fileEncoding = 'Windows-1250')
-```
 

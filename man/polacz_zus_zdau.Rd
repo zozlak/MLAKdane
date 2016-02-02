@@ -22,9 +22,10 @@ data.frame wyliczone zmienne
 }
 \description{
 Aby poprawnie przyłączyć statystyki powiatów macierz danych uzupełniana jest
-tak, aby dla każdego absolwenta zawierała informacje o każdym okrsie w
-zadanym przedziale czasu (zakładając zamieszkanie absolwenta w uzupełnianych
-okresach "w Polsce", kodowane jako pna = -1, oraz wszelkie cechy tytułu
-ubezpieczenia ZUS równe 0, w szczególności także bezrob = 0).
+tak, aby dla każdego absolwenta zawierała informacje o każdym okresie w
+zadanym przedziale czasu, ale nie później niż do "końca obserwacji w zus"
+(zakładając zamieszkanie absolwenta w uzupełnianych okresach "w Polsce",
+kodowane jako pna = -1, oraz wszelkie cechy tytułu ubezpieczenia ZUS równe 0,
+w szczególności także bezrob = 0).
 }
 
