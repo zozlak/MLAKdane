@@ -7,7 +7,7 @@
 oblicz_zmienne_pochodne = function(dane){
   stopifnot(
     'id_zdau' %in% colnames(dane),
-    length(unique(dane[, 'id_zdau'])) == nrow(dane)
+    length(unique(unlist(dane[, 'id_zdau']))) == nrow(dane)
   )
   dane = dane %>%
     mutate_(

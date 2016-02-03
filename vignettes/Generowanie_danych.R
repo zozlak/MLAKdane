@@ -9,11 +9,12 @@ devtools::load_all(".")
 library(dplyr)
 
 dataMin = '2014-01-01'
-dataMax = '2015-09-30' # 2015-09-30/2015-03-31 dla nowych/starych danych
+dataMax = '2015-03-31' # 2015-09-30/2015-03-31 dla nowych/starych danych
 okienkaMin = c(-11, 1, 13, 1)
 okienkaMax = c(0, 12, 24, 1000)
 okienkaSufiksy = c('_m1', '_p1', '_p2', '')
 okienkaIter = c(2, 4)
+katalogZapisu = 'dane/stare'
 
 ##########
 # Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
@@ -21,18 +22,20 @@ pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, d
 jednostki = przygotuj_jednostki() # t2
 zdau = przygotuj_zdau() # t5
 zus = przygotuj_zus(dataMin, dataMax) # t3
-# save(zus, file = 'cache/ZUS.RData', compress = TRUE)
+save(zus, file = 'cache/ZUS.RData', compress = TRUE)
 # load('cache/ZUS.RData')
 
 ##########
 # Wyliczamy pomocniczy zbiór utrataEtatu
 utrataEtatu = przygotuj_utrata_pracy(zus, dataMax) # t4
-# save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
+save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
 # load('cache/utrataEtatu.RData')
 
 ##########
 # złączamy dane ZUS z danymi OPI i statystykami powiatów z BDL
 baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax) # t6
+save(baza, file = 'cache/baza.RData', compress = TRUE)
+# load('cache/baza.RData')
 
 ##########
 # Wyliczamy zmienne w poszczególnych okienkach czasu
@@ -42,14 +45,16 @@ for(i in okienkaIter){
   cat(okienkoMin, '-', okienkoMax)
 
   okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax) # t9
+  len = okienko %>%
+    select(id_zdau, len) %>%
+    distinct()
 
   abs1 = oblicz_absolwent(okienko) # t10
   abs2 = oblicz_absolwent_okres(okienko) # t11
   nnn  = oblicz_nowi_pracodawcy(okienko) # t12
   nmle = oblicz_utrata_etatu(okienko, utrataEtatu) # t13
   zam  = oblicz_zamieszkanie(okienko, jednostki, okienkoMax == 1000) # t14
-  razem = oblicz_okienko(zdau, okienkoMin, okienkoMax, dataMin, dataMax) %>%  # t15
-    select(id_zdau, len) %>%
+  razem = len %>%
     right_join(abs1) %>%
     full_join(abs2) %>%
     full_join(nnn) %>%
@@ -58,7 +63,7 @@ for(i in okienkaIter){
   rm(abs1, abs2, nnn, nmle, zam)
   gc()
   razem = oblicz_zmienne_pochodne(razem) # t16
-  
+
   colnames(razem) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(razem), okienkaSufiksy[i]))
   save(razem, file = paste0('cache/razem', i, '.RData'), compress = TRUE)
   rm(razem)
@@ -86,6 +91,6 @@ stopifnot(
   nrow(wszystko) == nrow(zdau %>% filter_(~ typ %in% 'A'))
 )
 colnames(wszystko) = toupper(colnames(wszystko))
-save(wszystko, file = 'cache/zlaczone.RData', compress = TRUE)
-write.csv2(wszystko, 'cache/zlaczone.csv', row.names = FALSE, fileEncoding = 'Windows-1250')
+save(wszystko, file = paste0(katalogZapisu, '/zlaczone.RData'), compress = TRUE)
+write.csv2(wszystko, paste0(katalogZapisu, '/zlaczone.csv'), row.names = FALSE, fileEncoding = 'Windows-1250')
 

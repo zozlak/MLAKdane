@@ -4,7 +4,8 @@ output: html_document
 ---
 
 ```{r, echo = FALSE, results = 'hide', warning = FALSE, message = FALSE, cache = TRUE}
-setwd('../')
+setwd('../') # nie wykonywać przy ręcznym uruchamianiu
+
 library(dplyr)
 devtools::load_all(".")
 load('dane/stare/daneMS.RData')
@@ -57,17 +58,25 @@ Funkcja *porownaj(zbiorA, zbiorB, zmienna)* (opcjonalnie *porownaj(zbiorA, zbior
 
 # Pełna zgodność
 
-## NME
+## LEN
 ```{r, warning = FALSE, message = FALSE}
-porownaj(daneMS, wszystko, 'NME') %>% group_by(d) %>% summarize(n = n())
+porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n())
 ```
 
 ## SZE
 ```{r, warning = FALSE, message = FALSE}
-summary((porownaj(daneMS, wszystko, 'SZE'))$d)
+round(quantile((porownaj(daneMS, wszystko, 'SZE'))$d, c(0, 0.001, 0.1, 0.9999, 0.99999, 1)), 1)
+porownaj(daneMS, wszystko, 'SZE') %>% filter(d > 1) %>% left_join(zus %>% filter(okres == koniec) %>% select(id, podst) %>% rename(ID = id))
 ```
+Sprawa jest jasna, MS wlicza okres składkowy zgonu, a ja wykluczam (vide mail MB z 2016-01-02)
 
 # Dobra zgodność
+
+## NME
+```{r, warning = FALSE, message = FALSE}
+porownaj(daneMS, wszystko, 'NME') %>% group_by(d) %>% summarize(n = n())
+```
+Zgodność utracona po wyeliminowaniu ze zbioru ZUS składek dla miesięcy, w których absolwent zmarł. Tak więc prawdopodobnie MS wlicza te miesiące przy liczeniu NME.
 
 # NMP
 
@@ -86,17 +95,6 @@ porownaj(daneMS, wszystko, 'NMJ') %>% group_by(d) %>% summarize(n = n())
 ```{r, warning = FALSE, message = FALSE}
 porownaj(daneMS, wszystko, 'NMM') %>% group_by(d) %>% summarize(n = n())
 ```
-
-## LEN
-```{r, warning = FALSE, message = FALSE}
-porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n())
-
-porownaj(daneMS, wszystko, 'LEN1', 'LEN_P1') %>% filter(d != 0)
-zdau %>% filter(id_zdau == 152193)
-zus %>% filter(id == 196338524) %>% select(okres) %>% distinct() %>% arrange(okres)
-```
-Wygląda na to, że MS liczy tylko do ostatniej informacji z ZUS-u? (ja liczę do końca rozważanego okresu)  
-W sumie zaskakujące, że rozbieżności występują tylko dla 26 osób.
 
 ## NMS (samoz)
 
@@ -122,7 +120,7 @@ zus %>% filter(id == 15045163) %>% arrange(okres) %>% as.data.frame() %>% select
 porownaj(daneMS, wszystko, 'NMB', 'NMB_V2') %>% filter(d == 3)
 zus %>% filter(id == 221631525) %>% arrange(okres) %>% as.data.frame() %>% select(okres, etat, netat, samoz, bezrob, rentemer, student) # MS najwyraźniej nie wyklucza po samoz
 ```
-Wygląda na to, że NMB wg MS to coś pomiędzy naszym NMB (tylko po *bezrob*) a naszym NMB_V2 (*bezrob* i żadno z *etat, netat, samoz, rentemer, student*)
+Wygląda na to, że NMB wg MS to coś pomiędzy NMB opisnym przez MJ+MB (tylko po *bezrob*) a NMB_V2 opisanym przez MJ+MB (*bezrob* i żadno z *etat, netat, samoz, rentemer, student*)
 
 # Kiepska zgodność
 
@@ -132,8 +130,9 @@ Wygląda na to, że NMB wg MS to coś pomiędzy naszym NMB (tylko po *bezrob*) a
 porownaj(daneMS, wszystko, 'KONT') %>% group_by(d, is.na(a), is.na(b)) %>% summarize(n = n())
 
 porownaj(daneMS, wszystko, 'KONT') %>% filter(d == -1)
-zdau %>% filter(id == 57) 
-zdau %>% filter(id == 69) 
+zdau %>% filter(id == 2019916) 
+porownaj(daneMS, wszystko, 'KONT') %>% filter(d == -2)
+zdau %>% filter(id == 2040429) 
 ```
 Na losowo wybranych przykładach wydaje mi się, że liczę dobrze i nie mam pomysłu, skąd się wzięły wartości MS (nie tylko różnice w wartościach, ale też liczba braków danych u MS).  
 Wymaga dyskusji.
@@ -141,8 +140,10 @@ Wymaga dyskusji.
 ## GBEZD
 
 ```{r, warning = FALSE, message = FALSE}
-hist((porownaj(daneMS, wszystko, 'GBEZD'))$d)
-porownaj(daneMS, wszystko, 'GBEZD') %>% group_by(abs(d) < 0.1) %>% summarize(n = n())
+plot(density((porownaj(daneMS, wszystko, 'GBEZD'))$d, from = -10, to = 10))
+porownaj(daneMS, wszystko, 'GBEZD') %>% 
+  group_by(abs(d) > 2, abs(d) > 1, abs(d) > 0.5, abs(d) > 0.1) %>% summarize(n = n()) %>% 
+  ungroup() %>% mutate(n_skum = cumsum(n), ods_skum = n_skum / sum(n))
 
 porownaj(daneMS, wszystko, 'GBEZD') %>% filter(abs(d) > 30)
 zus %>% filter(id == 196758920) %>% select(okres, pna) %>% left_join(pnaPowiaty %>% select(pna, okres, powpbezd, powpbezd_sr))

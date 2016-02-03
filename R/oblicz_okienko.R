@@ -10,7 +10,7 @@
 #' @import dplyr
 oblicz_okienko = function(dane, okienkoMin, okienkoMax, dataMin, dataMax){
   stopifnot(
-    is(dane, 'baza_df') | is(dane, 'zdau_df'),
+    is(dane, 'baza_df'),
     is.vector(okienkoMin), is.numeric(okienkoMin), length(okienkoMin) == 1, all(!is.na(okienkoMin)),
     is.vector(okienkoMax), is.numeric(okienkoMax), length(okienkoMax) == 1, all(!is.na(okienkoMax)),
     is.vector(dataMin), is.character(dataMin), length(dataMin) == 1, all(!is.na(dataMin)),
@@ -22,7 +22,7 @@ oblicz_okienko = function(dane, okienkoMin, okienkoMax, dataMin, dataMax){
   dane = dane %>%
     mutate_(
       okres_min = ~ data_zak + okienkoMin,
-      okres_max = ~ data_zak + okienkoMax
+      okres_max = ~ ifelse(data_zak + okienkoMax > koniec, koniec, data_zak + okienkoMax)
     ) %>%
     mutate_(
       okres_min  = ~ ifelse(okres_min < data2okres(dataMin), data2okres(dataMin), okres_min),

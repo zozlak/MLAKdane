@@ -33,10 +33,14 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
   wynik = wynik %>%
     left_join(
       zus %>%
-        select_('-nspraw', '-pkd', '-platnik_kon', '-plec', '-rok_ur', '-rolnik', '-zlec')
+        select_('-nspraw', '-pkd', '-platnik_kon', '-plec', '-rok_ur', '-rolnik', '-zlec', '-koniec')
     ) %>%
-    filter_(~ okres < koniec) %>%
-    select_('-koniec')
+    left_join(
+      zus %>%
+        select_('id', 'koniec') %>%
+        distinct()
+    ) %>%
+    filter_(~ okres < koniec | is.na(koniec))
 
   wynik = wynik %>%
     mutate_(
