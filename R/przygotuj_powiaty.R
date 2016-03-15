@@ -32,7 +32,7 @@ przygotuj_powiaty = function(){
   powiaty = suppressMessages(full_join(bezrobocie, zarobki)) %>%
     mutate_(
       teryt = ~ terytPow * 100,
-      rok   = ~ floor(okres / 12)
+      rok   = ~ okres2rok(okres)
     ) %>%
     select_('-terytPow', '-terytWoj')
 

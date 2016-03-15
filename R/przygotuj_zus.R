@@ -123,7 +123,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     mutate_(
       okres       = ~ data2okres(okres),
       platnik_kon = ~ data2okres(platnik_kon),
-      rok         = ~ floor(okres / 12)
+      rok         = ~ okres2rok(okres)
     ) %>%
     left_join(pna) %>%
     mutate_(

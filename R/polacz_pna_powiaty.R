@@ -48,7 +48,11 @@ polacz_pna_powiaty = function(pna, powiaty, dataMin, dataMax){
     summarize_(
       teryt = ~ uzgodnij_teryt(teryt)
     ) %>%
-    left_join(powiaty)
+    left_join(powiaty) %>%
+    rename_(
+      powpbezd_teryt = 'powpbezd',
+      powezar_teryt  = 'powezar'
+    )
   stopifnot(
     all(!is.na(pnaWskJST$okres))
   )

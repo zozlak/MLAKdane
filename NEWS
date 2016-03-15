@@ -1,4 +1,10 @@
-# 0.3.1
+# 0.3.2 (2016-03-15)
+
+* korekty błędów w funkcjach przeliczających daty data2okres(), okres2data(),
+  dodanie funkcji okres2rok()
+* dodanie funkcji przygotuj_pna_powiaty_mb() dla danych od Marka Bożykowskiego
+
+# 0.3.1 (2016-02-03)
 
 * korekty wyliczania zmiennej pomocniczej "len" (uwzględnianie informacji o
   zgodnie ze zbioru ZDU1)
@@ -7,13 +13,13 @@
 * winietka zawierająca pełny kod wyliczający zbiór wynikowy skonwertowana na
   zwykły skrypt R z komentarzami (co ułatwia jej wykonanie)
 
-# 0.3.0
+# 0.3.0 (2016-01-27)
 
 * większość zmiennych sprawdzona ze zbiorem Marka Stycznia
     * korekty w sposobie wyliczania wielu zmiennych
     * przygotowana winietka w markdown wykonująca porównanie
 
-# 0.2.0
+# 0.2.0 (2016-01-12)
 
 * obliczenia równoległe z wykorzystaniem pakietu multidplyr
 * korekty definicji kilku zmiennych

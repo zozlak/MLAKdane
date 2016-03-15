@@ -57,7 +57,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
       # rolnik   = ~ ifelse(is.na(rolnik), 0, rolnik),
       podst    = ~ ifelse(is.na(podst), 0, podst),
       pna      = ~ ifelse(is.na(pna), -1, pna),
-      rok      = ~ floor(okres / 12)
+      rok      = ~ okres2rok(okres)
     )
 
   wynik = left_join(wynik, pnaPowiaty)
