@@ -18,7 +18,7 @@ katalogZapisu = 'dane/stare'
 
 ##########
 # Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
-pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
+# pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax) # t1
 jednostki = przygotuj_jednostki() # t2
 zdau = przygotuj_zdau() # t5

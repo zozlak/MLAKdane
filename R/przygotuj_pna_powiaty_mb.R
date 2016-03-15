@@ -31,7 +31,7 @@ przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
   dane$rok = 2000 + (dane$okres %% 100)
   dane$okres = data2okres(paste0(2000 + (dane$okres %% 100), '-', floor(dane$okres / 100)))
   dane = dane %>%
-    filter_(okres <= data2okres('2015-10'))
+    filter_(~ okres <= data2okres('2015-10'))
 
   # wartości unikalne dla powiatów
   stopifnot(
