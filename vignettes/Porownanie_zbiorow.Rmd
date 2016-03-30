@@ -140,7 +140,7 @@ Wymaga dyskusji.
 ## GBEZD
 
 ```{r, warning = FALSE, message = FALSE}
-plot(density((porownaj(daneMS, wszystko, 'GBEZD'))$d, from = -10, to = 10))
+plot(density(na.exclude((porownaj(daneMS, wszystko, 'GBEZD'))$d), from = -10, to = 10))
 porownaj(daneMS, wszystko, 'GBEZD') %>% 
   group_by(abs(d) > 2, abs(d) > 1, abs(d) > 0.5, abs(d) > 0.1) %>% summarize(n = n()) %>% 
   ungroup() %>% mutate(n_skum = cumsum(n), ods_skum = n_skum / sum(n))

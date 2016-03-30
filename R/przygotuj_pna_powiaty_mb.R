@@ -17,7 +17,7 @@ przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
     mutate_(
       pow_grodzki = ~ as.numeric(teryt %in% (100 * powGrodzkie))
     ) %>%
-    select_('pna', 'powiat', 'wojewodztwo', 'teryt', 'pow_grodzki', 'miejzam', 'klasazam', 'pna5') %>%
+    select_('pna', 'powiat', 'wojewodztwo', 'teryt', 'pow_grodzki', 'miejzam', 'klaszam', 'pna5') %>%
     full_join(expand.grid(rok = floor(data2okres(dataMin) / 12):floor(data2okres(dataMax) / 12), pna5 = dane$pna5, stringsAsFactors = FALSE)) %>%
     bind_rows(expand.grid(
       pna = -1, powiat = 'Polska', wojewodztwo = 'Polska', teryt = 0, rok = floor(data2okres(dataMin) / 12):floor(data2okres(dataMax) / 12),

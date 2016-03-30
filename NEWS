@@ -1,3 +1,8 @@
+# 0.3.3 (2016-03-30)
+
+* dodanie funkcji okres2miesiac()
+* dodanie funkcji oblicz_stale_czasowe()
+
 # 0.3.2 (2016-03-15)
 
 * korekty błędów w funkcjach przeliczających daty data2okres(), okres2data(),

@@ -38,8 +38,8 @@ oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE)
   dane = dane %>%
     summarize_(
       powiat      = ~ uzgodnij_teryt(teryt),
-      klasazam    = ~ ifelse(n_distinct(klasazam) == 1, klasazam, NA),
-      klasazam_v2 = ~ min(klasazam2),
+      klaszam     = ~ ifelse(n_distinct(klaszam) == 1, klaszam, NA),
+      klaszam_v2  = ~ min(klaszam2),
       miejzam     = ~ ifelse(n_distinct(miejzam) == 1, miejzam, NA),
       miejzam_v2  = ~ min(miejzam2),
       jpdzam      = ~ min(jpdzam),

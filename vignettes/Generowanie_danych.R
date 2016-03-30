@@ -78,7 +78,7 @@ czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
 
 ##########
 # Złączamy wszystko, cośmy policzyli i zapisujemy
-wszystko = zdau %>%
+wszystko = oblicz_stale_czasowe(zdau) %>%
   filter_(~ typ %in% 'A') %>%
   full_join(studyp) %>%
   full_join(czas) %>%
