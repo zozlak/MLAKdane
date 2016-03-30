@@ -9,16 +9,16 @@ devtools::load_all(".")
 library(dplyr)
 
 dataMin = '2014-01-01'
-dataMax = '2015-03-31' # 2015-09-30/2015-03-31 dla nowych/starych danych
+dataMax = '2015-09-30' # 2015-09-30/2015-03-31 dla nowych/starych danych
 okienkaMin = c(-11, 1, 13, 1)
 okienkaMax = c(0, 12, 24, 1000)
 okienkaSufiksy = c('_m1', '_p1', '_p2', '')
 okienkaIter = c(2, 4)
-katalogZapisu = 'dane/stare'
+katalogZapisu = 'dane/nowe'
 
 ##########
 # Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
-pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
+# pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax) # t1
 jednostki = przygotuj_jednostki() # t2
 zdau = przygotuj_zdau() # t5
