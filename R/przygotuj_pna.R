@@ -48,7 +48,7 @@ przygotuj_pna = function(){
   pna = pna %>%
     mutate_(
       miejzam = ~ ifelse(teryt %in% powiatyAkadem, 1, ifelse(pow_grodzki == 1, 2, 3)),
-      klasazam = ~ ifelse(teryt %in% powiatyNajw, 1, ifelse(pow_grodzki == 1, 2, 3))
+      klaszam = ~ ifelse(teryt %in% powiatyNajw, 1, ifelse(pow_grodzki == 1, 2, 3))
     )
 
   # testy

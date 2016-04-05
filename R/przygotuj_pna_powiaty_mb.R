@@ -25,7 +25,7 @@ przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
     ))
   class(pna) = c('pna_df', class(pna))
 
-  dane = reshape2::melt(dane, id.vars = c('pna5', 'pna', 'teryt', 'id_gus', 'powiat', 'wojewodztwo', 'miejzam', 'klasazam'))
+  dane = reshape2::melt(dane, id.vars = c('pna5', 'pna', 'teryt', 'id_gus', 'powiat', 'wojewodztwo', 'miejzam', 'klaszam'))
   dane$stat = ifelse(grepl('^bezr', dane$variable), 'powpbezd', 'powezar')
   dane$okres = as.numeric(gsub('[^0-9]', '', dane$variable))
   dane$rok = 2000 + (dane$okres %% 100)

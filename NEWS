@@ -1,3 +1,7 @@
+# 0.3.4 (2016-04-05)
+
+* dodanie zbioru danych opisującego obszary, dziedziny i dyscypliny studiów
+
 # 0.3.3 (2016-03-30)
 
 * dodanie funkcji okres2miesiac()

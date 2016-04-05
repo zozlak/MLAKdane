@@ -5,7 +5,7 @@
 #' @import dplyr
 oblicz_stale_czasowe = function(dane){
   dane = dane %>%
-    mutate(
+    mutate_(
       mcstart   = ~ okres2miesiac(data_rozp),
       rokstart  = ~ okres2rok(data_rozp),
       mcdyp     = ~ okres2miesiac(data_zak),

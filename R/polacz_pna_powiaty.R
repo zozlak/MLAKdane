@@ -23,8 +23,8 @@ polacz_pna_powiaty = function(pna, powiaty, dataMin, dataMax){
       pow_grodzki2 = ~ min(pow_grodzki),
       miejzam      = ~ ifelse(n_distinct(miejzam) > 1, NA, first(miejzam)),
       miejzam2     = ~ min(miejzam),
-      klaszam      = ~ ifelse(n_distinct(klasazam) > 1, NA, first(klasazam)),
-      klaszam2     = ~ min(klasazam)
+      klaszam      = ~ ifelse(n_distinct(klaszam) > 1, NA, first(klaszam)),
+      klaszam2     = ~ min(klaszam)
     )
 
   pnaWskSr = pna %>%
