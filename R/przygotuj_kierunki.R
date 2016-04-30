@@ -20,21 +20,21 @@ przygotuj_kierunki = function(){
     ) %>%
     group_by_('kierunek_id') %>%
     summarize_(
-      obsz_kod      = ~ first(obszar_kod),
-      obsz          = ~ first(obszar),
-      dziedzin_kod  = ~ first(dziedzina_kod),
-      dziedzin      = ~ first(dziedzina),
-      dyscyp_kod    = ~ first(dyscyplina_kod),
-      dyscyp        = ~ first(dyscyplina),
+      obsz_kod  = ~ first(obszar_kod),
+      obsz      = ~ first(obszar),
+      dzie_kod  = ~ first(dziedzina_kod),
+      dzie      = ~ first(dziedzina),
+      dysc_kod  = ~ first(dyscyplina_kod),
+      dysc      = ~ first(dyscyplina),
       n = ~ n()
     ) %>%
     mutate_(
-      obsz_kod      = ~ ifelse(n > 1, 99, obsz_kod),
-      obsz          = ~ ifelse(n > 1, 'studia międzyobszarowe', obsz),
-      dziedzin_kod  = ~ ifelse(n > 1, 99, dziedzin_kod),
-      dziedzin      = ~ ifelse(n > 1, 'studia międzydziedzinowe', dziedzin),
-      dyscyp_kod    = ~ ifelse(n > 1, 999, dyscyp_kod),
-      dyscyp        = ~ ifelse(n > 1, 'studia interdyscyplinarne', dyscyp)
+      obsz_kod  = ~ ifelse(n > 1, 99, obsz_kod),
+      obsz      = ~ ifelse(n > 1, 'studia międzyobszarowe', obsz),
+      dzie_kod  = ~ ifelse(n > 1, 99, dzie_kod),
+      dzie      = ~ ifelse(n > 1, 'studia międzydziedzinowe', dzie),
+      dysc_kod  = ~ ifelse(n > 1, 999, dysc_kod),
+      dysc      = ~ ifelse(n > 1, 'studia interdyscyplinarne', dysc)
     ) %>%
     select_('-n')
 
