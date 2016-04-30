@@ -19,6 +19,7 @@ oblicz_absolwent = function(dane, multidplyr = TRUE){
     summarize_(
       sz    = ~ sum(podst, na.rm = TRUE),
       sze   = ~ sum(podst[etat == 1], na.rm = TRUE),
+      szn   = ~ sum(podst[netat == 1], na.rm = TRUE),
       nde   = ~ length(unique(id_platnika[etat %in% 1])),
       ndn   = ~ length(unique(id_platnika[netat %in% 1])),
       nmb   = ~ length(unique(okres[bezrob == 1])),

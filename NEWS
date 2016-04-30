@@ -1,3 +1,10 @@
+# 0.4.0 (2016-04-30)
+
+* zmiany w nazwach zmiennych ujednolicajace ze zbiorem MS
+* zmienne opisujace zamieszkanie wyliczane sa obecnie tylko dla momentu
+  uzyskania dyplomu i konca obserwacji (znow kompatybilnosc z MS)
+* pare drobnych korekt w sposobie wyliczania zmiennych (np. domyslne NA/0)
+
 # 0.3.4 (2016-04-05)
 
 * dodanie zbioru danych opisującego obszary, dziedziny i dyscypliny studiów

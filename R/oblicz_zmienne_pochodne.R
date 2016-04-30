@@ -32,8 +32,8 @@ oblicz_zmienne_pochodne = function(dane){
       mnprud      = ~ (len - nme) / len,
       pbezd       = ~ nmb / len,
       pbezd_v2    = ~ nmb_v2 / len,
-      zilorazd    = ~ ezard / gezbazyd,
-      zilorazd_v2 = ~ ezard / gezbazyd_v2,
+      zilo        = ~ ezard / zpow,
+      ziloa       = ~ ezard / gezd,
       bilod       = ~ pbezd / gbezd
     ) %>%
     mutate_(
@@ -46,13 +46,13 @@ oblicz_zmienne_pochodne = function(dane){
       prudaw      = ~ ifelse(is.finite(prudaw), prudaw, 0),
       ezard       = ~ ifelse(is.finite(ezard), ezard, NA),
       ezarda      = ~ ifelse(is.finite(ezarda), ezarda, NA),
-      ezud        = ~ ifelse(is.finite(ezubazyd), ezubazyd, NA),
+      ezud        = ~ ifelse(is.finite(ezud), ezud, NA),
       mnprd       = ~ ifelse(is.finite(mnprd), mnprd, NA),
       mnprud      = ~ ifelse(is.finite(mnprud), mnprud, NA),
       pbezd       = ~ ifelse(is.finite(pbezd), pbezd, NA),
       pbezd_v2    = ~ ifelse(is.finite(pbezd_v2), pbezd_v2, NA),
-      zilorazd    = ~ ifelse(is.finite(zilorazd), zilorazd, 0),
-      zilorazd_v2 = ~ ifelse(is.finite(zilorazd_v2), zilorazd_v2, 0),
+      zilo        = ~ ifelse(is.finite(zilo), zilo, 0),
+      ziloa       = ~ ifelse(is.finite(ziloa), ziloa, 0),
       bilod       = ~ ifelse(is.finite(bilod), bilod, 0)
     )
   class(dane) = c('absolwent_df', class(dane))
