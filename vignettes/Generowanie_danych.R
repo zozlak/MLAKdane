@@ -54,18 +54,29 @@ for(i in okienkaIter){
   abs2 = oblicz_absolwent_okres(okienko) # t11
   nnn  = oblicz_nowi_pracodawcy(okienko) # t12
   nmle = oblicz_utrata_etatu(okienko, utrataEtatu) # t13
-  zam  = oblicz_zamieszkanie(okienko, jednostki, okienkoMax == 1000) # t14
   razem = len %>%
     right_join(abs1) %>%
     full_join(abs2) %>%
     full_join(nnn) %>%
-    full_join(nmle) %>%
-    full_join(zam)
-  rm(abs1, abs2, nnn, nmle, zam)
+    full_join(nmle)
+  rm(abs1, abs2, nnn, nmle)
   gc()
   razem = oblicz_zmienne_pochodne(razem) # t16
 
   colnames(razem) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(razem), okienkaSufiksy[i]))
+
+  if(okienkoMax == 1000){
+    zam0  = oblicz_zamieszkanie(okienko, jednostki, TRUE)
+    colnames(zam0) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(zam0), '0'))
+    zam1  = oblicz_zamieszkanie(okienko, jednostki, FALSE)
+    colnames(zam1) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(zam1), '1'))
+    razem = razem %>%
+      full_join(zam0) %>%
+      full_join(zam1)
+    rm(zam0, zam1)
+    gc()
+  }
+
   save(razem, file = paste0('cache/razem', i, '.RData'), compress = TRUE)
   rm(razem)
   gc()
@@ -78,7 +89,7 @@ czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
 
 ##########
 # Złączamy wszystko, cośmy policzyli i zapisujemy
-wszystko = oblicz_stale_czasowe(zdau) %>%
+wszystko = oblicz_stale_czasowe(zdau, dataMax) %>%
   filter_(~ typ %in% 'A') %>%
   full_join(studyp) %>%
   full_join(czas) %>%

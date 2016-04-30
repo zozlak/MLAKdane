@@ -123,7 +123,8 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     mutate_(
       okres       = ~ data2okres(okres),
       platnik_kon = ~ data2okres(platnik_kon),
-      rok         = ~ okres2rok(okres)
+      rok         = ~ okres2rok(okres),
+      id_platnika = ~ ifelse(samoz > 0, -1 , id_platnika) # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
     ) %>%
     left_join(pna) %>%
     mutate_(

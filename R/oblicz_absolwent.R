@@ -25,6 +25,7 @@ oblicz_absolwent = function(dane, multidplyr = TRUE){
       nme   = ~ length(unique(okres[etat == 1])),
       nmn   = ~ length(unique(okres[netat == 1])),
       nms   = ~ length(unique(okres[samoz == 1])),
+      nmz   = ~ length(unique(okres[etat == 1 | netat == 1])),
       nmp   = ~ length(unique(okres[etat == 1 | netat == 1 | samoz == 1])),
       nmj   = ~ length(unique(okres[prawnik == 1])),
       nmm   = ~ length(unique(okres[mundur == 1])),

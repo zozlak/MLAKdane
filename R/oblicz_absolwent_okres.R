@@ -20,21 +20,21 @@ oblicz_absolwent_okres = function(dane, multidplyr = TRUE){
       nbezrob     = ~ sum(etat + netat + samoz + rentemer + student),
       nem         = ~ length(unique(id_platnika[!is.na(id_platnika) & etat == 1])),
       gbezd       = ~ mean(powpbezd_sr, na.rm = TRUE),
-      gezbazyd    = ~ mean(powezar_sr[etat + netat + samoz > 0], na.rm = TRUE),
-      gezbazyd_v2 = ~ mean(powezar_sr, na.rm = TRUE)
+      zpow        = ~ mean(powezar_sr[etat + netat > 0], na.rm = TRUE),
+      gezd        = ~ mean(powezar_sr, na.rm = TRUE)
     ) %>%
     group_by_('id_zdau') %>%
     summarize_(
       nmb_v2      = ~ sum(bezrob > 0 & nbezrob == 0),
       nem         = ~ sum(nem, na.rm = TRUE),
       gbezd       = ~ mean(gbezd[is.finite(gbezd)], na.rm = TRUE),
-      gezbazyd    = ~ mean(gezbazyd[is.finite(gezbazyd)], na.rm = TRUE),
-      gezbazyd_v2 = ~ mean(gezbazyd_v2[is.finite(gezbazyd_v2)], na.rm = TRUE)
+      zpow        = ~ mean(zpow[is.finite(zpow)], na.rm = TRUE),
+      gezd        = ~ mean(gezd[is.finite(gezd)], na.rm = TRUE)
     ) %>%
     mutate_(
       gbezd       = ~ ifelse(is.finite(gbezd), gbezd, NA),
-      gezbazyd    = ~ ifelse(is.finite(gezbazyd), gezbazyd, NA),
-      gezbazyd_v2 = ~ ifelse(is.finite(gezbazyd_v2), gezbazyd_v2, NA)
+      zpow        = ~ ifelse(is.finite(zpow), zpow, NA),
+      gezd        = ~ ifelse(is.finite(gezd), gezd, NA)
     ) %>%
     collect()
   class(dane) = c('absolwent_df', class(dane))

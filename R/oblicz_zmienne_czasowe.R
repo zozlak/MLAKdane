@@ -25,26 +25,26 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
   }
   dane = dane %>%
     summarize_(
-      czasmun_v2  = ~ min(ifelse((roznica == 0 & is.na(utrmundur)  | roznica > 0) & mundur > 0, roznica, NA_integer_), na.rm = TRUE),
-      czaspraw_v2 = ~ min(ifelse((roznica == 0 & is.na(utrprawnik) | roznica > 0) & prawnik > 0, roznica, NA_integer_), na.rm = TRUE),
-      czasprd_v2  = ~ min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & etat + netat + samoz > 0, roznica, NA_integer_), na.rm = TRUE),
-      czasprsd_v2 = ~ min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & samoz > 0, roznica, NA_integer_), na.rm = TRUE),
-      czasprud_v2 = ~ min(ifelse((roznica == 0 & is.na(utretatu)   | roznica > 0) & etat > 0, roznica, NA_integer_), na.rm = TRUE),
-      czaszat_v2  = ~ min(ifelse((roznica == 0 & is.na(utrzatr)    | roznica > 0) & etat + netat > 0, roznica, NA_integer_), na.rm = TRUE)
+      tmuna  = ~ min(ifelse((roznica == 0 & is.na(utrmundur)  | roznica > 0) & mundur > 0, roznica, NA_integer_), na.rm = TRUE),
+      tprawa = ~ min(ifelse((roznica == 0 & is.na(utrprawnik) | roznica > 0) & prawnik > 0, roznica, NA_integer_), na.rm = TRUE),
+      tprda  = ~ min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & etat + netat + samoz > 0, roznica, NA_integer_), na.rm = TRUE),
+      tprsda = ~ min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & samoz > 0, roznica, NA_integer_), na.rm = TRUE),
+      tpruda = ~ min(ifelse((roznica == 0 & is.na(utretatu)   | roznica > 0) & etat > 0, roznica, NA_integer_), na.rm = TRUE),
+      tzata  = ~ min(ifelse((roznica == 0 & is.na(utrzatr)    | roznica > 0) & etat + netat > 0, roznica, NA_integer_), na.rm = TRUE)
     ) %>%
     mutate_(
-      czasmun_v2  = ~ ifelse(is.infinite(czasmun_v2),  NA_integer_, czasmun_v2),
-      czaspraw_v2 = ~ ifelse(is.infinite(czaspraw_v2), NA_integer_, czaspraw_v2),
-      czasprd_v2  = ~ ifelse(is.infinite(czasprd_v2),  NA_integer_, czasprd_v2),
-      czasprsd_v2 = ~ ifelse(is.infinite(czasprsd_v2), NA_integer_, czasprsd_v2),
-      czasprud_v2 = ~ ifelse(is.infinite(czasprud_v2), NA_integer_, czasprud_v2),
-      czaszat_v2  = ~ ifelse(is.infinite(czaszat_v2),  NA_integer_, czaszat_v2),
-      czasmun     = ~ ifelse(czasmun_v2  > 0, czasmun_v2  - 1, 0), # działa poprawnie także dla czas*_v2 równego NA
-      czaspraw    = ~ ifelse(czaspraw_v2 > 0, czaspraw_v2 - 1, 0),
-      czasprd     = ~ ifelse(czasprd_v2  > 0, czasprd_v2  - 1, 0),
-      czasprsd    = ~ ifelse(czasprsd_v2 > 0, czasprsd_v2 - 1, 0),
-      czasprud    = ~ ifelse(czasprud_v2 > 0, czasprud_v2 - 1, 0),
-      czaszat     = ~ ifelse(czaszat_v2  > 0, czaszat_v2  - 1, 0)
+      tmuna  = ~ ifelse(is.infinite(tmuna),  NA_integer_, tmuna),
+      tprawa = ~ ifelse(is.infinite(tprawa), NA_integer_, tprawa),
+      tprda  = ~ ifelse(is.infinite(tprda),  NA_integer_, tprda),
+      tprsda = ~ ifelse(is.infinite(tprsda), NA_integer_, tprsda),
+      tpruda = ~ ifelse(is.infinite(tpruda), NA_integer_, tpruda),
+      tzata  = ~ ifelse(is.infinite(tzata),  NA_integer_, tzata),
+      tmun     = ~ ifelse(tmuna  > 0, tmuna  - 1, 0), # działa poprawnie także dla czas*_v2 równego NA
+      tpraw    = ~ ifelse(tprawa > 0, tprawa - 1, 0),
+      tprd     = ~ ifelse(tprda  > 0, tprda  - 1, 0),
+      tprsd    = ~ ifelse(tprsda > 0, tprsda - 1, 0),
+      tprud    = ~ ifelse(tpruda > 0, tpruda - 1, 0),
+      tzat     = ~ ifelse(tzata  > 0, tzata  - 1, 0)
     ) %>%
     collect()
   class(dane) = c('absolwent_df', class(dane))
