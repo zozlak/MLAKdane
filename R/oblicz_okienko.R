@@ -22,7 +22,7 @@ oblicz_okienko = function(dane, okienkoMin, okienkoMax, dataMin, dataMax){
   dane = dane %>%
     mutate_(
       okres_min = ~ data_zak + okienkoMin,
-      okres_max = ~ ifelse(data_zak + okienkoMax > koniec, koniec, data_zak + okienkoMax)
+      okres_max = ~ ifelse(data_zak + okienkoMax > koniec & !is.na(koniec), koniec, data_zak + okienkoMax)
     ) %>%
     mutate_(
       okres_min  = ~ ifelse(okres_min < data2okres(dataMin), data2okres(dataMin), okres_min),
