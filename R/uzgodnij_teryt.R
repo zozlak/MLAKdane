@@ -7,6 +7,10 @@
 #' @export
 uzgodnij_teryt = function(teryt){
   potega = 0
+  teryt = teryt[!is.na(teryt) & teryt > 0]
+  if(length(teryt) == 0){
+    return(0)
+  }
   while(length(unique(teryt)) > 1){
     teryt = floor(teryt / 100)
     potega = potega + 2

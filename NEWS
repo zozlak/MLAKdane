@@ -1,3 +1,18 @@
+# 0.4.1 (2016-05-04)
+
+* zmienna ifzus okazała się nie być zmienną okienka czasu - wyliczanie
+  przeniesione do nowoutworzonej funkcji oblicz_stale()
+* korekty w funkcji oblicz_zamieszkanie():
+  * korekta błędnego użycia ifelse(wMomDyplomu), które powodowało
+    niepoprawne dopasowywanie danych dla niemal wszystkich obserwacji, gdy 
+    parametr wMomDyplomu był równy TRUE
+  * korekta wyliczania powiatu i województwa - na wcześniejszym etapie
+    teryt jest standaryzowany do postaci 6-cyfrowej i trzeba to uwzględnić
+* oblicz_okienko() w wypadku śmierci badanego ogranicza okienko do miesiąca
+  poprzedzającego śmierć (dotychczas wliczała też miesiąc zgonu)
+* przygotuj_kierunki() usuwa duplikaty ze zbioru mapowań kierunków na 
+  obszary, dziedziny i dyscypliny, zanim zacznie go dalej przetwarzać
+
 # 0.4.1 (2016-05-03)
 
 * korekta w funkcji przygotuj_okienko() pozostawiająca w okienku osoby,

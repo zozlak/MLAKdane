@@ -14,7 +14,7 @@ okienkaMin = c(-11, 1, 13, 1)
 okienkaMax = c(0, 12, 24, 1000)
 okienkaSufiksy = c('_m1', '_p1', '_p2', '')
 okienkaIter = c(2, 4)
-katalogZapisu = 'dane/nowe'
+plikZapisu = 'dane/nowe/nowe'
 
 ##########
 # Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
@@ -86,6 +86,7 @@ for(i in okienkaIter){
 # Wyliczamy zmienne niezależne od okienka czasu (KONT, STUDYP* oraz CZAS*)
 studyp = oblicz_studyp(zdau) # t7
 czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
+stale = oblicz_stale(baza)
 
 ##########
 # Złączamy wszystko, cośmy policzyli i zapisujemy
@@ -93,6 +94,7 @@ wszystko = oblicz_stale_czasowe(zdau, dataMax) %>%
   filter_(~ typ %in% 'A') %>%
   full_join(studyp) %>%
   full_join(czas) %>%
+  full_join(stale) %>%
   left_join(przygotuj_kierunki()) %>%
   left_join(jednostki %>% select(jednostka_id, jednostka, uczelnia))
 for(i in okienkaIter){
@@ -103,6 +105,6 @@ stopifnot(
   nrow(wszystko) == nrow(zdau %>% filter_(~ typ %in% 'A'))
 )
 colnames(wszystko) = toupper(colnames(wszystko))
-save(wszystko, file = paste0(katalogZapisu, '/zlaczone.RData'), compress = TRUE)
-write.csv2(wszystko, paste0(katalogZapisu, '/zlaczone.csv'), row.names = FALSE, fileEncoding = 'Windows-1250')
+save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
+write.csv2(wszystko, paste0(plikZapisu, '.csv'), row.names = FALSE, fileEncoding = 'Windows-1250')
 

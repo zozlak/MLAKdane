@@ -15,6 +15,8 @@ przygotuj_kierunki = function(){
   obszary = read.csv2('dane/sl_kierunki_obszary.csv', stringsAsFactors = FALSE)
   colnames(obszary) = tolower(colnames(obszary))
   obszary = obszary %>%
+    select_('kierunek', 'obszar_kod', 'obszar', 'dziedzina_kod', 'dziedzina', 'dyscyplina_kod', 'dyscyplina') %>%
+    distinct() %>%
     rename_(
       kierunek_id = 'kierunek'
     ) %>%

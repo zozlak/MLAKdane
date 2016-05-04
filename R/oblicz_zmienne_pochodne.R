@@ -13,7 +13,6 @@ oblicz_zmienne_pochodne = function(dane){
     mutate_(
       bezd        = ~ as.numeric(nmb > 0),
       bbazyd      = ~ as.numeric(nmb_v2 > 0),
-      ifzus       = ~ as.numeric(nzus > 0),
       munbaz      = ~ as.numeric(nmm > 0),
       netatd      = ~ as.numeric(nme > 0),
       npracd      = ~ as.numeric(nmp > 0),
