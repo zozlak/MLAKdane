@@ -12,6 +12,17 @@
   poprzedzającego śmierć (dotychczas wliczała też miesiąc zgonu)
 * przygotuj_kierunki() usuwa duplikaty ze zbioru mapowań kierunków na 
   obszary, dziedziny i dyscypliny, zanim zacznie go dalej przetwarzać
+* szablon generowania danych Generowanie_danych.R dba teraz o zachowanie
+  w okienku czasowym wszystkich absolwentów (także tych, którzy nie mają
+  w okienku żadnych danych, bo np. zmarli)
+* oblicz_zmienne_pochodne() ustawia teraz właściwe wartości domyślne braków
+  danych (generalnie 0 lub NA w zależności od zmiennej) dla wszystkich 
+  zmiennych generowanych w okienku czasowym
+* okres liczenia zmiennej STUDYP obejmuje teraz również miesiąc uzyskania
+  dyplomu
+* przygotuj_kierunki() dostosowane do zmian nazw zmiennych w zbiorze źródłowym
+* zmienne EMLE, EMLEP, EMLENP, ENDN i ENNN wyliczane są teraz w stosunku 
+  rocznym (mają wartości 12-krotnie większe niż poprzednio)
 
 # 0.4.1 (2016-05-03)
 

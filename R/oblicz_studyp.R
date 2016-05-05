@@ -41,7 +41,7 @@ oblicz_studyp = function(dane){
         select_('id', 'id_zdau', 'data_rozp', 'data_zak', 'uczelnia_id', 'jednostka_id', 'forma', 'poziom') %>%
         rename_(id_zdau_ = 'id_zdau', data_rozp_ = 'data_rozp', data_zak_ = 'data_zak', uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma', poziom_ = 'poziom')
     ) %>%
-    filter_(~ data_rozp_ < data_zak, ~is.na(data_zak_) | data_zak_ > data_zak, ~!is.na(id_zdau_), ~id_zdau != id_zdau_)
+    filter_(~ data_rozp_ <= data_zak, ~ is.na(data_zak_) | data_zak_ > data_zak, ~ !is.na(id_zdau_), ~ id_zdau != id_zdau_)
 
   studyp = polaczone %>%
     group_by_('id_zdau') %>%

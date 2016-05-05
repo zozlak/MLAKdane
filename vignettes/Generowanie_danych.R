@@ -12,7 +12,7 @@ dataMin = '2014-01-01'
 dataMax = '2015-09-30' # 2015-09-30/2015-03-31 dla nowych/starych danych
 okienkaMin = c(-11, 1, 13, 1)
 okienkaMax = c(0, 12, 24, 1000)
-okienkaSufiksy = c('_m1', '_p1', '_p2', '')
+okienkaSufiksy = c('m1', 'p1', 'p2', '')
 okienkaIter = c(2, 4)
 plikZapisu = 'dane/nowe/nowe'
 
@@ -54,8 +54,11 @@ for(i in okienkaIter){
   abs2 = oblicz_absolwent_okres(okienko) # t11
   nnn  = oblicz_nowi_pracodawcy(okienko) # t12
   nmle = oblicz_utrata_etatu(okienko, utrataEtatu) # t13
-  razem = len %>%
-    right_join(abs1) %>%
+  razem = zdau %>%
+    filter_(~ typ %in% 'A') %>%
+    select_('id_zdau') %>%
+    full_join(len) %>%
+    full_join(abs1) %>%
     full_join(abs2) %>%
     full_join(nnn) %>%
     full_join(nmle)
@@ -96,7 +99,8 @@ wszystko = oblicz_stale_czasowe(zdau, dataMax) %>%
   full_join(czas) %>%
   full_join(stale) %>%
   left_join(przygotuj_kierunki()) %>%
-  left_join(jednostki %>% select(jednostka_id, jednostka, uczelnia))
+  left_join(jednostki %>% select(jednostka_id, jednostka, uczelnianazwa)) %>%
+  rename_(kierunek = 'kierunek_id', uczelnia = 'uczelnia_id')
 for(i in okienkaIter){
   load(paste0('cache/razem', i, '.RData'))
   wszystko = full_join(wszystko, razem)
