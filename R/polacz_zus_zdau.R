@@ -40,7 +40,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
         select_('id', 'koniec') %>%
         distinct()
     ) %>%
-    filter_(~ okres < koniec | is.na(koniec))
+    filter_(~ (okres < koniec & data_zak <= koniec) | is.na(koniec))
 
   wynik = wynik %>%
     mutate_(

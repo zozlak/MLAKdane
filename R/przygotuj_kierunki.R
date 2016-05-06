@@ -10,22 +10,24 @@ przygotuj_kierunki = function(){
       jednostka_id = 'jednostka_prowadzaca_id',
       jednostka    = 'jednostka_prowadzaca'
     ) %>%
-    select_('uczelnia_id', 'jednostka_id', 'kierunek_id', 'kierunek')
+    select_('uczelnia_id', 'jednostka_id', 'kierunek_id', 'kieruneknazwa')
 
   obszary = read.csv2('dane/sl_kierunki_obszary.csv', stringsAsFactors = FALSE)
   colnames(obszary) = tolower(colnames(obszary))
   obszary = obszary %>%
+    select_('kierunek', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc') %>%
+    distinct() %>%
     rename_(
       kierunek_id = 'kierunek'
     ) %>%
     group_by_('kierunek_id') %>%
     summarize_(
-      obsz_kod  = ~ first(obszar_kod),
-      obsz      = ~ first(obszar),
-      dzie_kod  = ~ first(dziedzina_kod),
-      dzie      = ~ first(dziedzina),
-      dysc_kod  = ~ first(dyscyplina_kod),
-      dysc      = ~ first(dyscyplina),
+      obsz_kod  = ~ first(obsz_kod),
+      obsz      = ~ first(obsz),
+      dzie_kod  = ~ first(dzie_kod),
+      dzie      = ~ first(dzie),
+      dysc_kod  = ~ first(dysc_kod),
+      dysc      = ~ first(dysc),
       n = ~ n()
     ) %>%
     mutate_(

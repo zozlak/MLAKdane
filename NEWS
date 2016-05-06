@@ -1,3 +1,47 @@
+# 0.4.3 (2016-05-06)
+
+* korekty w sposobie wyliczania zmiennych dla specjalnych przypadków
+  (np. len równe 0, itp.)
+
+# 0.4.2 (2016-05-04)
+
+* zmienna ifzus okazała się nie być zmienną okienka czasu - wyliczanie
+  przeniesione do nowoutworzonej funkcji oblicz_stale()
+* korekty w funkcji oblicz_zamieszkanie():
+  * korekta błędnego użycia ifelse(wMomDyplomu), które powodowało
+    niepoprawne dopasowywanie danych dla niemal wszystkich obserwacji, gdy 
+    parametr wMomDyplomu był równy TRUE
+  * korekta wyliczania powiatu i województwa - na wcześniejszym etapie
+    teryt jest standaryzowany do postaci 6-cyfrowej i trzeba to uwzględnić
+* oblicz_okienko() w wypadku śmierci badanego ogranicza okienko do miesiąca
+  poprzedzającego śmierć (dotychczas wliczała też miesiąc zgonu)
+* przygotuj_kierunki() usuwa duplikaty ze zbioru mapowań kierunków na 
+  obszary, dziedziny i dyscypliny, zanim zacznie go dalej przetwarzać
+* szablon generowania danych Generowanie_danych.R dba teraz o zachowanie
+  w okienku czasowym wszystkich absolwentów (także tych, którzy nie mają
+  w okienku żadnych danych, bo np. zmarli)
+* oblicz_zmienne_pochodne() ustawia teraz właściwe wartości domyślne braków
+  danych (generalnie 0 lub NA w zależności od zmiennej) dla wszystkich 
+  zmiennych generowanych w okienku czasowym
+* okres liczenia zmiennej STUDYP obejmuje teraz również miesiąc uzyskania
+  dyplomu
+* przygotuj_kierunki() dostosowane do zmian nazw zmiennych w zbiorze źródłowym
+* zmienne EMLE, EMLEP, EMLENP, ENDN i ENNN wyliczane są teraz w stosunku 
+  rocznym (mają wartości 12-krotnie większe niż poprzednio)
+
+# 0.4.1 (2016-05-03)
+
+* korekta w funkcji przygotuj_okienko() pozostawiająca w okienku osoby,
+  dla których data końca obserwacji była brakiem danych (najczęściej osoby,
+  które w ogóle nie zostały odnotowane w danych ZUS)
+
+# 0.4.0 (2016-04-30)
+
+* zmiany w nazwach zmiennych ujednolicajace ze zbiorem MS
+* zmienne opisujace zamieszkanie wyliczane sa obecnie tylko dla momentu
+  uzyskania dyplomu i konca obserwacji (znow kompatybilnosc z MS)
+* pare drobnych korekt w sposobie wyliczania zmiennych (np. domyslne NA/0)
+
 # 0.3.4 (2016-04-05)
 
 * dodanie zbioru danych opisującego obszary, dziedziny i dyscypliny studiów

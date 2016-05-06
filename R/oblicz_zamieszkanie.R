@@ -20,7 +20,7 @@ oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE)
     select_('-teryt')
 
   dane = dane %>%
-    filter_(~ okres == ifelse(wMomDyplomu, data_zak, okres_max)) %>%
+    filter_(~ okres == ifelse(rep(wMomDyplomu, nrow(dane)), data_zak, okres_max)) %>%
     left_join(jednostki) %>%
     mutate_(
       jpdzam = ~ ifelse(
@@ -39,15 +39,15 @@ oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE)
     summarize_(
       powiat      = ~ uzgodnij_teryt(teryt),
       klaszam     = ~ ifelse(n_distinct(klaszam) == 1, klaszam, NA),
-      klaszam_v2  = ~ min(klaszam2),
+      klasz       = ~ min(klaszam2),
       miejzam     = ~ ifelse(n_distinct(miejzam) == 1, miejzam, NA),
-      miejzam_v2  = ~ min(miejzam2),
+      miejz       = ~ min(miejzam2),
       jpdzam      = ~ min(jpdzam),
       jpdzam_v2   = ~ ifelse(n_distinct(jpdzam) == 1, jpdzam, NA)
     ) %>%
     mutate_(
-      powiat    = ~ ifelse(powiat %% 100 > 0, powiat, NA),
-      nrwoj     = ~ ifelse(powiat > 0, floor(powiat / 100), NA)
+      nrwoj     = ~ ifelse(powiat > 0, floor(powiat / 10000), 0),
+      powiat    = ~ ifelse(powiat %% 10000 > 0, powiat, 0)
     ) %>%
     collect()
 

@@ -1,4 +1,167 @@
-KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
+KIERUNEK;OBSZ_KOD;OBSZ;DZIE_KOD;DZIE;DYSC_KOD;DYSC
+13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+8683;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+22285;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+8684;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+12944;0;NA;0;NA;0;NA
+22284;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+8686;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+12747;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+12766;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+26282;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+26288;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+26289;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+31845;0;NA;0;NA;0;NA
+6966;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+7321;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
+7954;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+7955;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+7956;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+7958;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+7966;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+7974;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+7975;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+9414;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+9415;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+9468;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+10041;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+10042;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+10058;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+10059;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+10597;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
+10604;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+10605;7;obszar nauk technicznych;18;dziedzina nauk technicznych;92;inżynieria biomedyczna
+10607;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+10637;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
+10639;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+10640;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+10664;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+10710;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
+10713;5;obszar nauk społecznych;14;dziedzina nauk społecznych;63;nauki o polityce publicznej
+10715;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+10717;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+10725;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+10737;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+10738;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
+10836;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+10893;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
+11027;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+11029;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+11194;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+11195;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
+11196;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+11596;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+11597;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+11599;7;obszar nauk technicznych;18;dziedzina nauk technicznych;95;inżynieria produkcji
+11827;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+11833;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
+11834;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+11835;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+11836;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;14;nauki o poznaniu i komunikacji społecznej
+11837;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+11838;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+11839;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;24;biologia medyczna
+11840;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+11842;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
+11844;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+11899;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+12082;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+12503;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+12561;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+12714;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+12737;0;NA;0;NA;0;NA
+12738;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+12746;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
+12750;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
+12753;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
+12754;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+12928;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+12929;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+13198;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
+13199;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
+20103;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+20211;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+20362;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+20365;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+20593;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
+21824;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
+21861;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+21868;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+21896;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+21900;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+22286;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+22824;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23137;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23152;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23165;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+23258;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
+23436;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23438;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23439;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23520;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+23638;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23639;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23640;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23641;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23894;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+23997;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+24047;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+24050;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+24615;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
+24735;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+24788;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+24791;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+25818;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+26277;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
+26280;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
+26281;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
+26285;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
+26850;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
+27148;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+27186;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+27187;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+27199;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+27200;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+27257;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+27478;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+27539;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+27541;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+27800;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
+27801;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
+28544;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+29600;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+29827;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+30842;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+30906;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
+31266;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+31389;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+31800;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+32542;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33273;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+33274;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33280;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33281;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33283;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33346;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+33350;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+33371;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
+33433;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33517;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33522;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34942;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 5944;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 5947;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 5948;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
@@ -764,8 +927,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 6960;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
 6963;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
 6964;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
-6966;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-6966;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 6968;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 6969;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 6971;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
@@ -1034,8 +1195,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 7314;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
 7317;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 7319;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-7321;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
-7321;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
 7322;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 7323;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 7325;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
@@ -1458,29 +1617,15 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 7951;8;obszar sztuki;21;dziedzina sztuk plastycznych;999;studia interdyscyplinarne
 7952;8;obszar sztuki;21;dziedzina sztuk plastycznych;999;studia interdyscyplinarne
 7953;8;obszar sztuki;21;dziedzina sztuk plastycznych;999;studia interdyscyplinarne
-7954;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-7954;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-7955;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-7955;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-7956;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-7956;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-7958;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-7958;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 7959;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 7960;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
 7961;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 7963;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 7964;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
-7966;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-7966;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 7967;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 7968;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 7969;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 7971;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-7974;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-7974;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-7975;5;obszar nauk społecznych;14;dziedzina nauk społecznych;999;studia interdyscyplinarne
-7975;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 7980;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 7981;7;obszar nauk technicznych;18;dziedzina nauk technicznych;96;inżynieria środowiska
 7983;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
@@ -1965,18 +2110,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 8679;7;obszar nauk technicznych;18;dziedzina nauk technicznych;86;elektrotechnika
 8680;7;obszar nauk technicznych;18;dziedzina nauk technicznych;86;elektrotechnika
 8682;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-8683;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8683;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8683;4;obszar nauk rolniczych, leśnych i weterynaryjnych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8683;4;obszar nauk rolniczych, leśnych i weterynaryjnych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8683;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8684;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8684;4;obszar nauk rolniczych, leśnych i weterynaryjnych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8684;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8684;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8686;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8686;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-8686;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 8687;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 8688;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 8689;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -2431,10 +2564,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 9410;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
 9411;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 9412;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
-9414;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-9414;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-9415;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-9415;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 9416;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 9417;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
 9418;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
@@ -2459,8 +2588,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 9465;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 9466;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 9467;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-9468;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-9468;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 9469;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 9470;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 9471;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
@@ -2800,16 +2927,8 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10034;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 10035;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;49;technologia żywności i żywienia
 10036;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;45;inżynieria rolnicza
-10041;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10041;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
-10042;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10042;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 10048;7;obszar nauk technicznych;18;dziedzina nauk technicznych;92;inżynieria biomedyczna
 10057;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-10058;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10058;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10059;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10059;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 10063;5;obszar nauk społecznych;14;dziedzina nauk społecznych;61;nauki o obronności
 10065;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 10068;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
@@ -3148,17 +3267,9 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10594;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
 10595;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
 10596;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
-10597;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
-10597;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
 10598;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
 10601;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 10602;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10604;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-10604;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-10605;7;obszar nauk technicznych;18;dziedzina nauk technicznych;92;inżynieria biomedyczna
-10605;7;obszar nauk technicznych;18;dziedzina nauk technicznych;92;inżynieria biomedyczna
-10607;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-10607;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 10609;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 10611;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 10612;4;obszar nauk rolniczych, leśnych i weterynaryjnych;9;dziedzina nauk leśnych;42;leśnictwo
@@ -3184,13 +3295,7 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10634;7;obszar nauk technicznych;18;dziedzina nauk technicznych;101;transport
 10635;7;obszar nauk technicznych;18;dziedzina nauk technicznych;101;transport
 10636;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
-10637;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
-10637;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
 10638;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-10639;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-10639;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-10640;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10640;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 10641;5;obszar nauk społecznych;14;dziedzina nauk społecznych;66;psychologia
 10642;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 10643;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
@@ -3213,8 +3318,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10661;7;obszar nauk technicznych;18;dziedzina nauk technicznych;87;energetyka
 10662;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 10663;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-10664;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-10664;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 10665;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
 10666;5;obszar nauk społecznych;14;dziedzina nauk społecznych;63;nauki o polityce publicznej
 10668;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
@@ -3253,26 +3356,16 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10706;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
 10707;7;obszar nauk technicznych;18;dziedzina nauk technicznych;83;budowa i eksploatacja maszyn
 10709;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-10710;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
-10710;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
 10711;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 10712;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-10713;5;obszar nauk społecznych;14;dziedzina nauk społecznych;63;nauki o polityce publicznej
-10713;5;obszar nauk społecznych;14;dziedzina nauk społecznych;63;nauki o polityce publicznej
 10714;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
-10715;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-10715;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 10716;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10717;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-10717;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 10718;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 10719;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 10720;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 10721;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
 10722;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 10724;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-10725;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-10725;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 10728;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 10729;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 10730;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
@@ -3281,10 +3374,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10734;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
 10735;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
 10736;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
-10737;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-10737;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-10738;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
-10738;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 10739;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
 10740;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 10741;7;obszar nauk technicznych;18;dziedzina nauk technicznych;88;geodezja i kartografia
@@ -3351,8 +3440,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10832;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 10833;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 10834;7;obszar nauk technicznych;18;dziedzina nauk technicznych;85;elektronika
-10836;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-10836;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 10837;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 10838;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 10839;5;obszar nauk społecznych;14;dziedzina nauk społecznych;999;studia interdyscyplinarne
@@ -3387,8 +3474,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 10889;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 10891;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 10892;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-10893;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
-10893;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 10900;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 10902;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 10903;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
@@ -3475,11 +3560,7 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 11021;8;obszar sztuki;20;dziedzina sztuk muzycznych;106;kompozycja i teoria muzyki
 11025;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 11026;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
-11027;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-11027;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 11028;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-11029;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-11029;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 11030;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 11031;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 11032;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
@@ -3610,12 +3691,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 11191;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 11192;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 11193;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-11194;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-11194;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-11195;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
-11195;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
-11196;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
-11196;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
 11198;5;obszar nauk społecznych;14;dziedzina nauk społecznych;66;psychologia
 11199;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 11200;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -3915,12 +3990,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 11593;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
 11594;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 11595;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-11596;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-11596;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-11597;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-11597;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-11599;7;obszar nauk technicznych;18;dziedzina nauk technicznych;95;inżynieria produkcji
-11599;7;obszar nauk technicznych;18;dziedzina nauk technicznych;95;inżynieria produkcji
 11600;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 11601;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
 11602;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
@@ -4089,34 +4158,12 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 11823;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 11824;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 11826;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;24;biologia medyczna
-11827;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
-11827;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
 11828;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 11830;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 11831;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 11832;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-11833;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
-11833;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
-11834;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-11834;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-11835;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-11835;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-11836;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;14;nauki o poznaniu i komunikacji społecznej
-11836;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;14;nauki o poznaniu i komunikacji społecznej
-11837;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-11837;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-11838;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-11838;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-11839;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;24;biologia medyczna
-11839;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;24;biologia medyczna
-11840;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-11840;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 11841;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-11842;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
-11842;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
 11843;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
-11844;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-11844;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 11845;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 11846;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 11847;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
@@ -4164,8 +4211,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 11896;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 11897;7;obszar nauk technicznych;18;dziedzina nauk technicznych;95;inżynieria produkcji
 11898;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
-11899;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-11899;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 11900;3;obszar nauk przyrodniczych;8;dziedzina nauk o Ziemi;38;geografia
 11901;0;NA;0;NA;0;NA
 11903;7;obszar nauk technicznych;18;dziedzina nauk technicznych;80;automatyka i robotyka
@@ -4291,8 +4336,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12078;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 12079;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 12080;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-12082;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-12082;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 12083;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 12085;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 12086;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
@@ -4601,8 +4644,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12500;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 12501;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 12502;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
-12503;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-12503;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 12505;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
 12506;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
 12507;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
@@ -4646,8 +4687,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12558;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
 12559;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 12560;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-12561;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-12561;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 12562;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 12563;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 12564;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
@@ -4763,8 +4802,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12711;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 12712;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 12713;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-12714;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-12714;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 12715;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 12716;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 12717;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -4784,25 +4821,10 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12733;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 12735;8;obszar sztuki;20;dziedzina sztuk muzycznych;105;instrumentalistyka
 12736;8;obszar sztuki;20;dziedzina sztuk muzycznych;105;instrumentalistyka
-12737;0;NA;0;NA;0;NA
-12737;0;NA;0;NA;0;NA
-12738;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-12738;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 12739;8;obszar sztuki;20;dziedzina sztuk muzycznych;109;wokalistyka
 12741;8;obszar sztuki;20;dziedzina sztuk muzycznych;106;kompozycja i teoria muzyki
 12743;8;obszar sztuki;20;dziedzina sztuk muzycznych;107;reżyseria dźwięku
 12744;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-12746;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-12746;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-12747;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-12747;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-12747;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-12750;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
-12750;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
-12753;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-12753;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-12754;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-12754;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
 12755;8;obszar sztuki;20;dziedzina sztuk muzycznych;104;dyrygentura
 12756;8;obszar sztuki;20;dziedzina sztuk muzycznych;104;dyrygentura
 12758;8;obszar sztuki;20;dziedzina sztuk muzycznych;105;instrumentalistyka
@@ -4812,9 +4834,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12763;3;obszar nauk przyrodniczych;8;dziedzina nauk o Ziemi;38;geografia
 12764;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;6;historia
 12765;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12766;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12766;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12766;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 12767;0;NA;0;NA;0;NA
 12770;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;3;dziedzina nauk farmaceutycznych;23;dziedzina nauk farmaceutycznych
 12771;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;3;dziedzina nauk farmaceutycznych;23;dziedzina nauk farmaceutycznych
@@ -4924,31 +4943,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12911;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 12912;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 12917;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12923;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12926;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12927;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-12928;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-12928;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-12929;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-12929;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 12930;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 12931;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 12932;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
@@ -4960,10 +4954,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 12939;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
 12940;8;obszar sztuki;21;dziedzina sztuk plastycznych;111;grafika
 12941;8;obszar sztuki;21;dziedzina sztuk plastycznych;111;grafika
-12944;0;NA;0;NA;0;NA
-12944;0;NA;0;NA;0;NA
-12944;0;NA;0;NA;0;NA
-12944;0;NA;0;NA;0;NA
 12946;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 12947;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 12949;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
@@ -5008,48 +4998,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 13017;0;NA;0;NA;0;NA
 13018;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 13019;7;obszar nauk technicznych;18;dziedzina nauk technicznych;88;geodezja i kartografia
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13020;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13021;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13022;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-13023;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 13027;7;obszar nauk technicznych;18;dziedzina nauk technicznych;79;architektura i urbanistyka
 13029;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
 13031;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
@@ -5139,10 +5087,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 13168;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
 13169;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
 13170;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
-13198;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
-13198;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
-13199;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
-13199;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
 13207;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
 13208;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
 13209;5;obszar nauk społecznych;14;dziedzina nauk społecznych;60;nauki o mediach
@@ -5221,8 +5165,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 20100;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 20101;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
 20102;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;999;studia interdyscyplinarne
-20103;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-20103;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 20104;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 20105;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 20106;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
@@ -5273,8 +5215,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 20184;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;21;socjologia
 20186;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
 20198;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-20211;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-20211;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 20212;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;49;technologia żywności i żywienia
 20213;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 20214;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;999;studia interdyscyplinarne
@@ -5403,12 +5343,8 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 20358;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
 20359;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 20360;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
-20362;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-20362;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 20363;8;obszar sztuki;21;dziedzina sztuk plastycznych;999;studia interdyscyplinarne
 20364;8;obszar sztuki;21;dziedzina sztuk plastycznych;999;studia interdyscyplinarne
-20365;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-20365;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 20367;8;obszar sztuki;20;dziedzina sztuk muzycznych;999;studia interdyscyplinarne
 20368;8;obszar sztuki;20;dziedzina sztuk muzycznych;999;studia interdyscyplinarne
 20370;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -5583,8 +5519,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 20590;7;obszar nauk technicznych;18;dziedzina nauk technicznych;95;inżynieria produkcji
 20591;7;obszar nauk technicznych;18;dziedzina nauk technicznych;85;elektronika
 20592;7;obszar nauk technicznych;18;dziedzina nauk technicznych;85;elektronika
-20593;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
-20593;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
 20594;7;obszar nauk technicznych;18;dziedzina nauk technicznych;100;telekomunikacja
 20595;7;obszar nauk technicznych;18;dziedzina nauk technicznych;100;telekomunikacja
 20596;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
@@ -6316,19 +6250,13 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 21809;7;obszar nauk technicznych;18;dziedzina nauk technicznych;99;technologia chemiczna
 21810;8;obszar sztuki;20;dziedzina sztuk muzycznych;104;dyrygentura
 21823;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
-21824;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
-21824;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 21853;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 21854;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
 21855;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 21858;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 21859;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-21861;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-21861;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 21862;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 21864;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-21868;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-21868;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 21871;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
 21878;7;obszar nauk technicznych;18;dziedzina nauk technicznych;79;architektura i urbanistyka
 21880;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
@@ -6341,12 +6269,8 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 21893;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
 21894;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
 21895;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-21896;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-21896;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 21898;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
 21899;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
-21900;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-21900;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
 21903;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
 21904;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 21906;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;3;bibliologia i informatologia
@@ -6599,17 +6523,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 22280;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 22281;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 22282;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
-22284;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22284;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22284;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22284;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22285;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22285;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22285;4;obszar nauk rolniczych, leśnych i weterynaryjnych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22285;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22285;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22286;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22286;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 22287;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 22289;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 22290;8;obszar sztuki;20;dziedzina sztuk muzycznych;106;kompozycja i teoria muzyki
@@ -6960,8 +6873,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 22818;7;obszar nauk technicznych;18;dziedzina nauk technicznych;79;architektura i urbanistyka
 22819;7;obszar nauk technicznych;18;dziedzina nauk technicznych;79;architektura i urbanistyka
 22823;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-22824;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-22824;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 22825;4;obszar nauk rolniczych, leśnych i weterynaryjnych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 22826;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 22827;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
@@ -7140,8 +7051,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23134;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23135;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23136;8;obszar sztuki;21;dziedzina sztuk plastycznych;116;sztuki piękne
-23137;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23137;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23139;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23140;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23141;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
@@ -7151,13 +7060,9 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23149;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 23150;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 23151;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
-23152;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23152;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23158;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 23159;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;47;ogrodnictwo
 23160;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-23165;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-23165;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 23167;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 23169;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 23171;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -7214,8 +7119,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23253;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
 23254;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;55;towaroznawstwo
 23255;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
-23258;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-23258;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
 23259;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23260;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23261;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -7320,20 +7223,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23411;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 23412;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 23413;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23414;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23415;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23416;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 23417;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 23419;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -7348,12 +7237,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23429;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 23432;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 23434;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23436;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23436;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23438;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23438;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23439;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23439;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23442;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23443;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23444;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -7417,8 +7300,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23517;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 23518;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 23519;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-23520;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-23520;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
 23521;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23522;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23523;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
@@ -7498,14 +7379,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23634;8;obszar sztuki;21;dziedzina sztuk plastycznych;116;sztuki piękne
 23636;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
 23637;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
-23638;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23638;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23639;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23639;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23640;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23640;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23641;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23641;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23648;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23649;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23650;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
@@ -7707,8 +7580,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23890;7;obszar nauk technicznych;18;dziedzina nauk technicznych;80;automatyka i robotyka
 23892;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 23893;7;obszar nauk technicznych;18;dziedzina nauk technicznych;86;elektrotechnika
-23894;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-23894;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23895;7;obszar nauk technicznych;18;dziedzina nauk technicznych;86;elektrotechnika
 23896;7;obszar nauk technicznych;18;dziedzina nauk technicznych;86;elektrotechnika
 23897;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
@@ -7788,8 +7659,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 23992;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 23994;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
 23996;3;obszar nauk przyrodniczych;8;dziedzina nauk o Ziemi;999;studia interdyscyplinarne
-23997;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
-23997;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23998;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 23999;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 24004;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -7828,12 +7697,8 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 24044;7;obszar nauk technicznych;18;dziedzina nauk technicznych;99;technologia chemiczna
 24045;7;obszar nauk technicznych;18;dziedzina nauk technicznych;99;technologia chemiczna
 24046;7;obszar nauk technicznych;18;dziedzina nauk technicznych;99;technologia chemiczna
-24047;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
-24047;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 24048;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 24049;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-24050;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24050;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 24051;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 24052;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 24054;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -8218,8 +8083,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 24611;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 24612;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
 24613;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
-24615;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
-24615;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
 24618;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 24619;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 24620;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
@@ -8311,8 +8174,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 24730;7;obszar nauk technicznych;18;dziedzina nauk technicznych;95;inżynieria produkcji
 24733;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 24734;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-24735;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-24735;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 24736;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 24738;7;obszar nauk technicznych;18;dziedzina nauk technicznych;101;transport
 24741;8;obszar sztuki;21;dziedzina sztuk plastycznych;111;grafika
@@ -8349,11 +8210,7 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 24782;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 24783;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 24784;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24788;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-24788;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 24789;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
-24791;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-24791;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 24792;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 24793;0;NA;0;NA;0;NA
 24794;0;NA;0;NA;0;NA
@@ -8462,18 +8319,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 24990;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
 24992;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;31;biologia
 24993;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-24994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 24995;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
 24996;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;33;biotechnologia
 24997;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;1;archeologia
@@ -8496,18 +8341,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 25015;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 25016;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 25017;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-25018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 25019;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
 25020;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 25021;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
@@ -9037,8 +8870,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 25814;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 25816;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 25817;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-25818;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-25818;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 25819;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
 25820;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
 25821;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
@@ -9322,27 +9153,10 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 26273;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
 26275;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 26276;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-26277;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
-26277;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
 26279;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
-26280;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-26280;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-26281;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-26281;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-26282;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-26282;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-26282;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 26284;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
-26285;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
-26285;6;obszar nauk ścisłych;16;dziedzina nauk fizycznych;75;fizyka
 26286;5;obszar nauk społecznych;14;dziedzina nauk społecznych;64;nauki o poznaniu i komunikacji społecznej
 26287;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
-26288;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-26288;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-26288;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-26289;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-26289;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-26289;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 26290;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 26291;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 26292;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
@@ -9722,8 +9536,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 26847;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 26848;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 26849;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
-26850;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
-26850;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
 26853;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 26855;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 26860;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -9915,8 +9727,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 27141;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;6;historia
 27143;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;6;historia
 27145;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
-27148;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
-27148;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 27149;7;obszar nauk technicznych;18;dziedzina nauk technicznych;83;budowa i eksploatacja maszyn
 27151;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 27153;7;obszar nauk technicznych;18;dziedzina nauk technicznych;83;budowa i eksploatacja maszyn
@@ -9942,10 +9752,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 27183;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;14;nauki o poznaniu i komunikacji społecznej
 27184;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 27185;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-27186;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-27186;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-27187;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-27187;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 27188;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 27189;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 27190;7;obszar nauk technicznych;18;dziedzina nauk technicznych;79;architektura i urbanistyka
@@ -9954,10 +9760,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 27194;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 27195;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 27196;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-27199;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-27199;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-27200;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-27200;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 27201;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 27204;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
 27207;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;24;biologia medyczna
@@ -9992,8 +9794,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 27254;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
 27255;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 27256;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-27257;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-27257;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 27258;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 27259;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 27260;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
@@ -10165,8 +9965,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 27474;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 27476;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 27477;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-27478;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-27478;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 27479;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 27480;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 27481;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
@@ -10217,10 +10015,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 27535;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
 27536;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;53;finanse
 27537;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
-27539;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-27539;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-27541;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
-27541;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 27542;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 27543;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 27545;7;obszar nauk technicznych;18;dziedzina nauk technicznych;93;inżynieria chemiczna
@@ -10407,10 +10201,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 27794;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
 27795;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
 27796;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
-27800;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
-27800;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
-27801;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
-27801;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;36;ochrona środowiska
 27804;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
 27806;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 27809;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
@@ -10743,43 +10533,8 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 28320;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 28323;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 28331;5;obszar nauk społecznych;14;dziedzina nauk społecznych;61;nauki o obronności
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28337;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 28338;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 28340;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28341;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-28346;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 28351;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
 28354;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
 28355;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
@@ -10866,8 +10621,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 28534;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
 28542;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 28543;7;obszar nauk technicznych;18;dziedzina nauk technicznych;80;automatyka i robotyka
-28544;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-28544;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
 28545;7;obszar nauk technicznych;18;dziedzina nauk technicznych;80;automatyka i robotyka
 28546;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
 28547;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
@@ -11295,8 +11048,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 29571;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 29572;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 29582;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
-29600;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-29600;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 29620;7;obszar nauk technicznych;18;dziedzina nauk technicznych;101;transport
 29640;7;obszar nauk technicznych;18;dziedzina nauk technicznych;85;elektronika
 29641;7;obszar nauk technicznych;18;dziedzina nauk technicznych;85;elektronika
@@ -11329,8 +11080,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 29824;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
 29825;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
 29826;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-29827;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
-29827;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 29828;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
 29829;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 29831;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
@@ -11606,8 +11355,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 30839;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;999;studia interdyscyplinarne
 30840;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 30841;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
-30842;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-30842;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 30843;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
 30844;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;6;historia
 30848;3;obszar nauk przyrodniczych;8;dziedzina nauk o Ziemi;999;studia interdyscyplinarne
@@ -11645,8 +11392,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 30902;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 30903;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 30904;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-30906;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
-30906;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
 30908;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 30910;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
 30915;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
@@ -11775,8 +11520,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 31260;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 31261;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 31265;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-31266;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-31266;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 31267;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 31268;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 31269;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
@@ -11805,8 +11548,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 31379;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 31380;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 31383;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
-31389;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-31389;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
 31390;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 31393;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
 31394;8;obszar sztuki;22;dziedzina sztuk teatralnych;120;dziedzina sztuk teatralnych
@@ -11930,8 +11671,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 31795;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 31796;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 31799;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
-31800;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-31800;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 31801;7;obszar nauk technicznych;18;dziedzina nauk technicznych;96;inżynieria środowiska
 31802;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 31803;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
@@ -11942,9 +11681,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 31829;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
 31842;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 31843;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-31845;0;NA;0;NA;0;NA
-31845;0;NA;0;NA;0;NA
-31845;0;NA;0;NA;0;NA
 31846;7;obszar nauk technicznych;18;dziedzina nauk technicznych;97;mechanika
 31847;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 31848;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
@@ -12017,8 +11753,6 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 32504;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 32505;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 32522;7;obszar nauk technicznych;18;dziedzina nauk technicznych;80;automatyka i robotyka
-32542;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
-32542;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
 32562;7;obszar nauk technicznych;18;dziedzina nauk technicznych;99;technologia chemiczna
 32563;7;obszar nauk technicznych;18;dziedzina nauk technicznych;99;technologia chemiczna
 32582;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;3;dziedzina nauk farmaceutycznych;23;dziedzina nauk farmaceutycznych
@@ -12201,20 +11935,10 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 33268;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 33269;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 33271;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;31;biologia
-33273;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-33273;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
-33274;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
-33274;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
 33275;8;obszar sztuki;21;dziedzina sztuk plastycznych;116;sztuki piękne
 33276;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
 33279;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-33280;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
-33280;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
-33281;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
-33281;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
 33282;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;6;historia
-33283;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
-33283;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 33284;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;6;historia
 33285;1;obszar nauk humanistycznych;2;dziedzina nauk teologicznych;22;dziedzina nauk teologicznych
 33286;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
@@ -12227,6 +11951,282 @@ KIERUNEK;OBSZAR_KOD;OBSZAR;DZIEDZINA_KOD;DZIEDZINA;DYSCYPLINA_KOD;DYSCYPLINA
 33293;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 33296;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
 33303;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33304;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33309;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33313;7;obszar nauk technicznych;18;dziedzina nauk technicznych;94;inżynieria materiałowa
+33314;8;obszar sztuki;20;dziedzina sztuk muzycznych;106;kompozycja i teoria muzyki
+33315;8;obszar sztuki;20;dziedzina sztuk muzycznych;106;kompozycja i teoria muzyki
+33316;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
+33318;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33319;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+33321;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+33326;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
+33327;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33332;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
+33333;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33334;5;obszar nauk społecznych;14;dziedzina nauk społecznych;999;studia interdyscyplinarne
+33336;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33337;7;obszar nauk technicznych;18;dziedzina nauk technicznych;85;elektronika
+33338;4;obszar nauk rolniczych, leśnych i weterynaryjnych;9;dziedzina nauk leśnych;41;drzewnictwo
+33341;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33342;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;49;technologia żywności i żywienia
+33343;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33344;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33348;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33349;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33351;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33352;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33354;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+33355;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33358;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33360;6;obszar nauk ścisłych;15;dziedzina nauk chemicznych;70;chemia
+33361;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33362;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33363;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33370;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33372;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33374;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;78;matematyka
+33377;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+33379;7;obszar nauk technicznych;18;dziedzina nauk technicznych;83;budowa i eksploatacja maszyn
+33381;6;obszar nauk ścisłych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33383;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33384;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
+33385;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
+33387;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+33392;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33394;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;33;biotechnologia
+33398;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33402;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33403;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33406;7;obszar nauk technicznych;18;dziedzina nauk technicznych;96;inżynieria środowiska
+33407;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
+33408;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
+33409;8;obszar sztuki;20;dziedzina sztuk muzycznych;104;dyrygentura
+33411;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33412;8;obszar sztuki;20;dziedzina sztuk muzycznych;109;wokalistyka
+33421;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33428;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33430;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33431;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33432;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+33434;3;obszar nauk przyrodniczych;8;dziedzina nauk o Ziemi;38;geografia
+33435;3;obszar nauk przyrodniczych;8;dziedzina nauk o Ziemi;38;geografia
+33436;5;obszar nauk społecznych;14;dziedzina nauk społecznych;999;studia interdyscyplinarne
+33439;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33440;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;999;studia interdyscyplinarne
+33441;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33442;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33443;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33444;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33445;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
+33447;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+33449;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+33450;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+33452;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33453;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33454;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33455;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33458;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33462;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+33482;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+33484;5;obszar nauk społecznych;14;dziedzina nauk społecznych;66;psychologia
+33486;5;obszar nauk społecznych;14;dziedzina nauk społecznych;66;psychologia
+33492;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33498;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+33500;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33506;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;6;historia
+33507;5;obszar nauk społecznych;14;dziedzina nauk społecznych;67;socjologia
+33508;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33509;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33510;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;45;inżynieria rolnicza
+33513;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33514;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33515;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33518;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+33519;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33523;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33524;7;obszar nauk technicznych;18;dziedzina nauk technicznych;96;inżynieria środowiska
+33525;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
+33526;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33528;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33529;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33530;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33533;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33536;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33539;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+33541;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+33542;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+33544;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+33545;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;31;biologia
+33546;3;obszar nauk przyrodniczych;7;dziedzina nauk biologicznych;31;biologia
+33550;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33552;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+33557;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33561;8;obszar sztuki;21;dziedzina sztuk plastycznych;111;grafika
+33562;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33563;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33564;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+33568;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
+33569;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
+33572;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+33575;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33576;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+33582;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33584;7;obszar nauk technicznych;18;dziedzina nauk technicznych;101;transport
+33585;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33587;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33592;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
+33594;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33595;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;9;kulturoznawstwo
+33597;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
+33598;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
+33599;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
+33600;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;18;pedagogika
+33601;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+33603;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+33604;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;15;nauki o rodzinie
+33606;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33607;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
+33608;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;5;filozofia
+33611;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33612;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33623;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+33624;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+33627;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33629;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+33630;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
+33631;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
+33633;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33635;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33638;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33639;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33648;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33649;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+33654;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33655;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33662;5;obszar nauk społecznych;14;dziedzina nauk społecznych;62;nauki o polityce
+33666;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33668;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+33670;5;obszar nauk społecznych;14;dziedzina nauk społecznych;999;studia interdyscyplinarne
+33672;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33674;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33676;5;obszar nauk społecznych;14;dziedzina nauk społecznych;999;studia interdyscyplinarne
+33682;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+33683;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+33684;5;obszar nauk społecznych;14;dziedzina nauk społecznych;59;nauki o bezpieczeństwie
+33685;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33686;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33687;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33688;7;obszar nauk technicznych;18;dziedzina nauk technicznych;80;automatyka i robotyka
+33696;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33715;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33717;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33728;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;49;technologia żywności i żywienia
+33730;5;obszar nauk społecznych;13;dziedzina nauk prawnych;56;nauki o administracji
+33753;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33754;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33759;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33760;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33773;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;999;studia interdyscyplinarne
+33793;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33794;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33795;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;999;studia interdyscyplinarne
+33796;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;54;nauki o zarządzaniu
+33813;5;obszar nauk społecznych;14;dziedzina nauk społecznych;65;pedagogika
+33814;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+33854;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33876;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+33880;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33893;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33915;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33916;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33917;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;25;medycyna
+33920;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;999;studia interdyscyplinarne
+33934;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33953;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33954;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33956;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
+33960;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33961;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+33973;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+33993;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;999;studia interdyscyplinarne
+33994;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+33995;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+34018;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34021;8;obszar sztuki;20;dziedzina sztuk muzycznych;109;wokalistyka
+34034;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34036;8;obszar sztuki;20;dziedzina sztuk muzycznych;105;instrumentalistyka
+34074;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+34075;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34094;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34095;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34097;6;obszar nauk ścisłych;17;dziedzina nauk matematycznych;77;informatyka
+34113;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+34114;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+34133;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+34153;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+34155;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;8;językoznawstwo
+34156;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
+34157;7;obszar nauk technicznych;18;dziedzina nauk technicznych;91;informatyka
+34173;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34193;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
+34196;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
+34197;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;5;dziedzina nauk o kulturze fizycznej;27;dziedzina nauk o kulturze fizycznej
+34198;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
+34200;7;obszar nauk technicznych;18;dziedzina nauk technicznych;86;elektrotechnika
+34213;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34255;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;20;religioznawstwo
+34256;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;20;religioznawstwo
+34273;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+34293;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;11;nauki o bezpieczeństwie
+34319;5;obszar nauk społecznych;13;dziedzina nauk prawnych;57;prawo
+34393;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34433;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34436;8;obszar sztuki;21;dziedzina sztuk plastycznych;116;sztuki piękne
+34453;7;obszar nauk technicznych;18;dziedzina nauk technicznych;84;budownictwo
+34533;5;obszar nauk społecznych;13;dziedzina nauk prawnych;999;studia interdyscyplinarne
+34535;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;20;religioznawstwo
+34573;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;999;studia interdyscyplinarne
+34576;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;999;studia interdyscyplinarne
+34593;7;obszar nauk technicznych;18;dziedzina nauk technicznych;80;automatyka i robotyka
+34614;5;obszar nauk społecznych;14;dziedzina nauk społecznych;999;studia interdyscyplinarne
+34653;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;6;dziedzina nauk o zdrowiu;28;dziedzina nauk o zdrowiu
+34673;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+34693;5;obszar nauk społecznych;12;dziedzina nauk ekonomicznych;52;ekonomia
+34714;8;obszar sztuki;21;dziedzina sztuk plastycznych;117;sztuki projektowe
+34715;2;obszar nauk medycznych i nauk o zdrowiu oraz nauk o kulturze fizycznej;4;dziedzina nauk medycznych;24;biologia medyczna
+34755;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+34775;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+34795;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34796;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34797;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+34803;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;45;inżynieria rolnicza
+34804;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;45;inżynieria rolnicza
+34805;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;46;ochrona i kształtowanie środowiska
+34806;4;obszar nauk rolniczych, leśnych i weterynaryjnych;9;dziedzina nauk leśnych;42;leśnictwo
+34807;4;obszar nauk rolniczych, leśnych i weterynaryjnych;9;dziedzina nauk leśnych;42;leśnictwo
+34808;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34809;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34810;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;13;nauki o polityce
+34811;1;obszar nauk humanistycznych;2;dziedzina nauk teologicznych;22;dziedzina nauk teologicznych
+34812;1;obszar nauk humanistycznych;2;dziedzina nauk teologicznych;22;dziedzina nauk teologicznych
+34823;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34842;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+34862;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;45;inżynieria rolnicza
+34882;8;obszar sztuki;21;dziedzina sztuk plastycznych;999;studia interdyscyplinarne
+34902;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+34922;7;obszar nauk technicznych;18;dziedzina nauk technicznych;81;biocybernetyka i inżynieria biomedyczna
+34962;7;obszar nauk technicznych;18;dziedzina nauk technicznych;999;studia interdyscyplinarne
+35082;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+35102;1;obszar nauk humanistycznych;2;dziedzina nauk teologicznych;22;dziedzina nauk teologicznych
+35103;1;obszar nauk humanistycznych;2;dziedzina nauk teologicznych;22;dziedzina nauk teologicznych
+35142;7;obszar nauk technicznych;18;dziedzina nauk technicznych;96;inżynieria środowiska
+35143;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+35182;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+35204;4;obszar nauk rolniczych, leśnych i weterynaryjnych;10;dziedzina nauk rolniczych;49;technologia żywności i żywienia
+35205;99;studia międzyobszarowe;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+35222;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
+35242;7;obszar nauk technicznych;18;dziedzina nauk technicznych;99;technologia chemiczna
 33304;1;obszar nauk humanistycznych;1;dziedzina nauk humanistycznych;10;literaturoznawstwo
 33309;5;obszar nauk społecznych;99;studia międzydziedzinowe;999;studia interdyscyplinarne
 33313;7;obszar nauk technicznych;18;dziedzina nauk technicznych;94;inżynieria materiałowa

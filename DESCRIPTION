@@ -1,17 +1,18 @@
 Package: MLAKdane
 Type: Package
 Title: Pakiet do zlaczania danych z rejestrow ZUS i uczelni
-Version: 0.3.4
+Version: 0.4.3
 Authors@R: person("Mateusz", "Zoltak", email = "zozlak@zozlak.org", role = c("aut", "cre"))
 Description: Pakiet do zlaczania danych z rejestrow ZUS i uczelni.
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends:
 Imports:
-  dplyr,
-  openxlsx,
-  reshape2
+    dplyr,
+    openxlsx,
+    reshape2
 Suggests:
-  testthat,
-  multidplyr
+    testthat,
+    multidplyr
 Encoding: UTF-8
+RoxygenNote: 5.0.1
