@@ -17,20 +17,19 @@ oblicz_absolwent = function(dane, multidplyr = TRUE){
   }
   dane = dane %>%
     summarize_(
-      sz    = ~ sum(podst, na.rm = TRUE),
-      sze   = ~ sum(podst[etat == 1], na.rm = TRUE),
-      szn   = ~ sum(podst[netat == 1], na.rm = TRUE),
-      nde   = ~ length(unique(id_platnika[etat %in% 1])),
-      ndn   = ~ length(unique(id_platnika[netat %in% 1])),
-      nmb   = ~ length(unique(okres[bezrob == 1])),
-      nme   = ~ length(unique(okres[etat == 1])),
-      nmn   = ~ length(unique(okres[netat == 1])),
-      nms   = ~ length(unique(okres[samoz == 1])),
-      nmz   = ~ length(unique(okres[etat == 1 | netat == 1])),
-      nmp   = ~ length(unique(okres[etat == 1 | netat == 1 | samoz == 1])),
-      nmj   = ~ length(unique(okres[prawnik == 1])),
-      nmm   = ~ length(unique(okres[mundur == 1])),
-      nzus  = ~ length(unique(okres[!is.na(id_platnika)]))
+      nde = ~ length(unique(id_platnika[etat %in% 1])),
+      ndn = ~ length(unique(id_platnika[netat %in% 1])),
+      nmb = ~ length(unique(okres[bezrob == 1])),
+      nme = ~ length(unique(okres[etat == 1])),
+      nmj = ~ length(unique(okres[prawnik == 1])),
+      nmm = ~ length(unique(okres[mundur == 1])),
+      nmn = ~ length(unique(okres[netat == 1])),
+      nmp = ~ length(unique(okres[etat == 1 | netat == 1 | samoz == 1])),
+      nms = ~ length(unique(okres[samoz == 1])),
+      nmz = ~ length(unique(okres[etat == 1 | netat == 1])),
+      sz  = ~ sum(podst, na.rm = TRUE),
+      sze = ~ sum(podst[etat == 1], na.rm = TRUE),
+      szn = ~ sum(podst[netat == 1], na.rm = TRUE)
     ) %>%
     collect()
   class(dane) = c('absolwent_df', class(dane))

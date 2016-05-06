@@ -38,13 +38,16 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
       tprda  = ~ ifelse(is.infinite(tprda),  NA_integer_, tprda),
       tprsda = ~ ifelse(is.infinite(tprsda), NA_integer_, tprsda),
       tpruda = ~ ifelse(is.infinite(tpruda), NA_integer_, tpruda),
-      tzata  = ~ ifelse(is.infinite(tzata),  NA_integer_, tzata),
-      tmun     = ~ ifelse(is.na(tmuna),  NA_integer_, ifelse(tmuna  > 0, tmuna  - 1, 0)),
-      tpraw    = ~ ifelse(is.na(tprawa), NA_integer_, ifelse(tprawa > 0, tprawa - 1, 0)),
-      tprd     = ~ ifelse(is.na(tprda),  NA_integer_, ifelse(tprda  > 0, tprda  - 1, 0)),
-      tprsd    = ~ ifelse(is.na(tprsda), NA_integer_, ifelse(tprsda > 0, tprsda - 1, 0)),
-      tprud    = ~ ifelse(is.na(tpruda), NA_integer_, ifelse(tpruda > 0, tpruda - 1, 0)),
-      tzat     = ~ ifelse(is.na(tzata),  NA_integer_, ifelse(tzata  > 0, tzata  - 1, 0))
+      tzata  = ~ ifelse(is.infinite(tzata),  NA_integer_, tzata)
+    ) %>%
+    mutate_(
+      munbaz = ~ ifelse(is.na(tmuna), 0, 1),
+      tmun   = ~ ifelse(is.na(tmuna),  NA_integer_, ifelse(tmuna  > 0, tmuna  - 1, 0)),
+      tpraw  = ~ ifelse(is.na(tprawa), NA_integer_, ifelse(tprawa > 0, tprawa - 1, 0)),
+      tprd   = ~ ifelse(is.na(tprda),  NA_integer_, ifelse(tprda  > 0, tprda  - 1, 0)),
+      tprsd  = ~ ifelse(is.na(tprsda), NA_integer_, ifelse(tprsda > 0, tprsda - 1, 0)),
+      tprud  = ~ ifelse(is.na(tpruda), NA_integer_, ifelse(tpruda > 0, tpruda - 1, 0)),
+      tzat   = ~ ifelse(is.na(tzata),  NA_integer_, ifelse(tzata  > 0, tzata  - 1, 0))
     ) %>%
     collect()
   class(dane) = c('absolwent_df', class(dane))
