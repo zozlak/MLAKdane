@@ -17,8 +17,8 @@ oblicz_absolwent = function(dane, multidplyr = TRUE){
   }
   dane = dane %>%
     summarize_(
-      nde = ~ length(unique(id_platnika[etat %in% 1])),
-      ndn = ~ length(unique(id_platnika[netat %in% 1])),
+      nde = ~ length(unique(id_platnika[etat == 1])),
+      ndn = ~ length(unique(id_platnika[netat == 1])),
       nmb = ~ length(unique(okres[bezrob == 1])),
       nme = ~ length(unique(okres[etat == 1])),
       nmj = ~ length(unique(okres[prawnik == 1])),

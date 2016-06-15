@@ -1,16 +1,21 @@
 #' łączy dane zus, zdau oraz statystyki powiatów
-#' @description
-#' Aby poprawnie przyłączyć statystyki powiatów macierz danych uzupełniana jest
-#' tak, aby dla każdego absolwenta zawierała informacje o każdym okresie w
-#' zadanym przedziale czasu, ale nie później niż do "końca obserwacji w zus"
-#' (zakładając zamieszkanie absolwenta w uzupełnianych okresach "w Polsce",
-#' kodowane jako pna = -1, oraz wszelkie cechy tytułu ubezpieczenia ZUS równe 0,
-#' w szczególności także bezrob = 0).
+#' @description Aby poprawnie przyłączyć statystyki powiatów macierz danych
+#' uzupełniana jest tak, aby dla każdego absolwenta zawierała informacje o
+#' każdym okresie w zadanym przedziale czasu, ale nie później niż do "końca
+#' obserwacji w zus" (zakładając zamieszkanie absolwenta w uzupełnianych
+#' okresach "w Polsce", kodowane jako pna = -1, oraz wszelkie cechy tytułu
+#' ubezpieczenia ZUS równe 0, w szczególności także bezrob = 0).
+#'
+#' Generowana jest również zmienna określająca, czy absolwent studiował w
+#' poszczególnych okresach, wyznaczana na podstawie danych ZDAU
 #' @param zus dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zus}}
 #' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
-#' @param pnaPowiaty dane wygenerowane za pomocą funkcji \code{\link{polacz_pna_powiaty}}
-#' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')
-#' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')
+#' @param pnaPowiaty dane wygenerowane za pomocą funkcji
+#'   \code{\link{polacz_pna_powiaty}}
+#' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch
+#'   znaków, np. '2014-01-01')
+#' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch
+#'   znaków, np. '2015-09-30')
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
@@ -42,7 +47,16 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
     ) %>%
     filter_(~ (okres < koniec & data_zak <= koniec) | is.na(koniec))
 
+  stud = zdau %>%
+    select_('id', 'data_rozp', 'data_zak') %>%
+    left_join(wynik %>% select_('id', 'okres')) %>%
+    filter_(~ okres >= data_rozp && (is.na(data_zak) || okres <= data_zak)) %>%
+    select_('id', 'okres') %>%
+    distinct() %>%
+    mutate_(student2 = 1)
+
   wynik = wynik %>%
+    left_join(stud) %>%
     mutate_(
       etat     = ~ ifelse(is.na(etat), 0, etat),
       netat    = ~ ifelse(is.na(netat), 0, netat),
@@ -50,11 +64,13 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
       bezrob   = ~ ifelse(is.na(bezrob), 0, bezrob),
       rentemer = ~ ifelse(is.na(rentemer), 0, rentemer),
       student  = ~ ifelse(is.na(student), 0, student),
+      student2 = ~ ifelse(is.na(student2), 0, student2),
       prawnik  = ~ ifelse(is.na(prawnik), 0, prawnik),
       mundur   = ~ ifelse(is.na(mundur), 0, mundur),
       # zlec     = ~ ifelse(is.na(zlec), 0, zlec),
       # nspraw   = ~ ifelse(is.na(nspraw), 0, nspraw),
       # rolnik   = ~ ifelse(is.na(rolnik), 0, rolnik),
+      dziecko  = ~ ifelse(is.na(dziecko), 0, dziecko),
       podst    = ~ ifelse(is.na(podst), 0, podst),
       pna      = ~ ifelse(is.na(pna), -1, pna),
       rok      = ~ okres2rok(okres)

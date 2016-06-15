@@ -60,6 +60,17 @@ oblicz_zmienne_pochodne = function(dane){
       zilo        = ~ ezard / zpow,
       ziloa       = ~ ezard / gezd,
       bilod       = ~ pbezd / gbezd
+      # pmes        = ~ nmes / len,
+      # pmns        = ~ nmns / len,
+      # pmdzs       = ~ nmdzs / len,
+      # pminnes     = ~ nminnes / len,
+      # pmbss       = ~ nmbss / len,
+      # pmens       = ~ nmens / len,
+      # pmnns       = ~ nmnns / len,
+      # pmdzns      = ~ nmdzns / len,
+      # pminnens    = ~ nminnens / len,
+      # pmbns       = ~ nmbns / len,
+      # pmbsns      = ~ nmbsns / len
     ) %>%
     mutate_(
       bilod    = ~ ifelse(is.infinite(bilod), 0, bilod),
