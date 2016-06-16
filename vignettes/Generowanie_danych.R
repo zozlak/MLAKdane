@@ -110,5 +110,5 @@ stopifnot(
 )
 colnames(wszystko) = toupper(colnames(wszystko))
 save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
-write.csv2(wszystko, paste0(plikZapisu, '.csv'), row.names = FALSE, fileEncoding = 'Windows-1250')
+#write.csv2(wszystko, paste0(plikZapisu, '.csv'), row.names = FALSE, fileEncoding = 'Windows-1250')
 
