@@ -50,7 +50,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
   stud = zdau %>%
     select_('id', 'data_rozp', 'data_zak') %>%
     left_join(wynik %>% select_('id', 'okres')) %>%
-    filter_(~ okres >= data_rozp && (is.na(data_zak) || okres <= data_zak)) %>%
+    filter_(~ okres >= data_rozp & ((is.na(data_zak) | okres <= data_zak))) %>%
     select_('id', 'okres') %>%
     distinct() %>%
     mutate_(student2 = 1)

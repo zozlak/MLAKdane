@@ -1,3 +1,9 @@
+# 0.5.0 (2016-06-22)
+
+* poprawiony wstydliwy błąd w wyliczaniu zmiennej student2 (bycie studentem
+  wg danych ze zbioru ZDAU), gdzie nie dość, że pomyliłem operatory, to
+  także ich priorytet
+
 # 0.5.0 (2016-06-16)
 
 * dodane nowe zmienne opisujące sytuację absolwenta na rynku pracy
