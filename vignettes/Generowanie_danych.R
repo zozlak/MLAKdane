@@ -20,17 +20,18 @@ plikZapisu = 'dane/nowe/nowe'
 # Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
 # pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
 pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax) # t1
-jednostki = przygotuj_jednostki() # t2
-zdau = przygotuj_zdau() # t5
-zus = przygotuj_zus(dataMin, dataMax) # t3
-save(zus, file = 'cache/ZUS.RData', compress = TRUE)
-# load('cache/ZUS.RData')
+jednostki = przygotuj_jednostki()
+#zdau = przygotuj_zdau()
+load('cache/zdau.RData')
+#zus = przygotuj_zus(dataMin, dataMax)
+#save(zus, file = 'cache/ZUS.RData', compress = TRUE)
+load('cache/ZUS.RData')
 
 ##########
 # Wyliczamy pomocniczy zbiór utrataEtatu
-utrataEtatu = przygotuj_utrata_pracy(zus, dataMax) # t4
-save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
-# load('cache/utrataEtatu.RData')
+#utrataEtatu = przygotuj_utrata_pracy(zus, dataMax) # t4
+#save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
+load('cache/utrataEtatu.RData')
 
 ##########
 # złączamy dane ZUS z danymi OPI i statystykami powiatów z BDL

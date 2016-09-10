@@ -13,6 +13,7 @@ oblicz_absolwent_okres = function(dane, multidplyr = TRUE){
   if(multidplyr){
     dane = multidplyr::partition(dane, id_zdau)
   }
+
   dane = dane %>%
     group_by_('id_zdau', 'okres') %>%
     summarize_(

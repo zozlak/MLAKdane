@@ -57,6 +57,7 @@ oblicz_zmienne_pochodne = function(dane){
       prndaw      = ~ ndn / nmn,
       prudaw      = ~ nde / nme,
       samod       = ~ as.numeric(nms > 0),
+      samodproc   = ~ 100 * nms / len,
       zilo        = ~ ezard / zpow,
       ziloa       = ~ ezard / gezd,
       bilod       = ~ pbezd / gbezd,
@@ -70,7 +71,8 @@ oblicz_zmienne_pochodne = function(dane){
       pmnstuddziecko = ~ nmnstuddziecko / len,
       pmnstudbezrob  = ~ nmnstudbezrob / len,
       pmnstudinne    = ~ nmnstudinne / len,
-      pmnstudbd      = ~ nmnstudbd / len      
+      pmnstudbd      = ~ nmnstudbd / len,
+      stud   = ~ as.numeric(studproc > 0)
     ) %>%
     mutate_(
       bilod    = ~ ifelse(is.infinite(bilod), 0, bilod),
@@ -102,7 +104,12 @@ oblicz_zmienne_pochodne = function(dane){
       pmnstuddziecko = ~ ifelse(is.infinite(pmnstuddziecko), NA, pmnstuddziecko),
       pmnstudbezrob  = ~ ifelse(is.infinite(pmnstudbezrob), NA, pmnstudbezrob),
       pmnstudinne    = ~ ifelse(is.infinite(pmnstudinne), NA, pmnstudinne),
-      pmnstudbd      = ~ ifelse(is.infinite(pmnstudbd), NA, pmnstudbd)
+      pmnstudbd      = ~ ifelse(is.infinite(pmnstudbd), NA, pmnstudbd),
+      samodproc = ~ ifelse(is.infinite(samodproc), NA, samodproc),
+    ) %>%
+    mutate_(
+      etatdproc = ~ 100 = mnprud,
+      pracdproc = ~ 100 - mnprd
     )
   class(dane) = c('absolwent_df', class(dane))
   return(dane)
