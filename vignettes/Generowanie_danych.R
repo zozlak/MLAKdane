@@ -111,5 +111,9 @@ stopifnot(
 )
 colnames(wszystko) = toupper(colnames(wszystko))
 save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
-#write.csv2(wszystko, paste0(plikZapisu, '.csv'), row.names = FALSE, fileEncoding = 'Windows-1250')
 
+##########
+# Zbiór danych miesięcznych
+okienko = oblicz_okienko(baza, 1, 60, dataMin, dataMax)
+miesieczne = oblicz_zmienne_miesieczne(okienko, zdau)
+save(miesieczne, file = paste0(plikZapisu, '_mies.RData'), compress = TRUE)
