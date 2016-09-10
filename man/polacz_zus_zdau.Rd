@@ -11,21 +11,27 @@ polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
 
 \item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
 
-\item{pnaPowiaty}{dane wygenerowane za pomocą funkcji \code{\link{polacz_pna_powiaty}}}
+\item{pnaPowiaty}{dane wygenerowane za pomocą funkcji
+\code{\link{polacz_pna_powiaty}}}
 
-\item{dataMin}{początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')}
+\item{dataMin}{początek okresu uwzględnionego w danych ZUS (jako łańcuch
+znaków, np. '2014-01-01')}
 
-\item{dataMax}{koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')}
+\item{dataMax}{koniec okresu uwzględnionego w danych ZUS (jako łańcuch
+znaków, np. '2015-09-30')}
 }
 \value{
 data.frame wyliczone zmienne
 }
 \description{
-Aby poprawnie przyłączyć statystyki powiatów macierz danych uzupełniana jest
-tak, aby dla każdego absolwenta zawierała informacje o każdym okresie w
-zadanym przedziale czasu, ale nie później niż do "końca obserwacji w zus"
-(zakładając zamieszkanie absolwenta w uzupełnianych okresach "w Polsce",
-kodowane jako pna = -1, oraz wszelkie cechy tytułu ubezpieczenia ZUS równe 0,
-w szczególności także bezrob = 0).
+Aby poprawnie przyłączyć statystyki powiatów macierz danych
+uzupełniana jest tak, aby dla każdego absolwenta zawierała informacje o
+każdym okresie w zadanym przedziale czasu, ale nie później niż do "końca
+obserwacji w zus" (zakładając zamieszkanie absolwenta w uzupełnianych
+okresach "w Polsce", kodowane jako pna = -1, oraz wszelkie cechy tytułu
+ubezpieczenia ZUS równe 0, w szczególności także bezrob = 0).
+
+Generowana jest również zmienna określająca, czy absolwent studiował w
+poszczególnych okresach, wyznaczana na podstawie danych ZDAU
 }
 
