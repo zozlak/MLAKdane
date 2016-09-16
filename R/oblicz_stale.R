@@ -1,12 +1,18 @@
 #' oblicza proste zmienne niezwiazane z okienkami czasu
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_stale = function(dane){
+oblicz_stale = function(dane, zdau){
   stopifnot(
-    is(dane, 'baza_df')
+    is(dane, 'baza_df'),
+    is(zdau, 'zdau_df')
   )
+  
+  dane = zdau %>%
+    select_('id_zdau', 'data_rozp') %>%
+    inner_join(dane)
 
   w1 = dane %>%
     select_('id_zdau', 'id_platnika') %>%

@@ -4,10 +4,12 @@
 \alias{oblicz_stale}
 \title{oblicza proste zmienne niezwiazane z okienkami czasu}
 \usage{
-oblicz_stale(dane)
+oblicz_stale(dane, zdau)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}}
+
+\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
 }
 \value{
 data.frame wyliczone zmienne

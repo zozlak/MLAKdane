@@ -18,24 +18,23 @@ plikZapisu = 'dane/nowe/nowe'
 
 ##########
 # Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
-# pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax) # t1
-pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax) # t1
+# pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax)
+pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax)
 jednostki = przygotuj_jednostki()
-#zdau = przygotuj_zdau()
-load('cache/zdau.RData')
-#zus = przygotuj_zus(dataMin, dataMax)
-#save(zus, file = 'cache/ZUS.RData', compress = TRUE)
-load('cache/ZUS.RData')
+zdau = przygotuj_zdau()
+zus = przygotuj_zus(dataMin, dataMax)
+save(zus, file = 'cache/ZUS.RData', compress = TRUE)
+#load('cache/ZUS.RData')
 
 ##########
 # Wyliczamy pomocniczy zbiór utrataEtatu
-#utrataEtatu = przygotuj_utrata_pracy(zus, dataMax) # t4
-#save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
-load('cache/utrataEtatu.RData')
+utrataEtatu = przygotuj_utrata_pracy(zus, dataMax)
+save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
+# load('cache/utrataEtatu.RData')
 
 ##########
 # złączamy dane ZUS z danymi OPI i statystykami powiatów z BDL
-baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax) # t6
+baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
 save(baza, file = 'cache/baza.RData', compress = TRUE)
 # load('cache/baza.RData')
 
@@ -46,7 +45,7 @@ for(i in okienkaIter){
   okienkoMax = okienkaMax[i]
   cat(okienkoMin, '-', okienkoMax)
 
-  okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax) # t9
+  okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax)
   len = okienko %>%
     select(id_zdau, len) %>%
     distinct()
@@ -92,7 +91,7 @@ for(i in okienkaIter){
 # Wyliczamy zmienne niezależne od okienka czasu (KONT, STUDYP* oraz CZAS*)
 studyp = oblicz_studyp(zdau)
 czas = oblicz_zmienne_czasowe(baza, utrataEtatu)
-stale = oblicz_stale(baza)
+stale = oblicz_stale(baza, zdau)
 
 ##########
 # Złączamy wszystko, cośmy policzyli i zapisujemy
