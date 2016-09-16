@@ -1,5 +1,6 @@
 #' oblicza zmienne generowane z poziomu (zus x zdau) przez poziom (zdau x okres) na poziom (zdau)
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
+#' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
 #' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
@@ -11,11 +12,13 @@ oblicz_zmienne_miesieczne = function(dane, zdau, multidplyr = TRUE){
   )
   dane = dane %>%
     filter_(~ okres >= okres_min & okres <= okres_max)
+
+  mies = dane
   if(multidplyr){
-    dane = multidplyr::partition(dane, id_zdau)
+    mies = multidplyr::partition(mies, id_zdau)
   }
-  dane = dane %>%
-    group_by_('id_zdau', 'okres') %>%
+  mies = mies %>%
+    group_by_('id_zdau', 'okres', 'id') %>%
     summarize_(
       gbezd = ~ mean(powpbezd_sr, na.rm = TRUE),
       nmb   = ~ max(bezrob == 1),
@@ -29,15 +32,41 @@ oblicz_zmienne_miesieczne = function(dane, zdau, multidplyr = TRUE){
     ) %>%
     mutate_(
       bilod = ~ 100 * nmb / gbezd,
-      zilo = ~ (sze + szn) / (nmz * zpow)
+      zilo  = ~ (sze + szn) / (nmz * zpow)
     ) %>%
-    select_('bilod', 'zilo')
-    collect()
-  dane = dane %>%
+    select_('id_zdau', 'id', 'okres', 'bilod', 'zilo') %>%
+    collect() %>%
+    ungroup()
+
+  stud = zdau %>%
+    select_('id_zdau', 'data_rozp', 'data_zak') %>%
     inner_join(
-      zdau %>%
-        select_('id_zdau', 'uczelnia_id', 'jednostka_id', 'kierunek_id', 'data_rozp', 'data_zak')
-    )
-  class(dane) = c('miesieczne_df', class(dane))
-  return(dane)
+      dane %>%
+        select_('id_zdau', 'okres', 'id')
+    ) %>%
+    filter_(~ okres >= data_rozp & (okres <= data_zak | is.na(data_zak))) %>%
+    select_('id_zdau', 'id', 'okres')
+
+  mies = mies %>%
+    left_join(
+      stud %>%
+        select_('id_zdau', 'okres') %>%
+        mutate_(studprog = 1)
+    ) %>%
+    left_join(
+      stud %>%
+        select_('id', 'okres') %>%
+        distinct() %>%
+        mutate_(stud = 1)
+    ) %>%
+    mutate_(
+      okres    = ~ okres2data(okres),
+      stud     = ~ ifelse(is.na(stud), 0, stud),
+      studprog = ~ ifelse(is.na(studprog), 0, studprog)
+    ) %>%
+    select_('-id')
+
+  class(mies) = c('miesieczne_df', class(mies))
+  names(mies) = paste0(names(mies), '_m')
+  return(mies)
 }

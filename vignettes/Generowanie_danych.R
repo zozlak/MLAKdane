@@ -51,10 +51,11 @@ for(i in okienkaIter){
     select(id_zdau, len) %>%
     distinct()
 
-  abs1 = oblicz_absolwent(okienko) # t10
-  abs2 = oblicz_absolwent_okres(okienko) # t11
-  nnn  = oblicz_nowi_pracodawcy(okienko) # t12
-  nmle = oblicz_utrata_etatu(okienko, utrataEtatu) # t13
+  abs1 = oblicz_absolwent(okienko)
+  abs2 = oblicz_absolwent_okres(okienko)
+  nnn  = oblicz_nowi_pracodawcy(okienko)
+  nmle = oblicz_utrata_etatu(okienko, utrataEtatu)
+  osoba = oblicz_osoba(okienko)
   razem = zdau %>%
     filter_(~ typ %in% 'A') %>%
     select_('id_zdau') %>%
@@ -62,10 +63,11 @@ for(i in okienkaIter){
     full_join(abs1) %>%
     full_join(abs2) %>%
     full_join(nnn) %>%
-    full_join(nmle)
-  rm(abs1, abs2, nnn, nmle)
+    full_join(nmle) %>%
+    full_join(osoba)
+  rm(abs1, abs2, nnn, nmle, osoba)
   gc()
-  razem = oblicz_zmienne_pochodne(razem) # t16
+  razem = oblicz_zmienne_pochodne(razem)
 
   colnames(razem) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(razem), okienkaSufiksy[i]))
 
@@ -88,8 +90,8 @@ for(i in okienkaIter){
 
 ##########
 # Wyliczamy zmienne niezależne od okienka czasu (KONT, STUDYP* oraz CZAS*)
-studyp = oblicz_studyp(zdau) # t7
-czas = oblicz_zmienne_czasowe(baza, utrataEtatu) # t8
+studyp = oblicz_studyp(zdau)
+czas = oblicz_zmienne_czasowe(baza, utrataEtatu)
 stale = oblicz_stale(baza)
 
 ##########
@@ -114,6 +116,7 @@ save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
 
 ##########
 # Zbiór danych miesięcznych
-okienko = oblicz_okienko(baza, 1, 60, dataMin, dataMax)
+okienko = oblicz_okienko(baza, -60, 60, dataMin, dataMax)
 miesieczne = oblicz_zmienne_miesieczne(okienko, zdau)
+names(miesieczne) = toupper(names(miesieczne))
 save(miesieczne, file = paste0(plikZapisu, '_mies.RData'), compress = TRUE)

@@ -1,4 +1,9 @@
-# 0.5.0 (2016-06-22)
+# 0.6.0 (2016-09-16)
+
+* dodane wyliczanie zmiennych miesięcznych (funkcja oblicz_zmienne_miesieczne())
+* dodane wyliczanie zmiennych na poziomie osoby (funkcja oblicz_osoba())
+
+# 0.5.1 (2016-06-22)
 
 * poprawiony wstydliwy błąd w wyliczaniu zmiennej student2 (bycie studentem
   wg danych ze zbioru ZDAU), gdzie nie dość, że pomyliłem operatory, to
@@ -24,24 +29,24 @@
   przeniesione do nowoutworzonej funkcji oblicz_stale()
 * korekty w funkcji oblicz_zamieszkanie():
   * korekta błędnego użycia ifelse(wMomDyplomu), które powodowało
-    niepoprawne dopasowywanie danych dla niemal wszystkich obserwacji, gdy 
+    niepoprawne dopasowywanie danych dla niemal wszystkich obserwacji, gdy
     parametr wMomDyplomu był równy TRUE
   * korekta wyliczania powiatu i województwa - na wcześniejszym etapie
     teryt jest standaryzowany do postaci 6-cyfrowej i trzeba to uwzględnić
 * oblicz_okienko() w wypadku śmierci badanego ogranicza okienko do miesiąca
   poprzedzającego śmierć (dotychczas wliczała też miesiąc zgonu)
-* przygotuj_kierunki() usuwa duplikaty ze zbioru mapowań kierunków na 
+* przygotuj_kierunki() usuwa duplikaty ze zbioru mapowań kierunków na
   obszary, dziedziny i dyscypliny, zanim zacznie go dalej przetwarzać
 * szablon generowania danych Generowanie_danych.R dba teraz o zachowanie
   w okienku czasowym wszystkich absolwentów (także tych, którzy nie mają
   w okienku żadnych danych, bo np. zmarli)
 * oblicz_zmienne_pochodne() ustawia teraz właściwe wartości domyślne braków
-  danych (generalnie 0 lub NA w zależności od zmiennej) dla wszystkich 
+  danych (generalnie 0 lub NA w zależności od zmiennej) dla wszystkich
   zmiennych generowanych w okienku czasowym
 * okres liczenia zmiennej STUDYP obejmuje teraz również miesiąc uzyskania
   dyplomu
 * przygotuj_kierunki() dostosowane do zmian nazw zmiennych w zbiorze źródłowym
-* zmienne EMLE, EMLEP, EMLENP, ENDN i ENNN wyliczane są teraz w stosunku 
+* zmienne EMLE, EMLEP, EMLENP, ENDN i ENNN wyliczane są teraz w stosunku
   rocznym (mają wartości 12-krotnie większe niż poprzednio)
 
 # 0.4.1 (2016-05-03)

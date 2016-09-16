@@ -9,6 +9,8 @@ oblicz_zmienne_miesieczne(dane, zdau, multidplyr = TRUE)
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
 
+\item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
+
 \item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
