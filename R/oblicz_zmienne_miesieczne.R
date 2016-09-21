@@ -1,11 +1,10 @@
 #' oblicza zmienne generowane z poziomu (zus x zdau) przez poziom (zdau x okres) na poziom (zdau)
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
-#' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
 #' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_zmienne_miesieczne = function(dane, zdau, multidplyr = TRUE){
+oblicz_zmienne_miesieczne = function(dane, multidplyr = TRUE){
   stopifnot(
     is(dane, 'okienko_df'),
     is(zdau, 'zdau_df')
@@ -38,15 +37,19 @@ oblicz_zmienne_miesieczne = function(dane, zdau, multidplyr = TRUE){
     collect() %>%
     ungroup()
 
-  stud = zdau %>%
-    select_('id_zdau', 'data_rozp', 'data_zak') %>%
-    inner_join(
-      dane %>%
-        select_('id_zdau', 'okres', 'id')
-    ) %>%
+  # stud = zdau %>%
+  #   select_('id_zdau', 'data_rozp', 'data_zak') %>%
+  #   inner_join(
+  #     dane %>%
+  #       select_('id_zdau', 'okres', 'id')
+  #   ) %>%
+  #   filter_(~ okres >= data_rozp & (okres <= data_zak | is.na(data_zak))) %>%
+  #   select_('id_zdau', 'id', 'okres')
+  stud = dane %>%
+    select_('id_zdau', 'okres', 'id', 'data_rozp', 'data_zak') %>%
     filter_(~ okres >= data_rozp & (okres <= data_zak | is.na(data_zak))) %>%
     select_('id_zdau', 'id', 'okres')
-
+  
   mies = mies %>%
     left_join(
       stud %>%

@@ -31,6 +31,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
   wynik = data.frame(
     id_zdau      = rep(absolw$id_zdau,      each = length(okresy)),
     id           = rep(absolw$id,           each = length(okresy)),
+    data_rozp    = rep(absolw$data_rozp,    each = length(okresy)),
     data_zak     = rep(absolw$data_zak,     each = length(okresy)),
     jednostka_id = rep(absolw$jednostka_id, each = length(okresy)),
     okres        = rep(okresy,              times = nrow(absolw))

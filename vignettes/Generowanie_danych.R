@@ -24,7 +24,7 @@ jednostki = przygotuj_jednostki()
 zdau = przygotuj_zdau()
 zus = przygotuj_zus(dataMin, dataMax)
 save(zus, file = 'cache/ZUS.RData', compress = TRUE)
-#load('cache/ZUS.RData')
+# load('cache/ZUS.RData')
 
 ##########
 # Wyliczamy pomocniczy zbiór utrataEtatu
@@ -116,6 +116,6 @@ save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
 ##########
 # Zbiór danych miesięcznych
 okienko = oblicz_okienko(baza, -60, 60, dataMin, dataMax)
-miesieczne = oblicz_zmienne_miesieczne(okienko, zdau)
+miesieczne = oblicz_zmienne_miesieczne(okienko)
 names(miesieczne) = toupper(names(miesieczne))
 save(miesieczne, file = paste0(plikZapisu, '_mies.RData'), compress = TRUE)
