@@ -2,6 +2,7 @@
 *.Rproj
 .Rhistory
 .RData
+.~lock*
 dropbox
 *cache
 dane/stare

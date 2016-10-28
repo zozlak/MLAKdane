@@ -19,7 +19,8 @@ porownaj = function(a, b, zmiennaA, zmiennaB = zmiennaA, id = c('ID_ZDAU', 'ID')
         rename_(b = zmiennaB)
     ) %>%
     mutate_(
-      d = ~ a - b
+      d = ~a - b,
+      d = ~ifelse(is.na(d) & is.na(a) & is.na(b), 0, d)
     )
   return(wynik)
 }
