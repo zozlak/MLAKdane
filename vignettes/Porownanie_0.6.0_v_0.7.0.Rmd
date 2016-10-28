@@ -8,7 +8,7 @@ Porówanie wyników generowanych przez wersje 0.6.0 i 0.7.0
 ```{r, echo = FALSE, results = 'hide', warning = FALSE, message = FALSE, cache = TRUE}
 library(dplyr)
 devtools::load_all(".")
-load('dane/stare/2016-09_0.6.0.RDataa')
+load('dane/stare/2016-09_0.6.0.RData')
 load('dane/stare/2016-09_0.6.0_mies.RData')
 wszystkoS = wszystko
 wszystkoS = wszystkoS %>% filter(!ID_ZDAU %in% wszystkoS$ID_ZDAU[duplicated(wszystkoS$ID_ZDAU)])
@@ -18,12 +18,12 @@ wszystko = wszystko %>% semi_join(wszystkoS %>% select(ID_ZDAU))
 
 # agreguj_do_miesiecy->agreguj_do_okresu
 porownaj(wszystkoS, wszystko, 'NME', 'NM_E') %>% group_by(d) %>% summarize(n = n()) 
-porownaj(wszystkoS, wszystko, 'EZARD_P1', 'EZ_Z_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
+porownaj(wszystkoS, wszystko, 'EZARDP1', 'EZ_Z_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
 porownaj(wszystkoS, wszystko, 'EZARD', 'EZ_Z') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
-porownaj(wszystkoS, wszystko, 'BILOD_P1', 'WZG_RYZBEZ_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
+porownaj(wszystkoS, wszystko, 'BILODP1', 'WZG_RYZBEZ_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
 porownaj(wszystkoS, wszystko, 'BILOD', 'WZG_RYZBEZ') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
 # oblicz_okienko
-porownaj(wszystkoS, wszystko, 'LEN_P1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n()) 
+porownaj(wszystkoS, wszystko, 'LENP1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n()) 
 # oblicz_pracodawcy
 porownaj(wszystkoS, wszystko, 'EMLENP', 'ENUP_ENL') %>% group_by(d) %>% summarize(n = n()) 
 porownaj(wszystkoS, wszystko, 'NNDN', 'NPN_E') %>% group_by(d) %>% summarize(n = n()) 
@@ -37,7 +37,7 @@ porownaj(wszystkoS, wszystko, 'JPDZAM1', 'JPDZAM1') %>% group_by(d) %>% summariz
 # oblicz_zmienne_czasowe
 porownaj(wszystkoS, wszystko, 'TMUN', 'TP_M') %>% group_by(d) %>% summarize(n = n()) 
 # oblicz_utrata_etatu
-porownaj(wszystkoS, wszystko, 'NMLE_P1', 'UP_E_P1') %>% group_by(d) %>% summarize(n = n()) 
+porownaj(wszystkoS, wszystko, 'NMLEP1', 'UP_E_P1') %>% group_by(d) %>% summarize(n = n()) 
 porownaj(wszystkoS, wszystko, 'NMLENP', 'UP_ENL') %>% group_by(d) %>% summarize(n = n()) 
 
 ```
