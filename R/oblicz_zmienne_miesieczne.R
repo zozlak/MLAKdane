@@ -37,19 +37,11 @@ oblicz_zmienne_miesieczne = function(dane, multidplyr = TRUE){
     collect() %>%
     ungroup()
 
-  # stud = zdau %>%
-  #   select_('id_zdau', 'data_rozp', 'data_zak') %>%
-  #   inner_join(
-  #     dane %>%
-  #       select_('id_zdau', 'okres', 'id')
-  #   ) %>%
-  #   filter_(~ okres >= data_rozp & (okres <= data_zak | is.na(data_zak))) %>%
-  #   select_('id_zdau', 'id', 'okres')
   stud = dane %>%
     select_('id_zdau', 'okres', 'id', 'data_rozp', 'data_zak') %>%
     filter_(~ okres >= data_rozp & (okres <= data_zak | is.na(data_zak))) %>%
     select_('id_zdau', 'id', 'okres')
-  
+
   mies = mies %>%
     left_join(
       stud %>%

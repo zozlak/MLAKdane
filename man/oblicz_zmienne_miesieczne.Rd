@@ -4,12 +4,10 @@
 \alias{oblicz_zmienne_miesieczne}
 \title{oblicza zmienne generowane z poziomu (zus x zdau) przez poziom (zdau x okres) na poziom (zdau)}
 \usage{
-oblicz_zmienne_miesieczne(dane, zdau, multidplyr = TRUE)
+oblicz_zmienne_miesieczne(dane, multidplyr = TRUE)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
-
-\item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
 
 \item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }

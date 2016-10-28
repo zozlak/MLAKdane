@@ -5,8 +5,22 @@
 #' @import dplyr
 oblicz_nowi_pracodawcy = function(dane){
   stopifnot(
-    is(dane, 'okienko_df')
+    is(dane, 'okienko_zus_zdau_df')
   )
+
+  np = dane %>%
+    filter_(~ okres <= okres_max) %>%
+    group_by_('id_zdau') %>%
+    mutate_(
+      npm_e = ~length(unique(id_platnika[etat])),
+      np_e = ~length(unique(id_platnika[etat])),
+      np_n = ~length(unique(id_platnika[netat])),
+      epm_e = ~dplyr::coalesce(npm_e / nm_e, NA_real_),
+      epm_e2 = ~dplyr::coalesce(npm_e / len, NA_real_),
+      pp_e = ~100 * np_e / nm_e, # (0 dla 0/0),
+      pp_n = ~100 * np_n / nm_n  # (NA dla 0/0),
+    )
+  #up_el = ~Liczba przypadków utraty etatu z uwagi na likwidację płatnika w okresie do 6 miesięcy od utraty etatu. NMLE – NMlenP,
 
   nnn = dane %>%
     filter_(~ okres <= okres_max) %>%
@@ -36,6 +50,7 @@ oblicz_nowi_pracodawcy = function(dane){
     )
 
   nnn = full_join(nndn, nnnn) %>%
+    full_join(np) %>%
     uzupelnij_obserwacje(dane, 'id_zdau') %>%
     mutate_(
       nndn = ~ ifelse(is.na(nndn), 0, nndn),

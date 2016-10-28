@@ -21,8 +21,7 @@ plikZapisu = 'dane/nowe/nowe'
 # pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax)
 pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax)
 jednostki = przygotuj_jednostki()
-zdau = przygotuj_zdau() %>%
-  sample_n(25000)
+zdau = przygotuj_zdau()
 zus = przygotuj_zus(dataMin, dataMax)
 save(zus, file = 'cache/ZUS.RData', compress = TRUE)
 # load('cache/ZUS.RData')
@@ -38,51 +37,53 @@ save(utrataEtatu, file = 'cache/utrataEtatu.RData', compress = TRUE)
 baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
 save(baza, file = 'cache/baza.RData', compress = TRUE)
 # load('cache/baza.RData')
-miesieczne = agreguj_do_miesiecy(baza, zdau)
-save(baza, file = 'cache/miesieczne.RData', compress = TRUE)
-# load('cache/miesieczne.RData')
 
 ##########
 # Wyliczamy zmienne w poszczególnych okienkach czasu
-for (i in okienkaIter) {
+for(i in okienkaIter){
   okienkoMin = okienkaMin[i]
   okienkoMax = okienkaMax[i]
   cat(okienkoMin, '-', okienkoMax)
 
-  okienkoMies = oblicz_okienko(miesieczne, okienkoMin, okienkoMax, dataMin, dataMax)
-  okienkoBaza = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax)
+  okienko = oblicz_okienko(baza, okienkoMin, okienkoMax, dataMin, dataMax)
+  len = okienko %>%
+    select(id_zdau, len) %>%
+    distinct()
 
-  abs = agreguj_do_okresu(okienkoMies)
-  np = oblicz_pracodawcy(okienkoBaza)
-  up = oblicz_utrata_etatu(okienkoMies, utrataEtatu)
-
+  abs1 = oblicz_absolwent(okienko)#
+  abs2 = oblicz_absolwent_okres(okienko)#
+  nnn  = oblicz_nowi_pracodawcy(okienko)#
+  nmle = oblicz_utrata_etatu(okienko, utrataEtatu)#
   razem = zdau %>%
-    filter_(~typ %in% 'A') %>%
+    filter_(~ typ %in% 'A') %>%
     select_('id_zdau') %>%
-    inner_join(abs) %>%
-    inner_join(np) %>%
-    inner_join(up)
-  stopifnot(
-    nrow(abs) == nrow(razem),
-    length(unique(razem$id_zdau)) == nrow(razem)
-  )
-  rm(abs, np, up);gc()
+    full_join(len) %>%
+    full_join(abs1) %>%
+    full_join(abs2) %>%
+    full_join(nnn) %>%
+    full_join(nmle) %>%
+    full_join(osoba)
+  rm(abs1, abs2, nnn, nmle, osoba)
+  gc()
+  razem = oblicz_zmienne_pochodne(razem)#
 
   colnames(razem) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(razem), okienkaSufiksy[i]))
 
-  if (okienkoMax == 1000) {
-    zam0  = oblicz_zamieszkanie(okienkoBaza, jednostki, TRUE)
+  if(okienkoMax == 1000){
+    zam0  = oblicz_zamieszkanie(okienko, jednostki, TRUE)
     colnames(zam0) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(zam0), '0'))
-    zam1  = oblicz_zamieszkanie(okienkoBaza, jednostki, FALSE)
+    zam1  = oblicz_zamieszkanie(okienko, jednostki, FALSE)
     colnames(zam1) = sub('^id_zdau.*$', 'id_zdau', paste0(colnames(zam1), '1'))
     razem = razem %>%
-      inner_join(zam0) %>%
-      inner_join(zam1)
-    rm(zam0, zam1); gc()
+      full_join(zam0) %>%
+      full_join(zam1)
+    rm(zam0, zam1)
+    gc()
   }
 
   save(razem, file = paste0('cache/razem', i, '.RData'), compress = TRUE)
-  rm(razem);gc()
+  rm(razem)
+  gc()
 }
 
 ##########
@@ -94,27 +95,26 @@ stale = oblicz_stale(baza, zdau)
 ##########
 # Złączamy wszystko, cośmy policzyli i zapisujemy
 wszystko = oblicz_stale_czasowe(zdau, dataMax) %>%
-  filter_(~typ %in% 'A') %>%
+  filter_(~ typ %in% 'A') %>%
   full_join(studyp) %>%
   full_join(czas) %>%
   full_join(stale) %>%
   left_join(przygotuj_kierunki()) %>%
   left_join(jednostki %>% select(jednostka_id, jednostka, uczelnianazwa)) %>%
   rename_(kierunek = 'kierunek_id', uczelnia = 'uczelnia_id')
-for (i in okienkaIter) {
+for(i in okienkaIter){
   load(paste0('cache/razem', i, '.RData'))
   wszystko = full_join(wszystko, razem)
 }
 stopifnot(
-  nrow(wszystko) == nrow(zdau %>% filter_(~typ %in% 'A'))
+  nrow(wszystko) == nrow(zdau %>% filter_(~ typ %in% 'A'))
 )
 colnames(wszystko) = toupper(colnames(wszystko))
 save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
 
 ##########
 # Zbiór danych miesięcznych
-okienkoMies = oblicz_okienko(miesieczne, -60, 60, dataMin, dataMax) %>%
-  filter_(~okres >= okres_min & okres <= okres_max) %>%
-  select_('id_zdau', 'okres', 'if_st', 'if_stprg', 'wzg_ez_e', 'wzg_ez_e2', 'wzg_ez_z', 'wzg_ez_z2', 'wzg_ryzbez')
-names(okienkoMies) = toupper(sub('^(id_zdau|okres).*$', '\\1', paste0(names(okienkoMies), '_M')))
-save(okienkoMies, file = paste0(plikZapisu, '_mies.RData'), compress = TRUE)
+okienko = oblicz_okienko(baza, -60, 60, dataMin, dataMax)
+miesieczne = oblicz_zmienne_miesieczne(okienko)
+names(miesieczne) = toupper(names(miesieczne))
+save(miesieczne, file = paste0(plikZapisu, '_mies.RData'), compress = TRUE)

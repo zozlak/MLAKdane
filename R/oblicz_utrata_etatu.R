@@ -1,36 +1,40 @@
-#' oblicza zmienne NMLE oraz NMLEP
-#' @param okienko dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
-#' @param utrataEtatu dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
+#' oblicza zmienne UP_E, UP_EL oraz UP_ENL
+#' @param okienko dane wygenerowane za pomocą funkcji
+#'   \code{\link{oblicz_okienko}} na danych miesięcznych (tzn. danych
+#'   wygenerowanych wcześniej funkcją \code{\link{agreguj_do_miesiecy}})
+#' @param utrataEtatu dane wygenerowane za pomocą funkcji
+#'   \code{\link{oblicz_utrata_etatu}}
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
+#'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
 oblicz_utrata_etatu = function(okienko, utrataEtatu, multidplyr = TRUE){
   stopifnot(
-    is(okienko, 'okienko_df'),
+    is(okienko, 'okienko_df') & is(okienko, 'miesieczne_df'),
     is(utrataEtatu, 'utrata_etatu_df')
   )
 
-  nmle = okienko %>%
-    filter_(~ okres >= okres_min & okres <= okres_max) %>%
+  up = okienko %>%
+    filter_(~okres >= okres_min & okres <= okres_max) %>%
     select_('id_zdau', 'id', 'okres') %>%
     distinct() %>%
     left_join(utrataEtatu)
-  if(multidplyr){
-    nmle = multidplyr::partition(nmle, id_zdau)
-  }else{
-    nmle = group_by_(nmle, 'id_zdau')
+  if (multidplyr) {
+    up = multidplyr::partition(up, id_zdau)
+  } else {
+    up = group_by_(up, 'id_zdau')
   }
-  nmle = nmle %>%
+  up = up %>%
     summarize_(
-      nmle   = ~ sum(utretatu, na.rm = TRUE),
-      nmlenp = ~ sum(utretatu_v2, na.rm = TRUE)
+      up_e   = ~sum(utretatu, na.rm = TRUE),
+      up_enl = ~sum(utretatu_v2, na.rm = TRUE)
     ) %>%
     mutate_(
-      nmlep = ~ nmle - nmlenp
+      up_el = ~up_e - up_enl
     ) %>%
-    collect()
+    collect() %>%
+    ungroup()
 
-  class(nmle) = c('absolwent_df', class(nmle))
-  return(nmle)
+  return(up)
 }

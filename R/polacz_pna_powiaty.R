@@ -59,7 +59,8 @@ polacz_pna_powiaty = function(pna, powiaty, dataMin, dataMax){
 
   wynik = pnaAgr %>%
     full_join(pnaWskSr) %>%
-    full_join(pnaWskJST)
+    full_join(pnaWskJST) %>%
+    select_('-rok')
   stopifnot(
     nrow(pnaWskJST) == nrow(wynik),
     nrow(pnaWskSr)  == nrow(wynik)

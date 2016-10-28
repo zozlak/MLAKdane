@@ -1,3 +1,8 @@
+# 0.7.0 (2016-10-28)
+
+* wyliczanie zmiennych przepisane tak, aby większość zmiennych przeliczana była
+  najpierw dla miesięcy, a następnie dla okienka czasu
+
 # 0.6.0 (2016-09-16)
 
 * dodane wyliczanie zmiennych miesięcznych (funkcja oblicz_zmienne_miesieczne())

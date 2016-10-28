@@ -50,11 +50,13 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
 
   stud = zdau %>%
     select_('id', 'data_rozp', 'data_zak') %>%
-    left_join(wynik %>% select_('id', 'okres')) %>%
+    left_join(
+      wynik %>% select_('id', 'okres')
+    ) %>%
     filter_(~ okres >= data_rozp & ((is.na(data_zak) | okres <= data_zak))) %>%
     select_('id', 'okres') %>%
     distinct() %>%
-    mutate_(student2 = 1)
+    mutate_(studopi = 1)
 
   wynik = wynik %>%
     left_join(stud) %>%
@@ -64,8 +66,10 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
       samoz    = ~ ifelse(is.na(samoz), 0, samoz),
       bezrob   = ~ ifelse(is.na(bezrob), 0, bezrob),
       rentemer = ~ ifelse(is.na(rentemer), 0, rentemer),
-      student  = ~ ifelse(is.na(student), 0, student),
-      student2 = ~ ifelse(is.na(student2), 0, student2),
+      studzus  = ~ ifelse(is.na(student), 0, student), # student wg zus
+      studopi  = ~ ifelse(is.na(studopi), 0, studopi), # student wg opi
+      if_st    = ~ as.numeric(studzus + studopi > 0), # student wg zus lub OPI
+      if_stprg = ~ as.numeric(if_st & okres >= data_rozp & (okres <= data_zak | is.na(data_zak))), # student na kierunku studiów id_zdau
       prawnik  = ~ ifelse(is.na(prawnik), 0, prawnik),
       mundur   = ~ ifelse(is.na(mundur), 0, mundur),
       # zlec     = ~ ifelse(is.na(zlec), 0, zlec),
@@ -73,9 +77,9 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
       # rolnik   = ~ ifelse(is.na(rolnik), 0, rolnik),
       dziecko  = ~ ifelse(is.na(dziecko), 0, dziecko),
       podst    = ~ ifelse(is.na(podst), 0, podst),
-      pna      = ~ ifelse(is.na(pna), -1, pna),
-      rok      = ~ okres2rok(okres)
-    )
+      pna      = ~ ifelse(is.na(pna), -1, pna)
+    ) %>%
+    select_('-student', '-studzus', '-studopi')
 
   wynik = left_join(wynik, pnaPowiaty)
 

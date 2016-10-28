@@ -2,18 +2,18 @@
 % Please edit documentation in R/oblicz_zmienne_pochodne.R
 \name{oblicz_zmienne_pochodne}
 \alias{oblicz_zmienne_pochodne}
-\title{oblicza zmienne wywodzone z wcześniej policzonych zmiennych}
+\title{oblicza zmienne wywodzone z już wcześniej policzonych}
 \usage{
-oblicz_zmienne_pochodne(dane)
+oblicz_zmienne_pochodne(dane, multidplyr = TRUE)
 }
 \arguments{
-\item{dane}{połączone dane na poziomie (zdau) wygenerowane za pomocą innych
-funkcji}
+\item{dane}{ramki danych wygenerowane wewnątrz pomocą funkcji
+\code{\link{agreguj_do_miesiecy}} lub \code{\link{agreguj_do_okresu}}}
 }
 \value{
 data.frame wyliczone zmienne
 }
 \description{
-oblicza zmienne wywodzone z wcześniej policzonych zmiennych
+oblicza zmienne wywodzone z już wcześniej policzonych
 }
 

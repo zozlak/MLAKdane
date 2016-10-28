@@ -8,6 +8,7 @@
 #'   multidplyr
 #' @export
 #' @import dplyr
+#' @import readr
 przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%

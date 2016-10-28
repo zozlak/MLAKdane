@@ -2,21 +2,25 @@
 % Please edit documentation in R/oblicz_utrata_etatu.R
 \name{oblicz_utrata_etatu}
 \alias{oblicz_utrata_etatu}
-\title{oblicza zmienne NMLE oraz NMLEP}
+\title{oblicza zmienne UP_E, UP_EL oraz UP_ENL}
 \usage{
 oblicz_utrata_etatu(okienko, utrataEtatu, multidplyr = TRUE)
 }
 \arguments{
-\item{okienko}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
+\item{okienko}{dane wygenerowane za pomocą funkcji
+\code{\link{oblicz_okienko}} na danych miesięcznych (tzn. danych
+wygenerowanych wcześniej funkcją \code{\link{agreguj_do_miesiecy}})}
 
-\item{utrataEtatu}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}}
+\item{utrataEtatu}{dane wygenerowane za pomocą funkcji
+\code{\link{oblicz_utrata_etatu}}}
 
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
+multidplyr}
 }
 \value{
 data.frame wyliczone zmienne
 }
 \description{
-oblicza zmienne NMLE oraz NMLEP
+oblicza zmienne UP_E, UP_EL oraz UP_ENL
 }
 
