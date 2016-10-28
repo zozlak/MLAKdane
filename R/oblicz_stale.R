@@ -1,10 +1,11 @@
 #' oblicza proste zmienne niezwiazane z okienkami czasu
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_stale = function(dane, zdau){
+oblicz_stale = function(dane, zdau, multidplyr = TRUE){
   stopifnot(
     is(dane, 'baza_df'),
     is(zdau, 'zdau_df')
@@ -14,46 +15,82 @@ oblicz_stale = function(dane, zdau){
     select_('id_zdau', 'data_rozp') %>%
     inner_join(dane)
 
+  if (multidplyr) {
+    dane = multidplyr::partition(dane, id_zdau)
+  }
+  
   w1 = dane %>%
     select_('id_zdau', 'id_platnika') %>%
     group_by_('id_zdau') %>%
-    summarize_(ifzus = ~ as.numeric(any(!is.na(id_platnika)))) %>%
+    summarize_(
+      if_zus = ~as.numeric(any(!is.na(id_platnika)))
+    ) %>%
+    collect() %>%
     ungroup()
 
   # w trakcie studiów
   w2 = dane %>%
-    select_('id_zdau', 'okres', 'data_rozp', 'data_zak', 'etat', 'samoz', 'podst') %>%
-    filter_(~ okres >= data_rozp & okres <= data_zak) %>%
+    select_('id_zdau', 'okres', 'data_rozp', 'data_zak', 'etat', 'netat', 'samoz', 'podst') %>%
+    filter_(~okres >= data_rozp & okres <= data_zak) %>%
     group_by_('id_zdau') %>%
     summarize_(
-      ezarstud = ~ sum(podst) / (first(data_zak) - first(data_rozp) + 1),
-      ezustud  = ~ sum(podst[etat == 1]) / (first(data_zak) - first(data_rozp) + 1),
-      pracaS   = ~ sum(etat + samoz) > 0
-    )
-
+      nm_k   = ~first(data_zak) - first(data_rozp) + 1,
+      nm_e_k = ~length(unique(okres[etat > 0])),
+      nm_z_k = ~length(unique(okres[etat + netat > 0])),
+      nm_s_k = ~length(unique(okres[samoz > 0])),
+      sz_k   = ~sum(podst, na.rm = TRUE),
+      sz_e_k = ~sum(podst[etat > 0], na.rm = TRUE),
+      sz_z_k = ~sum(podst[etat + netat > 0], na.rm = TRUE),
+      sz_s_k = ~sum(podst[samoz > 0], na.rm = TRUE)
+    ) %>%
+    mutate_(
+      if_es_k = ~as.integer(nm_e_k + nm_s_k > 0),
+      ez_k    =~dplyr::coalesce(sz_k / nm_k, NA_real_),
+      ez_e_k  =~dplyr::coalesce(sz_e_k / nm_e_k, NA_real_),
+      ez_e_k2 =~dplyr::coalesce(sz_e_k / nm_k, NA_real_),
+      ez_z_k  =~dplyr::coalesce(sz_z_k / nm_z_k, NA_real_),
+      ez_z_k2 =~dplyr::coalesce(sz_z_k / nm_k, NA_real_),
+      ez_s_k  =~dplyr::coalesce(sz_s_k / nm_s_k, NA_real_),
+      ez_s_k2 =~dplyr::coalesce(sz_s_k / nm_k, NA_real_)
+    ) %>%
+    collect() %>%
+    ungroup()
+    
   # przed studiami
   w3 = dane %>%
-    select_('id_zdau', 'okres', 'data_rozp', 'data_zak', 'etat', 'samoz', 'podst') %>%
+    select_('id_zdau', 'okres', 'data_rozp', 'data_zak', 'etat', 'netat', 'samoz', 'podst') %>%
     filter_(~ okres < data_rozp) %>%
     group_by_('id_zdau') %>%
     summarize_(
-      ezarrekr = ~ sum(podst) / length(unique(okres)),
-      ezurekr  = ~ sum(podst[etat == 1]) / length(unique(okres[etat == 1])),
-      pracaPS  = ~ sum(etat + samoz) > 0
-    )
+      nm_r   = ~length(unique(okres)),
+      nm_e_r = ~length(unique(okres[etat > 0])),
+      nm_z_r = ~length(unique(okres[etat + netat > 0])),
+      nm_s_r = ~length(unique(okres[samoz > 0])),
+      sz_r   = ~sum(podst, na.rm = TRUE),
+      sz_e_r = ~sum(podst[etat > 0], na.rm = TRUE),
+      sz_z_r = ~sum(podst[etat + netat > 0], na.rm = TRUE),
+      sz_s_r = ~sum(podst[samoz > 0], na.rm = TRUE)
+    ) %>%
+    mutate_(
+      if_es_r = ~as.integer(nm_e_r + nm_s_r > 0),
+      ez_r    =~dplyr::coalesce(sz_r / nm_r, NA_real_),
+      ez_e_r  =~dplyr::coalesce(sz_e_r / nm_e_r, NA_real_),
+      ez_e_r2 =~dplyr::coalesce(sz_e_r / nm_r, NA_real_),
+      ez_z_r  =~dplyr::coalesce(sz_z_r / nm_z_r, NA_real_),
+      ez_z_r2 =~dplyr::coalesce(sz_z_r / nm_r, NA_real_),
+      ez_s_r  =~dplyr::coalesce(sz_s_r / nm_s_r, NA_real_),
+      ez_s_r2 =~dplyr::coalesce(sz_s_r / nm_r, NA_real_)
+    ) %>%
+    collect() %>%
+    ungroup()
 
   dane = w1 %>%
     full_join(w2) %>%
     full_join(w3) %>%
     mutate_(
-      ezarstud = ~ ifelse(is.na(ezarstud), 0, ezarstud),
-      ezarrekr = ~ ifelse(is.na(ezarrekr), 0, ezarrekr),
-      ezustud  = ~ ifelse(is.na(ezustud), 0, ezustud),
-      ezurekr  = ~ ifelse(is.na(ezurekr), 0, ezurekr),
-      pracaS   = ~ ifelse(is.na(pracaS), FALSE, pracaS),
-      pracaPS  = ~ ifelse(is.na(pracaPS), FALSE, pracaPS),
-      dosw_es  = ~ ifelse(pracaPS, 1, ifelse(pracaS, 2, 3))
-    ) %>%
-    select_('-pracaS', '-pracaPS')
+      if_es_k = ~coalesce(if_es_k, 0L),
+      if_es_r = ~coalesce(if_es_r, 0L),
+      dosw_es = ~ifelse(if_es_r > 0, 1, ifelse(if_es_k > 0, 2, 3))
+    )
   return(dane)
 }

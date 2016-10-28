@@ -29,7 +29,6 @@ oblicz_zmienne_pochodne = function(dane, multidplyr = TRUE){
       if_p   = ~nm_p > 0L,
       if_s   = ~nm_s > 0L,
       if_st  = ~nm_st > 0L,
-      if_zus = ~nm_bd == 0L,
       epm_e  = ~dplyr::coalesce(npm_e / nm_e, NA_real_),
       epm_e2 = ~dplyr::coalesce(npm_e / len, NA_real_),
       ezpow   = ~dplyr::coalesce((ezpow_n + ezpow_s) / len, NA_real_),

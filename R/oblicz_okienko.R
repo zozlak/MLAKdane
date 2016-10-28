@@ -20,15 +20,15 @@ oblicz_okienko = function(dane, okienkoMin, okienkoMax, dataMin, dataMax){
 
   dane = dane %>%
     mutate_(
-      okres_min = ~ data_zak + okienkoMin,
-      okres_max = ~ ifelse(data_zak + okienkoMax >= koniec & !is.na(koniec), koniec - 1, data_zak + okienkoMax)
+      okres_min = ~data_zak + okienkoMin,
+      okres_max = ~ifelse(data_zak + okienkoMax >= koniec & !is.na(koniec), koniec - 1, data_zak + okienkoMax)
     ) %>%
     mutate_(
-      okres_min  = ~ ifelse(okres_min < data2okres(dataMin), data2okres(dataMin), okres_min),
-      okres_max  = ~ ifelse(okres_max > data2okres(dataMax), data2okres(dataMax), okres_max),
-      len        = ~ okres_max - okres_min + 1
+      okres_min  = ~ifelse(okres_min < data2okres(dataMin), data2okres(dataMin), okres_min),
+      okres_max  = ~ifelse(okres_max > data2okres(dataMax), data2okres(dataMax), okres_max),
+      len        = ~okres_max - okres_min + 1
     ) %>%
-    filter_(~ len >= 0)
+    filter_(~len > 0)
 
   class(dane) = c('okienko_df', klasy)
   return(dane)
