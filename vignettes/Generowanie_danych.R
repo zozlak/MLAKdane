@@ -12,7 +12,7 @@ dataMin = '2014-01-01'
 dataMax = '2015-09-30' # 2015-09-30/2015-03-31 dla nowych/starych danych
 okienkaMin = c(-11, 1, 13, 1)
 okienkaMax = c(0, 12, 24, 1000)
-okienkaSufiksy = c('m1', 'p1', 'p2', '')
+okienkaSufiksy = c('_m1', '_p1', '_p2', '')
 okienkaIter = c(2, 4)
 plikZapisu = 'dane/nowe/nowe'
 
@@ -21,8 +21,10 @@ plikZapisu = 'dane/nowe/nowe'
 # pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax)
 pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax)
 jednostki = przygotuj_jednostki()
-zdau = przygotuj_zdau() %>%
-  sample_n(25000)
+zdau = przygotuj_zdau() 
+zdauAbs = zdau %>%
+  filter_(~typ %in% 'A') %>%
+  select_('id_zdau')
 zus = przygotuj_zus(dataMin, dataMax)
 save(zus, file = 'cache/ZUS.RData', compress = TRUE)
 # load('cache/ZUS.RData')
@@ -39,8 +41,14 @@ baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
 save(baza, file = 'cache/baza.RData', compress = TRUE)
 # load('cache/baza.RData')
 miesieczne = agreguj_do_miesiecy(baza, zdau)
-save(baza, file = 'cache/miesieczne.RData', compress = TRUE)
+save(miesieczne, file = 'cache/miesieczne.RData', compress = TRUE)
 # load('cache/miesieczne.RData')
+
+##########
+# Wyliczamy zmienne niezależne od okienka czasu (STUDYP*, TP_*, *_K, *_R, itp.)
+studyp = oblicz_studyp(zdau)
+czas = oblicz_zmienne_czasowe(baza, utrataEtatu)
+stale = oblicz_stale(baza, zdau)
 
 ##########
 # Wyliczamy zmienne w poszczególnych okienkach czasu
@@ -56,14 +64,13 @@ for (i in okienkaIter) {
   np = oblicz_pracodawcy(okienkoBaza)
   up = oblicz_utrata_etatu(okienkoMies, utrataEtatu)
 
-  razem = zdau %>%
-    filter_(~typ %in% 'A') %>%
-    select_('id_zdau') %>%
-    inner_join(abs) %>%
-    inner_join(np) %>%
-    inner_join(up)
+  razem = zdauAbs %>%
+    full_join(abs) %>%
+    full_join(np) %>%
+    full_join(up) %>%
+    mutate_(len = ~coalesce(as.integer(len), 0L))
   stopifnot(
-    nrow(abs) == nrow(razem),
+    nrow(zdauAbs) == nrow(razem),
     length(unique(razem$id_zdau)) == nrow(razem)
   )
   rm(abs, np, up);gc()
@@ -84,12 +91,6 @@ for (i in okienkaIter) {
   save(razem, file = paste0('cache/razem', i, '.RData'), compress = TRUE)
   rm(razem);gc()
 }
-
-##########
-# Wyliczamy zmienne niezależne od okienka czasu (KONT, STUDYP* oraz CZAS*)
-studyp = oblicz_studyp(zdau)
-czas = oblicz_zmienne_czasowe(baza, utrataEtatu)
-stale = oblicz_stale(baza, zdau)
 
 ##########
 # Złączamy wszystko, cośmy policzyli i zapisujemy
@@ -118,3 +119,5 @@ okienkoMies = oblicz_okienko(miesieczne, -60, 60, dataMin, dataMax) %>%
   select_('id_zdau', 'okres', 'if_st', 'if_stprg', 'wzg_ez_e', 'wzg_ez_e2', 'wzg_ez_z', 'wzg_ez_z2', 'wzg_ryzbez')
 names(okienkoMies) = toupper(sub('^(id_zdau|okres).*$', '\\1', paste0(names(okienkoMies), '_M')))
 save(okienkoMies, file = paste0(plikZapisu, '_mies.RData'), compress = TRUE)
+
+Sys.time()

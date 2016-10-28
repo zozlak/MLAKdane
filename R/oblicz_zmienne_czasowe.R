@@ -25,21 +25,20 @@ oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
   }
   dane = dane %>%
     summarize_(
-      tmuna  = ~dplyr::coalesce(min(ifelse((roznica == 0 & is.na(utrmundur)  | roznica > 0) & mundur > 0, roznica, NA_integer_), na.rm = TRUE), NA_real_),
-      tprawa = ~dplyr::coalesce(min(ifelse((roznica == 0 & is.na(utrprawnik) | roznica > 0) & prawnik > 0, roznica, NA_integer_), na.rm = TRUE), NA_real_),
-      tprda  = ~dplyr::coalesce(min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & etat + netat + samoz > 0, roznica, NA_integer_), na.rm = TRUE), NA_real_),
-      tprsda = ~dplyr::coalesce(min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & samoz > 0, roznica, NA_integer_), na.rm = TRUE), NA_real_),
-      tpruda = ~dplyr::coalesce(min(ifelse((roznica == 0 & is.na(utretatu)   | roznica > 0) & etat > 0, roznica, NA_integer_), na.rm = TRUE), NA_real_),
-      tzata  = ~dplyr::coalesce(min(ifelse((roznica == 0 & is.na(utrzatr)    | roznica > 0) & etat + netat > 0, roznica, NA_integer_), na.rm = TRUE), NA_real_)
+      tp_m2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrmundur)  | roznica > 0) & mundur > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
+      tp_j2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrprawnik) | roznica > 0) & prawnik > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
+      tp_p2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & etat + netat + samoz > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
+      tp_s2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & samoz > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
+      tp_e2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utretatu)   | roznica > 0) & etat > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
+      tp_z2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrzatr)    | roznica > 0) & etat + netat > 0, roznica, NA_integer_), na.rm = TRUE), Inf)
     ) %>%
     mutate_(
-      munbaz = ~ifelse(is.na(tmuna), 0, 1),
-      tmun   = ~ifelse(is.na(tmuna),  NA_integer_, ifelse(tmuna  > 0, tmuna  - 1, 0)),
-      tpraw  = ~ifelse(is.na(tprawa), NA_integer_, ifelse(tprawa > 0, tprawa - 1, 0)),
-      tprd   = ~ifelse(is.na(tprda),  NA_integer_, ifelse(tprda  > 0, tprda  - 1, 0)),
-      tprsd  = ~ifelse(is.na(tprsda), NA_integer_, ifelse(tprsda > 0, tprsda - 1, 0)),
-      tprud  = ~ifelse(is.na(tpruda), NA_integer_, ifelse(tpruda > 0, tpruda - 1, 0)),
-      tzat   = ~ifelse(is.na(tzata),  NA_integer_, ifelse(tzata  > 0, tzata  - 1, 0))
+      tp_m = ~ifelse(is.na(tp_m2), NA_integer_, ifelse(tp_m2 > 0, tp_m2 - 1, 0)),
+      tp_j = ~ifelse(is.na(tp_j2), NA_integer_, ifelse(tp_j2 > 0, tp_j2 - 1, 0)),
+      tp_p = ~ifelse(is.na(tp_p2), NA_integer_, ifelse(tp_p2 > 0, tp_p2 - 1, 0)),
+      tp_s = ~ifelse(is.na(tp_s2), NA_integer_, ifelse(tp_s2 > 0, tp_s2 - 1, 0)),
+      tp_e = ~ifelse(is.na(tp_e2), NA_integer_, ifelse(tp_e2 > 0, tp_e2 - 1, 0)),
+      tp_z = ~ifelse(is.na(tp_z2), NA_integer_, ifelse(tp_z2 > 0, tp_z2 - 1, 0))
     ) %>%
     collect()
   class(dane) = c('absolwent_df', class(dane))

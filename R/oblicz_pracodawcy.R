@@ -16,16 +16,19 @@ oblicz_pracodawcy = function(dane, multidplyr = TRUE){
 
   if (multidplyr) {
     wynik = multidplyr::partition(dane, id_zdau)
+  } else {
+    wynik = dane
   }
 
   wynik = wynik %>%
     filter_(~ okres <= okres_max) %>%
     group_by_('id_zdau') %>%
     summarize_(
-      nm_e   = ~length(unique(okres[etat > 0])),
-      nm_n   = ~length(unique(okres[netat > 0])),
-      np_e   = ~length(unique(id_platnika[etat])),
-      np_n   = ~length(unique(id_platnika[netat])),
+      len = ~first(len),
+      nm_e = ~length(unique(okres[etat > 0])),
+      nm_n = ~length(unique(okres[netat > 0])),
+      np_e = ~length(unique(id_platnika[etat])),
+      np_n = ~length(unique(id_platnika[netat])),
       pp_e = ~dplyr::coalesce(100 * np_e / nm_e, 0),
       pp_n = ~dplyr::coalesce(100 * np_n / nm_n, NA_real_)
     ) %>%
@@ -66,8 +69,11 @@ oblicz_pracodawcy = function(dane, multidplyr = TRUE){
     left_join(npn_n) %>%
     mutate_(
       npn_e = ~dplyr::coalesce(npn_e, 0L),
-      npn_n = ~dplyr::coalesce(npn_n, 0L)
-    )
+      npn_n = ~dplyr::coalesce(npn_n, 0L),
+      enpn_e   = ~dplyr::coalesce(12 * npn_e / len, NA_real_),
+      enpn_n   = ~dplyr::coalesce(12 * npn_n / len, NA_real_)
+    ) %>%
+    select_('-len')
 
   return(dane)
 }

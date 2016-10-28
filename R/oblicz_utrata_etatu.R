@@ -17,7 +17,7 @@ oblicz_utrata_etatu = function(okienko, utrataEtatu, multidplyr = TRUE){
 
   up = okienko %>%
     filter_(~okres >= okres_min & okres <= okres_max) %>%
-    select_('id_zdau', 'id', 'okres') %>%
+    select_('id_zdau', 'id', 'okres', 'nm_e', 'len') %>%
     distinct() %>%
     left_join(utrataEtatu)
   if (multidplyr) {
@@ -27,12 +27,17 @@ oblicz_utrata_etatu = function(okienko, utrataEtatu, multidplyr = TRUE){
   }
   up = up %>%
     summarize_(
-      up_e   = ~sum(utretatu, na.rm = TRUE),
-      up_enl = ~sum(utretatu_v2, na.rm = TRUE)
+      len = ~first(len),
+      up_e   = ~ifelse(sum(nm_e) > 0, sum(utretatu, na.rm = TRUE), NA_integer_),
+      up_enl = ~ifelse(sum(nm_e) > 0, sum(utretatu_v2, na.rm = TRUE), NA_integer_)
     ) %>%
     mutate_(
-      up_el = ~up_e - up_enl
+      up_el = ~up_e - up_enl,
+      enup_e   = ~dplyr::coalesce(12 * up_e / len, NA_real_),
+      enup_el  = ~dplyr::coalesce(12 * up_el / len, NA_real_),
+      enup_enl = ~dplyr::coalesce(12 * up_enl / len, NA_real_)
     ) %>%
+    select_('-len') %>%
     collect() %>%
     ungroup()
 
