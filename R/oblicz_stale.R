@@ -10,7 +10,7 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
     is(dane, 'baza_df'),
     is(zdau, 'zdau_df')
   )
-  
+
   dane = zdau %>%
     select_('id_zdau', 'data_rozp') %>%
     inner_join(dane)
@@ -18,7 +18,7 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
   if (multidplyr) {
     dane = multidplyr::partition(dane, id_zdau)
   }
-  
+
   w1 = dane %>%
     select_('id_zdau', 'id_platnika') %>%
     group_by_('id_zdau') %>%
@@ -47,15 +47,12 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
       if_es_k = ~as.integer(nm_e_k + nm_s_k > 0),
       ez_k    =~dplyr::coalesce(sz_k / nm_k, NA_real_),
       ez_e_k  =~dplyr::coalesce(sz_e_k / nm_e_k, NA_real_),
-      ez_e_k2 =~dplyr::coalesce(sz_e_k / nm_k, NA_real_),
       ez_z_k  =~dplyr::coalesce(sz_z_k / nm_z_k, NA_real_),
-      ez_z_k2 =~dplyr::coalesce(sz_z_k / nm_k, NA_real_),
       ez_s_k  =~dplyr::coalesce(sz_s_k / nm_s_k, NA_real_),
-      ez_s_k2 =~dplyr::coalesce(sz_s_k / nm_k, NA_real_)
     ) %>%
     collect() %>%
     ungroup()
-    
+
   # przed studiami
   w3 = dane %>%
     select_('id_zdau', 'okres', 'data_rozp', 'data_zak', 'etat', 'netat', 'samoz', 'podst') %>%
@@ -75,11 +72,8 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
       if_es_r = ~as.integer(nm_e_r + nm_s_r > 0),
       ez_r    =~dplyr::coalesce(sz_r / nm_r, NA_real_),
       ez_e_r  =~dplyr::coalesce(sz_e_r / nm_e_r, NA_real_),
-      ez_e_r2 =~dplyr::coalesce(sz_e_r / nm_r, NA_real_),
       ez_z_r  =~dplyr::coalesce(sz_z_r / nm_z_r, NA_real_),
-      ez_z_r2 =~dplyr::coalesce(sz_z_r / nm_r, NA_real_),
       ez_s_r  =~dplyr::coalesce(sz_s_r / nm_s_r, NA_real_),
-      ez_s_r2 =~dplyr::coalesce(sz_s_r / nm_r, NA_real_)
     ) %>%
     collect() %>%
     ungroup()
