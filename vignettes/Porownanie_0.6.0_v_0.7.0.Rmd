@@ -12,16 +12,22 @@ load('dane/stare/2016-09_0.6.0.RData')
 load('dane/stare/2016-09_0.6.0_mies.RData')
 wszystkoS = wszystko
 wszystkoS = wszystkoS %>% filter(!ID_ZDAU %in% wszystkoS$ID_ZDAU[duplicated(wszystkoS$ID_ZDAU)])
-load('dane/stare/2016-09_0.6.0.RData')
-load('dane/stare/2016-09_0.6.0_mies.RData')
+miesieczneS = miesieczne %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% semi_join(wszystkoS %>% select(ID_ZDAU))
+load('dane/stare/2016-09_0.7.0.RData')
+load('dane/stare/2016-09_0.7.0_mies.RData')
 wszystko = wszystko %>% semi_join(wszystkoS %>% select(ID_ZDAU))
+miesieczne = okienkoMies %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% semi_join(wszystko %>% select(ID_ZDAU))
+miesieczneS = miesieczneS %>% semi_join(miesieczne %>% select(ID_ZDAU, OKRES)) %>% distinct()
 
 # agreguj_do_miesiecy->agreguj_do_okresu
 porownaj(wszystkoS, wszystko, 'NME', 'NM_E') %>% group_by(d) %>% summarize(n = n()) 
-porownaj(wszystkoS, wszystko, 'EZARDP1', 'EZ_Z_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
-porownaj(wszystkoS, wszystko, 'EZARD', 'EZ_Z') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
-porownaj(wszystkoS, wszystko, 'BILODP1', 'WZG_RYZBEZ_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
-porownaj(wszystkoS, wszystko, 'BILOD', 'WZG_RYZBEZ') %>% group_by(d) %>% summarize(n = n()) %>% filter(d > 0.01) 
+porownaj(wszystkoS, wszystko, 'EZARDP1', 'EZ_Z_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(abs(d) > 0.01 | is.na(d) | is.nan(d)) 
+porownaj(wszystkoS, wszystko, 'EZARD', 'EZ_Z') %>% group_by(d) %>% summarize(n = n()) %>% filter(abs(d) > 0.01 | is.na(d) | is.nan(d)) 
+prPna = miesieczneS %>% filter(is.nan(BILOD_M)) %>% select(ID_ZDAU) %>% distinct() %>% mutate(prPna = 1L) # osoby mające w wersji 0.6.0 nieistniejący kod pocztowy skutkujący NA/NaN na dany miesiąc
+porownaj(wszystkoS, wszystko, 'BILODP1', 'WZG_RYZBEZ_P1') %>% filter(abs(d) > 0.001 | is.na(d) | is.nan(d), !is.na(a)) %>% left_join(prPna) # NA w poprzednim zbiorze wyglądają na błędy
+porownaj(wszystkoS, wszystko, 'BILOD', 'WZG_RYZBEZ') %>% filter(abs(d) > 0.0001 | is.na(d) | is.nan(d), !is.na(a)) %>% left_join(prPna) # NA w poprzednim zbiorze z braku kodów pocztowych
+porownaj(wszystkoS, wszystko, 'ZILOP1', 'WZG_EZ_Z_P1') %>% arrange(desc(abs(d))) %>% filter(abs(d) > 0.0001) %>% left_join(prPna)
+porownaj(wszystkoS, wszystko, 'ZILO', 'WZG_EZ_Z') %>% arrange(desc(abs(d))) %>% filter(abs(d) > 0.0001) %>% left_join(prPna)
 # oblicz_okienko
 porownaj(wszystkoS, wszystko, 'LENP1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n()) 
 # oblicz_pracodawcy
@@ -40,5 +46,8 @@ porownaj(wszystkoS, wszystko, 'TMUN', 'TP_M') %>% group_by(d) %>% summarize(n = 
 porownaj(wszystkoS, wszystko, 'NMLEP1', 'UP_E_P1') %>% group_by(d) %>% summarize(n = n()) 
 porownaj(wszystkoS, wszystko, 'NMLENP', 'UP_ENL') %>% group_by(d) %>% summarize(n = n()) 
 
+# miesięczne
+porownaj(miesieczneS, miesieczne, 'BILOD_M', 'WZG_RYZBEZ_M', c('ID_ZDAU', 'OKRES')) %>% filter(!is.nan(a), abs(d) > 0.0001) # pomijamy nan-y ze względu na błędy wyliczania w wersji 0.6.0
+porownaj(miesieczneS, miesieczne, 'ZILO_M', 'WZG_EZ_Z_M', c('ID_ZDAU', 'OKRES')) %>% filter(!is.na(a), abs(d) > 0.0001)  # pomijamy NA, bo w poprzednim zbiorze brakowało paru kodów pocztowych, przez co ZILO wychodziło NA
 ```
 
