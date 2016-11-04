@@ -116,8 +116,10 @@ save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
 # Zbiór danych miesięcznych
 okienkoMies = oblicz_okienko(miesieczne, -60, 60, dataMin, dataMax) %>%
   filter_(~okres >= okres_min & okres <= okres_max) %>%
-  select_('id_zdau', 'okres', 'if_st', 'if_stprg', 'wzg_ez_e', 'wzg_ez_e2', 'wzg_ez_z', 'wzg_ez_z2', 'wzg_ryzbez')
-names(okienkoMies) = toupper(sub('^(id_zdau|okres).*$', '\\1', paste0(names(okienkoMies), '_M')))
+  select_('id_zdau', 'okres', 'if_st', 'if_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s') %>%
+  mutate_(okres = ~okres2data(okres))
+  
+names(okienkoMies) = toupper(paste0(names(okienkoMies), '_M'))
 save(okienkoMies, file = paste0(plikZapisu, '_mies.RData'), compress = TRUE)
 
 Sys.time()

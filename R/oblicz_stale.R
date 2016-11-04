@@ -48,7 +48,7 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
       ez_k    =~dplyr::coalesce(sz_k / nm_k, NA_real_),
       ez_e_k  =~dplyr::coalesce(sz_e_k / nm_e_k, NA_real_),
       ez_z_k  =~dplyr::coalesce(sz_z_k / nm_z_k, NA_real_),
-      ez_s_k  =~dplyr::coalesce(sz_s_k / nm_s_k, NA_real_),
+      ez_s_k  =~dplyr::coalesce(sz_s_k / nm_s_k, NA_real_)
     ) %>%
     collect() %>%
     ungroup()
@@ -73,7 +73,7 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
       ez_r    =~dplyr::coalesce(sz_r / nm_r, NA_real_),
       ez_e_r  =~dplyr::coalesce(sz_e_r / nm_e_r, NA_real_),
       ez_z_r  =~dplyr::coalesce(sz_z_r / nm_z_r, NA_real_),
-      ez_s_r  =~dplyr::coalesce(sz_s_r / nm_s_r, NA_real_),
+      ez_s_r  =~dplyr::coalesce(sz_s_r / nm_s_r, NA_real_)
     ) %>%
     collect() %>%
     ungroup()

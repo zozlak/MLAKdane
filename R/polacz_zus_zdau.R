@@ -82,6 +82,10 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
     select_('-student', '-studzus', '-studopi')
 
   wynik = left_join(wynik, pnaPowiaty)
+  
+  stopifnot(
+    all(!is.na(wynik$powezar_teryt))
+  )
 
   class(wynik) = c('baza_df', class(wynik))
   return(wynik)

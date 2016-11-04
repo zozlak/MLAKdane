@@ -18,10 +18,13 @@ agreguj_do_okresu = function(dane, multidplyr = TRUE){
     group_by_('id_zdau') %>%
     summarize_(
       len  = ~dplyr::first(len),
+      ezpow     = ~dplyr::coalesce(mean(ezpow, na.rm = TRUE), NA_real_),
+      ezpow_e   = ~dplyr::coalesce(mean(ezpow_e, na.rm = TRUE), NA_real_),
       ezpow_e_n = ~dplyr::coalesce(mean(ezpow_e_n, na.rm = TRUE), NA_real_),
       ezpow_e_s = ~dplyr::coalesce(mean(ezpow_e_s, na.rm = TRUE), NA_real_),
       ezpow_n   = ~dplyr::coalesce(mean(ezpow_n, na.rm = TRUE), NA_real_),
       ezpow_s   = ~dplyr::coalesce(mean(ezpow_s, na.rm = TRUE), NA_real_),
+      ezpow_z   = ~dplyr::coalesce(mean(ezpow_z, na.rm = TRUE), NA_real_),
       ezpow_z_n = ~dplyr::coalesce(mean(ezpow_z_n, na.rm = TRUE), NA_real_),
       ezpow_z_s = ~dplyr::coalesce(mean(ezpow_z_s, na.rm = TRUE), NA_real_),
       nm_b    = ~sum(nm_b, na.rm = TRUE),
