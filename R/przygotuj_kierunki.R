@@ -10,7 +10,10 @@ przygotuj_kierunki = function(){
       jednostka_id = 'jednostka_prowadzaca_id',
       jednostka    = 'jednostka_prowadzaca'
     ) %>%
-    select_('uczelnia_id', 'jednostka_id', 'kierunek_id', 'kieruneknazwa')
+    select_(
+      'uczelnia_id', 'jednostka_id', 'kierunek_id', 'kieruneknazwa', 
+      'kierunek_nowa_nazwa', 'kierunek_nowy_kod', 'dziedzina_nowa_nazwa', 'dziedzina_nowy_kod', 'obszar_nowa_nazwa', 'obszar_nowy_kod'
+    )
 
   obszary = read.csv2('dane/sl_kierunki_obszary.csv', stringsAsFactors = FALSE)
   colnames(obszary) = tolower(colnames(obszary))

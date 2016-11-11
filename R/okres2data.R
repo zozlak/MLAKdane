@@ -3,6 +3,6 @@
 #' @return character data wyrażona jako łańcuch znaków (np. '2004-11')
 #' @export
 okres2data = function(okres){
-  tmp = okres %% 12
-  return(sprintf('%04d-%02d', floor(okres / 12) - ifelse(tmp == 0, 1, 0), ifelse(tmp == 0, 12, tmp)))
+  tmp = okres %% 12L
+  return(sprintf('%04d-%02d', floor(okres / 12L) - ifelse(tmp == 0L, 1L, 0L), ifelse(tmp == 0L, 12L, tmp)))
 }

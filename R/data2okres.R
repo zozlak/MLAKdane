@@ -8,5 +8,5 @@
 #' @return numeric liczba miesięcy jako ROK*12 + MIESIĄC
 #' @export
 data2okres = function(data){
-  return(as.numeric(sub('-.*$', '', data)) * 12 + as.numeric(sub('^[0-9]+-([0-9]+).*$', '\\1', data)))
+  return(as.integer(sub('-.*$', '', data)) * 12L + as.integer(sub('^[0-9]+-([0-9]+).*$', '\\1', data)))
 }

@@ -15,6 +15,7 @@ okienkaMax = c(0, 12, 24, 1000)
 okienkaSufiksy = c('_m1', '_p1', '_p2', '')
 okienkaIter = c(2, 4)
 plikZapisu = 'dane/nowe/nowe'
+probka = 0
 
 ##########
 # Przygotowujemy dane zus, statystyki z BDL przypisane do PNA, dane OPI (zbiór ZDAU), itp.
@@ -22,6 +23,10 @@ plikZapisu = 'dane/nowe/nowe'
 pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax)
 jednostki = przygotuj_jednostki()
 zdau = przygotuj_zdau() 
+if (probka > 0) {
+  zdau = zdau %>%
+    sample_n(probka)
+}
 zdauAbs = zdau %>%
   filter_(~typ %in% 'A') %>%
   select_('id_zdau')
@@ -116,7 +121,7 @@ save(wszystko, file = paste0(plikZapisu, '.RData'), compress = TRUE)
 # Zbiór danych miesięcznych
 okienkoMies = oblicz_okienko(miesieczne, -60, 60, dataMin, dataMax) %>%
   filter_(~okres >= okres_min & okres <= okres_max) %>%
-  select_('id_zdau', 'okres', 'if_st', 'if_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s') %>%
+  select_('id_zdau', 'okres', 'if_x_s', 'if_x_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s') %>%
   mutate_(okres = ~okres2data(okres))
   
 names(okienkoMies) = toupper(paste0(names(okienkoMies), '_M'))

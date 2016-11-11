@@ -61,25 +61,31 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
   wynik = wynik %>%
     left_join(stud) %>%
     mutate_(
-      etat     = ~ ifelse(is.na(etat), 0, etat),
-      netat    = ~ ifelse(is.na(netat), 0, netat),
-      samoz    = ~ ifelse(is.na(samoz), 0, samoz),
-      bezrob   = ~ ifelse(is.na(bezrob), 0, bezrob),
-      rentemer = ~ ifelse(is.na(rentemer), 0, rentemer),
-      studzus  = ~ ifelse(is.na(student), 0, student), # student wg zus
-      studopi  = ~ ifelse(is.na(studopi), 0, studopi), # student wg opi
-      if_st    = ~ as.numeric(studzus + studopi > 0), # student wg zus lub OPI
-      if_stprg = ~ as.numeric(if_st & okres >= data_rozp & (okres <= data_zak | is.na(data_zak))), # student na kierunku studiów id_zdau
-      prawnik  = ~ ifelse(is.na(prawnik), 0, prawnik),
-      mundur   = ~ ifelse(is.na(mundur), 0, mundur),
-      # zlec     = ~ ifelse(is.na(zlec), 0, zlec),
-      # nspraw   = ~ ifelse(is.na(nspraw), 0, nspraw),
+      etat     = ~ ifelse(is.na(etat), 0L, etat),
+      netat    = ~ ifelse(is.na(netat), 0L, netat),
+      samoz    = ~ ifelse(is.na(samoz), 0L, samoz),
+      bezrob   = ~ ifelse(is.na(bezrob), 0L, bezrob),
+      rentemer = ~ ifelse(is.na(rentemer), 0L, rentemer),
+      studzus  = ~ ifelse(is.na(student), 0L, student), # student wg zus
+      studopi  = ~ ifelse(is.na(studopi), 0L, studopi), # student wg opi
+      if_x_s     = ~ as.integer(studzus + studopi > 0L), # student wg zus lub OPI
+      if_x_stprg = ~ as.integer(if_x_s == 1L & okres >= data_rozp & (okres <= data_zak | is.na(data_zak))), # student na kierunku studiów id_zdau
+      prawnik  = ~ ifelse(is.na(prawnik), 0L, prawnik),
+      mundur   = ~ ifelse(is.na(mundur), 0L, mundur),
+      # zlec     = ~ ifelse(is.na(zlec), 0L, zlec),
+      # nspraw   = ~ ifelse(is.na(nspraw), 0L, nspraw),
       # rolnik   = ~ ifelse(is.na(rolnik), 0, rolnik),
-      dziecko  = ~ ifelse(is.na(dziecko), 0, dziecko),
-      podst    = ~ ifelse(is.na(podst), 0, podst),
+      dziecko  = ~ ifelse(is.na(dziecko), 0L, dziecko),
+      podst    = ~ ifelse(is.na(podst), 0L, podst),
       pna      = ~ ifelse(is.na(pna), -1, pna)
     ) %>%
-    select_('-student', '-studzus', '-studopi')
+    select_('-student', '-studzus', '-studopi') %>%
+    group_by_('id_zdau', 'id', 'okres') %>%
+    mutate_(
+      if_x_s     = ~ as.integer(any(if_x_s)), # student wg zus lub OPI
+      if_x_stprg = ~ as.integer(any(if_x_stprg)) # student na kierunku studiów id_zdau
+    ) %>%
+    ungroup()
 
   wynik = left_join(wynik, pnaPowiaty)
   

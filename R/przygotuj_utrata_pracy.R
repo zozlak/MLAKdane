@@ -50,7 +50,8 @@ przygotuj_utrata_pracy = function(zus, dataMax, multidplyr = TRUE){
     ) %>%
     select_('id', 'id_platnika', 'okres', 'utretatu', 'utretatu_v2', 'utrsamoz', 'utrzatr', 'utrpracy', 'utrprawnik', 'utrmundur') %>%
     filter_(~ utretatu + utrsamoz + utrzatr + utrpracy + utrprawnik + utrmundur > 0) %>%
-    collect()
+    collect() %>%
+    ungroup()
 
   class(wynik) = c('utrata_etatu_df', class(wynik))
   return(wynik)

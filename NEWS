@@ -1,3 +1,15 @@
+# 0.7.1 (2016-11-11)
+
+* dodane nowe zmienne
+* ujednolicenie nazw zmiennych opisujących studiowanie (sufiks "_st" implikuje
+  bycie stała, dla zmiennych okienkowych przy dowolnej kategorii zatrudnienia
+  sufiks "_x_s")
+* korekta wyliczania zmiennych "if_x_s" oraz "if_x_strprg" (dawniej "if_st" i
+  "if_stprg"), które muszą być wyliczane na poziomie {id, okres}, a nie, jak do
+  tej pory {id, okres, pracodawca, tytuł ubezpieczenia}
+* zmiana rodzaju dużej ilości zmiennych z numeric na integer (co powinno dać 
+  kilka procent szybsze obliczenia)
+
 # 0.7.0 (2016-10-28)
 
 * wyliczanie zmiennych przepisane tak, aby większość zmiennych przeliczana była
@@ -6,7 +18,8 @@
 
 # 0.6.0 (2016-09-16)
 
-* dodane wyliczanie zmiennych miesięcznych (funkcja oblicz_zmienne_miesieczne())
+* dodane wyliczanie zmiennych miesięcznych 
+  (funkcja oblicz_zmienne_miesieczne())
 * dodane wyliczanie zmiennych na poziomie osoby (funkcja oblicz_osoba())
 
 # 0.5.1 (2016-06-22)

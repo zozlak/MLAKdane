@@ -13,7 +13,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%
     rename_(id_tytulu = 'KOD') %>%
-    mutate_each(funs_('as.numeric'))
+    mutate_each(funs_('as.integer'))
   colnames(zus_tytuly_ubezp) = tolower(colnames(zus_tytuly_ubezp))
 
   pna = przygotuj_pna() %>%
@@ -25,7 +25,11 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   zdu1 = read.csv2('dane/ZDU1.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)[, c(1, 5:8)]
   colnames(zdu1) = c('id', 'rok_ur', 'plec', 'koniec_r', 'koniec_m')
   zdu1 = zdu1 %>%
-    mutate_(koniec = ~ as.numeric(koniec_r) * 12 + as.numeric(koniec_m)) %>%
+    mutate_(
+      id = ~as.integer(id),
+      rok_ur = ~as.integer(rok_ur),
+      koniec = ~as.integer(koniec_r) * 12L + as.integer(koniec_m)
+    ) %>%
     select_('-koniec_r', '-koniec_m')
 
   # dane adresowe w poszczególnych okresach
@@ -33,8 +37,9 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   colnames(zdu2) = c('id', 'data_od', 'data_do', 'pna_mel', 'pna_zam', 'pna_kor', 'zm_mel', 'zm_zam', 'zm_kor')
   zdu2 = zdu2 %>%
     mutate_(
-      data_od = ~ as.Date(data_od),
-      data_do = ~ as.Date(ifelse(data_do == '', dataMax, data_do))
+      id = ~as.integer(id),
+      data_od = ~as.Date(data_od),
+      data_do = ~as.Date(ifelse(data_do == '', dataMax, data_do))
     )
   zdu2$data_do[zdu2$data_do > Sys.Date()] = Sys.Date()
   zdu2 = bind_rows(
@@ -59,7 +64,11 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   colnames(zdu3) = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
   zdu3 = zdu3 %>%
     filter_(~ okres >= substr(dataMin, 1, 7) & okres <= substr(dataMax, 1, 7)) %>%
-    mutate_(id_zdu3 = ~ row_number())
+    mutate_(
+      id = ~as.integer(id),
+      id_platnika = ~as.integer(id_platnika),
+      id_zdu3 = ~row_number()
+    )
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
   # zdu3 %>% group_by(id, id_platnika, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
   # zdu3 %>% group_by(id, id_platnika, okres, id_tytulu) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
@@ -71,9 +80,9 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     zdu3 %>% select_('id_zdu3', 'podst_em') %>% rename_(podst = 'podst_em') %>% mutate_(podst_typ = '"emerytalne"'),
     zdu3 %>% select_('id_zdu3', 'podst_zdr') %>% rename_(podst = 'podst_zdr') %>% mutate_(podst_typ = '"zdrowotne"')
   )
-  if(multidplyr){
+  if (multidplyr) {
     zdu3 = multidplyr::partition(zdu3, id_zdu3)
-  }else{
+  } else {
     zdu3 = group_by_(zdu3, 'id_zdu3')
   }
   zdu3 = zdu3 %>%
@@ -88,10 +97,11 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   colnames(zdu4) = c('id_platnika', 'pkd', 'platnik_koniec_r', 'platnik_koniec_m')
   zdu4 = zdu4 %>%
     mutate_(
-      platnik_kon = ~ sprintf('%04d-%02d', platnik_koniec_r, platnik_koniec_m)
+      id_platnika = ~as.integer(id_platnika),
+      platnik_kon = ~sprintf('%04d-%02d', platnik_koniec_r, platnik_koniec_m)
     ) %>%
     mutate_(
-      platnik_kon = ~ ifelse(platnik_kon > dataMax, NA, platnik_kon)
+      platnik_kon = ~ifelse(platnik_kon > dataMax, NA, platnik_kon)
     )
 
   zus = zdu3 %>%
@@ -125,7 +135,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
       okres       = ~ data2okres(okres),
       platnik_kon = ~ data2okres(platnik_kon),
       rok         = ~ okres2rok(okres),
-      id_platnika = ~ ifelse(samoz > 0, -1 , id_platnika) # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
+      id_platnika = ~ ifelse(samoz > 0L, -1L , id_platnika) # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
     ) %>%
     left_join(pna) %>%
     mutate_(
