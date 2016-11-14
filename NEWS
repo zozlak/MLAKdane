@@ -1,3 +1,8 @@
+# 0.7.2 (2016-11-14)
+
+* wyznaczając zmienną if_x_s bierzemy pod uwagę składkę za bycie bezrobotnym
+  (jeśli jest bezrobotny, to nie może być w danym okresie studentem)
+
 # 0.7.1 (2016-11-11)
 
 * dodane nowe zmienne
