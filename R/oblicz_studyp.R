@@ -5,7 +5,7 @@
 #' @import dplyr
 oblicz_studyp = function(dane){
   stopifnot(
-    is(dane, 'zdau_df')
+    methods::is(dane, 'zdau_df')
   )
 
   skalaRelKier = function(ucz1, ucz2, jedn1, jedn2, forma2){
@@ -18,14 +18,14 @@ oblicz_studyp = function(dane){
 
   kont = dane %>%
     filter_(~poziom %in% 1 & typ %in% 'A') %>%
-    select_('id_zdau', 'id', 'uczelnia_id', 'jednostka_id', 'data_rozp', 'data_zak') %>%
+    select_('id_zdau', 'id', 'uczelnia_id', 'jednostka_id', 'data_od', 'data_do') %>%
     left_join(
       dane %>%
         filter_(~poziom %in% 2) %>%
-        select_('id', 'uczelnia_id', 'jednostka_id', 'forma', 'data_rozp', 'data_zak') %>%
-        rename_(uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma', data_rozp_ = 'data_rozp', data_zak_ = 'data_zak')
+        select_('id', 'uczelnia_id', 'jednostka_id', 'forma', 'data_od', 'data_do') %>%
+        rename_(uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma', data_od_ = 'data_od', data_do_ = 'data_do')
     ) %>%
-    filter_(~data_rozp_ >= data_zak) %>%
+    filter_(~data_od_ >= data_do) %>%
     group_by_('id_zdau') %>%
     summarize_(
       kont = ~min(skalaRelKier(uczelnia_id, uczelnia_id_, jednostka_id, jednostka_id_, forma_))
@@ -34,14 +34,14 @@ oblicz_studyp = function(dane){
 
   polaczone = dane %>%
     filter_(~typ == 'A') %>%
-    select_('id_zdau', 'id', 'data_rozp', 'data_zak', 'uczelnia_id', 'jednostka_id') %>%
+    select_('id_zdau', 'id', 'data_od', 'data_do', 'uczelnia_id', 'jednostka_id') %>%
     left_join(
       dane %>%
         filter_(~typ == 'S') %>%
-        select_('id', 'id_zdau', 'data_rozp', 'data_zak', 'uczelnia_id', 'jednostka_id', 'forma', 'poziom') %>%
-        rename_(id_zdau_ = 'id_zdau', data_rozp_ = 'data_rozp', data_zak_ = 'data_zak', uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma', poziom_ = 'poziom')
+        select_('id', 'id_zdau', 'data_od', 'data_do', 'uczelnia_id', 'jednostka_id', 'forma', 'poziom') %>%
+        rename_(id_zdau_ = 'id_zdau', data_od_ = 'data_od', data_do_ = 'data_do', uczelnia_id_ = 'uczelnia_id', jednostka_id_ = 'jednostka_id', forma_ = 'forma', poziom_ = 'poziom')
     ) %>%
-    filter_(~data_rozp_ <= data_zak, ~ is.na(data_zak_) | data_zak_ > data_zak, ~ !is.na(id_zdau_), ~ id_zdau != id_zdau_)
+    filter_(~data_od_ <= data_do, ~ is.na(data_do_) | data_do_ > data_do, ~ !is.na(id_zdau_), ~ id_zdau != id_zdau_)
 
   studyp = polaczone %>%
     group_by_('id_zdau') %>%

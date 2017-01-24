@@ -9,6 +9,9 @@ oblicz_zmienne_pochodne(dane, multidplyr = TRUE)
 \arguments{
 \item{dane}{ramki danych wygenerowane wewnątrz pomocą funkcji
 \code{\link{agreguj_do_miesiecy}} lub \code{\link{agreguj_do_okresu}}}
+
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
+multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

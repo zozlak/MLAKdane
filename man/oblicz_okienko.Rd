@@ -4,19 +4,17 @@
 \alias{oblicz_okienko}
 \title{ustawia zmienne okienka czasowego (okres_min, okres_max, len)}
 \usage{
-oblicz_okienko(dane, okienkoMin, okienkoMax, dataMin, dataMax)
+oblicz_okienko(dane, okienko, filtrZdau = NULL)
 }
 \arguments{
-\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
-lub \code{\link{przygotuj_zdau}}}
+\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}},
+lub \code{\link{agreguj_do_miesiecy}}}
 
-\item{okienkoMin}{pierwszy miesiąc okienka względem daty uzyskania dyplomu}
+\item{okienko}{obiekt opisujący okienko stworzony za pomocą funkcji
+\code{\link{okienko}}}
 
-\item{okienkoMax}{ostatni miesiąc okienka względem daty uzyskania dyplomu}
-
-\item{dataMin}{początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')}
-
-\item{dataMax}{koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')}
+\item{filtrZdau}{ramka danych zawierająca zmienną \code{id_zdau} ograniczająca
+obserwacje, które mają się znaleźć w okienku}
 }
 \value{
 data.frame wyliczone zmienne

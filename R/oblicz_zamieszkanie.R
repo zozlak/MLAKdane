@@ -11,7 +11,7 @@
 #' @import dplyr
 oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE){
   stopifnot(
-    is(dane, 'okienko_df') & is(dane, 'baza_df')
+    methods::is(dane, 'okienko_df') & methods::is(dane, 'baza_df')
   )
 
   jednostki = jednostki %>%
@@ -23,7 +23,7 @@ oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE)
     select_('-teryt')
 
   dane = dane %>%
-    filter_(~okres == ifelse(rep(wMomDyplomu, nrow(dane)), data_zak, okres_max)) %>%
+    filter_(~okres == ifelse(rep(wMomDyplomu, nrow(dane)), data_do, okres_max)) %>%
     left_join(jednostki) %>%
     mutate_(
       jpdzam = ~ifelse(

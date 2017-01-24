@@ -7,7 +7,7 @@
 oblicz_stale_czasowe(dane, data_badania)
 }
 \arguments{
-\item{dane}{ramka danych ZDAU (lub pochodna)}
+\item{dane}{ramka danych ZDAU zwrócona przez funkcję \code{\link{przygotuj_zdau}}}
 
 \item{data_badania}{data konca badanego okresu}
 }

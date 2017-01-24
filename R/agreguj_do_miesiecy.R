@@ -1,14 +1,16 @@
-#' @title agreguje dane do poziomu {id, id_zdau, okres}
+#' agreguje dane do poziomu {id, id_zdau, okres}
+#' @description Agreguje dane do poziomu {id, id_zdau, okres}
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
 #' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
+#'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
 agreguj_do_miesiecy = function(dane, zdau, multidplyr = TRUE){
   stopifnot(
-    is(dane, 'baza_df'),
-    is(zdau, 'zdau_df')
+    methods::is(dane, 'baza_df'),
+    methods::is(zdau, 'zdau_df')
   )
 
   if (multidplyr) {

@@ -9,8 +9,10 @@
 #' @import dplyr
 polacz_pna_powiaty = function(pna, powiaty, dataMin, dataMax){
   stopifnot(
-    is(pna, 'pna_df'),
-    is(powiaty, 'powiaty_df')
+    methods::is(pna, 'pna_df'),
+    methods::is(powiaty, 'powiaty_df'),
+    pna %>% group_by_('pna5', 'rok') %>% summarize_(n = ~n()) %>% filter_(~n > 1) %>% nrow() == 0,
+    powiaty %>% group_by_('okres', 'teryt') %>% summarize_(n = ~n()) %>% filter_(~n > 1) %>% nrow() == 0
   )
 
   pna = pna %>%

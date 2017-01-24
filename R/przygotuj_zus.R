@@ -2,6 +2,7 @@
 #' @description
 #' Do danych o składkach dołączane są dane o miejscu zamieszkania, płatniku,
 #' tytułach ubezpieczeń, itp.
+#' @param katZr katalog, w którym znajduje się plik ZDUx.csv
 #' @param dataMin pierwszy uwzględniany okres składkowy
 #' @param dataMax ostatni uwzględniany okres składkowy
 #' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
@@ -9,7 +10,7 @@
 #' @export
 #' @import dplyr
 #' @import readr
-przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
+przygotuj_zus = function(katZr, dataMin, dataMax, multidplyr = TRUE){
   zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%
     rename_(id_tytulu = 'KOD') %>%
@@ -22,7 +23,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     mutate_(popr_pna = TRUE)
 
   # dane ewidencyjne osoby
-  zdu1 = read.csv2('dane/ZDU1.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)[, c(1, 5:8)]
+  zdu1 = utils::read.csv2(paste0(katZr, '/ZDU1.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)[, c(1, 5:8)]
   colnames(zdu1) = c('id', 'rok_ur', 'plec', 'koniec_r', 'koniec_m')
   zdu1 = zdu1 %>%
     mutate_(
@@ -33,7 +34,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     select_('-koniec_r', '-koniec_m')
 
   # dane adresowe w poszczególnych okresach
-  zdu2 = read.csv2('dane/ZDU2.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
+  zdu2 = utils::read.csv2(paste0(katZr, '/ZDU2.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
   colnames(zdu2) = c('id', 'data_od', 'data_do', 'pna_mel', 'pna_zam', 'pna_kor', 'zm_mel', 'zm_zam', 'zm_kor')
   zdu2 = zdu2 %>%
     mutate_(
@@ -60,7 +61,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
     collect()
 
   # dane z rozliczeń
-  zdu3 = read.csv2('dane/ZDU3.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
+  zdu3 = utils::read.csv2(paste0(katZr, '/ZDU3.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
   colnames(zdu3) = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
   zdu3 = zdu3 %>%
     filter_(~ okres >= substr(dataMin, 1, 7) & okres <= substr(dataMax, 1, 7)) %>%
@@ -93,7 +94,7 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n())
 
   # dane płatników
-  zdu4 = read.csv2('dane/ZDU4.csv', header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
+  zdu4 = utils::read.csv2(paste0(katZr, '/ZDU4.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
   colnames(zdu4) = c('id_platnika', 'pkd', 'platnik_koniec_r', 'platnik_koniec_m')
   zdu4 = zdu4 %>%
     mutate_(
@@ -107,9 +108,9 @@ przygotuj_zus = function(dataMin, dataMax, multidplyr = TRUE){
   zus = zdu3 %>%
     left_join(zdu2) %>%
     arrange_('data_od')
-  if(multidplyr){
+  if (multidplyr) {
     zus = multidplyr::partition(zus, id_zdu3)
-  }else{
+  } else {
     zus = group_by_('id_zdu3')
   }
   zus = zus %>%

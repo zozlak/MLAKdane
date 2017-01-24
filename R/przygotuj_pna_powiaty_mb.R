@@ -6,7 +6,7 @@
 #' @export
 #' @import dplyr
 przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
-  dane = read.csv2('dane/pna_powiaty_mb.csv', stringsAsFactors = FALSE) %>%
+  dane = utils::read.csv2('dane/pna_powiaty_mb.csv', stringsAsFactors = FALSE) %>%
     mutate_(
       teryt = ~ teryt * 100,
       pna5 = ~ sub('#', '-', pna5)
@@ -31,7 +31,7 @@ przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
   dane$rok = 2000 + (dane$okres %% 100)
   dane$okres = data2okres(paste0(2000 + (dane$okres %% 100), '-', floor(dane$okres / 100)))
   dane = dane %>%
-    filter_(~ okres <= data2okres('2015-10'))
+    filter_(~ okres <= data2okres(dataMax))
 
   # wartości unikalne dla powiatów
   stopifnot(
@@ -58,8 +58,9 @@ przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
   powiaty = full_join(powezar, powpbezd) %>%
     select_('okres', 'powpbezd', 'powezar', 'teryt', 'rok')
   powiaty = suppressWarnings(przygotuj_powiaty()) %>%
-    filter_(~ teryt %% 10000 == 0 & teryt > 0) %>%
+    filter_(~teryt %% 10000 == 0 & teryt > 0 & okres >= data2okres(dataMin) & okres <= data2okres(dataMax)) %>%
     bind_rows(powiaty)
+
   class(powiaty) = c('powiaty_df', class(powiaty))
 
   return(polacz_pna_powiaty(pna, powiaty, dataMin, dataMax))

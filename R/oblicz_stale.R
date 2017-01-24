@@ -1,18 +1,18 @@
 #' oblicza proste zmienne niezwiazane z okienkami czasu
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
-#' @param dane dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
+#' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
 #' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
 oblicz_stale = function(dane, zdau, multidplyr = TRUE){
   stopifnot(
-    is(dane, 'baza_df'),
-    is(zdau, 'zdau_df')
+    methods::is(dane, 'baza_df'),
+    methods::is(zdau, 'zdau_df')
   )
 
   dane = zdau %>%
-    select_('id_zdau', 'data_rozp') %>%
+    select_('id_zdau', 'data_od') %>%
     inner_join(dane)
 
   if (multidplyr) {
@@ -30,11 +30,11 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
 
   # w trakcie studiów
   w2 = dane %>%
-    select_('id_zdau', 'okres', 'data_rozp', 'data_zak', 'etat', 'netat', 'samoz', 'podst') %>%
-    filter_(~okres >= data_rozp & okres <= data_zak) %>%
+    select_('id_zdau', 'okres', 'data_od', 'data_do', 'etat', 'netat', 'samoz', 'podst') %>%
+    filter_(~okres >= data_od & okres <= data_do) %>%
     group_by_('id_zdau') %>%
     summarize_(
-      nm_k   = ~first(data_zak) - first(data_rozp) + 1,
+      nm_k   = ~first(data_do) - first(data_od) + 1,
       nm_e_k = ~length(unique(okres[etat > 0])),
       nm_z_k = ~length(unique(okres[etat + netat > 0])),
       nm_s_k = ~length(unique(okres[samoz > 0])),
@@ -45,18 +45,18 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
     ) %>%
     mutate_(
       if_es_k = ~as.integer(nm_e_k + nm_s_k > 0),
-      ez_k    =~dplyr::coalesce(sz_k / nm_k, NA_real_),
-      ez_e_k  =~dplyr::coalesce(sz_e_k / nm_e_k, NA_real_),
-      ez_z_k  =~dplyr::coalesce(sz_z_k / nm_z_k, NA_real_),
-      ez_s_k  =~dplyr::coalesce(sz_s_k / nm_s_k, NA_real_)
+      ez_k    = ~dplyr::coalesce(sz_k / nm_k, NA_real_),
+      ez_e_k  = ~dplyr::coalesce(sz_e_k / nm_e_k, NA_real_),
+      ez_z_k  = ~dplyr::coalesce(sz_z_k / nm_z_k, NA_real_),
+      ez_s_k  = ~dplyr::coalesce(sz_s_k / nm_s_k, NA_real_)
     ) %>%
     collect() %>%
     ungroup()
 
   # przed studiami
   w3 = dane %>%
-    select_('id_zdau', 'okres', 'data_rozp', 'data_zak', 'etat', 'netat', 'samoz', 'podst') %>%
-    filter_(~ okres < data_rozp) %>%
+    select_('id_zdau', 'okres', 'data_od', 'data_do', 'etat', 'netat', 'samoz', 'podst') %>%
+    filter_(~ okres < data_od) %>%
     group_by_('id_zdau') %>%
     summarize_(
       nm_r   = ~length(unique(okres)),
@@ -70,10 +70,10 @@ oblicz_stale = function(dane, zdau, multidplyr = TRUE){
     ) %>%
     mutate_(
       if_es_r = ~as.integer(nm_e_r + nm_s_r > 0),
-      ez_r    =~dplyr::coalesce(sz_r / nm_r, NA_real_),
-      ez_e_r  =~dplyr::coalesce(sz_e_r / nm_e_r, NA_real_),
-      ez_z_r  =~dplyr::coalesce(sz_z_r / nm_z_r, NA_real_),
-      ez_s_r  =~dplyr::coalesce(sz_s_r / nm_s_r, NA_real_)
+      ez_r    = ~dplyr::coalesce(sz_r / nm_r, NA_real_),
+      ez_e_r  = ~dplyr::coalesce(sz_e_r / nm_e_r, NA_real_),
+      ez_z_r  = ~dplyr::coalesce(sz_z_r / nm_z_r, NA_real_),
+      ez_s_r  = ~dplyr::coalesce(sz_s_r / nm_s_r, NA_real_)
     ) %>%
     collect() %>%
     ungroup()

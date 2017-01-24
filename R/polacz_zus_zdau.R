@@ -21,8 +21,9 @@
 #' @import dplyr
 polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
   stopifnot(
-    is(zus, 'zus_df'),
-    is(zdau, 'zdau_df')
+    methods::is(zus, 'zus_df'),
+    methods::is(zdau, 'zdau_df'),
+    methods::is(pnaPowiaty, 'pna_powiaty_df')
   )
 
   okresy = data2okres(dataMin):data2okres(dataMax)
@@ -31,8 +32,8 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
   wynik = data.frame(
     id_zdau      = rep(absolw$id_zdau,      each = length(okresy)),
     id           = rep(absolw$id,           each = length(okresy)),
-    data_rozp    = rep(absolw$data_rozp,    each = length(okresy)),
-    data_zak     = rep(absolw$data_zak,     each = length(okresy)),
+    data_od      = rep(absolw$data_od,      each = length(okresy)),
+    data_do      = rep(absolw$data_do,      each = length(okresy)),
     jednostka_id = rep(absolw$jednostka_id, each = length(okresy)),
     okres        = rep(okresy,              times = nrow(absolw))
   )
@@ -46,14 +47,14 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
         select_('id', 'koniec') %>%
         distinct()
     ) %>%
-    filter_(~ (okres < koniec & data_zak <= koniec) | is.na(koniec))
+    filter_(~ (okres < koniec & data_do <= koniec) | is.na(koniec))
 
   stud = zdau %>%
-    select_('id', 'data_rozp', 'data_zak') %>%
+    select_('id', 'data_od', 'data_do') %>%
     left_join(
       wynik %>% select_('id', 'okres')
     ) %>%
-    filter_(~ okres >= data_rozp & ((is.na(data_zak) | okres <= data_zak))) %>%
+    filter_(~ okres >= data_od & ((is.na(data_do) | okres <= data_do))) %>%
     select_('id', 'okres') %>%
     distinct() %>%
     mutate_(studopi = 1)
@@ -70,7 +71,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
       studopi  = ~ifelse(is.na(studopi), 0L, studopi), # student wg opi
       if_b       = ~as.integer(bezrob > 0L), # niezbędne, aby poprawnie policzyć if_x_s zagregowane do miesięcy
       if_x_s     = ~as.integer(studzus + studopi > 0L), # student wg zus lub OPI
-      if_x_stprg = ~as.integer(if_x_s == 1L & okres >= data_rozp & (okres <= data_zak | is.na(data_zak))), # student na kierunku studiów id_zdau
+      if_x_stprg = ~as.integer(if_x_s == 1L & okres >= data_od & (okres <= data_do | is.na(data_do))), # student na kierunku studiów id_zdau
       prawnik  = ~ifelse(is.na(prawnik), 0L, prawnik),
       mundur   = ~ifelse(is.na(mundur), 0L, mundur),
       # zlec     = ~ifelse(is.na(zlec), 0L, zlec),
@@ -91,7 +92,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
     ungroup()
 
   wynik = left_join(wynik, pnaPowiaty)
-  
+
   stopifnot(
     all(!is.na(wynik$powezar_teryt))
   )

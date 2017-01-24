@@ -14,7 +14,7 @@ oblicz_pracodawcy(dane, multidplyr = TRUE)
 \value{
 data.frame wyliczone zmienne
 }
-\details{
+\description{
 Zmienne opisujące pracodawców wymagają danych źródłowych na poziomie nie
 wyższym niż {osoba x płatnik x okres}, przez co nie mogą być liczone z danych
 zagregowanych do poziomu miesięcy w funkcji \code{\link{agreguj_do_okresu}} i

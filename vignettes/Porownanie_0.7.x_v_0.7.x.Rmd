@@ -8,11 +8,11 @@ output: html_document
 library(dplyr)
 library(MLAK)
 devtools::load_all(".")
-wszystkoS = wczytajDane('../dane/stare/2016-09_0.7.0.RData')
-miesieczneS = wczytajDane('../dane/stare/2016-09_0.7.0_mies.RData')
+wszystkoS = wczytajDane('../dane/archiwum/2016-09_0.7.1.RData')
+miesieczneS = wczytajDane('../dane/archiwum/2016-09_0.7.1_mies.RData')
 miesieczneS = miesieczneS %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% semi_join(wszystkoS %>% select(ID_ZDAU))
-wszystko = wczytajDane('../dane/stare/2016-09_0.7.1.RData')
-miesieczne = wczytajDane('../dane/stare/2016-09_0.7.1_mies.RData')
+wszystko = wczytajDane('../dane/ZUS_2015-09/2014_dane.RData')
+miesieczne = wczytajDane('../dane/ZUS_2015-09/2014_dane_mies.RData')
 miesieczne = miesieczne %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% semi_join(wszystko %>% select(ID_ZDAU))
 ```
 ## agreguj_do_miesiecy->agreguj_do_okresu

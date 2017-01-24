@@ -4,9 +4,16 @@
 \alias{przygotuj_zdau}
 \title{Przygotowuje plik ZDAU}
 \usage{
-przygotuj_zdau()
+przygotuj_zdau(katZr, probka = 1)
+}
+\arguments{
+\item{katZr}{katalog, w którym znajduje się plik ZDAU.csv}
+
+\item{probka}{jaki odsetek rekordów ze zbioru zachować (w wypadku wartości
+mniejszych od 1 zadany odsetek wybierany jest losowo)}
 }
 \description{
-ZDAU to plik z uczelni, w którym jednostką jest student na kierunku studiów
+ZDAU to plik z uczelni, w którym jednostką jest student na
+kierunku studiów.
 }
 

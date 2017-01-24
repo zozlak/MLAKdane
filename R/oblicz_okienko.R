@@ -1,31 +1,44 @@
 #' ustawia zmienne okienka czasowego (okres_min, okres_max, len)
-#' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
-#'   lub \code{\link{przygotuj_zdau}}
-#' @param okienkoMin pierwszy miesiąc okienka względem daty uzyskania dyplomu
-#' @param okienkoMax ostatni miesiąc okienka względem daty uzyskania dyplomu
-#' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')
-#' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}},
+#'   lub \code{\link{agreguj_do_miesiecy}}
+#' @param okienko obiekt opisujący okienko stworzony za pomocą funkcji
+#'   \code{\link{okienko}}
+#' @param filtrZdau ramka danych zawierająca zmienną \code{id_zdau} ograniczająca
+#'   obserwacje, które mają się znaleźć w okienku
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_okienko = function(dane, okienkoMin, okienkoMax, dataMin, dataMax){
+oblicz_okienko = function(dane, okienko, filtrZdau = NULL){
   stopifnot(
-    is(dane, 'miesieczne_df') | is(dane, 'baza_df'),
-    is.vector(okienkoMin), is.numeric(okienkoMin), length(okienkoMin) == 1, all(!is.na(okienkoMin)),
-    is.vector(okienkoMax), is.numeric(okienkoMax), length(okienkoMax) == 1, all(!is.na(okienkoMax)),
-    is.vector(dataMin), is.character(dataMin), length(dataMin) == 1, all(!is.na(dataMin)),
-    is.vector(dataMax), is.character(dataMax), length(dataMax) == 1, all(!is.na(dataMax))
+    methods::is(dane, 'miesieczne_df') | methods::is(dane, 'baza_df'),
+    methods::is(okienko, 'okienko'),
+    is.null(filtrZdau) | is.data.frame(filtrZdau) & 'id_zdau' %in% colnames(filtrZdau)
   )
   klasy = class(dane)
 
+  if (!is.null(filtrZdau)) {
+    dane = dane %>%
+      inner_join(
+        filtrZdau %>%
+          select_('id_zdau') %>%
+          distinct()
+      )
+  }
+
+  dataMin = data2okres(okienko[['dataMin']])
+  dataMax = data2okres(okienko[['dataMax']])
+
   dane = dane %>%
     mutate_(
-      okres_min = ~data_zak + okienkoMin,
-      okres_max = ~ifelse(data_zak + okienkoMax >= koniec & !is.na(koniec), koniec - 1, data_zak + okienkoMax)
+      okres_min = paste(okienko[['zmiennaMin']], '+', okienko[['offsetMin']]),
+      okres_max = paste(okienko[['zmiennaMax']], '+', okienko[['offsetMax']])
     ) %>%
     mutate_(
-      okres_min  = ~ifelse(okres_min < data2okres(dataMin), data2okres(dataMin), okres_min),
-      okres_max  = ~ifelse(okres_max > data2okres(dataMax), data2okres(dataMax), okres_max),
+      okres_max = ~ifelse(okres_max >= koniec & !is.na(koniec), koniec - 1, okres_max)
+    ) %>%
+    mutate_(
+      okres_min  = ~ifelse(okres_min < dataMin, dataMin, okres_min),
+      okres_max  = ~ifelse(okres_max > dataMax, dataMax, okres_max),
       len        = ~okres_max - okres_min + 1
     ) %>%
     filter_(~len > 0)

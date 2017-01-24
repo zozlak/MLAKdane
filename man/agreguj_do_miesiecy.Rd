@@ -11,9 +11,13 @@ agreguj_do_miesiecy(dane, zdau, multidplyr = TRUE)
 
 \item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
 
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
+multidplyr}
 }
 \value{
 data.frame wyliczone zmienne
+}
+\description{
+Agreguje dane do poziomu {id, id_zdau, okres}
 }
 

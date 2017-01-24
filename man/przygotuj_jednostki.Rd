@@ -2,14 +2,19 @@
 % Please edit documentation in R/przygotuj_jednostki.R
 \name{przygotuj_jednostki}
 \alias{przygotuj_jednostki}
-\title{Przygotowuje słownik jednostek}
+\title{Przygotowuje słownik uczelni}
 \usage{
-przygotuj_jednostki(rok = NA)
+przygotuj_jednostki(katZr, rok)
 }
 \arguments{
+\item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
+
 \item{rok}{rok, który zostanie przypisany jednostkom (gdy NA, obecny rok)}
 }
+\value{
+[data.frame] ramka danych opisująca uczelnie
+}
 \description{
-Przygotowuje słownik jednostek
+Zwraca słownik uczelni
 }
 

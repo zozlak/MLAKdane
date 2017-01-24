@@ -1,6 +1,8 @@
 #' oblicza zmienne wywodzone z już wcześniej policzonych
 #' @param dane ramki danych wygenerowane wewnątrz pomocą funkcji
 #'   \code{\link{agreguj_do_miesiecy}} lub \code{\link{agreguj_do_okresu}}
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
+#'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @import dplyr
 oblicz_zmienne_pochodne = function(dane, multidplyr = TRUE){

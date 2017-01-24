@@ -1,12 +1,14 @@
-#' @title agreguje dane do poziomu {id, id_zdau}
+#' agreguje dane do poziomu {id, id_zdau}
+#' @description Agreguje dane do poziomu {id, id_zdau}
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
+#'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
 agreguj_do_okresu = function(dane, multidplyr = TRUE){
   stopifnot(
-    is(dane, 'okienko_df') & is(dane, 'miesieczne_df')
+    methods::is(dane, 'okienko_df') & methods::is(dane, 'miesieczne_df')
   )
 
   if (multidplyr) {

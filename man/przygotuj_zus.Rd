@@ -4,9 +4,11 @@
 \alias{przygotuj_zus}
 \title{Przygotowuje dane z ZUS}
 \usage{
-przygotuj_zus(dataMin, dataMax, multidplyr = TRUE)
+przygotuj_zus(katZr, dataMin, dataMax, multidplyr = TRUE)
 }
 \arguments{
+\item{katZr}{katalog, w którym znajduje się plik ZDUx.csv}
+
 \item{dataMin}{pierwszy uwzględniany okres składkowy}
 
 \item{dataMax}{ostatni uwzględniany okres składkowy}

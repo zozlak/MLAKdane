@@ -2,24 +2,24 @@
 #' @param okienko dane wygenerowane za pomocą funkcji
 #'   \code{\link{oblicz_okienko}} na danych miesięcznych (tzn. danych
 #'   wygenerowanych wcześniej funkcją \code{\link{agreguj_do_miesiecy}})
-#' @param utrataEtatu dane wygenerowane za pomocą funkcji
-#'   \code{\link{oblicz_utrata_etatu}}
+#' @param utrataPracy dane wygenerowane za pomocą funkcji
+#'   \code{\link{przygotuj_utrata_pracy}}
 #' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
 #'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_utrata_etatu = function(okienko, utrataEtatu, multidplyr = TRUE){
+oblicz_utrata_etatu = function(okienko, utrataPracy, multidplyr = TRUE){
   stopifnot(
-    is(okienko, 'okienko_df') & is(okienko, 'miesieczne_df'),
-    is(utrataEtatu, 'utrata_etatu_df')
+    methods::is(okienko, 'okienko_df') & methods::is(okienko, 'miesieczne_df'),
+    methods::is(utrataPracy, 'utrata_pracy_df')
   )
 
   up = okienko %>%
     filter_(~okres >= okres_min & okres <= okres_max) %>%
     select_('id_zdau', 'id', 'okres', 'nm_e', 'nm_e_n', 'nm_e_s', 'if_x_s', 'len') %>%
     distinct() %>%
-    left_join(utrataEtatu)
+    left_join(utrataPracy)
   if (multidplyr) {
     up = multidplyr::partition(up, id_zdau)
   } else {

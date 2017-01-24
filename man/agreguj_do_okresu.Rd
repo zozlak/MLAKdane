@@ -9,9 +9,13 @@ agreguj_do_okresu(dane, multidplyr = TRUE)
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
 
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
+\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
+multidplyr}
 }
 \value{
 data.frame wyliczone zmienne
+}
+\description{
+Agreguje dane do poziomu {id, id_zdau}
 }
 

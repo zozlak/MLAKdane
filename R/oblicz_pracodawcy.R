@@ -1,5 +1,5 @@
 #' @title oblicza zmienne związane z liczbą pracodawców
-#' @details
+#' @description
 #' Zmienne opisujące pracodawców wymagają danych źródłowych na poziomie nie
 #' wyższym niż {osoba x płatnik x okres}, przez co nie mogą być liczone z danych
 #' zagregowanych do poziomu miesięcy w funkcji \code{\link{agreguj_do_okresu}} i
@@ -11,7 +11,7 @@
 #' @import dplyr
 oblicz_pracodawcy = function(dane, multidplyr = TRUE){
   stopifnot(
-    is(dane, 'okienko_df') & is(dane, 'baza_df')
+    methods::is(dane, 'okienko_df') & methods::is(dane, 'baza_df')
   )
 
   if (multidplyr) {

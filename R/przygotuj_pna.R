@@ -5,14 +5,14 @@ przygotuj_pna = function(){
   # zbiór zebrany z bazy ZPD:
   # SELECT rok, id_wojewodztwa * 100 + id_gminy AS teryt, p.nazwa AS powiat, w.nazwa AS wojewodztwo, id_wojewodztwa * 100 + id_gminy IN (261, 262, 264, 265, 461, 462, 463, 464, 661, 662, 663, 664, 861, 862, 1061, 1062, 1063, 1261, 1262, 1263, 1461, 1462, 1463, 1464, 1465, 1661, 1861, 1862, 1863, 1864, 2061, 2062, 2063, 2261, 2262, 2263, 2264, 2461, 2462, 2463, 2464, 2465, 2466, 2467, 2468, 2469, 2470, 2471, 2472, 2473, 2474, 2475, 2476, 2477, 2478, 2479, 2661, 2861, 2862, 3061, 3062, 3063, 3064, 3261, 3262, 3263) AS pow_grodzki
   # FROM teryt_powiaty p JOIN teryt_wojewodztwa w USING (rok, id_wojewodztwa)
-  powiaty = read.csv2('dane/powiaty.csv', stringsAsFactors = FALSE)
+  powiaty = utils::read.csv2('dane/powiaty.csv', stringsAsFactors = FALSE)
   powiaty = powiaty %>%
     mutate_(
       powiat = ~tolower(powiat),
       wojewodztwo = ~tolower(wojewodztwo)
     )
   # placówki poczty ze spisu PLACÓWEK poczty
-  pna = read.csv2('dane/pna_placówki.csv', stringsAsFactors = FALSE)
+  pna = utils::read.csv2('dane/pna_placówki.csv', stringsAsFactors = FALSE)
   colnames(pna) = tolower(colnames(pna))
   pna = pna %>%
     mutate_(

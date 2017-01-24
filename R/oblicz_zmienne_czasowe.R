@@ -1,26 +1,27 @@
 #' oblicza zmienne związane z czasem, który upłynął od momentu uzyskania dyplomu
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
-#' @param utrataEtatu dane wygenerowane za pomocą funkcji \code{\link{oblicz_utrata_etatu}}
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
+#' @param utrataPracy dane wygenerowane za pomocą funkcji
+#'   \code{\link{przygotuj_utrata_pracy}}
+#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
+#'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_zmienne_czasowe = function(dane, utrataEtatu, multidplyr = TRUE){
+oblicz_zmienne_czasowe = function(dane, utrataPracy, multidplyr = TRUE){
   stopifnot(
-    is(dane, 'baza_df')
+    methods::is(dane, 'baza_df'),
+    methods::is(utrataPracy, 'utrata_pracy_df')
   )
 
-  # liczone do dupy, to trzeba liczyć w podziale na pracodawców, bo tylko tam ma sens utratapracy!
-
   dane = dane %>%
-    filter_(~okres >= data_zak) %>%
-    left_join(utrataEtatu) %>%
+    filter_(~okres >= data_do) %>%
+    left_join(utrataPracy) %>%
     mutate_(
-      roznica =~ okres - data_zak
+      roznica = ~okres - data_do
     )
-  if(multidplyr){
+  if (multidplyr) {
     dane = multidplyr::partition(dane, id_zdau)
-  }else{
+  } else {
     dane = group_by_(dane, 'id_zdau')
   }
   dane = dane %>%

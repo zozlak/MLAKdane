@@ -9,8 +9,8 @@
 #' @import dplyr
 uzupelnij_obserwacje = function(wynik, wzor, id = 'id_zdau'){
   stopifnot(
-    is(wynik, 'data.frame'),
-    is(wzor, 'data.frame')
+    methods::is(wynik, 'data.frame'),
+    methods::is(wzor, 'data.frame')
   )
   wzor %>%
     select_(.dots = id) %>%
