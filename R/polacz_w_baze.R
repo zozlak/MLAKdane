@@ -1,4 +1,5 @@
-#' łączy dane zus, zdau oraz statystyki powiatów
+#' łączy dane zus, zdau, statystyki powiatów, informacje o jednostkach oraz
+#' karierze
 #' @description Aby poprawnie przyłączyć statystyki powiatów macierz danych
 #' uzupełniana jest tak, aby dla każdego absolwenta zawierała informacje o
 #' każdym okresie w zadanym przedziale czasu, ale nie później niż do "końca
@@ -10,6 +11,10 @@
 #' poszczególnych okresach, wyznaczana na podstawie danych ZDAU
 #' @param zus dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zus}}
 #' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
+#' @param kariera dane wygenerowane za pomocą funkcji
+#'   \code{\link{oblicz_kariere}}
+#' @param jednostki dane wygenerowane za pomocą funkcji
+#'   \code{\link{przygotuj_jednostki}}
 #' @param pnaPowiaty dane wygenerowane za pomocą funkcji
 #'   \code{\link{polacz_pna_powiaty}}
 #' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch
@@ -19,7 +24,7 @@
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
+polacz_w_baze = function(zus, zdau, kariera, jednostki, pnaPowiaty, dataMin, dataMax){
   stopifnot(
     methods::is(zus, 'zus_df'),
     methods::is(zdau, 'zdau_df'),
@@ -28,7 +33,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
 
   okresy = data2okres(dataMin):data2okres(dataMax)
   absolw = zdau %>%
-    filter_(~ typ %in% 'A')
+    filter_(~typ %in% 'A' | poziom %in% '3') # doktoranci jak leci, także nieukończeni
   wynik = data.frame(
     id_zdau      = rep(absolw$id_zdau,      each = length(okresy)),
     id           = rep(absolw$id,           each = length(okresy)),
@@ -47,7 +52,12 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
         select_('id', 'koniec') %>%
         distinct()
     ) %>%
-    filter_(~ (okres < koniec & data_do <= koniec) | is.na(koniec))
+    filter_(~ (okres < koniec & data_do <= koniec) | is.na(koniec)) %>%
+    left_join(
+      jednostki %>%
+        select_('regon') %>%
+        mutate_(nauka = TRUE)
+    )
 
   stud = zdau %>%
     select_('id', 'data_od', 'data_do') %>%

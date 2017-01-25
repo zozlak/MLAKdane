@@ -36,7 +36,7 @@ plikCache = nazwa_pliku('baza', 'cache', rocznik)
 if (!file.exists(plikCache) | pominCache) {
   zdau = przygotuj_zdau(katZr, probka)
   jednostki = przygotuj_jednostki(katZr, rocznik)
-  baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
+  baza = polacz_w_baze(zus, zdau, pnaPowiaty, dataMin, dataMax)
   miesieczne = agreguj_do_miesiecy(baza, zdau)
   save(zdau, jednostki, baza, miesieczne, utrataPracy, file = plikCache, compress = TRUE)
   rm(zus)

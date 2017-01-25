@@ -2,11 +2,10 @@
 #' @description
 #' Zwraca słownik kierunków studiów
 #' @param katZr katalog, w którym znajduje się plik sl_instytucje.xlsx
-#' @param zmDodatkowe nazwy dodatkowych zmiennych do pozostawienia w zwracanym zbiorze danych
 #' @return [data.frame] ramka danych opisująca kierunki studiów
 #' @export
 #' @import dplyr
-przygotuj_kierunki = function(katZr, zmDodatkowe = character()){
+przygotuj_kierunki = function(katZr){
   dane = openxlsx::readWorkbook(paste0(katZr, '/sl_kierunki.xlsx'))
   colnames(dane) = tolower(colnames(dane))
 
@@ -20,18 +19,19 @@ przygotuj_kierunki = function(katZr, zmDodatkowe = character()){
     ) %>%
     group_by_('kierunek_id') %>%
     summarize_(
-      kierunek = ~paste0(unique(kierunek), collapse = '/'),
+      kierunek          = ~paste0(unique(kierunek), collapse = '/'),
       forma_ksztalcenia = ~ifelse(length(unique(forma_ksztalcenia)) > 1, 'Stacjonarne/Niestacjonarne', first(forma_ksztalcenia)),
       jednostka_id      = ~ifelse(length(unique(jednostka_id)) > 1, NA, first(jednostka_id)),
       jednostka         = ~ifelse(length(unique(jednostka_id)) > 1, 'studia międzywydziałowe', first(jednostka)),
       uczelnia_id       = ~ifelse(length(unique(uczelnia_id)) > 1, NA, first(uczelnia_id)),
-      uczelnia          = ~ifelse(length(unique(uczelnia_id)) > 1, 'studia między uczelniane', first(uczelnia))
+      uczelnia          = ~ifelse(length(unique(uczelnia_id)) > 1, 'studia między uczelniane', first(uczelnia)),
+      liczba_semestrow  = ~ifelse(length(unique(liczba_semestrow)) > 1, NA_integer_, as.numeric(first(liczba_semestrow)))
     ) %>%
     mutate_(
-      kieruneknazwa = ~paste0(jednostka, ', ', kierunek, ', ', slFormy[forma_ksztalcenia], ' (POLon: ', kierunek_id, ')')
+      kierunek_nazwa = ~paste0(jednostka, ', ', kierunek, ', ', slFormy[forma_ksztalcenia], ' (POLon: ', kierunek_id, ')')
     ) %>%
     select_(
-      .dots = c('uczelnia_id', 'jednostka_id', 'kierunek_id', 'kieruneknazwa', zmDodatkowe)
+      .dots = c('uczelnia_id', 'jednostka_id', 'kierunek_id', 'kierunek_nazwa', 'liczba_semestrow')
     )
 
   obszary = utils::read.csv2(paste0('dane/sl_kierunki_obszary.csv'), stringsAsFactors = FALSE)
@@ -72,5 +72,6 @@ przygotuj_kierunki = function(katZr, zmDodatkowe = character()){
     all(!duplicated(dane$kierunek_id))
   )
 
+  class(dane) = c('kierunki_df', class(dane))
   return(dane)
 }

@@ -1,3 +1,12 @@
+# 0.9.0 (2017-??-??)
+
+* Uogólnienie do doktorantów
+
+# 0.8.0 (2017-01-22)
+
+* Dostosowanie do zrzutu danych 2016-09
+* Wprowadzenie wyliczania okienek czasu partiami, aby zmieścić się w RAM-ie
+
 # 0.7.2 (2016-11-14)
 
 * wyznaczając zmienną if_x_s bierzemy pod uwagę składkę za bycie bezrobotnym
@@ -12,7 +21,7 @@
 * korekta wyliczania zmiennych "if_x_s" oraz "if_x_strprg" (dawniej "if_st" i
   "if_stprg"), które muszą być wyliczane na poziomie {id, okres}, a nie, jak do
   tej pory {id, okres, pracodawca, tytuł ubezpieczenia}
-* zmiana rodzaju dużej ilości zmiennych z numeric na integer (co powinno dać 
+* zmiana rodzaju dużej ilości zmiennych z numeric na integer (co powinno dać
   kilka procent szybsze obliczenia)
 
 # 0.7.0 (2016-10-28)
@@ -23,7 +32,7 @@
 
 # 0.6.0 (2016-09-16)
 
-* dodane wyliczanie zmiennych miesięcznych 
+* dodane wyliczanie zmiennych miesięcznych
   (funkcja oblicz_zmienne_miesieczne())
 * dodane wyliczanie zmiennych na poziomie osoby (funkcja oblicz_osoba())
 

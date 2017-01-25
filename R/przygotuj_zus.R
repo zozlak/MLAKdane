@@ -95,7 +95,11 @@ przygotuj_zus = function(katZr, dataMin, dataMax, multidplyr = TRUE){
 
   # dane płatników
   zdu4 = utils::read.csv2(paste0(katZr, '/ZDU4.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
-  colnames(zdu4) = c('id_platnika', 'pkd', 'platnik_koniec_r', 'platnik_koniec_m')
+  if (ncol(zdu4) < 5) {
+    warning('dane płatników nie zawierają REGON-u')
+    zdu4$regon = NA_integer_
+  }
+  colnames(zdu4) = c('id_platnika', 'pkd', 'platnik_koniec_r', 'platnik_koniec_m', 'regon')
   zdu4 = zdu4 %>%
     mutate_(
       id_platnika = ~as.integer(id_platnika),
