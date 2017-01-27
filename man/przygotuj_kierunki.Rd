@@ -4,17 +4,20 @@
 \alias{przygotuj_kierunki}
 \title{Przygotowuje słownik kierunków}
 \usage{
-przygotuj_kierunki(katZr, zmDodatkowe = character())
+przygotuj_kierunki(katZr, rok)
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
 
-\item{zmDodatkowe}{nazwy dodatkowych zmiennych do pozostawienia w zwracanym zbiorze danych}
+\item{rok}{rok, który zostanie przypisany jednostkom}
 }
 \value{
 [data.frame] ramka danych opisująca kierunki studiów
 }
 \description{
 Zwraca słownik kierunków studiów
+
+Uwaga, kluczem unikalnym zwracanych danych jest para {kierunek_id,
+jednostka_id}!
 }
 

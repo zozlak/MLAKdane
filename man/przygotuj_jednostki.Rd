@@ -9,7 +9,7 @@ przygotuj_jednostki(katZr, rok)
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
 
-\item{rok}{rok, który zostanie przypisany jednostkom (gdy NA, obecny rok)}
+\item{rok}{rok, który zostanie przypisany jednostkom}
 }
 \value{
 [data.frame] ramka danych opisująca uczelnie

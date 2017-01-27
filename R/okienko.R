@@ -13,6 +13,7 @@
 #' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch
 #'   znaków, np. '2015-09-30')
 #' @return [okienko] obiekt opisujący okienko czasu
+#' @export
 okienko = function(offsetMin, offsetMax, zmiennaMin, zmiennaMax, sufiks, dataMin, dataMax) {
   stopifnot(
     is.vector(offsetMin), is.numeric(offsetMin), length(offsetMin) == 1, all(!is.na(offsetMin)),

@@ -33,7 +33,7 @@ przygotuj_zdau = function(katZr, probka = 1){
         zdau %>%
           select_('id') %>%
           distinct() %>%
-          sample_n(probka)
+          sample_frac(probka)
       )
   }
 

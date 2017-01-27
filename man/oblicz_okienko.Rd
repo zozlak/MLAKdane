@@ -2,24 +2,38 @@
 % Please edit documentation in R/oblicz_okienko.R
 \name{oblicz_okienko}
 \alias{oblicz_okienko}
-\title{ustawia zmienne okienka czasowego (okres_min, okres_max, len)}
+\title{wylicza zadane okienko danych}
 \usage{
-oblicz_okienko(dane, okienko, filtrZdau = NULL)
+oblicz_okienko(okienko, zdau, baza, miesieczne, utrataPracy, jednostki,
+  krok = 1e+06, info = TRUE)
 }
 \arguments{
-\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}},
-lub \code{\link{agreguj_do_miesiecy}}}
-
-\item{okienko}{obiekt opisujący okienko stworzony za pomocą funkcji
+\item{okienko}{obiekt okienka utworzony za pomocą funkcji
 \code{\link{okienko}}}
 
-\item{filtrZdau}{ramka danych zawierająca zmienną \code{id_zdau} ograniczająca
-obserwacje, które mają się znaleźć w okienku}
+\item{zdau}{dane zwrócone przez funkcję \code{\link{przygotuj_zdau}}}
+
+\item{baza}{dane zwrócone przez funkcję \code{\link{polacz_w_baze}}}
+
+\item{miesieczne}{dane miesieczne zwrócone przez funkcję
+\code{\link{agreguj_do_miesiecy}}}
+
+\item{utrataPracy}{dane wygenerowane za pomocą funkcji
+\code{\link{przygotuj_utrata_pracy}}}
+
+\item{jednostki}{dane wygenerowane za pomocą funkcji
+\code{\link{przygotuj_jednostki}}}
+
+\item{krok}{liczba obserwacji obliczanych w pojedynczym kroku (determinuje
+rozmiar potrzebnej pamięci - im większa, tym więcej pamięci potrzeba, ale
+też obliczenia przebiegają nieco szybciej)}
+
+\item{info}{czy wyświetlać informacje o przetwarzanym okienku}
 }
 \value{
-data.frame wyliczone zmienne
+[data.frame] dane obliczone dla wskazanego okienka czasu
 }
 \description{
-ustawia zmienne okienka czasowego (okres_min, okres_max, len)
+wylicza zadane okienko danych
 }
 

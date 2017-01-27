@@ -27,12 +27,12 @@ oblicz_kariere = function(zdau, jednostki, kierunki){
     ) %>%
     left_join(
       kierunki %>%
-        select_('kierunek_id', 'dysc_kod', 'dzie_kod', 'obsz_kod', 'liczba_semestrow')
+        select_('kierunek_id', 'jednostka_id', 'dysc_kod', 'dzie_kod', 'obsz_kod', 'n_semestrow')
     ) %>%
     mutate_(
-      if_wterminie = ~(data_do - data_od) / 6 < liczba_semestrow + 1
+      if_wterminie = ~(data_do - data_od) / 6 < n_semestrow + 1
     ) %>%
-    select_('-liczba_semestrow')
+    select_('-n_semestrow')
 
   kariera = data.frame(id = numeric(0))
   for (i in unique(slEtapy)) {

@@ -1,5 +1,5 @@
 #' oblicza proste zmienne niezwiazane z okienkami czasu
-#' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
+#' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_w_baze}}
 #' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
 #' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne

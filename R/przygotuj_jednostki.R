@@ -2,7 +2,7 @@
 #' @description
 #' Zwraca słownik uczelni
 #' @param katZr katalog, w którym znajduje się plik sl_instytucje.xlsx
-#' @param rok rok, który zostanie przypisany jednostkom (gdy NA, obecny rok)
+#' @param rok rok, który zostanie przypisany jednostkom
 #' @return [data.frame] ramka danych opisująca uczelnie
 #' @export
 #' @import dplyr
@@ -50,6 +50,7 @@ przygotuj_jednostki = function(katZr, rok){
     all(!duplicated(sl_jednostki$jednostka_id))
   )
 
+  sl_jednostki = ungroup(sl_jednostki)
   class(sl_jednostki) = c('jednostki_df', class(sl_jednostki))
   return(sl_jednostki)
 }

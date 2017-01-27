@@ -13,8 +13,6 @@
 #' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
 #' @param kariera dane wygenerowane za pomocą funkcji
 #'   \code{\link{oblicz_kariere}}
-#' @param jednostki dane wygenerowane za pomocą funkcji
-#'   \code{\link{przygotuj_jednostki}}
 #' @param pnaPowiaty dane wygenerowane za pomocą funkcji
 #'   \code{\link{polacz_pna_powiaty}}
 #' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch
@@ -24,10 +22,11 @@
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-polacz_w_baze = function(zus, zdau, kariera, jednostki, pnaPowiaty, dataMin, dataMax){
+polacz_w_baze = function(zus, zdau, kariera, pnaPowiaty, dataMin, dataMax){
   stopifnot(
     methods::is(zus, 'zus_df'),
     methods::is(zdau, 'zdau_df'),
+    methods::is(kariera, 'kariera_df'),
     methods::is(pnaPowiaty, 'pna_powiaty_df')
   )
 
@@ -42,22 +41,23 @@ polacz_w_baze = function(zus, zdau, kariera, jednostki, pnaPowiaty, dataMin, dat
     jednostka_id = rep(absolw$jednostka_id, each = length(okresy)),
     okres        = rep(okresy,              times = nrow(absolw))
   )
+
   wynik = wynik %>%
     left_join(
+      kariera %>%
+        select_(
+          'id', 'data_od_slic', 'data_od_smgr', 'data_od_sdr', 'data_od_dr', 'data_od_hab', 'data_od_prof')
+    ) %>%
+    left_join(
       zus %>%
-        select_('-nspraw', '-pkd', '-platnik_kon', '-plec', '-rok_ur', '-rolnik', '-zlec', '-koniec')
+        select_('-nspraw', '-platnik_kon', '-plec', '-rok_ur', '-rolnik', '-zlec', '-koniec')
     ) %>%
     left_join(
       zus %>%
         select_('id', 'koniec') %>%
         distinct()
     ) %>%
-    filter_(~ (okres < koniec & data_do <= koniec) | is.na(koniec)) %>%
-    left_join(
-      jednostki %>%
-        select_('regon') %>%
-        mutate_(nauka = TRUE)
-    )
+    filter_(~ (okres < koniec & data_do <= koniec) | is.na(koniec))
 
   stud = zdau %>%
     select_('id', 'data_od', 'data_do') %>%
@@ -84,6 +84,7 @@ polacz_w_baze = function(zus, zdau, kariera, jednostki, pnaPowiaty, dataMin, dat
       if_x_stprg = ~as.integer(if_x_s == 1L & okres >= data_od & (okres <= data_do | is.na(data_do))), # student na kierunku studiów id_zdau
       prawnik  = ~ifelse(is.na(prawnik), 0L, prawnik),
       mundur   = ~ifelse(is.na(mundur), 0L, mundur),
+      nauka    = ~ifelse(is.na(pkd), 0L, as.integer(grepl('^72|^8542', pkd))),
       # zlec     = ~ifelse(is.na(zlec), 0L, zlec),
       # nspraw   = ~ifelse(is.na(nspraw), 0L, nspraw),
       # rolnik   = ~ifelse(is.na(rolnik), 0, rolnik),
@@ -91,7 +92,7 @@ polacz_w_baze = function(zus, zdau, kariera, jednostki, pnaPowiaty, dataMin, dat
       podst    = ~ifelse(is.na(podst), 0L, podst),
       pna      = ~ifelse(is.na(pna), -1, pna)
     ) %>%
-    select_('-student', '-studzus', '-studopi') %>%
+    select_('-student', '-studzus', '-studopi', '-pkd') %>%
     group_by_('id_zdau', 'id', 'okres') %>%
     mutate_(
       if_nb      = ~as.integer(all(if_b == 0L)),

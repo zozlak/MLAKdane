@@ -4,13 +4,15 @@
 \alias{przygotuj_publikacje}
 \title{Przygotowuje zbiór z informacjami o publikacjach naukowych}
 \usage{
-przygotuj_publikacje(katZr, kariera)
+przygotuj_publikacje(katZr, kariera, dataMax)
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik publikacje.csv}
 
 \item{kariera}{dane wygenerowane za pomocą funkcji
 \code{\link{oblicz_kariere}}}
+
+\item{dataMax}{koniec badanego okresu (jako łańcuch znaków, np. '2015-09-30')}
 }
 \value{
 ramka danych z informacjami o publikacjach naukowych

@@ -7,7 +7,7 @@
 oblicz_stale(dane, zdau, multidplyr = TRUE)
 }
 \arguments{
-\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}}
+\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_w_baze}}}
 
 \item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
 

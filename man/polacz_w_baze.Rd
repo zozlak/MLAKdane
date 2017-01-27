@@ -5,7 +5,7 @@
 \title{łączy dane zus, zdau, statystyki powiatów, informacje o jednostkach oraz
 karierze}
 \usage{
-polacz_w_baze(zus, zdau, kariera, jednostki, pnaPowiaty, dataMin, dataMax)
+polacz_w_baze(zus, zdau, kariera, pnaPowiaty, dataMin, dataMax)
 }
 \arguments{
 \item{zus}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zus}}}
@@ -14,9 +14,6 @@ polacz_w_baze(zus, zdau, kariera, jednostki, pnaPowiaty, dataMin, dataMax)
 
 \item{kariera}{dane wygenerowane za pomocą funkcji
 \code{\link{oblicz_kariere}}}
-
-\item{jednostki}{dane wygenerowane za pomocą funkcji
-\code{\link{przygotuj_jednostki}}}
 
 \item{pnaPowiaty}{dane wygenerowane za pomocą funkcji
 \code{\link{polacz_pna_powiaty}}}
