@@ -5,22 +5,18 @@
 #' @param katZr katalog, w którym znajduje się plik ZDUx.csv
 #' @param dataMin pierwszy uwzględniany okres składkowy
 #' @param dataMax ostatni uwzględniany okres składkowy
+#' @param pna ramka danych z dozwolonymi kodami pna
 #' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
 #'   multidplyr
 #' @export
 #' @import dplyr
 #' @import readr
-przygotuj_zus = function(katZr, dataMin, dataMax, multidplyr = TRUE){
+przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
   zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%
     rename_(id_tytulu = 'KOD') %>%
     mutate_each(funs_('as.integer'))
   colnames(zus_tytuly_ubezp) = tolower(colnames(zus_tytuly_ubezp))
-
-  pna = przygotuj_pna() %>%
-    select_('rok', 'pna') %>%
-    distinct() %>%
-    mutate_(popr_pna = TRUE)
 
   # dane ewidencyjne osoby
   zdu1 = utils::read.csv2(paste0(katZr, '/ZDU1.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)[, c(1, 5:8)]
@@ -136,13 +132,31 @@ przygotuj_zus = function(katZr, dataMin, dataMax, multidplyr = TRUE){
       okres       = ~ data2okres(okres),
       platnik_kon = ~ data2okres(platnik_kon),
       rok         = ~ okres2rok(okres),
-      id_platnika = ~ ifelse(samoz > 0L, -1L , id_platnika) # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
-    ) %>%
-    left_join(pna) %>%
+      id_platnika = ~ ifelse(samoz > 0L, -1L , id_platnika), # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
+      pna = ~dplyr::coalesce(pna, -1)
+    )
+  stopifnot(
+    all(!is.na(zus$etat))
+  )
+
+  # weryfikacja pna
+  zus = zus %>%
+    left_join(
+      pna %>%
+        select_('pna') %>%
+        distinct() %>%
+        mutate_(popr_pna = TRUE)
+    )
+  test = is.na(zus$popr_pna)
+  if (sum(test) > 0) {
+    kody = unique(zus$pna[test])
+    warning('Błędne kody pocztowe w ', sum(test), ' rekordach: ', paste0(kody[order(kody)], collapse = ', '))
+  }
+  zus = zus %>%
     mutate_(
-      pna = ~ ifelse(is.na(popr_pna), -1, pna)
+      pna = ~ifelse(!is.na(popr_pna), pna, -1)
     ) %>%
-    select_('-rok', '-popr_pna')
+    select_('-popr_pna')
 
   class(zus) = c('zus_df', class(zus))
   return(zus)

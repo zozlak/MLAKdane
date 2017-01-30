@@ -2,28 +2,28 @@ devtools::load_all(".")
 library(dplyr)
 
 dataMin = '2014-01-01'
-dataMax = '2016-09-30'  # 2015-03-31 / 2015-09-30 / 2016-09-30
-rocznik = 2015          # 2014 / 2015
-katZr = 'dane/ZUS_2016-09/2015/'
+dataMax = '2015-09-30'  # 2015-03-31 / 2015-09-30 / 2016-09-30
+rocznik = 2014          # 2014 / 2015
+katZr = 'dane/ZUS_2015-09/'
 okienka = list(
-  okienko(  1, 12, 'data_zak', 'data_zak', '_p1', dataMin, dataMax),
-  okienko( 13, 24, 'data_zak', 'data_zak', '_p2', dataMin, dataMax),
-  okienko(  1, 99, 'data_zak', 'data_zak', ''   , dataMin, dataMax)
+  okienko(  1, 12, 'data_od', 'data_do', '_p1', dataMin, dataMax),
+#  okienko( 13, 24, 'data_od', 'data_do', '_p2', dataMin, dataMax),
+  okienko(  1, 99, 'data_od', 'data_do', ''   , dataMin, dataMax)
 )
 kierZmDod = c()
 probka = 1
 krok = 100000
-pominCache = FALSE
+pominCache = TRUE
 
 ####################
 # 1. Przygotowanie danych ZUS i GUS
 ####################
 plikCache = nazwa_pliku('ZUS', 'cache', rocznik)
 if (!file.exists(plikCache) | pominCache) {
-  zus = przygotuj_zus(katZr, dataMin, dataMax)
-  utrataPracy = przygotuj_utrata_pracy(zus, dataMax)
   # pnaPowiaty = polacz_pna_powiaty(przygotuj_pna(), przygotuj_powiaty(), dataMin, dataMax)
   pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax)
+  zus = przygotuj_zus(katZr, dataMin, dataMax, pnaPowiaty)
+  utrataPracy = przygotuj_utrata_pracy(zus, dataMax)
   save(zus, utrataPracy, pnaPowiaty, file = plikCache, compress = TRUE)
 } else {
   load(plikCache)
@@ -90,7 +90,7 @@ save(wszystko, file = nazwa_pliku('dane', katZr, rocznik), compress = TRUE)
 
 ##########
 # Zbiór danych miesięcznych
-okienkoMies = oblicz_okienko(miesieczne, okienko(-60, 60, 'data_zak', 'data_zak', '', dataMin, dataMax)) %>%
+okienkoMies = oblicz_okienko(miesieczne, okienko(-60, 60, 'data_do', 'data_do', '', dataMin, dataMax)) %>%
   filter_(~okres >= okres_min & okres <= okres_max) %>%
   select_('id_zdau', 'okres', 'if_x_s', 'if_x_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s') %>%
   mutate_(okres = ~okres2data(okres))

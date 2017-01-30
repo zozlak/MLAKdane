@@ -79,7 +79,7 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
       # rolnik   = ~ifelse(is.na(rolnik), 0, rolnik),
       dziecko  = ~ifelse(is.na(dziecko), 0L, dziecko),
       podst    = ~ifelse(is.na(podst), 0L, podst),
-      pna      = ~ifelse(is.na(pna), -1, pna)
+      pna      = ~ifelse(is.na(pna), -200, pna)
     ) %>%
     select_('-student', '-studzus', '-studopi') %>%
     group_by_('id_zdau', 'id', 'okres') %>%
@@ -93,9 +93,9 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
 
   wynik = left_join(wynik, pnaPowiaty)
 
-  stopifnot(
-    all(!is.na(wynik$powezar_teryt))
-  )
+  # stopifnot(
+  #   all(!is.na(wynik$powezar_teryt))
+  # )
 
   class(wynik) = c('baza_df', class(wynik))
   return(wynik)
