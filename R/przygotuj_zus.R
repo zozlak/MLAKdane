@@ -129,11 +129,11 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
     left_join(zdu1 %>% select_('id', 'rok_ur', 'plec', 'koniec')) %>%
     left_join(zus_tytuly_ubezp) %>%
     mutate_(
-      okres       = ~ data2okres(okres),
-      platnik_kon = ~ data2okres(platnik_kon),
-      rok         = ~ okres2rok(okres),
-      id_platnika = ~ ifelse(samoz > 0L, -1L , id_platnika), # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
-      pna = ~dplyr::coalesce(pna, -1)
+      okres       = ~data2okres(okres),
+      platnik_kon = ~data2okres(platnik_kon),
+      rok         = ~okres2rok(okres),
+      id_platnika = ~ifelse(samoz > 0L, -1L , id_platnika), # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
+      pna         = ~dplyr::coalesce(pna, -1)
     )
   stopifnot(
     all(!is.na(zus$etat))

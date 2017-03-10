@@ -23,7 +23,7 @@ oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE)
     select_('-teryt')
 
   dane = dane %>%
-    filter_(~okres == ifelse(rep(wMomDyplomu, nrow(dane)), data_od, okres_max)) %>%
+    filter_(~okres == ifelse(rep(wMomDyplomu, nrow(dane)), data_do, okres_max)) %>%
     left_join(jednostki) %>%
     mutate_(
       jpdzam = ~ifelse(

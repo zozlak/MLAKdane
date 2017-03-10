@@ -3,9 +3,11 @@
 .Rhistory
 .RData
 .~lock*
-dropbox
 *cache
 dane/stare
 dane/nowe
 dane/ZD*
 .*.Rnb.cached
+/wiki
+/dane/ZUS_*
+/dane/archiwum

@@ -1,3 +1,21 @@
+# 0.8.1 (2017-03-10)
+
+* korekta literówek data_od~data_do
+
+# 0.8.0 (2017-01-30)
+
+* wprowadzenie ugólnionej koncepcji okienka czasu definiowanego za pomocą
+  funkcji okienko(); wymuszona tym faktem zmiana parametrów funkcji
+  oblicz_okienko()
+* wprowadzenie możliwości obliczania okresów krokami (w celu zmniejszenia
+  zużycia pamięci) - funkcja krok_zdau()
+* zmiana nazw zmiennych określających początek i koniec sudiowania na
+  "data_od" i "data_do" (konwencji przyjętej w MLD)
+* zaktualizowana baza kodów pocztowych, ich mapowania na powiaty oraz danych
+  GUS o powiatach
+* dodanie weryfikacji kodów pocztowych w funkcji polacz_zus()
+* wprowadzenie lepszego wspomagania dla cache-owania wyników pośrednich
+  - funkcja nazwa_pliku() i przepisana winietka Generowanie_danych.R
 # 0.7.2 (2016-11-14)
 
 * wyznaczając zmienną if_x_s bierzemy pod uwagę składkę za bycie bezrobotnym
@@ -12,7 +30,7 @@
 * korekta wyliczania zmiennych "if_x_s" oraz "if_x_strprg" (dawniej "if_st" i
   "if_stprg"), które muszą być wyliczane na poziomie {id, okres}, a nie, jak do
   tej pory {id, okres, pracodawca, tytuł ubezpieczenia}
-* zmiana rodzaju dużej ilości zmiennych z numeric na integer (co powinno dać 
+* zmiana rodzaju dużej ilości zmiennych z numeric na integer (co powinno dać
   kilka procent szybsze obliczenia)
 
 # 0.7.0 (2016-10-28)
@@ -23,7 +41,7 @@
 
 # 0.6.0 (2016-09-16)
 
-* dodane wyliczanie zmiennych miesięcznych 
+* dodane wyliczanie zmiennych miesięcznych
   (funkcja oblicz_zmienne_miesieczne())
 * dodane wyliczanie zmiennych na poziomie osoby (funkcja oblicz_osoba())
 
