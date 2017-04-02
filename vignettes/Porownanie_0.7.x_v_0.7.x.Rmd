@@ -9,8 +9,8 @@ output: html_document
 library(dplyr)
 library(MLAK)
 devtools::load_all(".")
-wszystkoS = wczytajDane('../dane/archiwum/2016-09_2015_0.8.0.RData')
-miesieczneS = wczytajDane('../dane/archiwum/2016-09_2015_0.8.0_mies.RData')
+wszystkoS = wczytajDane('../dane/archiwum/2016-09_2014_0.8.1.RData')
+miesieczneS = wczytajDane('../dane/archiwum/2016-09_2014_0.8.1_mies.RData')
 miesieczneS = miesieczneS %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% semi_join(wszystkoS %>% select(ID_ZDAU))
 wszystko = wczytajDane('../dane/ZUS_2016-09/2014/2014_dane.RData')
 miesieczne = wczytajDane('../dane/ZUS_2016-09/2014/2014_dane_mies.RData')
@@ -86,7 +86,7 @@ porownaj(wszystkoS, wszystko, 'UP_EL_P1', 'UP_EL_P1') %>% group_by(d) %>% summar
 # miesięczne
 
 ```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
-porownaj(miesieczneS, miesieczne, 'WZG_RYZBEZ_M', 'WZG_RYZBEZ_M', c('ID_ZDAU', 'OKRES')) %>% filter(!is.nan(a), abs(d) > 0.0001) # pomijamy nan-y ze względu na błędy wyliczania w wersji 0.6.0
-porownaj(miesieczneS, miesieczne, 'WZG_EZ_Z_M', 'WZG_EZ_Z_M', c('ID_ZDAU', 'OKRES')) %>% filter(!is.na(a), abs(d) > 0.0001)  # pomijamy NA, bo w poprzednim zbiorze brakowało paru kodów pocztowych, przez co ZILO wychodziło NA
+porownaj(miesieczneS, miesieczne, 'WZG_RYZBEZ_M', 'WZG_RYZBEZ_M', c('ID_ZDAU', 'OKRES')) %>% filter(abs(d) > 0.0001) 
+porownaj(miesieczneS, miesieczne, 'WZG_EZ_Z_M', 'WZG_EZ_Z_M', c('ID_ZDAU', 'OKRES')) %>% filter(abs(d) > 0.0001)
 ```
 

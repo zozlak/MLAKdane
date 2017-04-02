@@ -1,3 +1,9 @@
+# 0.9.0 (2017-04-01)
+
+* wprowadzenie liniowej interpolacji danych o zarobkach z poziomu roku do
+  poziomu miesięcy (funkcje przygotuj_pna_powiaty_mb() oraz
+  przygotuj_powiaty())
+
 # 0.8.1 (2017-03-10)
 
 * korekta literówek data_od~data_do

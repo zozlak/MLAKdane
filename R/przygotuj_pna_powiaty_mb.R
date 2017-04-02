@@ -45,21 +45,38 @@ przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
 
   powezar = dane %>%
     filter_(~ stat == 'powezar') %>%
-    select_('rok', 'value', 'teryt') %>%
+    select_('rok', 'teryt', 'value') %>%
     rename_(powezar = 'value') %>%
-    distinct()
+    distinct() %>%
+    arrange_('teryt', 'rok') %>%
+    group_by_('teryt') %>%
+    mutate_(
+      powezar_p1 = ~(lead(powezar) - powezar) / (lead(rok) - rok) / 12,
+      powezar_m1 = ~(powezar - lag(powezar)) / (rok - lag(rok)) / 12
+    ) %>%
+    mutate_(
+      powezar_p1 = ~coalesce(powezar_p1, powezar_m1),
+      powezar_m1 = ~coalesce(powezar_m1, powezar_p1)
+    ) %>%
+    ungroup()
 
   powpbezd = dane %>%
     filter_(~ stat == 'powpbezd') %>%
-    select_('okres', 'rok', 'value', 'teryt') %>%
+    select_('okres', 'rok', 'teryt', 'value') %>%
     rename_(powpbezd = 'value') %>%
     distinct()
 
   powiaty = full_join(powezar, powpbezd) %>%
+    mutate_(
+      miesiac = ~okres2miesiac(okres),
+      powezar = ~powezar - pmax(0, 6.5 - miesiac) * powezar_m1 + pmax(0, miesiac - 6.5) * powezar_p1
+    ) %>%
     select_('okres', 'powpbezd', 'powezar', 'teryt', 'rok')
-  powiaty = suppressWarnings(przygotuj_powiaty()) %>%
+  wojewodztwa = suppressWarnings(przygotuj_powiaty()) %>%
     filter_(~teryt %% 10000 == 0 & teryt > 0 & okres >= data2okres(dataMin) & okres <= data2okres(dataMax)) %>%
-    bind_rows(powiaty)
+    anti_join(powiaty)
+  powiaty = powiaty %>%
+    bind_rows(wojewodztwa)
 
   class(powiaty) = c('powiaty_df', class(powiaty))
 

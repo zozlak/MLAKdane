@@ -4,7 +4,7 @@
 \alias{przygotuj_zus}
 \title{Przygotowuje dane z ZUS}
 \usage{
-przygotuj_zus(katZr, dataMin, dataMax, multidplyr = TRUE)
+przygotuj_zus(katZr, dataMin, dataMax, pna, multidplyr = TRUE)
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik ZDUx.csv}
@@ -12,6 +12,8 @@ przygotuj_zus(katZr, dataMin, dataMax, multidplyr = TRUE)
 \item{dataMin}{pierwszy uwzględniany okres składkowy}
 
 \item{dataMax}{ostatni uwzględniany okres składkowy}
+
+\item{pna}{ramka danych z dozwolonymi kodami pna}
 
 \item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
 multidplyr}

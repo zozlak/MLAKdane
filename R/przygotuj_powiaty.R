@@ -9,13 +9,14 @@ przygotuj_powiaty = function(){
   # pobrane jako "tabela relacyjna" (czyli w postaci długiej)
   bezrobocie = utils::read.csv2('dane/GUS_bezrobocie.csv', stringsAsFactors = FALSE)
   bezrobocie = bezrobocie %>%
+    rename_(rok = 'Rok') %>%
     mutate_(
       terytPow = ~floor(Kod / 1000),
       terytWoj = ~floor(terytPow / 100),
-      okres    = ~data2okres(sprintf('%d-%02d', Rok, miesiace[Miesiące])),
+      okres    = ~data2okres(sprintf('%d-%02d', rok, miesiace[Miesiące])),
       powpbezd = ~as.numeric(sub(',', '.', Wartosc))
     ) %>%
-    select_('terytPow', 'terytWoj', 'Rok', 'okres', 'powpbezd') %>%
+    select_('terytPow', 'terytWoj', 'rok', 'okres', 'powpbezd') %>%
     filter_(~ !is.na(powpbezd))
   stopifnot(
     bezrobocie %>% group_by_('terytPow', 'okres') %>% summarize_(n = ~n()) %>% filter_(~n > 1) %>% nrow() == 0
@@ -26,22 +27,37 @@ przygotuj_powiaty = function(){
   # pobrane jako "tabela relacyjna" (czyli w postaci długiej)
   zarobki = utils::read.csv2('dane/GUS_zarobki.csv', stringsAsFactors = FALSE)
   zarobki = zarobki %>%
+    rename_(rok = 'Rok') %>%
     mutate_(
       terytWoj = ~floor(Kod / 100000),
       powezar  = ~as.numeric(sub(',', '.', Wartosc))
     ) %>%
-    select_('terytWoj', 'Rok', 'powezar') %>%
-    filter_(~ !is.na(powezar))
+    select_('terytWoj', 'rok', 'powezar') %>%
+    filter_(~ !is.na(powezar)) %>%
+    arrange_('terytWoj', 'rok') %>%
+    group_by_('terytWoj') %>%
+    mutate_(
+      powezar_p1 = ~(lead(powezar) - powezar) / (lead(rok) - rok) / 12,
+      powezar_m1 = ~(powezar - lag(powezar)) / (rok - lag(rok)) / 12
+    ) %>%
+    mutate_(
+      powezar_p1 = ~coalesce(powezar_p1, powezar_m1),
+      powezar_m1 = ~coalesce(powezar_m1, powezar_p1)
+    ) %>%
+    ungroup()
   stopifnot(
-    zarobki %>% group_by_('terytWoj', 'Rok') %>% summarize_(n = ~n()) %>% filter_(~n > 1) %>% nrow() == 0
+    zarobki %>% group_by_('terytWoj', 'rok') %>% summarize_(n = ~n()) %>% filter_(~n > 1) %>% nrow() == 0
   )
 
-  powiaty = suppressMessages(full_join(bezrobocie, zarobki)) %>%
+  powiaty = suppressMessages(full_join(zarobki, bezrobocie)) %>%
     mutate_(
       teryt = ~ terytPow * 100
     ) %>%
-    rename_(rok = 'Rok') %>%
-    select_('-terytPow', '-terytWoj')
+    mutate_(
+      miesiac = ~okres2miesiac(okres),
+      powezar = ~powezar - pmax(0, 6.5 - miesiac) * powezar_m1 + pmax(0, miesiac - 6.5) * powezar_p1
+    ) %>%
+    select_('teryt', 'rok', 'okres', 'powpbezd', 'powezar')
 
   stopifnot(
     nrow(powiaty) == nrow(bezrobocie),
