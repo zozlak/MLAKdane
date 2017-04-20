@@ -1,3 +1,8 @@
+# 0.9.1 (2017-04-13)
+
+* zmiany w sposobie przygotowania danych o kierunkach
+  (specyficzne dla zrzutu danych z 2017 roku)
+
 # 0.9.0 (2017-04-01)
 
 * wprowadzenie liniowej interpolacji danych o zarobkach z poziomu roku do
