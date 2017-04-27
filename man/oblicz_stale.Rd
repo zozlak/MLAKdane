@@ -19,4 +19,3 @@ data.frame wyliczone zmienne
 \description{
 oblicza proste zmienne niezwiazane z okienkami czasu
 }
-

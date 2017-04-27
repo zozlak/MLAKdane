@@ -22,4 +22,3 @@ data.frame wyliczone zmienne
 \description{
 ustawia zmienne okienka czasowego (okres_min, okres_max, len)
 }
-

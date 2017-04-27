@@ -23,4 +23,3 @@ data.frame wyliczone dane
 przyłącza dane powiatów do danych PNA i agreguje je tak, by (rok, pna) było
 unikalne
 }
-

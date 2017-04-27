@@ -17,4 +17,3 @@ przygotuj_kierunki(katZr, zmDodatkowe = character())
 \description{
 Zwraca słownik kierunków studiów
 }
-

@@ -15,4 +15,3 @@ character data wyrażona jako łańcuch znaków (np. '2004-11')
 \description{
 konwertuje okres składkowy (rok i miesiąc) wyrażony liczbą na datę
 }
-

@@ -17,4 +17,3 @@ przygotuj_jednostki(katZr, rok)
 \description{
 Zwraca słownik uczelni
 }
-

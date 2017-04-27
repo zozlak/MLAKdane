@@ -22,4 +22,3 @@ multidplyr}
 Do danych o składkach dołączane są dane o miejscu zamieszkania, płatniku,
 tytułach ubezpieczeń, itp.
 }
-

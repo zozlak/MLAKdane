@@ -20,4 +20,3 @@ wyższym niż {osoba x płatnik x okres}, przez co nie mogą być liczone z dany
 zagregowanych do poziomu miesięcy w funkcji \code{\link{agreguj_do_okresu}} i
 wymagają osobnej funkcji.
 }
-

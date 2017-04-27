@@ -36,4 +36,3 @@ też obliczenia przebiegają nieco szybciej)}
 \description{
 wylicza zadane okienka danych zgodnie z potrzebami projektu ELA
 }
-

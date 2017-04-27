@@ -16,4 +16,3 @@ numeric uzgodniony kod TERYT
 W razie niezgodności zwraca najbliższą wspólną JST (powiat, województwo bądz
 Polskę)
 }
-

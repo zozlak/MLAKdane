@@ -9,4 +9,3 @@ przygotuj_pna()
 \description{
 przygotowuje dane opisujące PNA
 }
-

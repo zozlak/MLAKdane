@@ -23,4 +23,3 @@ data.frame wartości zmiennej połączone z obydwy zbiorów
 \description{
 zestawia ze sobą wartości wskazanej zmiennej w dwóch zbiorach
 }
-

@@ -26,4 +26,3 @@ Typowy scenariusz użycia to wyliczanie zmiennych dla okresów w
 Funkcja jest stabilna, tzn. dla tych samych danych wejściowych zawsze zwraca
 takie same dane.
 }
-

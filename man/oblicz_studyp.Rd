@@ -15,4 +15,3 @@ data.frame wyliczone zmienne
 \description{
 oblicza zmienne KONT oraz STUDYP*
 }
-

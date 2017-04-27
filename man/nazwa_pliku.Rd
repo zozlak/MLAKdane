@@ -16,4 +16,3 @@ nazwa_pliku(zbior, katalog = "", rocznik = "")
 \description{
 Ułatwia generowanie nazw plików w powtarzalny sposób
 }
-

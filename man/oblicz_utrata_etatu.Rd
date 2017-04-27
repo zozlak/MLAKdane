@@ -23,4 +23,3 @@ data.frame wyliczone zmienne
 \description{
 oblicza zmienne UP_E, UP_EL oraz UP_ENL
 }
-

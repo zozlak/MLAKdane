@@ -9,4 +9,3 @@ przygotuj_powiaty()
 \description{
 przygotowuje powiatowe dane o bezrobociu i zarobkach
 }
-

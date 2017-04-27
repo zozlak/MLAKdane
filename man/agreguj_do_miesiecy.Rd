@@ -20,4 +20,3 @@ data.frame wyliczone zmienne
 \description{
 Agreguje dane do poziomu {id, id_zdau, okres}
 }
-

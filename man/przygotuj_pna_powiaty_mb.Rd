@@ -19,4 +19,3 @@ data.frame wyliczone dane
 przygotowuje dane o PNA i powiatach na podstawie zbioru danych od Marka
 Bożykowskiego
 }
-

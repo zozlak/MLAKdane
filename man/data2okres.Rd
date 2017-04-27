@@ -21,4 +21,3 @@ ciąg cyfr interpretowany jest jako rok, a drugi jako liczba miesięcy. Stąd
 funkcja działa poprawnie także dla niepełnych data (np. okres składkowy ZUS
 "2014-05")
 }
-

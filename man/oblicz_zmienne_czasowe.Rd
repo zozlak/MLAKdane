@@ -7,7 +7,7 @@
 oblicz_zmienne_czasowe(dane, utrataPracy, multidplyr = TRUE)
 }
 \arguments{
-\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
+\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}}
 
 \item{utrataPracy}{dane wygenerowane za pomocą funkcji
 \code{\link{przygotuj_utrata_pracy}}}
@@ -21,4 +21,3 @@ data.frame wyliczone zmienne
 \description{
 oblicza zmienne związane z czasem, który upłynął od momentu uzyskania dyplomu
 }
-

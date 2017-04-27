@@ -19,4 +19,3 @@ data.frame wyliczone zmienne
 \description{
 oblicza zmienne wywodzone z już wcześniej policzonych
 }
-

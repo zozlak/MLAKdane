@@ -34,4 +34,3 @@ ubezpieczenia ZUS równe 0, w szczególności także bezrob = 0).
 Generowana jest również zmienna określająca, czy absolwent studiował w
 poszczególnych okresach, wyznaczana na podstawie danych ZDAU
 }
-

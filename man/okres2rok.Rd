@@ -18,4 +18,3 @@ odczytuje rok z liczby miesięcy wyrażonej liczbą
 \seealso{
 data2okres
 }
-

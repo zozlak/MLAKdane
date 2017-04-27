@@ -16,4 +16,3 @@ mniejszych od 1 zadany odsetek wybierany jest losowo)}
 ZDAU to plik z uczelni, w którym jednostką jest student na
 kierunku studiów.
 }
-

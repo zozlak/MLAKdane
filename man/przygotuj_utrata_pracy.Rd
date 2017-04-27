@@ -23,4 +23,3 @@ data.frame wyliczone zmienne
 oblicza zmienne utraty pracy, używane do wyliczania zmiennych NMLE, NMLEP
 oraz zmiennych czasowych
 }
-

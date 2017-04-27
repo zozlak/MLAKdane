@@ -21,4 +21,3 @@ data.frame dane z parametru \code{wynik} uzupełnione o wszystkie
 \description{
 uzupełnia rekordy ramki danych o unikalne obserwacje z innej ramki danych
 }
-

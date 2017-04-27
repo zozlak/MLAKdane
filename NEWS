@@ -1,3 +1,11 @@
+# 0.9.2 (2017-04-27)
+
+* zaktualizowane dane GUS
+* dodane zmienne DATA_OD_E i DATA_OD_ES
+* zmodyfikowany sposób przygotowywania słownika kierunków
+  (stary słownik mapowania kierunków na obszary/dziedziny/dyscypliny
+  został usunięty jako nieaktualny i zawierający błędy)
+
 # 0.9.1 (2017-04-13)
 
 * zmiany w sposobie przygotowania danych o kierunkach

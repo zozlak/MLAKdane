@@ -17,4 +17,3 @@ data.frame
 \description{
 oblicza stałe czasowe i konwertuje istniejące stałe czasowe z powrotem na daty
 }
-

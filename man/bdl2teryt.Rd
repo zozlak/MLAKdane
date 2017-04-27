@@ -15,4 +15,3 @@ numeric kod TERYT powiatu
 \description{
 Zamienia kody powiatów z kodów BDL na kody TERYT
 }
-

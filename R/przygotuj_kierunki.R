@@ -34,50 +34,13 @@ przygotuj_kierunki = function(katZr, zmDodatkowe = character()){
       dysc              = ~first(wiodaca_dysc)
     ) %>%
     mutate_(
+      dzie_kod = ~as.integer(sub('^([0-9])0([0-9])$', '\\1\\2', dzie_kod)),
+      dysc_kod = ~as.integer(sub('^([0-9])0([0-9]{3})$', '\\1\\2', dysc_kod)),
       kieruneknazwa = ~paste0(jednostka, ', ', kierunek, ', ', slFormy[forma_ksztalcenia], ' (POLon: ', kierunek_id, ')')
     ) %>%
     select_(
       .dots = c('uczelnia_id', 'jednostka_id', 'kierunek_id', 'kieruneknazwa', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc', zmDodatkowe)
     )
-
-  obszary = utils::read.csv2(paste0('dane/sl_kierunki_obszary.csv'), stringsAsFactors = FALSE)
-  colnames(obszary) = tolower(colnames(obszary))
-  obszary = obszary %>%
-    select_('kierunek', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc') %>%
-    distinct() %>%
-    rename_(
-      kierunek_id = 'kierunek'
-    ) %>%
-    group_by_('kierunek_id') %>%
-    summarize_(
-      obsz_kod2  = ~ first(obsz_kod),
-      obsz2      = ~ first(obsz),
-      dzie_kod2  = ~ first(dzie_kod),
-      dzie2      = ~ first(dzie),
-      dysc_kod2  = ~ first(dysc_kod),
-      dysc2      = ~ first(dysc),
-      n = ~ n()
-    ) %>%
-    mutate_(
-      obsz_kod2  = ~ ifelse(n > 1, 99, obsz_kod2),
-      obsz2      = ~ ifelse(n > 1, 'studia międzyobszarowe', obsz2),
-      dzie_kod2  = ~ ifelse(n > 1, 99, dzie_kod2),
-      dzie2      = ~ ifelse(n > 1, 'studia międzydziedzinowe', dzie2),
-      dysc_kod2  = ~ ifelse(n > 1, 999, dysc_kod2),
-      dysc2      = ~ ifelse(n > 1, 'studia interdyscyplinarne', dysc2)
-    ) %>%
-    select_('-n')
-  dane = dane %>%
-    left_join(obszary) %>%
-    mutate_(
-      obsz_kod  = ~ dplyr::coalesce(obsz_kod, obsz_kod2),
-      obsz      = ~ dplyr::coalesce(obsz, obsz2),
-      dzie_kod  = ~ dplyr::coalesce(dzie_kod, dzie_kod2),
-      dzie      = ~ dplyr::coalesce(dzie, dzie2),
-      dysc_kod  = ~ dplyr::coalesce(dysc_kod, dysc_kod2),
-      dysc      = ~ dplyr::coalesce(dysc, dysc2)
-    ) %>%
-    select_('-obsz_kod2', '-obsz2', '-dzie_kod2', '-dzie2', '-dysc_kod2', '-dysc2')
 
   if (any(is.na(dane$obsz_kod))) {
     warning('brak informacji o obszarach/dziedzinach/dyscyplinach dla ', sum(is.na(dane$obsz_kod)), ' kierunków')

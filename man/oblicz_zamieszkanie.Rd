@@ -24,4 +24,3 @@ data.frame wyliczone zmienne
 \description{
 oblicza zmienne związane z miejscem zamieszkania
 }
-
