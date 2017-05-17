@@ -3,11 +3,11 @@ library(dplyr)
 
 dataMin = '2014-01-01'
 dataMax = '2016-09-30'  # 2015-03-31 / 2015-09-30 / 2016-09-30
-rocznik = 2015          # 2014 / 2015
-katZr = 'dane/ZUS_2016-09/2015/'
+rocznik = 2014          # 2014 / 2015
+katZr = 'dane/ZUS_2016-09/2014/'
 okienka = list(
   okienko(  1, 12, 'data_do', 'data_do', '_p1', dataMin, dataMax),
-  #okienko( 13, 24, 'data_do', 'data_do', '_p2', dataMin, dataMax),
+  okienko( 13, 24, 'data_do', 'data_do', '_p2', dataMin, dataMax),
   okienko(  1, 99, 'data_do', 'data_do', ''   , dataMin, dataMax)
 )
 kierZmDod = c()
