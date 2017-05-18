@@ -27,8 +27,10 @@ oblicz_utrata_etatu = function(okienko, utrataPracy, multidplyr = TRUE){
   }
   up = up %>%
     summarize_(
-      len  = ~first(len),
-      nm_e = ~sum(nm_e, na.rm = TRUE),
+      len    = ~first(len),
+      nm_e   = ~sum(nm_e, na.rm = TRUE),
+      nm_e_n = ~sum(nm_e_n, na.rm = TRUE),
+      nm_e_s = ~sum(nm_e_s, na.rm = TRUE),
       up_e_n   = ~ifelse(sum(nm_e_n, na.rm = TRUE) > 0L, sum(utretatu[if_x_s == 0L], na.rm = TRUE), NA_integer_),
       up_e_s   = ~ifelse(sum(nm_e_s, na.rm = TRUE) > 0L, sum(utretatu[if_x_s == 1L], na.rm = TRUE), NA_integer_),
       up_enl_n = ~ifelse(sum(nm_e_n, na.rm = TRUE) > 0L, sum(utretatu_v2[if_x_s == 0L], na.rm = TRUE), NA_integer_),
@@ -41,16 +43,16 @@ oblicz_utrata_etatu = function(okienko, utrataPracy, multidplyr = TRUE){
       up_el  = ~ifelse(nm_e > 0L, dplyr::coalesce(up_el_n, 0L) + dplyr::coalesce(up_el_s, 0L), NA_integer_),
       up_enl = ~ifelse(nm_e > 0L, dplyr::coalesce(up_enl_n, 0L) + dplyr::coalesce(up_enl_s, 0L), NA_integer_),
       enup_e     = ~dplyr::coalesce(12L * up_e / len, NA_real_),
-      enup_e_n   = ~dplyr::coalesce(12L * up_e_n / len, NA_real_),
-      enup_e_s   = ~dplyr::coalesce(12L * up_e_s / len, NA_real_),
+      enup_e_n   = ~dplyr::coalesce(12L * up_e_n / nm_e_n, NA_real_),
+      enup_e_s   = ~dplyr::coalesce(12L * up_e_s / nm_e_s, NA_real_),
       enup_el    = ~dplyr::coalesce(12L * up_el / len, NA_real_),
-      enup_el_n  = ~dplyr::coalesce(12L * up_el_n / len, NA_real_),
-      enup_el_s  = ~dplyr::coalesce(12L * up_el_s / len, NA_real_),
+      enup_el_n  = ~dplyr::coalesce(12L * up_el_n / nm_e_n, NA_real_),
+      enup_el_s  = ~dplyr::coalesce(12L * up_el_s / nm_e_s, NA_real_),
       enup_enl   = ~dplyr::coalesce(12L * up_enl / len, NA_real_),
-      enup_enl_n = ~dplyr::coalesce(12L * up_enl_n / len, NA_real_),
-      enup_enl_s = ~dplyr::coalesce(12L * up_enl_s / len, NA_real_)
+      enup_enl_n = ~dplyr::coalesce(12L * up_enl_n / nm_e_n, NA_real_),
+      enup_enl_s = ~dplyr::coalesce(12L * up_enl_s / nm_e_s, NA_real_)
     ) %>%
-    select_('-len', '-nm_e') %>%
+    select_('-len', '-nm_e', '-nm_e_n', '-nm_e_s') %>%
     collect() %>%
     ungroup()
 

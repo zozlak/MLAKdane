@@ -1,19 +1,20 @@
 devtools::load_all(".")
 library(dplyr)
+options(scipen = 100)
 
 dataMin = '2014-01-01'
 dataMax = '2016-09-30'  # 2015-03-31 / 2015-09-30 / 2016-09-30
-rocznik = 2014          # 2014 / 2015
-katZr = 'dane/ZUS_2016-09/2014/'
+rocznik = 2015          # 2014 / 2015
+katZr = 'dane/ZUS_2016-09/2015/'
 okienka = list(
   okienko(  1, 12, 'data_do', 'data_do', '_p1', dataMin, dataMax),
-  okienko( 13, 24, 'data_do', 'data_do', '_p2', dataMin, dataMax),
+#  okienko( 13, 24, 'data_do', 'data_do', '_p2', dataMin, dataMax),
   okienko(  1, 99, 'data_do', 'data_do', ''   , dataMin, dataMax)
 )
 kierZmDod = c()
 probka = 1
 krok = 100000
-pominCache = TRUE
+pominCache = FALSE
 
 ####################
 # 1. Przygotowanie danych ZUS i GUS
@@ -49,6 +50,7 @@ if (!file.exists(plikCache) | pominCache) {
 # 3. Wyliczamy zmienne w poszczególnych okienkach czasu
 ####################
 for (i in seq_along(okienka)) {
+  unlink(nazwa_pliku(paste0('razem_', i), 'cache', rocznik))
   razem = okienko_ela(okienka[[i]], zdau, baza, miesieczne, utrataPracy, jednostki, krok, TRUE)
   save(razem, file = nazwa_pliku(paste0('razem_', i), 'cache', rocznik), compress = TRUE)
   rm(razem)
@@ -98,3 +100,20 @@ okienkoMies = oblicz_okienko(miesieczne, okienko(-60, 60, 'data_do', 'data_do', 
 names(okienkoMies) = toupper(paste0(names(okienkoMies), '_M'))
 save(okienkoMies, file = nazwa_pliku('dane_mies', katZr, rocznik), compress = TRUE)
 
+##########
+# Zbiór danych kwartalnych (+0, +3, +6, itd. miesiąc od dyplomu)
+kwartalne = miesieczne %>%
+  filter(okres >= data_do & (okres - data_do) %% 3L == 0L) %>%
+  mutate(
+    kwartal = as.integer((okres - data_do) / 3L),
+    data = okres2data(okres),
+    nm_es = pmin(nm_e + nm_s, 1)
+  )
+names(kwartalne) = toupper(names(kwartalne))
+save(kwartalne, file = nazwa_pliku('dane_kwart', katZr, rocznik), compress = TRUE)
+
+##########
+# W innych formatach
+haven::write_dta(wszystko, nazwa_pliku('dane', katZr, rocznik, '.dta'))
+haven::write_dta(okienkoMies, nazwa_pliku('dane_mies', katZr, rocznik, '.dta'))
+haven::write_dta(kwartalne, nazwa_pliku('dane_kwart', katZr, rocznik, '.dta'))

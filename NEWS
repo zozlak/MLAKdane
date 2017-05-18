@@ -1,6 +1,8 @@
 # 0.9.3 (2017-05-17)
 
-* zmiana definicji zmiennych if_e_n, if_e_s, if_p_n, if_p_s, if_s_n, if_s_s
+* zmiana definicji zmiennych {coś}_{coś}_n oraz {coś}_{coś}_s
+* używana wewnętrznie funkcja nazwa_pliku() przyjmuje teraz dodatkowy
+  parametr "rozszerzenie"
 
 # 0.9.2 (2017-04-27)
 

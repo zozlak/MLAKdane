@@ -71,6 +71,49 @@ agreguj_do_okresu = function(dane, multidplyr = TRUE){
       sz_z_n = ~sum(sz_z_n, na.rm = TRUE),
       sz_z_s = ~sum(sz_z_s, na.rm = TRUE)
     ) %>%
+    mutate_(
+      na_n = ~ifelse(nm_x_n > 0L & !is.na(nm_x_n), 1L, NA_integer_),
+      na_s = ~ifelse(nm_x_s > 0L & !is.na(nm_x_s), 1L, NA_integer_),
+      ezpow_e_n = ~ezpow_e_n * na_n,
+      ezpow_e_s = ~ezpow_e_s * na_s,
+      ezpow_z_n = ~ezpow_z_n * na_n,
+      ezpow_z_s = ~ezpow_z_s * na_s,
+      nm_bd_n = ~nm_bd_n * na_n,
+      nm_bd_s = ~nm_bd_s * na_s,
+      nm_d_n  = ~nm_d_n * na_n,
+      nm_d_s  = ~nm_d_s * na_s,
+      nm_e_n  = ~nm_e_n * na_n,
+      nm_e_s  = ~nm_e_s * na_s,
+      nm_i_n  = ~nm_i_n * na_n,
+      nm_i_s  = ~nm_i_s * na_s,
+      nm_j_n  = ~nm_j_n * na_n,
+      nm_j_s  = ~nm_j_s * na_s,
+      nm_m_n  = ~nm_m_n * na_n,
+      nm_m_s  = ~nm_m_s * na_s,
+      nm_n_n  = ~nm_n_n * na_n,
+      nm_n_s  = ~nm_n_s * na_s,
+      nm_p_n  = ~nm_p_n * na_n,
+      nm_p_s  = ~nm_p_s * na_s,
+      nm_s_n  = ~nm_s_n * na_n,
+      nm_s_s  = ~nm_s_s * na_s,
+      nm_z_n  = ~nm_z_n * na_n,
+      nm_z_s  = ~nm_z_s * na_s,
+      npm_e_n  = ~nm_e_n * na_n,
+      npm_e_s  = ~nm_e_s * na_s,
+      sz_e_n = ~sz_e_n * na_n,
+      sz_e_s = ~sz_e_s * na_s,
+      sz_n_n = ~sz_n_n * na_n,
+      sz_n_s = ~sz_n_s * na_s,
+      sz_p_n = ~sz_p_n * na_n,
+      sz_p_s = ~sz_p_s * na_s,
+      sz_s_n = ~sz_s_n * na_n,
+      sz_s_s = ~sz_s_s * na_s,
+      sz_x_n = ~sz_x_n * na_n,
+      sz_x_s = ~sz_x_s * na_s,
+      sz_z_n = ~sz_z_n * na_n,
+      sz_z_s = ~sz_z_s * na_s
+    ) %>%
+    select_('-na_n', '-na_s') %>%
     collect() %>%
     ungroup()
 

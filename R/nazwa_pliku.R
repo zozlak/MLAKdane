@@ -4,9 +4,10 @@
 #' @param zbior nazwa zbioru
 #' @param katalog ścieżka do katalogu
 #' @param rocznik rocznik absolwentów (np. 2014)
+#' @param rozszerzenie rozszerzenie pliku (domyślnie .RData)
 #' @export
-nazwa_pliku = function(zbior, katalog = '', rocznik = '') {
+nazwa_pliku = function(zbior, katalog = '', rocznik = '', rozszerzenie = '.RData') {
   katalog = sub('^/', '', paste0(katalog, '/'))
   rocznik = sub('^_', '', paste0(rocznik, '_'))
-  return(paste0(katalog, rocznik, zbior, '.RData'))
+  return(paste0(katalog, rocznik, zbior, rozszerzenie))
 }

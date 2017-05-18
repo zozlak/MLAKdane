@@ -9,11 +9,11 @@ output: html_document
 library(dplyr)
 library(MLAK)
 devtools::load_all(".")
-wszystkoS = wczytajDane('../dane/archiwum/2016-09_2014_0.9.1_dane.RData')
-miesieczneS = wczytajDane('../dane/archiwum/2016-09_2014_0.9.1_mies.RData')
+wszystkoS = wczytajDane('../dane/archiwum/2016-09_2014_0.9.2_dane.RData')
+miesieczneS = wczytajDane('../dane/archiwum/2016-09_2014_0.9.2_mies.RData')
 miesieczneS = miesieczneS %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% semi_join(wszystkoS %>% select(ID_ZDAU))
 wszystko = wczytajDane('../dane/ZUS_2016-09/2014/2014_dane.RData')
-miesieczne = wczytajDane('../dane/ZUS_2016-09/2014/2014_mies.RData')
+miesieczne = wczytajDane('../dane/ZUS_2016-09/2014/2014_dane_mies.RData')
 miesieczne = miesieczne %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% semi_join(wszystko %>% select(ID_ZDAU))
 ```
 
@@ -22,11 +22,20 @@ miesieczne = miesieczne %>% rename(ID_ZDAU = ID_ZDAU_M, OKRES = OKRES_M) %>% sem
 ```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
 porownaj(wszystkoS, wszystko, 'NM_E', 'NM_E') %>% group_by(d) %>% summarize(n = n()) 
 porownaj(wszystkoS, wszystko, 'NPM_E', 'NPM_E') %>% group_by(d) %>% summarize(n = n()) 
+```
+```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
 porownaj(wszystkoS, wszystko, 'IF_X_S', 'IF_X_S') %>% group_by(d) %>% summarize(n = n())
 porownaj(wszystkoS, wszystko, 'IF_E_S', 'IF_E_S') %>% group_by(d) %>% summarize(n = n())
+```
+```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
 porownaj(wszystkoS, wszystko, 'EZ_Z_P1', 'EZ_Z_P1') %>% group_by(d) %>% summarize(n = n()) %>% filter(abs(d) > 0.01 | is.na(d) | is.nan(d)) 
 porownaj(wszystkoS, wszystko, 'EZ_Z', 'EZ_Z') %>% group_by(d) %>% summarize(n = n()) %>% filter(abs(d) > 0.01 | is.na(d) | is.nan(d)) 
-
+```
+```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
+porownaj(wszystkoS, wszystko, 'SZ_X_S', 'SZ_X_S') %>% group_by(d) %>% summarize(n = n()) %>% filter(abs(d) > 0.01 | is.na(d) | is.nan(d)) 
+porownaj(wszystkoS, wszystko, 'SZ_E_S', 'SZ_E_S') %>% group_by(d) %>% summarize(n = n()) %>% filter(abs(d) > 0.01 | is.na(d) | is.nan(d)) 
+```
+```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
 porownaj(wszystkoS, wszystko, 'WZG_EZ_Z_P1', 'WZG_EZ_Z_P1') %>% arrange(desc(abs(d))) %>% filter(abs(d) > 0.0001 | is.na(d)) %>% arrange(desc(abs(d)))
 porownaj(wszystkoS, wszystko, 'WZG_EZ_Z', 'WZG_EZ_Z') %>% arrange(desc(abs(d))) %>% filter(abs(d) > 0.0001 | is.na(d)) %>% arrange(desc(abs(d)))
 porownaj(wszystkoS, wszystko, 'WZG_RYZBEZ_P1', 'WZG_RYZBEZ_P1') %>% filter(abs(d) > 0.001 | is.na(d)) %>% arrange(desc(abs(d)))
@@ -36,13 +45,14 @@ porownaj(wszystkoS, wszystko, 'WZG_RYZBEZ', 'WZG_RYZBEZ') %>% filter(abs(d) > 0.
 ## oblicz_okienko
 
 ```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
+porownaj(wszystkoS, wszystko, 'LEN', 'LEN') %>% group_by(d) %>% summarize(n = n()) 
 porownaj(wszystkoS, wszystko, 'LEN_P1', 'LEN_P1') %>% group_by(d) %>% summarize(n = n()) 
 ```
 ## oblicz_pracodawcy
 
 ```{r, echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE}
-porownaj(wszystkoS, wszystko, 'ENUP_ENL', 'ENUP_ENL') %>% group_by(d) %>% summarize(n = n()) 
-porownaj(wszystkoS, wszystko, 'NPN_E', 'NPN_E') %>% group_by(d) %>% summarize(n = n()) 
+porownaj(wszystkoS, wszystko, 'NPN_E', 'NPN_E') %>% group_by(d) %>% summarize(n = n())
+porownaj(wszystkoS, wszystko, 'NPM_E_S', 'NPM_E_S') %>% group_by(d) %>% summarize(n = n()) 
 ```
 
 ## oblicz_stale
@@ -82,6 +92,8 @@ porownaj(wszystkoS, wszystko, 'UP_E_P1', 'UP_E_P1') %>% group_by(d) %>% summariz
 porownaj(wszystkoS, wszystko, 'UP_ENL', 'UP_ENL') %>% group_by(d) %>% summarize(n = n())
 porownaj(wszystkoS, wszystko, 'UP_EL', 'UP_EL') %>% group_by(d) %>% summarize(n = n()) 
 porownaj(wszystkoS, wszystko, 'UP_EL_P1', 'UP_EL_P1') %>% group_by(d) %>% summarize(n = n()) 
+porownaj(wszystkoS, wszystko, 'UP_E_N', 'UP_E_N') %>% group_by(d) %>% summarize(n = n()) 
+porownaj(wszystkoS, wszystko, 'ENUP_E_S', 'ENUP_E_S') %>% group_by(d) %>% summarize(n = n()) 
 ```
 
 # miesięczne
