@@ -39,7 +39,8 @@ if (!file.exists(plikCache) | pominCache) {
   jednostki = przygotuj_jednostki(katZr, rocznik)
   baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
   miesieczne = agreguj_do_miesiecy(baza, zdau)
-  save(zdau, jednostki, baza, miesieczne, utrataPracy, file = plikCache, compress = TRUE)
+  pkd = oblicz_pkd(zus)
+  save(zdau, jednostki, baza, miesieczne, utrataPracy, pkd, file = plikCache, compress = TRUE)
   rm(zus)
 } else {
   suppressWarnings(rm(zus))
@@ -94,7 +95,11 @@ save(wszystko, file = nazwa_pliku('dane', katZr, rocznik), compress = TRUE)
 # Zbiór danych miesięcznych
 okienkoMies = oblicz_okienko(miesieczne, okienko(-60, 60, 'data_do', 'data_do', '', dataMin, dataMax)) %>%
   filter_(~okres >= okres_min & okres <= okres_max) %>%
-  select_('id_zdau', 'okres', 'if_x_s', 'if_x_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s') %>%
+  select_('id_zdau', 'id', 'okres', 'if_x_s', 'if_x_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s')
+okienkoMies = okienkoMies %>%
+  left_join(pkd) %>%
+  mutate_at(vars(starts_with('if_pkd_')), function(x){coalesce(x, FALSE)})
+okienkoMies = okienkoMies %>%
   mutate_(okres = ~okres2data(okres))
 
 names(okienkoMies) = toupper(paste0(names(okienkoMies), '_M'))
@@ -108,7 +113,21 @@ kwartalne = miesieczne %>%
     kwartal = as.integer((okres - data_do) / 3L),
     data = okres2data(okres),
     nm_es = pmin(nm_e + nm_s, 1)
+  ) %>%
+  left_join(
+    baza %>%
+      select_('id_zdau', 'okres', 'klaszam2') %>%
+      group_by_('id_zdau', 'okres') %>%
+      summarize_(klasz = ~min(klaszam2))
+  ) %>%
+  left_join(
+    przygotuj_zdu1(katZr) %>%
+      select(id, plec, rok_ur)
   )
+kwartalne = kwartalne %>%
+  left_join(pkd) %>%
+  mutate_at(vars(starts_with('if_pkd_')), function(x){coalesce(x, FALSE)})
+
 names(kwartalne) = toupper(names(kwartalne))
 save(kwartalne, file = nazwa_pliku('dane_kwart', katZr, rocznik), compress = TRUE)
 

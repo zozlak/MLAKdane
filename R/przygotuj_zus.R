@@ -19,15 +19,7 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
   colnames(zus_tytuly_ubezp) = tolower(colnames(zus_tytuly_ubezp))
 
   # dane ewidencyjne osoby
-  zdu1 = utils::read.csv2(paste0(katZr, '/ZDU1.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)[, c(1, 5:8)]
-  colnames(zdu1) = c('id', 'rok_ur', 'plec', 'koniec_r', 'koniec_m')
-  zdu1 = zdu1 %>%
-    mutate_(
-      id = ~as.integer(id),
-      rok_ur = ~as.integer(rok_ur),
-      koniec = ~as.integer(koniec_r) * 12L + as.integer(koniec_m)
-    ) %>%
-    select_('-koniec_r', '-koniec_m')
+  zdu1 = przygotuj_zdu1(katZr)
 
   # dane adresowe w poszczególnych okresach
   zdu2 = utils::read.csv2(paste0(katZr, '/ZDU2.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)

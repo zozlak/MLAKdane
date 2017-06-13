@@ -1,3 +1,18 @@
+# 0.10.0 (2017-06-13)
+
+* korekta wielkiej literówki w 0.9.3, gdzie zmienne PM_coś_S/PM_coś_N miały
+  w mianowniku NM_S/NM_N zamiast NM_X_S/NM_X_N
+* korekta wyliczania zmiennych PM_X_S i PM_X_N (te dwie wyjątkowo powinny mieć
+  w mianowniku LEN zamiast NM_X_S i NM_X_N)
+* dodanie funkcji oblicz_pkd() wyliczającej zmienne opisujące PKD
+    * pozostawienie zmiennej "pkd" w przygotuj_zus_zdau()
+    * dodanie dołączania zbioru pkd do danych miesięcznych i kwartalnych
+      w winietce generowania danych
+* wydzielenie funkcji przygotuj_zdu1() z przygotuj_zus(), aby można było łatwo
+  dołączyć informację o płci oraz roku urodzenia
+* dodanie funkcji generuj_wartosci() używanej przy generowaniu raportów
+  oraz wykorzystującej je winietki
+
 # 0.9.3 (2017-05-17)
 
 * zmiana definicji zmiennych {coś}_{coś}_n oraz {coś}_{coś}_s
