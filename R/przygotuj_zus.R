@@ -15,7 +15,7 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
   zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%
     rename_(id_tytulu = 'KOD') %>%
-    mutate_each(funs_('as.integer'))
+    mutate_all(funs_('as.integer'))
   colnames(zus_tytuly_ubezp) = tolower(colnames(zus_tytuly_ubezp))
 
   # dane ewidencyjne osoby
