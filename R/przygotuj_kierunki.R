@@ -40,6 +40,12 @@ przygotuj_kierunki = function(katZr, zmDodatkowe = character()){
     ) %>%
     select_(
       .dots = c('uczelnia_id', 'jednostka_id', 'kierunek_id', 'kieruneknazwa', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc', zmDodatkowe)
+    ) %>%
+    left_join(
+      przygotuj_jednostki(katZr) %>%
+        select_('jednostka_id', 'rodzaj') %>%
+        rename_(uczelnia_id = 'jednostka_id', rodzucz = 'rodzaj') %>%
+        mutate_(rodzucz_kod = ~c('PUBLIC_UNIVERSITY' = 1L, 'NONPUBLIC_UNIVERSITY' = 2L, 'ECCLESIASTICAL_UNIVERSITY' = 3L)[rodzucz])
     )
 
   if (any(is.na(dane$obsz_kod))) {
