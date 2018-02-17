@@ -21,12 +21,12 @@ polacz_pna_powiaty = function(pna, powiaty, dataMin, dataMax){
   pnaAgr = pna %>%
     group_by_('pna', 'rok') %>%
     summarize_(
-      pow_grodzki  = ~ ifelse(n_distinct(pow_grodzki) > 1, NA, first(pow_grodzki)),
       pow_grodzki2 = ~ min(pow_grodzki),
-      miejzam      = ~ ifelse(n_distinct(miejzam) > 1, NA, first(miejzam)),
+      pow_grodzki  = ~ ifelse(n_distinct(pow_grodzki) > 1, NA, first(pow_grodzki)),
       miejzam2     = ~ min(miejzam),
-      klaszam      = ~ ifelse(n_distinct(klaszam) > 1, NA, first(klaszam)),
-      klaszam2     = ~ min(klaszam)
+      miejzam      = ~ ifelse(n_distinct(miejzam) > 1, NA, first(miejzam)),
+      klaszam2     = ~ min(klaszam),
+      klaszam      = ~ ifelse(n_distinct(klaszam) > 1, NA, first(klaszam))
     )
 
   pnaWskSr = pna %>%

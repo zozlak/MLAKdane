@@ -4,7 +4,7 @@
 \alias{przygotuj_jednostki}
 \title{Przygotowuje słownik uczelni}
 \usage{
-przygotuj_jednostki(katZr, rok)
+przygotuj_jednostki(katZr, rok = NA_integer_)
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}

@@ -6,7 +6,7 @@
 #' @return [data.frame] ramka danych opisująca uczelnie
 #' @export
 #' @import dplyr
-przygotuj_jednostki = function(katZr, rok){
+przygotuj_jednostki = function(katZr, rok = NA_integer_){
   sl_jednostki = openxlsx::readWorkbook(paste0(katZr, '/sl_instytucje.xlsx'))
   colnames(sl_jednostki) = tolower(colnames(sl_jednostki))
 
