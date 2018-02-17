@@ -25,7 +25,11 @@ przygotuj_zdau = function(katZr, probka = 1){
       data_do  = ~data2okres(ifelse(grepl('NA', data_do), NA_character_, data_do)),
       data_skr = ~ifelse(poziom %in% 3 & typ %in% 'S', data_do, NA_integer_)
     ) %>%
-    select_('-rok_od', '-mies_od', '-rok_do', '-mies_do', '-liczba_rekordów')
+    select_('-rok_od', '-mies_od', '-rok_do', '-mies_do', '-liczba_rekordów') %>%
+    left_join(
+      przygotuj_zdu1(katZr) %>%
+        select_('id', 'plec', 'rok_ur')
+    )
 
   if (probka < 1) {
     zdau = zdau %>%

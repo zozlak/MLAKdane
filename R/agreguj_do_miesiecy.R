@@ -22,7 +22,6 @@ agreguj_do_miesiecy = function(dane, zdau, multidplyr = TRUE){
     summarize_(
       len = ~as.integer(dplyr::first(okres <= koniec | is.na(koniec))),
       if_x_stprg = ~first(if_x_stprg),
-      plec = ~first(plec),
       koniec = ~dplyr::first(koniec),
       ezpow     = ~dplyr::coalesce(mean(powezar_sr, na.rm = TRUE), NA_real_),
       ezpow_e   = ~dplyr::coalesce(mean(powezar_sr[etat > 0L], na.rm = TRUE), NA_real_),

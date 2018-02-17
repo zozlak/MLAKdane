@@ -18,6 +18,10 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
     mutate_all(funs_('as.integer'))
   colnames(zus_tytuly_ubezp) = tolower(colnames(zus_tytuly_ubezp))
 
+  pkd = openxlsx::readWorkbook('dane/pkd.xlsx') %>%
+    select('pkd', 'pkd_klasa', 'pkd_klasa_edu') %>%
+    mutate_(pkd2 = ~substr(pkd, 1, 2))
+
   # dane ewidencyjne osoby
   zdu1 = przygotuj_zdu1(katZr)
 
@@ -75,7 +79,7 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
     zdu3 = group_by_(zdu3, 'id_zdu3')
   }
   zdu3 = zdu3 %>%
-    summarize_(podst = ~ max(podst, na.rm = TRUE)) %>%
+    summarize_(podst = ~dplyr::na_if(max(podst, na.rm = TRUE), -Inf)) %>%
     collect() %>%
     inner_join(zdu3tmp)
   rm(zdu3tmp)
@@ -118,8 +122,9 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
 
   zus = zus %>%
     left_join(zdu4 %>% select_('id_platnika', 'pkd', 'platnik_kon')) %>%
-    left_join(zdu1 %>% select_('id', 'rok_ur', 'plec', 'koniec')) %>%
+    left_join(zdu1 %>% select_('id', 'koniec')) %>%
     left_join(zus_tytuly_ubezp) %>%
+    left_join(pkd) %>%
     mutate_(
       okres       = ~data2okres(okres),
       platnik_kon = ~data2okres(platnik_kon),
@@ -128,7 +133,8 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
       pna         = ~dplyr::coalesce(pna, -1)
     )
   stopifnot(
-    all(!is.na(zus$etat))
+    all(!is.na(zus$etat)),
+    all(!is.infinite(zus$podst))
   )
 
   # weryfikacja pna
