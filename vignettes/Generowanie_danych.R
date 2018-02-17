@@ -39,8 +39,7 @@ if (!file.exists(plikCache) | pominCache) {
   jednostki = przygotuj_jednostki(katZr, rocznik)
   baza = polacz_zus_zdau(zus, zdau, pnaPowiaty, dataMin, dataMax)
   miesieczne = agreguj_do_miesiecy(baza, zdau)
-  pkd = oblicz_pkd(zus)
-  save(zdau, jednostki, baza, miesieczne, utrataPracy, pkd, file = plikCache, compress = TRUE)
+  save(zdau, jednostki, baza, miesieczne, utrataPracy, file = plikCache, compress = TRUE)
   rm(zus)
 } else {
   suppressWarnings(rm(zus))
@@ -95,10 +94,7 @@ save(wszystko, file = nazwa_pliku('dane', katZr, rocznik), compress = TRUE)
 # Zbiór danych miesięcznych
 okienkoMies = oblicz_okienko(miesieczne, okienko(-60, 60, 'data_do', 'data_do', '', dataMin, dataMax)) %>%
   filter_(~okres >= okres_min & okres <= okres_max) %>%
-  select_('id_zdau', 'id', 'okres', 'if_x_s', 'if_x_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s')
-okienkoMies = okienkoMies %>%
-  left_join(pkd) %>%
-  mutate_at(vars(starts_with('if_pkd_')), function(x){coalesce(x, FALSE)})
+  select_('id_zdau', 'id', 'okres', 'if_x_s', 'if_x_stprg', 'wzg_ez_e', 'wzg_ez_z', 'wzg_ryzbez', 'ez_z', 'ez_e', 'if_p', 'if_e', 'if_s', 'status')
 okienkoMies = okienkoMies %>%
   mutate_(okres = ~okres2data(okres))
 
@@ -119,20 +115,24 @@ kwartalne = miesieczne %>%
       select_('id_zdau', 'okres', 'klaszam2') %>%
       group_by_('id_zdau', 'okres') %>%
       summarize_(klasz = ~min(klaszam2))
-  ) %>%
-  left_join(
-    przygotuj_zdu1(katZr) %>%
-      select(id, plec, rok_ur)
   )
-kwartalne = kwartalne %>%
-  left_join(pkd) %>%
-  mutate_at(vars(starts_with('if_pkd_')), function(x){coalesce(x, FALSE)})
 
 names(kwartalne) = toupper(names(kwartalne))
 save(kwartalne, file = nazwa_pliku('dane_kwart', katZr, rocznik), compress = TRUE)
 
 ##########
-# W innych formatach
-haven::write_dta(wszystko, nazwa_pliku('dane', katZr, rocznik, '.dta'))
-haven::write_dta(okienkoMies, nazwa_pliku('dane_mies', katZr, rocznik, '.dta'))
-haven::write_dta(kwartalne, nazwa_pliku('dane_kwart', katZr, rocznik, '.dta'))
+# PKD
+load(nazwa_pliku('baza', 'cache', rocznik))
+load(nazwa_pliku('stale', 'cache', rocznik))
+
+pkdKwartalne = agreguj_pkd(baza, 3)
+pkdPoDyplomie = agreguj_pkd(baza, 99) %>% select(-kwartal)
+pkdAbsolwenci = zdau %>%
+  filter_(~typ == 'A') %>%
+  select_('id_zdau', 'uczelnia_id', 'jednostka_id', 'kierunek_id', 'forma', 'poziom') %>%
+  left_join(przygotuj_kierunki(katZr, c())) %>%
+  left_join(stale)
+names(pkdKwartalne) = toupper(names(pkdKwartalne))
+names(pkdAbsolwenci) = toupper(names(pkdAbsolwenci))
+names(pkdPoDyplomie) = toupper(names(pkdPoDyplomie))
+save(pkdAbsolwenci, pkdKwartalne, pkdPoDyplomie, file = nazwa_pliku('pkd', katZr, rocznik), compress = TRUE)
