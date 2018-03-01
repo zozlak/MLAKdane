@@ -8,9 +8,9 @@ unikalne}
 polacz_pna_powiaty(pna, powiaty, dataMin, dataMax)
 }
 \arguments{
-\item{pna}{dane PNA wygenerowane za pomocą funkcji \code{\link{przygotuj_pna}}}
+\item{pna}{dane PNA}
 
-\item{powiaty}{dane powiatów wygenerowane za pomocą funkcji \code{\link{przygotuj_powiaty}}}
+\item{powiaty}{dane powiatów}
 
 \item{dataMin}{początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')}
 
