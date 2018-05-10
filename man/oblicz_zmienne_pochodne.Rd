@@ -4,14 +4,11 @@
 \alias{oblicz_zmienne_pochodne}
 \title{oblicza zmienne wywodzone z już wcześniej policzonych}
 \usage{
-oblicz_zmienne_pochodne(dane, multidplyr = TRUE)
+oblicz_zmienne_pochodne(dane)
 }
 \arguments{
 \item{dane}{ramki danych wygenerowane wewnątrz pomocą funkcji
 \code{\link{agreguj_do_miesiecy}} lub \code{\link{agreguj_do_okresu}}}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
-multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

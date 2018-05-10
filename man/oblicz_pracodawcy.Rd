@@ -4,12 +4,10 @@
 \alias{oblicz_pracodawcy}
 \title{oblicza zmienne związane z liczbą pracodawców}
 \usage{
-oblicz_pracodawcy(dane, multidplyr = TRUE)
+oblicz_pracodawcy(dane)
 }
 \arguments{
 \item{dane}{zbiór danych wygenerowany funkcją \code{\link{oblicz_okienko}}}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

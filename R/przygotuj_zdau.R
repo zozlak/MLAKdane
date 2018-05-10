@@ -22,8 +22,7 @@ przygotuj_zdau = function(katZr, probka = 1){
     ) %>%
     mutate_(
       data_od  = ~data2okres(ifelse(grepl('NA', data_od), NA_character_, data_od)),
-      data_do  = ~data2okres(ifelse(grepl('NA', data_do), NA_character_, data_do)),
-      data_skr = ~ifelse(poziom %in% 3 & typ %in% 'S', data_do, NA_integer_)
+      data_do  = ~data2okres(ifelse(grepl('NA', data_do), NA_character_, data_do))
     ) %>%
     select_('-rok_od', '-mies_od', '-rok_do', '-mies_do', '-liczba_rekordów') %>%
     left_join(
@@ -41,6 +40,7 @@ przygotuj_zdau = function(katZr, probka = 1){
       )
   }
 
+  zdau = as.tbl(zdau)
   class(zdau) = c('zdau_df', class(zdau))
   return(zdau)
 }

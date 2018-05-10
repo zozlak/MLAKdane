@@ -5,35 +5,28 @@
 #' zagregowanych do poziomu miesięcy w funkcji \code{\link{agreguj_do_okresu}} i
 #' wymagają osobnej funkcji.
 #' @param dane zbiór danych wygenerowany funkcją \code{\link{oblicz_okienko}}
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_pracodawcy = function(dane, multidplyr = TRUE){
+oblicz_pracodawcy = function(dane){
   stopifnot(
-    methods::is(dane, 'okienko_df') & methods::is(dane, 'baza_df')
+    methods::is(dane, 'tbl_spark') # Spark inaczej ewaluuje niektóre funkcje (np. n_distinct), co prowadziłoby do różnych wyników
   )
-
-  if (multidplyr) {
-    wynik = multidplyr::partition(dane, id_zdau)
-  } else {
-    wynik = dane
-  }
-
-  wynik = wynik %>%
-    filter_(~ okres <= okres_max) %>%
+  wynik = dane %>%
+    filter_(~okres >= okres_min & okres <= okres_max) %>%
     group_by_('id_zdau') %>%
     summarize_(
-      len = ~first(len),
-      nm_e = ~length(unique(okres[etat > 0])),
-      nm_n = ~length(unique(okres[netat > 0])),
-      np_e = ~length(unique(id_platnika[etat])),
-      np_n = ~length(unique(id_platnika[netat])),
-      pp_e = ~dplyr::coalesce(100 * np_e / nm_e, 0),
-      pp_n = ~dplyr::coalesce(100 * np_n / nm_n, NA_real_)
+      len = ~mean(len, na.rm = TRUE),
+      nm_e = ~as.integer(n_distinct(if_else(etat > 0L, okres, NA_integer_))),
+      nm_n = ~as.integer(n_distinct(if_else(netat > 0L, okres, NA_integer_))),
+      np_e = ~as.integer(n_distinct(if_else(etat > 0L, id_platnika, NA_integer_))),
+      np_n = ~as.integer(n_distinct(if_else(netat > 0L, id_platnika, NA_integer_)))
+    ) %>%
+    mutate_(
+      pp_e = ~if_else(nm_e > 0L, 100 * np_e / nm_e, 0),
+      pp_n = ~if_else(nm_n > 0L, 100 * np_n / nm_n, NA_real_)
     ) %>%
     select_('-nm_e', '-nm_n') %>%
-    collect() %>%
     ungroup()
 
   npn = dane %>%
@@ -45,15 +38,14 @@ oblicz_pracodawcy = function(dane, multidplyr = TRUE){
     distinct()
   poprzedni = npn %>%
     filter_(~przed == TRUE) %>%
-    select_('id_zdau', 'id_platnika') %>%
-    collect()
+    select_('id_zdau', 'id_platnika')
 
   npn_e = npn %>%
     filter_(~etat %in% 1 & przed == FALSE) %>%
     anti_join(poprzedni) %>%
     group_by_('id_zdau') %>%
     summarize_(
-      npn_e = ~ sum(!is.na(id_platnika))
+      npn_e = ~as.integer(sum(as.integer(!is.na(id_platnika)), na.rm = TRUE))
     )
 
   npn_n = npn %>%
@@ -61,17 +53,19 @@ oblicz_pracodawcy = function(dane, multidplyr = TRUE){
     anti_join(poprzedni) %>%
     group_by_('id_zdau') %>%
     summarize_(
-      npn_n = ~sum(!is.na(id_platnika))
+      npn_n = ~as.integer(sum(as.integer(!is.na(id_platnika)), na.rm = TRUE))
     )
 
   dane = wynik %>%
     left_join(npn_e) %>%
     left_join(npn_n) %>%
     mutate_(
-      npn_e = ~dplyr::coalesce(npn_e, 0L),
-      npn_n = ~dplyr::coalesce(npn_n, 0L),
-      enpn_e   = ~dplyr::coalesce(12 * npn_e / len, NA_real_),
-      enpn_n   = ~dplyr::coalesce(12 * npn_n / len, NA_real_)
+      npn_e = ~coalesce(npn_e, 0L),
+      npn_n = ~coalesce(npn_n, 0L)
+    ) %>%
+    mutate_(
+      enpn_e   = ~coalesce(12 * npn_e / len, NA_real_),
+      enpn_n   = ~coalesce(12 * npn_n / len, NA_real_)
     ) %>%
     select_('-len')
 

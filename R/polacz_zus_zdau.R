@@ -20,24 +20,14 @@
 #' @export
 #' @import dplyr
 polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
-  stopifnot(
-    methods::is(zus, 'zus_df'),
-    methods::is(zdau, 'zdau_df'),
-    methods::is(pnaPowiaty, 'pna_powiaty_df')
-  )
-
-  okresy = data2okres(dataMin):data2okres(dataMax)
   absolw = zdau %>%
-    filter_(~ typ %in% 'A')
-  wynik = data.frame(
-    id_zdau      = rep(absolw$id_zdau,      each = length(okresy)),
-    id           = rep(absolw$id,           each = length(okresy)),
-    data_od      = rep(absolw$data_od,      each = length(okresy)),
-    data_do      = rep(absolw$data_do,      each = length(okresy)),
-    jednostka_id = rep(absolw$jednostka_id, each = length(okresy)),
-    okres        = rep(okresy,              times = nrow(absolw))
-  )
-  wynik = wynik %>%
+    filter_(~typ %in% 'A') %>%
+    select_('id_zdau', 'id', 'data_od', 'data_do', 'jednostka_id') %>%
+    mutate_(dummy = 1L)
+  okresy = data_frame(dummy = 1L, okres = data2okres(dataMin):data2okres(dataMax))
+  wynik1 = absolw %>%
+    inner_join(okresy, copy = TRUE) %>%
+    select_('-dummy') %>%
     left_join(
       zus %>%
         select_('-nspraw', '-platnik_kon', '-rolnik', '-zlec', '-koniec')
@@ -47,56 +37,60 @@ polacz_zus_zdau = function(zus, zdau, pnaPowiaty, dataMin, dataMax){
         select_('id', 'koniec') %>%
         distinct()
     ) %>%
-    filter_(~ (okres < koniec & data_do <= koniec) | is.na(koniec))
+    filter_(~(okres < koniec & data_do <= koniec) | is.na(koniec))
 
   stud = zdau %>%
     select_('id', 'data_od', 'data_do') %>%
     left_join(
-      wynik %>% select_('id', 'okres')
+      wynik1 %>% select_('id', 'okres')
     ) %>%
-    filter_(~ okres >= data_od & ((is.na(data_do) | okres <= data_do))) %>%
+    filter_(~okres >= data_od & ((is.na(data_do) | okres <= data_do))) %>%
     select_('id', 'okres') %>%
     distinct() %>%
     mutate_(studopi = 1)
 
-  wynik = wynik %>%
+  wynik2 = wynik1 %>%
     left_join(stud) %>%
     mutate_(
-      etat     = ~ifelse(is.na(etat), 0L, etat),
-      netat    = ~ifelse(is.na(netat), 0L, netat),
-      samoz    = ~ifelse(is.na(samoz), 0L, samoz),
-      bezrob   = ~ifelse(is.na(bezrob), 0L, bezrob),
-      rentemer = ~ifelse(is.na(rentemer), 0L, rentemer),
-      studzus  = ~ifelse(is.na(student), 0L, student), # student wg zus
-      studopi  = ~ifelse(is.na(studopi), 0L, studopi), # student wg opi
-      if_b       = ~as.integer(bezrob > 0L), # niezbędne, aby poprawnie policzyć if_x_s zagregowane do miesięcy
-      if_x_s     = ~as.integer(studzus + studopi > 0L), # student wg zus lub OPI
-      if_x_stprg = ~as.integer(if_x_s == 1L & okres >= data_od & (okres <= data_do | is.na(data_do))), # student na kierunku studiów id_zdau
-      prawnik  = ~ifelse(is.na(prawnik), 0L, prawnik),
-      mundur   = ~ifelse(is.na(mundur), 0L, mundur),
-      # zlec     = ~ifelse(is.na(zlec), 0L, zlec),
-      # nspraw   = ~ifelse(is.na(nspraw), 0L, nspraw),
-      # rolnik   = ~ifelse(is.na(rolnik), 0, rolnik),
-      dziecko  = ~ifelse(is.na(dziecko), 0L, dziecko),
-      podst    = ~ifelse(is.na(podst), 0L, podst),
-      pna      = ~ifelse(is.na(pna), -200, pna)
+      etat     = ~coalesce(etat, 0L),
+      netat    = ~coalesce(netat, 0L),
+      samoz    = ~coalesce(samoz, 0L),
+      bezrob   = ~coalesce(bezrob, 0L),
+      rentemer = ~coalesce(rentemer, 0L),
+      studzus  = ~coalesce(student, 0L), # student wg zus
+      studopi  = ~coalesce(studopi, 0L), # student wg opi
+      prawnik  = ~coalesce(prawnik, 0L),
+      mundur   = ~coalesce(mundur, 0L),
+      # zlec     = ~coalesce(zlec, 0L),
+      # nspraw   = ~coalesce(nspraw, 0L),
+      # rolnik   = ~coalesce(rolnik, 0L),
+      dziecko  = ~coalesce(dziecko, 0L),
+      podst    = ~coalesce(podst, 0L),
+      pna      = ~coalesce(pna, -200L)
+    )  %>%
+    mutate_(
+      if_b   = ~as.integer(bezrob > 0L), # niezbędne, aby poprawnie policzyć if_x_s zagregowane do miesięcy
+      if_x_s = ~as.integer(studzus + studopi > 0L) # student wg zus lub OPI
+    ) %>%
+    mutate_(
+      if_x_stprg = ~as.integer(if_x_s == 1L & okres >= data_od & (okres <= data_do | is.na(data_do))) # student na kierunku studiów id_zdau
     ) %>%
     select_('-student', '-studzus', '-studopi') %>%
     group_by_('id_zdau', 'id', 'okres') %>%
     mutate_(
-      if_nb      = ~as.integer(all(if_b == 0L)),
-      if_x_s     = ~as.integer(any(if_x_s > 0L) & if_nb), # student wg zus lub OPI
-      if_x_stprg = ~as.integer(any(if_x_stprg > 0L) & if_nb) # student na kierunku studiów id_zdau
+      if_nb      = ~as.integer(sum(as.integer(if_b == 0L), na.rm = TRUE) == n())
+    ) %>%
+    mutate_(
+      if_x_s     = ~as.integer(sum(as.integer(if_x_s > 0L), na.rm = TRUE) > 0L & if_nb > 0L), # student wg zus lub OPI
+      if_x_stprg = ~as.integer(sum(as.integer(if_x_stprg > 0L), na.rm = TRUE) > 0L & if_nb > 0L) # student na kierunku studiów id_zdau
     ) %>%
     select_('-if_b', '-if_nb') %>%
-    ungroup()
-
-  wynik = left_join(wynik, pnaPowiaty)
+    ungroup() %>%
+    left_join(pnaPowiaty)
 
   # stopifnot(
   #   all(!is.na(wynik$powezar_teryt))
   # )
 
-  class(wynik) = c('baza_df', class(wynik))
-  return(wynik)
+  return(wynik2)
 }

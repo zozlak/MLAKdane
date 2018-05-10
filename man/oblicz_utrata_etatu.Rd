@@ -4,7 +4,7 @@
 \alias{oblicz_utrata_etatu}
 \title{oblicza zmienne UP_E, UP_EL oraz UP_ENL}
 \usage{
-oblicz_utrata_etatu(okienko, utrataPracy, multidplyr = TRUE)
+oblicz_utrata_etatu(okienko, utrataPracy)
 }
 \arguments{
 \item{okienko}{dane wygenerowane za pomocą funkcji
@@ -13,9 +13,6 @@ wygenerowanych wcześniej funkcją \code{\link{agreguj_do_miesiecy}})}
 
 \item{utrataPracy}{dane wygenerowane za pomocą funkcji
 \code{\link{przygotuj_utrata_pracy}}}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
-multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

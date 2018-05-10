@@ -4,16 +4,17 @@
 \alias{nazwa_pliku}
 \title{generuje nazwę pliku zgodną z konwencją}
 \usage{
-nazwa_pliku(zbior, katalog = "", rocznik = "", rozszerzenie = ".RData")
+nazwa_pliku(zbior, rozszerzenie = ".RData", katalog = "cache",
+  rocznik = "")
 }
 \arguments{
 \item{zbior}{nazwa zbioru}
 
+\item{rozszerzenie}{rozszerzenie pliku (domyślnie .RData)}
+
 \item{katalog}{ścieżka do katalogu}
 
 \item{rocznik}{rocznik absolwentów (np. 2014)}
-
-\item{rozszerzenie}{rozszerzenie pliku (domyślnie .RData)}
 }
 \description{
 Ułatwia generowanie nazw plików w powtarzalny sposób

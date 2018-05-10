@@ -4,13 +4,10 @@
 \alias{agreguj_do_okresu}
 \title{agreguje dane do poziomu {id, id_zdau}}
 \usage{
-agreguj_do_okresu(dane, multidplyr = TRUE)
+agreguj_do_okresu(dane)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
-multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

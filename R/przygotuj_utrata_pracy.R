@@ -40,13 +40,15 @@ przygotuj_utrata_pracy = function(zus, dataMax, multidplyr = TRUE){
   }
   wynik = wynik %>%
     mutate_(
-      utretatu    = ~etat    > 0 & (lead(etat)    %in% 0 | !is.na(lead(okres))  & lead(okres) - okres > 1 | is.na(lead(etat))    & okres != dataMax),
-      utretatu_v2 = ~utretatu %in% 1 & (is.na(platnik_kon) | platnik_kon - okres > 6),
-      utrsamoz    = ~samoz   > 0 & (lead(samoz)   %in% 0 | is.na(lead(samoz))   & lead(okres) - okres > 1 | is.na(lead(samoz))   & okres != dataMax),
-      utrzatr     = ~zatr    > 0 & (lead(zatr)    %in% 0 | is.na(lead(zatr))    & lead(okres) - okres > 1 | is.na(lead(zatr))    & okres != dataMax),
-      utrpracy    = ~praca   > 0 & (lead(praca)   %in% 0 | is.na(lead(praca))   & lead(okres) - okres > 1 | is.na(lead(praca))   & okres != dataMax),
-      utrprawnik  = ~prawnik > 0 & (lead(prawnik) %in% 0 | is.na(lead(prawnik)) & lead(okres) - okres > 1 | is.na(lead(prawnik)) & okres != dataMax),
-      utrmundur   = ~mundur  > 0 & (lead(mundur)  %in% 0 | is.na(lead(mundur))  & lead(okres) - okres > 1 | is.na(lead(mundur))  & okres != dataMax)
+      utretatu    = ~as.integer(etat    > 0 & (lead(etat)    %in% 0 | !is.na(lead(okres))  & lead(okres) - okres > 1 | is.na(lead(etat))    & okres != dataMax))
+    ) %>%
+    mutate_(
+      utretatu_v2 = ~as.integer(utretatu %in% 1 & (is.na(platnik_kon) | platnik_kon - okres > 6)),
+      utrsamoz    = ~as.integer(samoz   > 0 & (lead(samoz)   %in% 0 | is.na(lead(samoz))   & lead(okres) - okres > 1 | is.na(lead(samoz))   & okres != dataMax)),
+      utrzatr     = ~as.integer(zatr    > 0 & (lead(zatr)    %in% 0 | is.na(lead(zatr))    & lead(okres) - okres > 1 | is.na(lead(zatr))    & okres != dataMax)),
+      utrpracy    = ~as.integer(praca   > 0 & (lead(praca)   %in% 0 | is.na(lead(praca))   & lead(okres) - okres > 1 | is.na(lead(praca))   & okres != dataMax)),
+      utrprawnik  = ~as.integer(prawnik > 0 & (lead(prawnik) %in% 0 | is.na(lead(prawnik)) & lead(okres) - okres > 1 | is.na(lead(prawnik)) & okres != dataMax)),
+      utrmundur   = ~as.integer(mundur  > 0 & (lead(mundur)  %in% 0 | is.na(lead(mundur))  & lead(okres) - okres > 1 | is.na(lead(mundur))  & okres != dataMax))
     ) %>%
     select_('id', 'id_platnika', 'okres', 'utretatu', 'utretatu_v2', 'utrsamoz', 'utrzatr', 'utrpracy', 'utrprawnik', 'utrmundur') %>%
     filter_(~utretatu + utrsamoz + utrzatr + utrpracy + utrprawnik + utrmundur > 0) %>%

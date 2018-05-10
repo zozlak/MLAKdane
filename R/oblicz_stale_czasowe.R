@@ -5,10 +5,8 @@
 #' @export
 #' @import dplyr
 oblicz_stale_czasowe = function(dane, data_badania){
-  stopifnot(
-    methods::is(dane, 'zdau_df')
-  )
   dane = dane %>%
+    collect() %>%
     mutate_(
       nokr     = ~ data2okres(data_badania) - data_do,
       mcstart  = ~ okres2miesiac(data_od),

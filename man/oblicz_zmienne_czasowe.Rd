@@ -4,16 +4,13 @@
 \alias{oblicz_zmienne_czasowe}
 \title{oblicza zmienne związane z czasem, który upłynął od momentu uzyskania dyplomu}
 \usage{
-oblicz_zmienne_czasowe(dane, utrataPracy, multidplyr = TRUE)
+oblicz_zmienne_czasowe(dane, utrataPracy)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}}
 
 \item{utrataPracy}{dane wygenerowane za pomocą funkcji
 \code{\link{przygotuj_utrata_pracy}}}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
-multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

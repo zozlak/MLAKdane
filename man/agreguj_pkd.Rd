@@ -4,10 +4,10 @@
 \alias{agreguj_pkd}
 \title{agreguje dane na poziomie skladek do poziomu {id, id_zdau, okres, pkd}}
 \usage{
-agreguj_pkd(skladki, okres, multidplyr = TRUE)
+agreguj_pkd(dane, okres, multidplyr = TRUE)
 }
 \arguments{
-\item{skladki}{dane wygenerowane za pomocą funkcji
+\item{dane}{dane wygenerowane za pomocą funkcji
 \code{\link{polacz_zus_zdau}}}
 
 \item{okres}{okres agregacji (okienko agregacji liczone jest jako

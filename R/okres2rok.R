@@ -4,6 +4,5 @@
 #' @seealso data2okres
 #' @export
 okres2rok = function(okres){
-  tmp = okres %% 12
-  return(floor(okres / 12) - ifelse(tmp == 0, 1, 0))
+  return(as.integer((okres - 1) / 12))
 }

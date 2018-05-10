@@ -2,47 +2,39 @@
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
 #' @param utrataPracy dane wygenerowane za pomocą funkcji
 #'   \code{\link{przygotuj_utrata_pracy}}
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
-#'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_zmienne_czasowe = function(dane, utrataPracy, multidplyr = TRUE){
+oblicz_zmienne_czasowe = function(dane, utrataPracy){
   stopifnot(
-    methods::is(dane, 'baza_df'),
-    methods::is(utrataPracy, 'utrata_pracy_df')
+    methods::is(dane, 'tbl_spark') # Spark inaczej ewaluuje niektóre funkcje (np. n_distinct), co prowadziłoby do różnych wyników
   )
 
   dane = dane %>%
     filter_(~okres >= data_do) %>%
-    left_join(utrataPracy) %>%
+    left_join(utrataPracy, copy = TRUE) %>%
     mutate_(
       roznica = ~okres - data_do
-    )
-  if (multidplyr) {
-    dane = multidplyr::partition(dane, id_zdau)
-  } else {
-    dane = group_by_(dane, 'id_zdau')
-  }
-  dane = dane %>%
+    ) %>%
+    group_by_('id_zdau') %>%
     summarize_(
-      data_do = ~dplyr::first(data_do),
-      tp_m2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrmundur)  | roznica > 0) & mundur > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
-      tp_j2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrprawnik) | roznica > 0) & prawnik > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
-      tp_p2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & etat + netat + samoz > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
-      tp_s2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrpracy)   | roznica > 0) & samoz > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
-      tp_e2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utretatu)   | roznica > 0) & etat > 0, roznica, NA_integer_), na.rm = TRUE), Inf),
-      tp_z2 = ~dplyr::na_if(min(ifelse((roznica == 0 & is.na(utrzatr)    | roznica > 0) & etat + netat > 0, roznica, NA_integer_), na.rm = TRUE), Inf)
+      data_do = ~min(data_do, na.rm = TRUE),
+      tp_m2 = ~min(if_else((roznica == 0L & is.na(utrmundur)  | roznica > 0L) & mundur > 0L, roznica, NA_integer_), na.rm = TRUE),
+      tp_j2 = ~min(if_else((roznica == 0L & is.na(utrprawnik) | roznica > 0L) & prawnik > 0L, roznica, NA_integer_), na.rm = TRUE),
+      tp_p2 = ~min(if_else((roznica == 0L & is.na(utrpracy)   | roznica > 0L) & etat + netat + samoz > 0L, roznica, NA_integer_), na.rm = TRUE),
+      tp_s2 = ~min(if_else((roznica == 0L & is.na(utrpracy)   | roznica > 0L) & samoz > 0L, roznica, NA_integer_), na.rm = TRUE),
+      tp_e2 = ~min(if_else((roznica == 0L & is.na(utretatu)   | roznica > 0L) & etat > 0L, roznica, NA_integer_), na.rm = TRUE),
+      tp_z2 = ~min(if_else((roznica == 0L & is.na(utrzatr)    | roznica > 0L) & etat + netat > 0L, roznica, NA_integer_), na.rm = TRUE)
     ) %>%
     mutate_(
-      tp_m = ~ifelse(is.na(tp_m2), NA_integer_, ifelse(tp_m2 > 0, tp_m2 - 1, 0)),
-      tp_j = ~ifelse(is.na(tp_j2), NA_integer_, ifelse(tp_j2 > 0, tp_j2 - 1, 0)),
-      tp_p = ~ifelse(is.na(tp_p2), NA_integer_, ifelse(tp_p2 > 0, tp_p2 - 1, 0)),
-      tp_s = ~ifelse(is.na(tp_s2), NA_integer_, ifelse(tp_s2 > 0, tp_s2 - 1, 0)),
-      tp_e = ~ifelse(is.na(tp_e2), NA_integer_, ifelse(tp_e2 > 0, tp_e2 - 1, 0)),
-      tp_z = ~ifelse(is.na(tp_z2), NA_integer_, ifelse(tp_z2 > 0, tp_z2 - 1, 0)),
+      tp_m = ~if_else(is.na(tp_m2), NA_integer_, if_else(tp_m2 > 0L, tp_m2 - 1, 0L)),
+      tp_j = ~if_else(is.na(tp_j2), NA_integer_, if_else(tp_j2 > 0L, tp_j2 - 1, 0L)),
+      tp_p = ~if_else(is.na(tp_p2), NA_integer_, if_else(tp_p2 > 0L, tp_p2 - 1, 0L)),
+      tp_s = ~if_else(is.na(tp_s2), NA_integer_, if_else(tp_s2 > 0L, tp_s2 - 1, 0L)),
+      tp_e = ~if_else(is.na(tp_e2), NA_integer_, if_else(tp_e2 > 0L, tp_e2 - 1, 0L)),
+      tp_z = ~if_else(is.na(tp_z2), NA_integer_, if_else(tp_z2 > 0L, tp_z2 - 1, 0L)),
       data_od_e  = ~data_do + tp_e2,
-      data_od_es = ~data_do + pmin(tp_e2, tp_s2, na.rm = T)
+      data_od_es = ~data_do + if_else(tp_e2 < tp_s2  & !is.na(tp_e2) | is.na(tp_s2), tp_e2, tp_s2)
     ) %>%
     select_('-data_do') %>%
     collect() %>%
@@ -50,6 +42,5 @@ oblicz_zmienne_czasowe = function(dane, utrataPracy, multidplyr = TRUE){
       data_od_e  = ~okres2data(data_od_e),
       data_od_es = ~okres2data(data_od_es)
     )
-  class(dane) = c('absolwent_df', class(dane))
   return(dane)
 }

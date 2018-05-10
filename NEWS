@@ -1,3 +1,19 @@
+# 0.11.0 (2018-05-10)
+
+* Przepisanie zdecydowanej większości funkcji na sparka.
+  Uwaga! Spark (czy szerzej żaden SQL-owy backend dplyr-a) nie jest w pełni
+  kompatybilny z wersją natywnie R-ową. Szczególnej uwagi wymagają braki danych
+  i to, jak traktowane są przez niektóre funkcje (np. n_distinct()), pewnym
+  utrudnieniem jest też brak implementacji niektórych funkcji R (np. all() czy
+  any()), co wymaga stosowania idiomów.
+* Przepisanie funkcji wczytujących uczelnie/instytucje/kierunki na uporządkowany
+  format danych wejściowych
+* Korekta sposobu liczenia zmiennych np_e i np_n
+* Dodanie nowych zmiennych kont_*
+* Zmiana sposobu działania funkcji nazwa_pliku(), tak by wygodniej używało się
+  jej z csv-kami dla sparka
+
+
 # 0.10.0 (2017-06-13)
 
 * korekta wielkiej literówki w 0.9.3, gdzie zmienne PM_coś_S/PM_coś_N miały

@@ -4,55 +4,61 @@
 #' @param jednostki dane wygenerowane za pomocą funkcji
 #'   \code{\link{przygotuj_jednostki}}
 #' @param wMomDyplomu czy wyliczyć w momencie dyplomu czy dla końca okienka
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
-#'   multidplyr
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu, multidplyr = FALSE){
+oblicz_zamieszkanie = function(dane, jednostki, wMomDyplomu){
   stopifnot(
-    methods::is(dane, 'okienko_df') & methods::is(dane, 'baza_df')
+    methods::is(dane, 'tbl_spark') # Spark inaczej ewaluuje niektóre funkcje (np. n_distinct), co prowadziłoby do różnych wyników
   )
 
   jednostki = jednostki %>%
-    select_('jednostka_id', 'teryt') %>%
+    select_('rok', 'jednostka_id', 'teryt') %>%
     mutate_(
-      powiat_jedn = ~floor(teryt / 100),
-      woj_jedn    = ~floor(teryt / 10000)
+      powiat_jedn = ~as.integer(teryt / 100L),
+      woj_jedn    = ~as.integer(teryt / 10000L)
     ) %>%
     select_('-teryt')
 
   dane = dane %>%
-    filter_(~okres == ifelse(rep(wMomDyplomu, nrow(dane)), data_do, okres_max)) %>%
-    left_join(jednostki) %>%
+    mutate_(wMomDyplomu = ~wMomDyplomu) %>%
+    filter_(~okres == if_else(wMomDyplomu, data_do, okres_max)) %>%
+    mutate_(rok = ~as.integer((okres - 1) / 12)) %>%
+    left_join(jednostki, copy = TRUE) %>%
     mutate_(
-      jpdzam = ~ifelse(
-        powiat_jedn == floor(teryt / 100), 1, ifelse(
-          woj_jedn == floor(teryt / 10000), 2, ifelse(
-            teryt > 0, 3, NA)
+      jpdzam_ = ~ifelse(
+        powiat_jedn == as.integer(teryt / 100L), 1L, if_else(
+          woj_jedn == as.integer(teryt / 10000L), 2L, if_else(
+            teryt > 0L, 3L, NA_integer_)
           )
         )
-    )
-  if (multidplyr) {
-    dane = multidplyr::partition(dane, id_zdau)
-  } else {
-    dane = group_by_(dane, 'id_zdau')
-  }
-  dane = dane %>%
+    ) %>%
+    group_by_('id_zdau') %>%
     summarize_(
-      powiat    = ~uzgodnij_teryt(teryt),
-      klaszam   = ~ifelse(n_distinct(klaszam) == 1, klaszam, NA),
-      klasz     = ~min(klaszam2),
-      miejzam   = ~ifelse(n_distinct(miejzam) == 1, miejzam, NA),
-      miejz     = ~min(miejzam2),
-      jpdzam    = ~min(jpdzam),
-      jpdzam_v2 = ~ifelse(n_distinct(jpdzam) == 1, jpdzam, NA)
+      powiat    = ~if_else(
+        n_distinct(teryt) == 1L,
+        min(teryt, na.rm = TRUE),
+        if_else(
+          n_distinct(as.integer(teryt / 100L)) == 1L,
+          min(as.integer(teryt / 100L), na.rm = TRUE) * 100L,
+          if_else(
+            n_distinct(as.integer(teryt / 10000L)) == 1L,
+            min(as.integer(teryt / 10000L), na.rm = TRUE) * 10000L,
+            0L
+          )
+        )
+      ),
+      klaszam   = ~if_else(n_distinct(klaszam) == 1L, min(klaszam, na.rm = TRUE), NA_integer_),
+      klasz     = ~min(klaszam2, na.rm = TRUE),
+      miejzam   = ~if_else(n_distinct(miejzam) == 1L, min(miejzam, na.rm = TRUE), NA_integer_),
+      miejz     = ~min(miejzam2, na.rm = TRUE),
+      jpdzam    = ~min(jpdzam_, na.rm = TRUE),
+      jpdzam_v2 = ~if_else(n_distinct(jpdzam_) == 1L, min(jpdzam_, na.rm = TRUE), NA_integer_)
     ) %>%
     mutate_(
-      nrwoj  = ~ifelse(powiat > 0, floor(powiat / 10000), 0),
-      powiat = ~ifelse(powiat %% 10000 > 0, powiat, 0)
-    ) %>%
-    collect()
+      nrwoj  = ~if_else(powiat > 0L, as.integer(powiat / 10000L), 0L),
+      powiat = ~if_else(powiat %% 10000L > 0L, powiat, 0L)
+    )
 
   return(dane)
 }

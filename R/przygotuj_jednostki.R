@@ -1,55 +1,47 @@
-#' Przygotowuje słownik uczelni
+#' Przygotowuje słownik jednostek
 #' @description
-#' Zwraca słownik uczelni
+#' Zwraca słownik jednostek
 #' @param katZr katalog, w którym znajduje się plik sl_instytucje.xlsx
-#' @param rok rok, który zostanie przypisany jednostkom (gdy NA, obecny rok)
-#' @return [data.frame] ramka danych opisująca uczelnie
+#' @return [data.frame] ramka danych opisująca jednostki
 #' @export
 #' @import dplyr
-przygotuj_jednostki = function(katZr, rok = NA_integer_){
-  sl_jednostki = openxlsx::readWorkbook(paste0(katZr, '/sl_instytucje.xlsx'))
-  colnames(sl_jednostki) = tolower(colnames(sl_jednostki))
+przygotuj_jednostki = function(katZr){
+  jednostki = as.tbl(openxlsx::readWorkbook(paste0(katZr, '/JEDNOSTKI.xlsx')))
+  colnames(jednostki) = tolower(colnames(jednostki))
 
-  sl_jednostki = sl_jednostki %>%
+  lata = data_frame(rok = 2014L:as.integer(format(Sys.Date(), '%Y'))) %>%
+    mutate_(
+      x = 1L,
+      f_do = ~paste0(rok, '-12-31')
+    )
+
+  jednostki = jednostki %>%
     rename_(
-      teryt     = 'kod_lokalizacji',
-      jednostka = 'jednostka_podstawowa',
-      typ_jednostki = 'typ'
+      teryt = 'jednostka_teryt',
+      jednostka_nazwa = 'nazwa_pelna'
     ) %>%
-    mutate_(teryt = ~ floor(as.numeric(teryt) / 10))
+    mutate_(
+      teryt = ~ floor(as.numeric(teryt) / 10),
+      x = 1L
+    ) %>%
+    inner_join(lata) %>%
+    group_by_('jednostka_id') %>%
+    # zapewnijmy, że każda jednostka będzie miała rekord dla każdego roku, nawet jeśli w teorii wtedy nie istniała (bo kto wie, co siedzi w zbiorze ZDAU)
+    mutate_(data_od = ~coalesce(data_od, '1900-01-01')) %>%
+    mutate_(data_od = ~if_else(data_od == min(data_od, na.rm = TRUE), '1900-01-01', data_od)) %>%
+    ungroup() %>%
+    filter_(~data_od <= f_do) %>%
+    group_by_('rok', 'jednostka_id') %>%
+    arrange_('desc(data_od)') %>%
+    filter_(~row_number(jednostka_id) == 1) %>%
+    ungroup() %>%
+    select_('-data_od', '-f_do', '-x', '-zmiana_nazwy_jednostki')
 
-  nazwy2teryt = utils::read.csv2('dane/nazwy2teryt.csv', stringsAsFactors = FALSE) %>%
-    mutate_(
-      wojewodztwo = ~enc2utf8(tolower(wojewodztwo)),
-      powiat = ~enc2utf8(tolower(powiat)),
-      gmina = ~enc2utf8(tolower(gmina)),
-      teryt = ~100 * floor(teryt / 100)
-    ) %>%
-    distinct()
-  braki = sl_jednostki %>%
-    filter_(~ is.na(teryt)) %>%
-    select_('jednostka_id', 'wojewodztwo', 'powiat', 'gmina') %>%
-    mutate_(
-      wojewodztwo = ~ enc2utf8(tolower(wojewodztwo)),
-      powiat = ~ enc2utf8(tolower(powiat)),
-      gmina = ~ enc2utf8(tolower(gmina)),
-      rok = ~ as.numeric(ifelse(is.na(rok), substring(Sys.Date(), 1, 4), rok))
-    ) %>%
-    left_join(nazwy2teryt) %>%
-    select_('jednostka_id', 'teryt') %>%
-    rename_(teryt2 = 'teryt')
-  if (any(is.na(braki$teryt2))) {
-    warning(sum(is.na(braki$teryt2)), ' jednostki bez kodu TERYT')
+  if (any(is.na(jednostki$teryt))) {
+    warning(sum(is.na(jednostki$teryt)), ' jednostek bez kodu TERYT')
   }
-  sl_jednostki = sl_jednostki %>%
-    left_join(braki) %>%
-    mutate_(teryt = ~ ifelse(is.na(teryt), teryt2, teryt)) %>%
-    select_('-teryt2')
+  stopifnot(jednostki %>% group_by_('rok', 'jednostka_id') %>% filter_(~n() > 1) %>% nrow() == 0)
 
-  stopifnot(
-    all(!duplicated(sl_jednostki$jednostka_id))
-  )
-
-  class(sl_jednostki) = c('jednostki_df', class(sl_jednostki))
-  return(sl_jednostki)
+  class(jednostki) = c('jednostki_df', class(jednostki))
+  return(jednostki)
 }

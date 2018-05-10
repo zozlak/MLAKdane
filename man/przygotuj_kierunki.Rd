@@ -4,12 +4,17 @@
 \alias{przygotuj_kierunki}
 \title{Przygotowuje słownik kierunków}
 \usage{
-przygotuj_kierunki(katZr, zmDodatkowe = character())
+przygotuj_kierunki(katZr, agregujDoKierunku = TRUE, jednostki = NULL)
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
 
-\item{zmDodatkowe}{nazwy dodatkowych zmiennych do pozostawienia w zwracanym zbiorze danych}
+\item{agregujDoKierunku}{czy agregować dane tak by {rok, kierunek_id} były
+unikalne (jeśli FALSE, agregacja nastapi do unikalności na poziomie {rok,
+kierunek_id, jednostka_id})}
+
+\item{jednostki}{ramka danych opisująca jednostki (gdy NULL, zostanie
+wczytana automatycznie)}
 }
 \value{
 [data.frame] ramka danych opisująca kierunki studiów

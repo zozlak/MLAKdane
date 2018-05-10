@@ -4,10 +4,13 @@
 \alias{oblicz_studyp}
 \title{oblicza zmienne KONT oraz STUDYP*}
 \usage{
-oblicz_studyp(dane)
+oblicz_studyp(dane, kierunki)
 }
 \arguments{
-\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
+\item{dane}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
+
+\item{kierunki}{zbiór informacji o kierunkach studiów wygenerowany za pomocą
+funkcji \code{\link{przygotuj_kierunki}}}
 }
 \value{
 data.frame wyliczone zmienne

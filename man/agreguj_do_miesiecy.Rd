@@ -4,15 +4,12 @@
 \alias{agreguj_do_miesiecy}
 \title{agreguje dane do poziomu {id, id_zdau, okres}}
 \usage{
-agreguj_do_miesiecy(dane, zdau, multidplyr = TRUE)
+agreguj_do_miesiecy(dane, zdau)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}}
 
 \item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
-multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

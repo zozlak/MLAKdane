@@ -10,11 +10,8 @@
 #' @import dplyr
 oblicz_okienko = function(dane, okienko, filtrZdau = NULL){
   stopifnot(
-    methods::is(dane, 'miesieczne_df') | methods::is(dane, 'baza_df'),
-    methods::is(okienko, 'okienko'),
     is.null(filtrZdau) | is.data.frame(filtrZdau) & 'id_zdau' %in% colnames(filtrZdau)
   )
-  klasy = class(dane)
 
   if (!is.null(filtrZdau)) {
     dane = dane %>%
@@ -30,19 +27,20 @@ oblicz_okienko = function(dane, okienko, filtrZdau = NULL){
 
   dane = dane %>%
     mutate_(
-      okres_min = paste(okienko[['zmiennaMin']], '+', okienko[['offsetMin']]),
-      okres_max = paste(okienko[['zmiennaMax']], '+', okienko[['offsetMax']])
+      okres_min = paste('as.integer(', okienko[['zmiennaMin']], '+', okienko[['offsetMin']], ')'),
+      okres_max = paste('as.integer(', okienko[['zmiennaMax']], '+', okienko[['offsetMax']], ')')
     ) %>%
     mutate_(
-      okres_max = ~ifelse(okres_max >= koniec & !is.na(koniec), koniec - 1, okres_max)
+      okres_max = ~if_else(okres_max >= koniec & !is.na(koniec), koniec - 1L, okres_max)
     ) %>%
     mutate_(
-      okres_min  = ~ifelse(okres_min < dataMin, dataMin, okres_min),
-      okres_max  = ~ifelse(okres_max > dataMax, dataMax, okres_max),
-      len        = ~okres_max - okres_min + 1
+      okres_min  = ~if_else(okres_min < dataMin, dataMin, okres_min),
+      okres_max  = ~if_else(okres_max > dataMax, dataMax, okres_max)
     ) %>%
-    filter_(~len > 0)
+    mutate_(
+      len = ~okres_max - okres_min + 1L
+    ) %>%
+    filter_(~len > 0L)
 
-  class(dane) = c('okienko_df', klasy)
   return(dane)
 }

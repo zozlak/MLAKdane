@@ -4,14 +4,12 @@
 \alias{oblicz_stale}
 \title{oblicza proste zmienne niezwiazane z okienkami czasu}
 \usage{
-oblicz_stale(dane, zdau, multidplyr = TRUE)
+oblicz_stale(dane, zdau)
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}}
 
 \item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu multidplyr}
 }
 \value{
 data.frame wyliczone zmienne
