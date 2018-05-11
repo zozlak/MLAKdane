@@ -99,7 +99,7 @@ przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL)
     ) %>%
     left_join(jednostki %>% select_('jednostka_id', 'rok', 'jednostka_nazwa')) %>%
     mutate_(
-      kierunek_nazwa = ~sub('^.*; ?', '', paste0(jednostka_nazwa, ', ', kierunek_nazwa, ', ', forma_ksztalcenia, ' (POLon: ', kierunek_id, ')'))
+      kierunek_nazwa_pelna = ~sub('^.*; ?', '', paste0(jednostka_nazwa, ', ', kierunek_nazwa, ', ', forma_ksztalcenia, ' (POLon: ', kierunek_id, ')'))
     ) %>%
     select_('-jednostka_nazwa')
 

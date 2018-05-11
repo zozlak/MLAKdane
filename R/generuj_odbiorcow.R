@@ -130,19 +130,19 @@ generuj_odbiorcow = function(katZr, dataBazy, katalog, format = 'xlsx', typ = c(
         powiat_dop      = ~coalesce(powiat_dop, '-'),
         wojewodztwo_dop = ~coalesce(wojewodztwo_dop, '-')
       ) %>%
-      select_('dwb', 'vrok', 'vrokdyp', 'vstopien', 'vpoziom', 'kierunek_id', 'kierunek_nazwa', 'miedzywydz', 'forma_ksztalcenia', 'jednostka_nazwa', 'uczelnia_id', 'uczelnia_kod', 'uczelnia_nazwa', 'uczelnia_mundur', 'miejscowosc', 'powiat', 'wojewodztwo', 'wojewodztwo_dop', 'powiat_dop') %>%
+      select_('dwb', 'vrok', 'vrokdyp', 'vstopien', 'poziom', 'kierunek_id', 'kierunek_nazwa', 'miedzywydz', 'forma_ksztalcenia', 'jednostka_nazwa', 'uczelnia_id', 'uczelnia_kod', 'uczelnia_nazwa', 'uczelnia_mundur', 'miejscowosc', 'powiat', 'wojewodztwo', 'wojewodztwo_dop', 'powiat_dop') %>%
       rename_(
         vkier     = 'kierunek_id',
         vuczelnia = 'uczelnia_id',
         vucz      = 'uczelnia_nazwa',
         vuczskrt  = 'uczelnia_kod',
         vjpd      = 'jednostka_nazwa',
-        vmundur   = 'uczelnia_mundur',
-        vkierunek = 'kierunek_nazwa'
+        vmundur   = 'uczelnia_mundur'
       ) %>%
       mutate_(
         nr                    = ~row_number(vkier),
         nazwa_pliku           = ~sprintf('%d_%d_%s_%d', vrok %% 100, as.integer(sub('^.*([0-9]{4}).*$', '\\1', dwb)) - vrok, vuczskrt, vkier),
+        vkierunek             = ~paste0(kierunek_nazwa, ', ', formy[forma_ksztalcenia], ' ', poziomy4[poziom]),
         vjpd                  = ~if_else(miedzywydz > 0L, 'Kierunek międzywydziałowy', vjpd),
         nazwawojewodztwo      = ~paste0('w województwie ', wojewodztwo_dop),
         nazwapozawojewodztwem = ~paste0('poza województwem ', wojewodztwo_dop),

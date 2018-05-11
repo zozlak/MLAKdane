@@ -134,7 +134,7 @@ wszystko = zdau %>%
   left_join(kierunki %>% select_('rok', 'kierunek_id', 'jednostka_id', 'kierunek', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc')) %>%
   left_join(przygotuj_jednostki(katZr) %>% select('rok', 'jednostka_id', 'jednostka_nazwa')) %>%
   left_join(przygotuj_uczelnie(katZr) %>% select_('uczelnia_id', 'uczelnia_nazwa')) %>%
-  rename_(kieruneknazwa = 'kierunek_nazwa', kierunek = 'kierunek_id', uczelnia = 'uczelnia_id', uczelnianazwa = 'uczelnia_nazwa')
+  rename_(kieruneknazwa = 'kierunek_nazwa_pelna', kierunek = 'kierunek_id', uczelnia = 'uczelnia_id', uczelnianazwa = 'uczelnia_nazwa')
 for (i in seq_along(okienka)) {
   load(nazwa_pliku(paste0('razem_', i), '.RData'))
   wszystko = full_join(wszystko, razem)
