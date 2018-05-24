@@ -57,11 +57,11 @@ przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL)
       group_by_('rok', 'kierunek_id') %>%
       arrange_('dysc_na', 'desc(data_od)', 'desc(data_do)') %>%
       summarize_(
+        miedzywydz        = ~as.integer(n_distinct(jednostka_id) > 1), # musi być na początku, aby brał właściwą "jednostka_id"
         jednostka_id      = ~first(jednostka_id),
         kierunek_nazwa    = ~paste0(unique(nazwa), collapse = '/'),
         poziom            = ~first(poziom_ksz),
         forma_ksztalcenia = ~if_else(n_distinct(formy_ksztalcenia) > 1, 'stacjonarne_i_niestacjonarne', first(formy_ksztalcenia)),
-        miedzywydz        = ~n_distinct(jednostka_id) > 1,
         obsz_kod          = ~suppressWarnings(as.integer(sub('^[A-Z]+', '', first(obszar_kod)))),
         obsz              = ~first(obszar_nazwa),
         dzie_kod          = ~suppressWarnings(as.integer(sub('^[A-Z]+', '', first(dziedzina_kod)))),
@@ -74,10 +74,10 @@ przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL)
       group_by_('rok', 'kierunek_id', 'jednostka_id') %>%
       arrange_('dysc_na', 'desc(data_od)', 'desc(data_do)') %>%
       summarize_(
+        miedzywydz        = ~as.integer(n_distinct(jednostka_id) > 1),
         kierunek_nazwa    = ~paste0(unique(nazwa), collapse = '/'),
         poziom            = ~first(poziom_ksz),
         forma_ksztalcenia = ~if_else(n_distinct(formy_ksztalcenia) > 1, 'stacjonarne_i_niestacjonarne', first(formy_ksztalcenia)),
-        miedzywydz        = ~n_distinct(jednostka_id) > 1,
         obsz_kod          = ~suppressWarnings(as.integer(sub('^[A-Z]+', '', first(obszar_kod)))),
         obsz              = ~first(obszar_nazwa),
         dzie_kod          = ~suppressWarnings(as.integer(sub('^[A-Z]+', '', first(dziedzina_kod)))),
@@ -99,7 +99,7 @@ przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL)
     ) %>%
     left_join(jednostki %>% select_('jednostka_id', 'rok', 'jednostka_nazwa')) %>%
     mutate_(
-      kierunek_nazwa_pelna = ~sub('^.*; ?', '', paste0(jednostka_nazwa, ', ', kierunek_nazwa, ', ', forma_ksztalcenia, ' (POLon: ', kierunek_id, ')'))
+      kierunek_nazwa_pelna = ~sub('^.*; ?', '', paste0(if_else(miedzywydz > 0L, 'Studia międzywydziałowe', jednostka_nazwa), ', ', kierunek_nazwa, ', ', forma_ksztalcenia, ' (POLon: ', kierunek_id, ')'))
     ) %>%
     select_('-jednostka_nazwa')
 
