@@ -5,7 +5,7 @@
 #' @param pominNumInt nie zgłaszaj różnic typów gdy zmienna w \code{z1} jest
 #'   typu \code{numeric}, a zmienna w \code{z2} typu \code{integer}
 #' @export
-porownaj_zbiory = function(z1, z2, wspolne = c('ID_ZDAU', 'id_zdau', 'ID', 'id'), pominNumInt = TRUE) {
+porownaj_zbiory = function(z1, z2, wspolne = c('ID_ZDAU', 'id_zdau', 'ID', 'id', 'OKRES', 'okres'), pominNumInt = TRUE) {
   zmienne = intersect(names(z1), names(z2))
   wspolne = intersect(wspolne, zmienne)
 
@@ -28,6 +28,7 @@ porownaj_zbiory = function(z1, z2, wspolne = c('ID_ZDAU', 'id_zdau', 'ID', 'id')
   }
 
   d = full_join(z1, z2)
+  stopifnot(nrow(d) <= nrow(z1) + nrow(z2))
 
   for (zm in setdiff(zmienne, wspolne)) {
     zm1 = paste0(zm, '_1')
