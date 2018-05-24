@@ -62,7 +62,7 @@ miesieczne = wczytaj_do_sparka(sc, 'miesieczne')
 # 3. Wyliczamy zmienne w poszczególnych okienkach czasu
 ####################
 jednostki = przygotuj_jednostki(katZr)
-#jednostki = przygotuj_jednostki_old(katZr, rocznik)
+#jednostki = przygotuj_jednostki_old(katZr, 2015) %>% mutate(x = 1L) %>% inner_join(data_frame(rok = 2014L:2016L, x = c(1L, 1L, 1L))) %>% select(-x)
 zdauAbs = zdau %>%
   filter_(~typ == 'A') %>%
   select_('id_zdau')
@@ -111,6 +111,7 @@ for (i in seq_along(okienka)) {
 ####################
 
 kierunki = przygotuj_kierunki(katZr, FALSE)
+#kierunki = przygotuj_kierunki_old(katZr) %>% mutate(rok = 2015)
 plikCache = nazwa_pliku('stale', '.RData')
 if (!file.exists(plikCache) | pominCache) {
   studyp = oblicz_studyp(zdau, kierunki)
@@ -123,6 +124,7 @@ if (!file.exists(plikCache) | pominCache) {
 
 ##########
 # Złączamy wszystko, cośmy policzyli i zapisujemy
+kierunki = przygotuj_kierunki(katZr, TRUE)
 wszystko = zdau %>%
   collect() %>%
   mutate_(rok = ~okres2rok(data_do)) %>%
