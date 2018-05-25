@@ -7,7 +7,7 @@
 #' @return data.frame odfiltrowane dane
 #' @import dplyr
 #' @export
-pokaz_roznice = function(dane, zmienna, zmienneId = c('id_zdau', 'id', 'ID_ZDAU', 'ID', 'okres', 'OKRES'), tolerancja = 0.00001) {
+pokaz_roznice = function(dane, zmienna, zmienneId = c('id_zdau', 'id', 'ID_ZDAU', 'ID', 'okres', 'OKRES', 'id_zdu3'), tolerancja = 0.00001) {
   zmienneId = intersect(zmienneId, colnames(dane))
   z1 = paste0(zmienna, '_1')
   z2 = paste0(zmienna, '_2')

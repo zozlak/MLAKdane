@@ -1,3 +1,12 @@
+# 0.11.2 (2018-05-25)
+
+* przygotuj_zus() przepisane na Spark-a
+  UWAGA - generowane dane mogą różnić się co do pna niektórych osób w związku
+  z niestabilną metodą przypisywania pna do okresów w wypadku istnienia wielu
+  rekordów adresowych obejmujących dany okres stosowaną w starym rozwiązaniu
+* drobne poprawki w porownaj_zbiory() i pokaz_roznice() ułatwiające prace
+  ze zbiorami zus
+
 # 0.11.1 (2018-05-24)
 
 * Wersja, za pomocą której wygenerowano raporty '2017.

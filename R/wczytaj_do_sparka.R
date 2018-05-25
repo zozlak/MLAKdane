@@ -13,7 +13,7 @@ wczytaj_do_sparka = function(polSparka, nazwaPliku, katalog = NULL) {
   } else {
     sciezka = paste0(katalog, '/', nazwaPliku, '.csv')
   }
-  dane = sparklyr::spark_read_csv(polSparka, 'r', paste0('file://', sciezka))
+  dane = sparklyr::spark_read_csv(polSparka, nazwaPliku, paste0('file://', sciezka))
   dane = sparklyr::sdf_register(dane, nazwaPliku)
   return(dane)
 }

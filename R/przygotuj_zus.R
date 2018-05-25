@@ -6,12 +6,14 @@
 #' @param dataMin pierwszy uwzględniany okres składkowy
 #' @param dataMax ostatni uwzględniany okres składkowy
 #' @param pna ramka danych z dozwolonymi kodami pna
-#' @param multidplyr czy obliczać na wielu rdzeniach korzystając z pakietu
-#'   multidplyr
+#' @param polSparka połączenie ze Sparkiem
+#' @param cacheTestow czy cache-ować dane przed testami poprawności (jeśli tylko
+#'   dane mieszczą się w RAM-ie, znacznie przyspiesza wykonywani testów
+#'   poprawności)
 #' @export
 #' @import dplyr
 #' @import readr
-przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
+przygotuj_zus = function(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = TRUE){
   zus_tytuly_ubezp = openxlsx::readWorkbook('dane/ZUS_tytuly_ubezp.xlsx')[-1, ] %>%
     select_('-OPIS', '-OD', '-DO', '-ZAGRANIC', '-CUDZOZ') %>%
     rename_(id_tytulu = 'KOD') %>%
@@ -26,136 +28,127 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, multidplyr = TRUE){
   zdu1 = przygotuj_zdu1(katZr)
 
   # dane adresowe w poszczególnych okresach
-  zdu2 = utils::read.csv2(paste0(katZr, '/ZDU2.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
-  colnames(zdu2) = c('id', 'data_od', 'data_do', 'pna_mel', 'pna_zam', 'pna_kor', 'zm_mel', 'zm_zam', 'zm_kor')
+  kolZdu2 = c('id', 'data_od', 'data_do', 'pna_mel', 'pna_zam', 'pna_kor', 'zm_mel', 'zm_zam', 'zm_kor')
+  sciezka = paste0('file://', if_else(grepl('^/', katZr), katZr, paste0(getwd(), '/', katZr)), '/ZDU2.csv')
+  zdu2 = sparklyr::spark_read_csv(polSparka, 'zdu2', sciezka, header = FALSE, columns = kolZdu2, delimiter = ';')
   zdu2 = zdu2 %>%
     mutate_(
-      id = ~as.integer(id),
-      data_od = ~as.Date(data_od),
-      data_do = ~as.Date(ifelse(data_do == '', dataMax, data_do))
+      data_do = ~substr(coalesce(if_else(data_do <= dataMax, data_do, dataMax), data_do, dataMax), 1, 10),
+      pna_mel = ~as.integer(pna_mel),
+      pna_zam = ~as.integer(pna_zam),
+      pna_kor = ~as.integer(pna_kor)
     )
-  zdu2$data_do[zdu2$data_do > Sys.Date()] = Sys.Date()
-  zdu2 = bind_rows(
-    zdu2 %>% select_('id', 'data_od', 'data_do', 'pna_mel') %>% rename_(pna = 'pna_mel') %>% mutate_(pna_typ = '3', pna = ~suppressWarnings(as.numeric(pna))),
-    zdu2 %>% select_('id', 'data_od', 'data_do', 'pna_zam') %>% rename_(pna = 'pna_zam') %>% mutate_(pna_typ = '2', pna = ~suppressWarnings(as.numeric(pna))),
-    zdu2 %>% select_('id', 'data_od', 'data_do', 'pna_kor') %>% rename_(pna = 'pna_kor') %>% mutate_(pna_typ = '1', pna = ~suppressWarnings(as.numeric(pna)))
+  zdu2 = sparklyr::sdf_bind_rows(
+    zdu2 %>% select_('id', 'data_od', 'data_do', 'pna_mel') %>% rename_(pna = 'pna_mel') %>% filter_(~!is.na(pna)) %>% mutate_(pna_typ = 3L),
+    zdu2 %>% select_('id', 'data_od', 'data_do', 'pna_zam') %>% rename_(pna = 'pna_zam') %>% filter_(~!is.na(pna)) %>% mutate_(pna_typ = 2L),
+    zdu2 %>% select_('id', 'data_od', 'data_do', 'pna_kor') %>% rename_(pna = 'pna_kor') %>% filter_(~!is.na(pna)) %>% mutate_(pna_typ = 1L)
   ) %>%
-    filter_(~!is.na(pna)) %>%
     group_by_('id', 'data_od', 'data_do') %>%
-    arrange_('pna_typ') %>%
-    summarize_(pna = ~first(pna)) %>%
+    filter_(~row_number(pna_typ) == 1) %>%
     ungroup() %>%
+    select_('-pna_typ') %>%
     mutate_(
-      pna =     ~ ifelse(is.na(pna), 0, pna),
       data_od = ~ substring(as.character(data_od), 1, 7),
       data_do = ~ substring(as.character(data_do), 1, 7)
-    ) %>%
-    collect()
+    )
 
   # dane z rozliczeń
-  zdu3 = utils::read.csv2(paste0(katZr, '/ZDU3.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
-  colnames(zdu3) = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
+  kolZdu3 = c('id', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor', 'podst_wyp', 'podst_em', 'podst_zdr', 'limit', 'rsa')
+  sciezka = paste0('file://', if_else(grepl('^/', katZr), katZr, paste0(getwd(), '/', katZr)), '/ZDU3.csv')
+  zdu3 = sparklyr::spark_read_csv(polSparka, 'zdu3', sciezka, header = FALSE, columns = kolZdu3, delimiter = ';')
   zdu3 = zdu3 %>%
-    filter_(~ okres >= substr(dataMin, 1, 7) & okres <= substr(dataMax, 1, 7)) %>%
+    filter_(~okres >= substr(dataMin, 1, 7) & okres <= substr(dataMax, 1, 7)) %>%
     mutate_(
-      id = ~as.integer(id),
-      id_platnika = ~as.integer(id_platnika),
-      id_zdu3 = ~row_number()
+      id_zdu3 = ~row_number(id)
     )
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
   # zdu3 %>% group_by(id, id_platnika, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
   # zdu3 %>% group_by(id, id_platnika, okres, id_tytulu) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n()) %>% arrange(nn)
   zdu3tmp = zdu3 %>%
     select_('id_zdu3', 'id', 'id_platnika', 'okres', 'id_tytulu')
-  zdu3 = bind_rows(
-    zdu3 %>% select_('id_zdu3', 'id_platnika', 'okres', 'id_tytulu', 'podst_chor') %>% rename_(podst = 'podst_chor') %>% mutate_(podst_typ = '"chorobowe"'),
+  zdu3 = sparklyr::sdf_bind_rows(
+    zdu3 %>% select_('id_zdu3', 'podst_chor') %>% rename_(podst = 'podst_chor') %>% mutate_(podst_typ = '"chorobowe"'),
     zdu3 %>% select_('id_zdu3', 'podst_wyp') %>% rename_(podst = 'podst_wyp') %>% mutate_(podst_typ = '"wypadkowe"'),
     zdu3 %>% select_('id_zdu3', 'podst_em') %>% rename_(podst = 'podst_em') %>% mutate_(podst_typ = '"emerytalne"'),
     zdu3 %>% select_('id_zdu3', 'podst_zdr') %>% rename_(podst = 'podst_zdr') %>% mutate_(podst_typ = '"zdrowotne"')
-  )
-  if (multidplyr) {
-    zdu3 = multidplyr::partition(zdu3, id_zdu3)
-  } else {
-    zdu3 = group_by_(zdu3, 'id_zdu3')
-  }
-  zdu3 = zdu3 %>%
-    summarize_(podst = ~dplyr::na_if(max(podst, na.rm = TRUE), -Inf)) %>%
-    collect() %>%
+  ) %>%
+    group_by_('id_zdu3') %>%
+    mutate_(podst = ~as.numeric(regexp_replace(podst, ',', '.'))) %>%
+    summarize_(podst = ~max(podst, na.rm = TRUE)) %>%
     inner_join(zdu3tmp)
-  rm(zdu3tmp)
   # zdu3 %>% group_by(id, okres) %>% summarize(n = n()) %>% group_by(n) %>% summarize(nn = n())
 
   # dane płatników
-  zdu4 = utils::read.csv2(paste0(katZr, '/ZDU4.csv'), header = F, fileEncoding = 'Windows-1250', stringsAsFactors = FALSE)
-  colnames(zdu4) = c('id_platnika', 'pkd', 'platnik_koniec_r', 'platnik_koniec_m')
+  kolZdu4 = c('id_platnika', 'pkd', 'platnik_koniec_r', 'platnik_koniec_m')
+  sciezka = paste0('file://', if_else(grepl('^/', katZr), katZr, paste0(getwd(), '/', katZr)), '/ZDU4.csv')
+  zdu4 = sparklyr::spark_read_csv(polSparka, 'zdu4', sciezka, header = FALSE, columns = kolZdu4, delimiter = ';')
   zdu4 = zdu4 %>%
     mutate_(
-      id_platnika = ~as.integer(id_platnika),
-      platnik_kon = ~sprintf('%04d-%02d', platnik_koniec_r, platnik_koniec_m)
+      platnik_kon = ~as.character(as.Date(paste0(platnik_koniec_r, '-', platnik_koniec_m, '-01')))
     ) %>%
     mutate_(
-      platnik_kon = ~ifelse(platnik_kon > dataMax, NA, platnik_kon)
+      platnik_kon = ~substr(if_else(platnik_kon > dataMax, NA_character_, platnik_kon), 1, 7)
     )
 
-  zus = zdu3 %>%
+  zusA = zdu3 %>%
     left_join(zdu2) %>%
-    arrange_('data_od')
-  if (multidplyr) {
-    zus = multidplyr::partition(zus, id_zdu3)
-  } else {
-    zus = group_by_('id_zdu3')
-  }
-  zus = zus %>%
-    filter_(~ data_do >= okres | okres > max(data_do) & data_do == max(data_do) | is.na(pna)) %>%
-    filter_(~ row_number() == 1) %>%
-    collect() %>%
+    group_by_('id_zdu3') %>%
+    filter_(~data_do >= okres | okres > max(data_do, na.rm = TRUE) & data_do == max(data_do, na.rm = TRUE) | is.na(pna)) %>%
+    # jedyny sens uwzględnienia "pna" w filtrze poniżej to zapewnienie stabilnych wyników, mniejszy kod pocztowy nie jest oczywiście w żaden sposób "lepszy" od większego
+    arrange_('data_od', 'pna') %>%
+    filter_(~row_number() == 1) %>%
     ungroup() %>%
-    select_('-data_od', '-data_do') %>%
-    distinct()
+    select_('-data_od', '-data_do')
+  if (cacheTestow) {
+    zusA = sparklyr::sdf_register(zusA, 'zus')
+    tbl_cache(polSparka, 'zus')
+  }
+  # {id, id_platnika, okres, id_tytulu} nie jest unikalne!
   stopifnot(
-    # {id, id_platnika, okres, id_tytulu} nie jest unikalne!
-    zus %>% select_('id', 'okres', 'pna') %>% distinct() %>% nrow() == zus %>% select_('id', 'okres') %>% distinct() %>% nrow(), # unikalność {id, okres, pna}
-    nrow(zus) == nrow(zdu3), # nie zgubiliśmy żadnego okresu składkowego,
-    all(!is.na(zus$id_platnika)) # wszyscy płatnicy są znani
+    # unikalność {id, okres, pna}
+    unlist(zusA %>% select_('id', 'okres', 'pna') %>% distinct() %>% summarize(n = n()) %>% collect()) == unlist(zusA %>% select_('id', 'okres') %>% distinct() %>% summarize(n = n()) %>% collect()),
+    # nie zgubiliśmy żadnego okresu składkowego
+    unlist(zusA %>% summarize(n = n()) %>% collect()) == unlist(zdu3 %>% summarize(n = n()) %>% collect()),
+    # wszyscy płatnicy są znani
+    unlist(zusA %>% filter(is.na(id_platnika)) %>% summarise(n = n()) %>% collect()) == 0
   )
   #zdu3 %>% anti_join(zus %>% select(id, id_platnika, okres, id_tytulu)) %>% head()
 
-  zus = zus %>%
+  zusB = zusA %>%
     left_join(zdu4 %>% select_('id_platnika', 'pkd', 'platnik_kon')) %>%
-    left_join(zdu1 %>% select_('id', 'koniec')) %>%
-    left_join(zus_tytuly_ubezp) %>%
-    left_join(pkd) %>%
+    left_join(zdu1 %>% select_('id', 'koniec'), copy = TRUE) %>%
+    left_join(zus_tytuly_ubezp, copy = TRUE) %>%
+    left_join(pkd, copy = TRUE) %>%
     mutate_(
-      okres       = ~data2okres(okres),
-      platnik_kon = ~data2okres(platnik_kon),
-      rok         = ~okres2rok(okres),
-      id_platnika = ~ifelse(samoz > 0L, -1L , id_platnika), # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
-      pna         = ~dplyr::coalesce(pna, -1)
+      okres       = ~as.integer(substr(okres, 1, 4)) * 12L + as.integer(substr(okres, 6, 7)),
+      platnik_kon = ~as.integer(substr(platnik_kon, 1, 4)) * 12L + as.integer(substr(platnik_kon, 6, 7)),
+      rok         = ~as.integer(substr(okres, 1, 4)),
+      id_platnika = ~if_else(samoz > 0L, -1L , id_platnika), # zmiana firmy na samozatrudnieniu nie jest dla nas zmiana platnika
+      pna         = ~coalesce(pna, -1L)
     )
   stopifnot(
-    all(!is.na(zus$etat)),
-    all(!is.infinite(zus$podst))
+    unlist(zusB %>% filter_(~is.na(etat)) %>% summarise(n = n()) %>% collect()) == 0
   )
 
   # weryfikacja pna
-  zus = zus %>%
+  zusC = zusB %>%
     left_join(
       pna %>%
         select_('pna') %>%
         distinct() %>%
-        mutate_(popr_pna = TRUE)
+        mutate_(popr_pna = TRUE),
+      copy = TRUE
     )
-  test = is.na(zus$popr_pna)
-  if (sum(test) > 0) {
-    kody = unique(zus$pna[test])
-    warning('Błędne kody pocztowe w ', sum(test), ' rekordach: ', paste0(kody[order(kody)], collapse = ', '))
+  test = zusC %>% filter(is.na(popr_pna)) %>% select_('pna') %>% collect()
+  if (nrow(test) > 0) {
+    test = test %>% distinct() %>% arrange_('pna')
+    warning('Błędne kody pocztowe w ', nrow(test), ' rekordach: ', paste0(test$pna, collapse = ', '))
   }
-  zus = zus %>%
+  zusD = zusC %>%
     mutate_(
-      pna = ~ifelse(!is.na(popr_pna), pna, -1)
+      pna = ~if_else(!is.na(popr_pna), pna, -1L)
     ) %>%
     select_('-popr_pna')
 
-  class(zus) = c('zus_df', class(zus))
-  return(zus)
+  return(zusD)
 }

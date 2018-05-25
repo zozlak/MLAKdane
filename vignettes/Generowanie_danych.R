@@ -33,8 +33,8 @@ if (!file.exists(plikCache) | pominCache) {
   zapisz_dla_sparka(zdau, 'zdau')
   pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax)
   zapisz_dla_sparka(pnaPowiaty, 'pnaPowiaty')
-  zus = przygotuj_zus(katZr, dataMin, dataMax, pnaPowiaty)
-  zapisz_dla_sparka(zus, 'zus')
+  zus = przygotuj_zus(katZr, dataMin, dataMax, pnaPowiaty, sc)
+  zapisz_ze_sparka(zus, 'zus')
   utrataPracy = przygotuj_utrata_pracy(zus, dataMax)
   zapisz_dla_sparka(utrataPracy, 'utrataPracy')
 }
