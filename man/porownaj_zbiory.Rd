@@ -4,8 +4,8 @@
 \alias{porownaj_zbiory}
 \title{Porównuje ze sobą wskazane zbiory}
 \usage{
-porownaj_zbiory(z1, z2, wspolne = c("ID_ZDAU", "id_zdau", "ID", "id"),
-  pominNumInt = TRUE)
+porownaj_zbiory(z1, z2, wspolne = c("ID_ZDAU", "id_zdau", "ID", "id", "OKRES",
+  "okres", "id_zdu3"), pominNumInt = TRUE)
 }
 \arguments{
 \item{z1}{pierwszy zbiór do porównania}

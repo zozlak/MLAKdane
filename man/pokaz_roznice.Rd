@@ -4,8 +4,8 @@
 \alias{pokaz_roznice}
 \title{Odfiltrowuje rekordy z różnicami wartości wskazanej zmiennej}
 \usage{
-pokaz_roznice(dane, zmienna, zmienneId = c("id_zdau", "id", "ID_ZDAU", "ID"),
-  tolerancja = 1e-05)
+pokaz_roznice(dane, zmienna, zmienneId = c("id_zdau", "id", "ID_ZDAU", "ID",
+  "okres", "OKRES", "id_zdu3"), tolerancja = 1e-05)
 }
 \arguments{
 \item{dane}{zbiór danych}
@@ -13,6 +13,8 @@ pokaz_roznice(dane, zmienna, zmienneId = c("id_zdau", "id", "ID_ZDAU", "ID"),
 \item{zmienna}{prefiks zmiennej, między którymi występują różnice}
 
 \item{zmienneId}{list zmiennych, która powinna zostać dołączona do wyniku}
+
+\item{tolerancja}{tolerancja przy porównywaniu liczb zmiennoprzecinkowych}
 }
 \value{
 data.frame odfiltrowane dane

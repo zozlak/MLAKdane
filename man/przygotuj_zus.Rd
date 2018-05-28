@@ -4,7 +4,7 @@
 \alias{przygotuj_zus}
 \title{Przygotowuje dane z ZUS}
 \usage{
-przygotuj_zus(katZr, dataMin, dataMax, pna, multidplyr = TRUE)
+przygotuj_zus(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = TRUE)
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik ZDUx.csv}
@@ -15,8 +15,11 @@ przygotuj_zus(katZr, dataMin, dataMax, pna, multidplyr = TRUE)
 
 \item{pna}{ramka danych z dozwolonymi kodami pna}
 
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
-multidplyr}
+\item{polSparka}{połączenie ze Sparkiem}
+
+\item{cacheTestow}{czy cache-ować dane przed testami poprawności (jeśli tylko
+dane mieszczą się w RAM-ie, znacznie przyspiesza wykonywani testów
+poprawności)}
 }
 \description{
 Do danych o składkach dołączane są dane o miejscu zamieszkania, płatniku,

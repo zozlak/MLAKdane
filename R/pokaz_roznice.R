@@ -3,7 +3,7 @@
 #' @param dane zbiór danych
 #' @param zmienna prefiks zmiennej, między którymi występują różnice
 #' @param zmienneId list zmiennych, która powinna zostać dołączona do wyniku
-#' @param tolerancja
+#' @param tolerancja tolerancja przy porównywaniu liczb zmiennoprzecinkowych
 #' @return data.frame odfiltrowane dane
 #' @import dplyr
 #' @export
