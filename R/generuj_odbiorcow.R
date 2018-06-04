@@ -151,6 +151,9 @@ generuj_odbiorcow = function(katZr, dataBazy, katalog, format = 'xlsx', typ = c(
         vjpd = ~ifelse(rep(n_distinct(jednostka_id) > 1L, n()), sub('^.*; ?', '', jednostka_nazwa), ' ')
       ) %>%
       ungroup() %>%
+      mutate_(
+        vjpd = ~if_else(vjpd == vucz, '', vjpd)
+      ) %>%
       select_('nazwa_pliku', 'nr', 'vrokdyp', 'vkier', 'dwb', 'vrok', 'vstopien', 'vjpd', 'vkierunek', 'vucz', 'vuczskrt', 'miejscowosc', 'powiat', 'wojewodztwo', 'vmundur', 'nazwamiasto', 'nazwawojewodztwo', 'nazwapozawojewodztwem')
     colnames(kierunkiOdb) = toupper(colnames(kierunkiOdb))
     sciezka = paste0(katalog, '/odbiorcy_kierunki.', format)

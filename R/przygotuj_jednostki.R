@@ -22,6 +22,7 @@ przygotuj_jednostki = function(katZr){
     ) %>%
     mutate_(
       teryt = ~ floor(as.numeric(teryt) / 10),
+      jednostka_nazwa = ~gsub('"', '', jednostka_nazwa),
       x = 1L
     ) %>%
     inner_join(lata) %>%

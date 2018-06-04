@@ -13,7 +13,10 @@ przygotuj_uczelnie = function(katZr){
     mutate_(uczelnia_mundur = 1L)
   uczelnie = uczelnie %>%
     left_join(mundur) %>%
-    mutate_(uczelnia_mundur = ~coalesce(uczelnia_mundur, 0L))
+    mutate_(
+      uczelnia_mundur = ~coalesce(uczelnia_mundur, 0L),
+      uczelnia_nazwa  = ~gsub('"', '', uczelnia_nazwa)
+    )
   class(uczelnie) = c('uczelnie_df', class(uczelnie))
   return(uczelnie)
 }

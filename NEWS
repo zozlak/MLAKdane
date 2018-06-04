@@ -1,3 +1,10 @@
+# 0.11.3 (2018-06-04)
+
+* usuwanie " z nazw kierunków/jednostek/uczelni (były interpretowane jako znaki
+  specjalne w LaTeXu)
+* zmiana sposobu przypisywania kierunkom obszaru/dziedziny/dyscypliny w funkcji
+  przygotuj_kierunki() na taki, by do minimum ograniczyć liczbę braków danych
+
 # 0.11.2 (2018-05-25)
 
 * przygotuj_zus() przepisane na Spark-a
