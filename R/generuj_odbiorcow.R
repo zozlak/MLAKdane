@@ -146,9 +146,9 @@ generuj_odbiorcow = function(katZr, dataBazy, katalog, format = 'xlsx', typ = c(
         nazwapozawojewodztwem = ~paste0('poza województwem ', wojewodztwo_dop),
         nazwamiasto           = ~paste0('na terenie powiatu ', if_else(tolower(substr(powiat_dop, 1, 1)) == substr(powiat_dop, 1, 1), '', 'm. '), powiat_dop)
       ) %>%
-      group_by_('vrok', 'vuczelnia') %>%
+      group_by_('vrok', 'vkier') %>%
       mutate_(
-        vjpd = ~ifelse(rep(n_distinct(jednostka_id) > 1L, n()), sub('^.*; ?', '', jednostka_nazwa), ' ')
+        vjpd = ~ifelse(rep(n_distinct(jednostka_id) > 1L, n()), ' ', sub('^.*; ?', '', jednostka_nazwa))
       ) %>%
       ungroup() %>%
       mutate_(

@@ -18,6 +18,6 @@ pokaz_roznice = function(dane, zmienna, zmienneId = c('id_zdau', 'id', 'ID_ZDAU'
   }
   wynik = dane %>%
     filter_(.dots = filtr) %>%
-    select_(zmienneId, z1, z2)
+    select_(.dots = c(zmienneId, z1, z2))
   return(as.tbl(wynik))
 }

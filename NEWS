@@ -1,3 +1,9 @@
+# 0.11.4 (2018-06-05)
+
+* korekta poważnego błędu w generowaniu zmiennej VJPD dla odbiorców - kierunków
+  w funkcji generuj_odbiorcow()
+* korekta uwzględniania "zmiennych id" w funkcji pokaz_roznice()
+
 # 0.11.3 (2018-06-04)
 
 * usuwanie " z nazw kierunków/jednostek/uczelni (były interpretowane jako znaki
