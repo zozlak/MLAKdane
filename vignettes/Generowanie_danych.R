@@ -15,10 +15,11 @@ okienka = list(
 probka = 1
 pominCache = FALSE
 
+cores = 6
 sc = spark_connect(
   master = 'local',
   config = list(
-    sparklyr.cores.local = 7, 'sparklyr.shell.driver-memory' = '30G', spark.memory.fraction = 0.8, spark.executor.memory = '8G',
+    sparklyr.cores.local = cores, 'sparklyr.shell.driver-memory' = '30G', spark.memory.fraction = 0.8, spark.executor.memory = '8G',
     spark.local.dir = '/home/zozlak/roboty/Jasiński/MLAKdane/cache/',
     spark.sql.crossJoin.enabled = 'true'
   )
@@ -62,7 +63,6 @@ miesieczne = wczytaj_do_sparka(sc, 'miesieczne')
 # 3. Wyliczamy zmienne w poszczególnych okienkach czasu
 ####################
 jednostki = przygotuj_jednostki(katZr)
-#jednostki = przygotuj_jednostki_old(katZr, 2015) %>% mutate(x = 1L) %>% inner_join(data_frame(rok = 2014L:2016L, x = c(1L, 1L, 1L))) %>% select(-x)
 zdauAbs = zdau %>%
   filter_(~typ == 'A') %>%
   select_('id_zdau')
@@ -111,7 +111,6 @@ for (i in seq_along(okienka)) {
 ####################
 
 kierunki = przygotuj_kierunki(katZr, FALSE)
-#kierunki = przygotuj_kierunki_old(katZr) %>% mutate(rok = 2015)
 plikCache = nazwa_pliku('stale', '.RData')
 if (!file.exists(plikCache) | pominCache) {
   studyp = oblicz_studyp(zdau, kierunki)
@@ -122,19 +121,19 @@ if (!file.exists(plikCache) | pominCache) {
   load(plikCache)
 }
 
-##########
-# Złączamy wszystko, cośmy policzyli i zapisujemy
-kierunki = przygotuj_kierunki(katZr, TRUE)
+####################
+# 5. Złączamy wszystko, cośmy policzyli i zapisujemy
+####################
+kierunki = przygotuj_kierunki(katZr, TRUE, zmiennaRok = 'rokdyp')
 wszystko = zdau %>%
-  collect() %>%
-  mutate_(rok = ~okres2rok(data_do)) %>%
-  oblicz_stale_czasowe(dataMax) %>%
   filter_(~typ %in% 'A') %>%
+  collect() %>%
+  oblicz_stale_czasowe(dataMax) %>%
   full_join(studyp) %>%
   full_join(czas) %>%
   full_join(stale) %>%
-  left_join(kierunki %>% select_('rok', 'kierunek_id', 'jednostka_id', 'kierunek', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc')) %>%
-  left_join(przygotuj_jednostki(katZr) %>% select('rok', 'jednostka_id', 'jednostka_nazwa')) %>%
+  left_join(kierunki %>% select_('rokdyp', 'kierunek_id', 'jednostka_id', 'kierunek_nazwa_pelna', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc')) %>%
+  left_join(przygotuj_jednostki(katZr, zmiennaRok = 'rokdyp') %>% select('rokdyp', 'jednostka_id', 'jednostka_nazwa')) %>%
   left_join(przygotuj_uczelnie(katZr) %>% select_('uczelnia_id', 'uczelnia_nazwa')) %>%
   rename_(kieruneknazwa = 'kierunek_nazwa_pelna', kierunek = 'kierunek_id', uczelnia = 'uczelnia_id', uczelnianazwa = 'uczelnia_nazwa')
 for (i in seq_along(okienka)) {
@@ -148,17 +147,11 @@ stopifnot(
 colnames(wszystko) = toupper(colnames(wszystko))
 save(wszystko, file = nazwa_pliku('dane', '.RData'), compress = TRUE)
 tmp = wszystko
-for (r in unique(wszystko$ROK)) {
-  wszystko = tmp %>% filter(ROK == r)
+for (r in unique(wszystko$ROKDYP)) {
+  wszystko = tmp %>% filter(ROKDYP == r)
   save(wszystko, file = nazwa_pliku('dane', '.RData', katZr, r), compress = TRUE)
 }
 rm(tmp, wszystko)
-
-# load(nazwa_pliku('dane', '.RData'))
-# wszystko2 = wszystko
-# load('dane/ZUS_2016-09/2015/2015_dane.RData')
-# wszystko1 = wszystko
-# d = porownaj_zbiory(wszystko1, wszystko2)
 
 ##########
 # Zbiór danych miesięcznych
@@ -179,41 +172,96 @@ for (r in unique(tmp$ROK)) {
 }
 rm(okienkoMies)
 
-##########
-# Zbiór danych kwartalnych (+0, +3, +6, itd. miesiąc od dyplomu)
-kwartalne = miesieczne %>%
-  filter(okres >= data_do & (okres - data_do) %% 3L == 0L) %>%
-  mutate(
-    rok = as.integer((data_do - 1) / 12),
-    kwartal = as.integer((okres - data_do) / 3L),
-    data = printf('%04d-%02d', as.integer((okres - 1) / 12), if_else(okres %% 12L == 0L, 12L, okres %% 12L)),
-    nm_es = if_else(nm_e > 0L | nm_s > 0L, 1L, 0L)
-  ) %>%
-  left_join(
-    baza %>%
-      select_('id_zdau', 'okres', 'klaszam2') %>%
-      group_by_('id_zdau', 'okres') %>%
-      summarize_(klasz = ~min(klaszam2, na.rm = TRUE))
-  )
+####################
+# 6. Zbiór danych kwartalnych
+####################
+zdau = wczytaj_do_sparka(sc, 'zdau')
+baza = wczytaj_do_sparka(sc, 'baza')
+miesieczne = wczytaj_do_sparka(sc, 'miesieczne')
+jednostki = przygotuj_jednostki(katZr)
+kwartalne = list()
+for (i in 0L:12L) {
+  okienko = okienko(max((3 * i) - 2, 0), 3 * i, 'data_do', 'data_do', '', dataMin, dataMax)
+  okienkoMies = oblicz_okienko(miesieczne, okienko)
+  okienkoBaza = oblicz_okienko(baza, okienko)
+  abs = agreguj_do_okresu(okienkoMies)
+  zam = oblicz_zamieszkanie(okienkoBaza, jednostki, FALSE)
+  kwartalne[[i + 1]] = left_join(abs, zam) %>%
+    mutate(kwartal = i)
+}
+kwartalne = do.call(sdf_bind_rows, kwartalne)
 zapisz_ze_sparka(kwartalne, 'daneKwart')
+spark_disconnect_all()
 
-kwartalne = read_csv_spark(nazwa_pliku('daneKwart', '.csv'), 'iiciidddddiiii')
-names(kwartalne) = toupper(names(kwartalne))
-rm(kwartalne)
+zdau = przygotuj_zdau(katZr)
+uczelnie = przygotuj_uczelnie(katZr)
+kierunki = przygotuj_kierunki(katZr, TRUE)
+load(nazwa_pliku('stale', '.RData'))
+kwartalne = read_csv_spark(nazwa_pliku('daneKwart', '.csv'))
+kwartalne = zdau %>%
+  filter_(~typ %in% 'A') %>%
+  collect() %>%
+  oblicz_stale_czasowe(dataMax) %>%
+  inner_join(kwartalne) %>%
+  left_join(stale) %>%
+  left_join(kierunki %>% select_('rok', 'kierunek_id', 'jednostka_id', 'kierunek_nazwa_pelna', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc')) %>%
+  left_join(uczelnie %>% select('uczelnia_id', 'uczelnia_rodzaj')) %>%
+  rename_(kieruneknazwa = 'kierunek_nazwa_pelna', kierunek = 'kierunek_id', uczelnia = 'uczelnia_id')
+colnames(kwartalne) = toupper(colnames(kwartalne))
+save(kwartalne, file = nazwa_pliku('daneKwart', '.RData'), compress = TRUE)
+tmp = kwartalne
+for (r in unique(kwartalne$ROKDYP)) {
+  wszystko = tmp %>% filter(ROKDYP == r)
+  save(wszystko, file = nazwa_pliku('daneKwart', '.RData', katZr, r), compress = TRUE)
+}
+rm(tmp, wszystko)
 
-##########
-# PKD
-load(nazwa_pliku('baza', 'cache', rocznik))
-load(nazwa_pliku('stale', 'cache', rocznik))
+####################
+# 7. PKD
+####################
+zdau = wczytaj_do_sparka(sc, 'zdau')
+baza = wczytaj_do_sparka(sc, 'baza')
+plikCache = nazwa_pliku('miesiecznePkd', '.csv')
+if (!file.exists(plikCache) | pominCache) {
+  miesieczne = agreguj_do_miesiecy(baza, zdau, c('id', 'id_zdau', 'okres', 'pkd'))
+  zapisz_ze_sparka(miesieczne, 'miesiecznePkd')
+}
+miesieczne = wczytaj_do_sparka(sc, 'miesiecznePkd')
+jednostki = przygotuj_jednostki(katZr)
+kwartalnePkd = list()
+for (i in 0L:12L) {
+  okienko = okienko(max((3 * i) - 2, 0), 3 * i, 'data_do', 'data_do', '', dataMin, dataMax)
+  okienkoMies = oblicz_okienko(miesieczne, okienko)
+  okienkoBaza = oblicz_okienko(baza, okienko)
+  abs = agreguj_do_okresu(okienkoMies, c('id_zdau', 'pkd'))
+  zam = oblicz_zamieszkanie(okienkoBaza, jednostki, FALSE)
+  kwartalnePkd[[i + 1]] = left_join(abs, zam) %>%
+    mutate(kwartal = i)
+}
+kwartalnePkd = do.call(sdf_bind_rows, kwartalnePkd)
+zapisz_ze_sparka(kwartalnePkd, 'daneKwartPkd')
+spark_disconnect_all()
 
-pkdKwartalne = agreguj_pkd(baza, 3)
-pkdPoDyplomie = agreguj_pkd(baza, 99) %>% select(-kwartal)
-pkdAbsolwenci = zdau %>%
-  filter_(~typ == 'A') %>%
-  select_('id_zdau', 'uczelnia_id', 'jednostka_id', 'kierunek_id', 'forma', 'poziom') %>%
-  left_join(przygotuj_kierunki(katZr, c())) %>%
-  left_join(stale)
-names(pkdKwartalne) = toupper(names(pkdKwartalne))
-names(pkdAbsolwenci) = toupper(names(pkdAbsolwenci))
-names(pkdPoDyplomie) = toupper(names(pkdPoDyplomie))
-save(pkdAbsolwenci, pkdKwartalne, pkdPoDyplomie, file = nazwa_pliku('pkd', katZr, rocznik), compress = TRUE)
+zdau = przygotuj_zdau(katZr)
+uczelnie = przygotuj_uczelnie(katZr)
+kierunki = przygotuj_kierunki(katZr, TRUE, zmiennaRok = 'rokdyp')
+load(nazwa_pliku('stale', '.RData'))
+kwartalnePkd = read_csv_spark(nazwa_pliku('daneKwartPkd', '.csv'))
+kwartalnePkd = zdau %>%
+  filter_(~typ %in% 'A') %>%
+  collect() %>%
+  oblicz_stale_czasowe(dataMax) %>%
+  inner_join(kwartalnePkd) %>%
+  left_join(stale) %>%
+  left_join(kierunki %>% select_('rokdyp', 'kierunek_id', 'jednostka_id', 'kierunek_nazwa_pelna', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc')) %>%
+  left_join(uczelnie %>% select('uczelnia_id', 'uczelnia_rodzaj')) %>%
+  left_join(przygotuj_pkd()) %>%
+  rename_(kieruneknazwa = 'kierunek_nazwa_pelna', kierunek = 'kierunek_id', uczelnia = 'uczelnia_id')
+colnames(kwartalnePkd) = toupper(colnames(kwartalnePkd))
+save(kwartalnePkd, file = nazwa_pliku('daneKwartPkd', '.RData'), compress = TRUE)
+tmp = kwartalnePkd
+for (r in unique(kwartalnePkd$ROKDYP)) {
+  wszystko = tmp %>% filter(ROKDYP == r)
+  save(wszystko, file = nazwa_pliku('daneKwartPkd', '.RData', katZr, r), compress = TRUE)
+}
+rm(tmp, wszystko)

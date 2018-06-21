@@ -2,15 +2,17 @@
 #' @description Agreguje dane do poziomu {id, id_zdau, okres}
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}
 #' @param zdau dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}
+#' @param grupy lista zmiennych wyznaczających grupy (domyślnie 'id', 'id_zdau'
+#'   i 'okres')
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-agreguj_do_miesiecy = function(dane, zdau){
+agreguj_do_miesiecy = function(dane, zdau, grupy = c('id', 'id_zdau', 'okres')){
   stopifnot(
     methods::is(dane, 'tbl_spark') # Spark inaczej ewaluuje niektóre funkcje (np. n_distinct), co prowadziłoby do różnych wyników
   )
   dane = dane %>%
-    group_by_('id', 'id_zdau', 'okres') %>%
+    group_by_(.dots = grupy) %>%
     summarize_(
       len = ~as.integer(sum(as.integer(okres <= koniec | is.na(koniec)), na.rm = TRUE) > 0L),
       if_x_stprg = ~min(if_x_stprg, na.rm = TRUE), # wystarczyłoby wziąć pierwszą wartość, ale Spark nie zna first()

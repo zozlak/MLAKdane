@@ -1,16 +1,17 @@
 #' agreguje dane do poziomu {id, id_zdau}
 #' @description Agreguje dane do poziomu {id, id_zdau}
 #' @param dane dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}
+#' @param grupy lista zmiennych wyznaczających grupy (domyślnie 'id_zdau')
 #' @return data.frame wyliczone zmienne
 #' @export
 #' @import dplyr
-agreguj_do_okresu = function(dane){
+agreguj_do_okresu = function(dane, grupy = c('id_zdau')){
   stopifnot(
     methods::is(dane, 'tbl_spark') # Spark inaczej ewaluuje niektóre funkcje (np. n_distinct), co prowadziłoby do różnych wyników
   )
   dane = dane %>%
     filter_(~ okres >= okres_min & okres <= okres_max) %>%
-    group_by_('id_zdau') %>%
+    group_by_(.dots = grupy) %>%
     summarize_(
       len       = ~min(len, na.rm = TRUE),
       ezpow     = ~mean(ezpow, na.rm = TRUE),

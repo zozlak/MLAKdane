@@ -20,10 +20,6 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = 
     mutate_all(funs_('as.integer'))
   colnames(zus_tytuly_ubezp) = tolower(colnames(zus_tytuly_ubezp))
 
-  pkd = openxlsx::readWorkbook('dane/pkd.xlsx') %>%
-    select('pkd', 'pkd_klasa', 'pkd_klasa_edu') %>%
-    mutate_(pkd2 = ~substr(pkd, 1, 2))
-
   # dane ewidencyjne osoby
   zdu1 = przygotuj_zdu1(katZr)
 
@@ -118,7 +114,6 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = 
     left_join(zdu4 %>% select_('id_platnika', 'pkd', 'platnik_kon')) %>%
     left_join(zdu1 %>% select_('id', 'koniec'), copy = TRUE) %>%
     left_join(zus_tytuly_ubezp, copy = TRUE) %>%
-    left_join(pkd, copy = TRUE) %>%
     mutate_(
       okres       = ~as.integer(substr(okres, 1, 4)) * 12L + as.integer(substr(okres, 6, 7)),
       platnik_kon = ~as.integer(substr(platnik_kon, 1, 4)) * 12L + as.integer(substr(platnik_kon, 6, 7)),

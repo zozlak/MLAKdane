@@ -4,7 +4,8 @@
 \alias{przygotuj_kierunki}
 \title{Przygotowuje słownik kierunków}
 \usage{
-przygotuj_kierunki(katZr, agregujDoKierunku = TRUE, jednostki = NULL)
+przygotuj_kierunki(katZr, agregujDoKierunku = TRUE, jednostki = NULL,
+  zmiennaRok = "rok")
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
@@ -15,6 +16,8 @@ kierunek_id, jednostka_id})}
 
 \item{jednostki}{ramka danych opisująca jednostki (gdy NULL, zostanie
 wczytana automatycznie)}
+
+\item{zmiennaRok}{nazwa zmiennej z rokiem rekordu}
 }
 \value{
 [data.frame] ramka danych opisująca kierunki studiów

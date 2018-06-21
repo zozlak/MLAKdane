@@ -4,10 +4,12 @@
 \alias{agreguj_do_okresu}
 \title{agreguje dane do poziomu {id, id_zdau}}
 \usage{
-agreguj_do_okresu(dane)
+agreguj_do_okresu(dane, grupy = c("id_zdau"))
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{oblicz_okienko}}}
+
+\item{grupy}{lista zmiennych wyznaczających grupy (domyślnie 'id_zdau')}
 }
 \value{
 data.frame wyliczone zmienne

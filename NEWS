@@ -1,3 +1,22 @@
+# 0.12.0 (2018-06-21)
+
+* rozszerzenie funkcji agreguj_do_miesiecy() oraz agreguj_do_okresu()
+  o możliwość dowolnego zdefiniowania zmiennych grupujących (w praktyce
+  wykorzystywane przy liczeniu zbiorów w podziale na PKD)
+* dodanie funkcji przygotuj_pkd() zwracającej wykorzystywane klasyfikacje PKD
+* usunięcie dołączania klasyfikacji PKD z funkcji przygotuj_zus(),
+  dodatkowe klasyfikacje powinny być dodawane przy sklejaniu danych
+  w ostateczny zbiór, a nie na samym początku przygotowania danych
+* rozszerzenie funkcji przygotuj_kierunki() i przygotuj_jednostki()
+  o możliwość zdefiniowania nazwy zmiennej identyfikującej rok rekordu
+  (ułatwia złączanie zwracanych danych ze zbiorami o różnych konwencjach
+  nazewnictwa)
+* przepisanie kodu winietki Generowanie_danych.R we fragmentach dotyczących
+  zbioru kwartalnego i PKD, tak by korzystał z tych samych funkcji, co przy
+  generacji "standardowych" zbiorów (z kwartałami obliczanymi jako 12 okresów
+  3-miesięcznych plus okres "miesiąc uzyskania dyplomu")
+* usunięcie funkcji agreguj_pkd() - patrz poprzedni punkt
+
 # 0.11.4 (2018-06-05)
 
 * korekta poważnego błędu w generowaniu zmiennej VJPD dla odbiorców - kierunków

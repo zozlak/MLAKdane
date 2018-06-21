@@ -7,10 +7,11 @@
 #'   kierunek_id, jednostka_id})
 #' @param jednostki ramka danych opisująca jednostki (gdy NULL, zostanie
 #'   wczytana automatycznie)
+#' @param zmiennaRok nazwa zmiennej z rokiem rekordu
 #' @return [data.frame] ramka danych opisująca kierunki studiów
 #' @export
 #' @import dplyr
-przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL){
+przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL, zmiennaRok = 'rok'){
   kierunki = as.tbl(openxlsx::readWorkbook(paste0(katZr, '/KIERUNKI.xlsx')))
   colnames(kierunki) = tolower(colnames(kierunki))
   stopifnot(
@@ -153,5 +154,5 @@ przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL)
     stopifnot(kierunki %>% group_by_('rok', 'kierunek_id', 'jednostka_id') %>% filter_(~n() > 1) %>% nrow() == 0)
   }
 
-  return(kierunki)
+  return(kierunki %>% rename_(.dots = setNames(list('rok'), zmiennaRok)))
 }

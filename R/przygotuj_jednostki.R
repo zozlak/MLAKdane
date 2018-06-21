@@ -2,10 +2,11 @@
 #' @description
 #' Zwraca słownik jednostek
 #' @param katZr katalog, w którym znajduje się plik sl_instytucje.xlsx
+#' @param zmiennaRok nazwa zmiennej z rokiem rekordu
 #' @return [data.frame] ramka danych opisująca jednostki
 #' @export
 #' @import dplyr
-przygotuj_jednostki = function(katZr){
+przygotuj_jednostki = function(katZr, zmiennaRok = 'rok'){
   jednostki = as.tbl(openxlsx::readWorkbook(paste0(katZr, '/JEDNOSTKI.xlsx')))
   colnames(jednostki) = tolower(colnames(jednostki))
 
@@ -44,5 +45,5 @@ przygotuj_jednostki = function(katZr){
   stopifnot(jednostki %>% group_by_('rok', 'jednostka_id') %>% filter_(~n() > 1) %>% nrow() == 0)
 
   class(jednostki) = c('jednostki_df', class(jednostki))
-  return(jednostki)
+  return(jednostki %>% rename_(.dots = setNames(list('rok'), zmiennaRok)))
 }

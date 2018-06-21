@@ -4,12 +4,15 @@
 \alias{agreguj_do_miesiecy}
 \title{agreguje dane do poziomu {id, id_zdau, okres}}
 \usage{
-agreguj_do_miesiecy(dane, zdau)
+agreguj_do_miesiecy(dane, zdau, grupy = c("id", "id_zdau", "okres"))
 }
 \arguments{
 \item{dane}{dane wygenerowane za pomocą funkcji \code{\link{polacz_zus_zdau}}}
 
 \item{zdau}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zdau}}}
+
+\item{grupy}{lista zmiennych wyznaczających grupy (domyślnie 'id', 'id_zdau'
+i 'okres')}
 }
 \value{
 data.frame wyliczone zmienne
