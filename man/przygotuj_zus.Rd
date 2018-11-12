@@ -4,7 +4,8 @@
 \alias{przygotuj_zus}
 \title{Przygotowuje dane z ZUS}
 \usage{
-przygotuj_zus(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = TRUE)
+przygotuj_zus(katZr, dataMin, dataMax, pna, polSparka,
+  cacheTestow = TRUE)
 }
 \arguments{
 \item{katZr}{katalog, w którym znajduje się plik ZDUx.csv}

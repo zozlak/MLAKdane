@@ -8,6 +8,10 @@ read_csv_spark(sciezka, typyKolumn = NULL)
 }
 \arguments{
 \item{sciezka}{ścieżka do pliku/katalogu przechowującego dane}
+
+\item{typyKolumn}{opcjonalnie typy kolumn w formacie parametru
+\code{col_types} funkcji \code{\link[readr]{read_csv}} (d - double, i -
+integer, c - character)}
 }
 \value{
 data.frame

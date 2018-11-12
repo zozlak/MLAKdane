@@ -8,15 +8,13 @@ License: MIT + file LICENSE
 LazyData: TRUE
 Depends:
 Imports:
-    dplyr,
     methods,
+    dplyr,
     openxlsx,
     readr,
-    reshape2,
-    tidyr
+    tidyr,
+    sparklyr
 Suggests:
-    testthat,
-    multidplyr,
-    haven
+    testthat
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0

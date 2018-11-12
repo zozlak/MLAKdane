@@ -16,6 +16,7 @@ probka = 1
 pominCache = FALSE
 
 cores = 6
+Sys.setenv(JAVA_HOME = '/usr/lib/jvm/java-8-openjdk-amd64/')
 sc = spark_connect(
   master = 'local',
   config = list(
@@ -32,12 +33,12 @@ plikCache = nazwa_pliku('utrataPracy', '.csv')
 if (!file.exists(plikCache) | pominCache) {
   zdau = przygotuj_zdau(katZr, probka)
   zapisz_dla_sparka(zdau, 'zdau')
-  pnaPowiaty = przygotuj_pna_powiaty_mb(dataMin, dataMax)
+  pnaPowiaty = przygotuj_pna_powiaty(dataMin, dataMax)
   zapisz_dla_sparka(pnaPowiaty, 'pnaPowiaty')
   zus = przygotuj_zus(katZr, dataMin, dataMax, pnaPowiaty, sc)
   zapisz_ze_sparka(zus, 'zus')
   utrataPracy = przygotuj_utrata_pracy(zus, dataMax)
-  zapisz_dla_sparka(utrataPracy, 'utrataPracy')
+  zapisz_ze_sparka(utrataPracy, 'utrataPracy')
 }
 zdau = wczytaj_do_sparka(sc, 'zdau')
 pnaPowiaty = wczytaj_do_sparka(sc, 'pnaPowiaty')
@@ -128,7 +129,7 @@ kierunki = przygotuj_kierunki(katZr, TRUE, zmiennaRok = 'rokdyp')
 wszystko = zdau %>%
   filter_(~typ %in% 'A') %>%
   collect() %>%
-  oblicz_stale_czasowe(dataMax) %>%
+  konwertuj_daty(dataMax) %>%
   full_join(studyp) %>%
   full_join(czas) %>%
   full_join(stale) %>%
@@ -201,7 +202,7 @@ kwartalne = read_csv_spark(nazwa_pliku('daneKwart', '.csv'))
 kwartalne = zdau %>%
   filter_(~typ %in% 'A') %>%
   collect() %>%
-  oblicz_stale_czasowe(dataMax) %>%
+  konwertuj_daty(dataMax) %>%
   inner_join(kwartalne) %>%
   left_join(stale) %>%
   left_join(kierunki %>% select_('rok', 'kierunek_id', 'jednostka_id', 'kierunek_nazwa_pelna', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc')) %>%
@@ -250,7 +251,7 @@ kwartalnePkd = read_csv_spark(nazwa_pliku('daneKwartPkd', '.csv'))
 kwartalnePkd = zdau %>%
   filter_(~typ %in% 'A') %>%
   collect() %>%
-  oblicz_stale_czasowe(dataMax) %>%
+  konwertuj_daty(dataMax) %>%
   inner_join(kwartalnePkd) %>%
   left_join(stale) %>%
   left_join(kierunki %>% select_('rokdyp', 'kierunek_id', 'jednostka_id', 'kierunek_nazwa_pelna', 'obsz_kod', 'obsz', 'dzie_kod', 'dzie', 'dysc_kod', 'dysc')) %>%

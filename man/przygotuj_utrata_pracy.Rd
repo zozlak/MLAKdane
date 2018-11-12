@@ -5,16 +5,13 @@
 \title{oblicza zmienne utraty pracy, używane do wyliczania zmiennych NMLE, NMLEP
 oraz zmiennych czasowych}
 \usage{
-przygotuj_utrata_pracy(zus, dataMax, multidplyr = TRUE)
+przygotuj_utrata_pracy(zus, dataMax)
 }
 \arguments{
 \item{zus}{dane wygenerowane za pomocą funkcji \code{\link{przygotuj_zus}}}
 
 \item{dataMax}{koniec okresu uwzględnionego w danych ZUS (jako łańcuch
 znaków, np. '2015-09-30')}
-
-\item{multidplyr}{czy obliczać na wielu rdzeniach korzystając z pakietu
-multidplyr}
 }
 \value{
 data.frame wyliczone zmienne

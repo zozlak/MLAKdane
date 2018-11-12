@@ -1,13 +1,12 @@
-#' przygotowuje dane o PNA i powiatach na podstawie zbioru danych od Marka
-#' Bożykowskiego
+#' przygotowuje dane o PNA i powiatach
 #' @param dataMin początek okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2014-01-01')
 #' @param dataMax koniec okresu uwzględnionego w danych ZUS (jako łańcuch znaków, np. '2015-09-30')
 #' @return data.frame wyliczone dane
 #' @export
 #' @import dplyr
-przygotuj_pna_powiaty_mb = function(dataMin, dataMax){
+przygotuj_pna_powiaty = function(dataMin, dataMax){
   typy = readr::cols(pna5 = 'c', pna = 'i', teryt = 'i', id_gus = 'c', powiat = 'c', wojewodztwo = 'c', miejzam = 'i', 'klaszam' = 'i', .default = 'd')
-  dane = readr::read_csv2('dane/pna_powiaty_mb.csv', col_types = typy) %>%
+  dane = readr::read_csv2('dane/pna_powiaty.csv', col_types = typy) %>%
     mutate_(
       teryt = ~teryt * 100,
       pna5 = ~sub('#', '-', pna5)

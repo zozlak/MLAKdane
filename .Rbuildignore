@@ -1,7 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^dane$
-^cache$
-^dropbox$
+^dane/.*$
+^cache/.*$
+^dropbox/.*$
 ^vignettes/.*$
-^wiki$
+^wiki/.*$
+^derby.log$
+^logs/.*$

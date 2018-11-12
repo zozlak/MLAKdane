@@ -154,5 +154,5 @@ przygotuj_kierunki = function(katZr, agregujDoKierunku = TRUE, jednostki = NULL,
     stopifnot(kierunki %>% group_by_('rok', 'kierunek_id', 'jednostka_id') %>% filter_(~n() > 1) %>% nrow() == 0)
   }
 
-  return(kierunki %>% rename_(.dots = setNames(list('rok'), zmiennaRok)))
+  return(kierunki %>% rename_(.dots = stats::setNames(list('rok'), zmiennaRok)))
 }

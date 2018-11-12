@@ -1,10 +1,10 @@
-#' oblicza stałe czasowe i konwertuje istniejące stałe czasowe z powrotem na daty
+#' konwertuje istniejące stałe czasowe z powrotem na daty
 #' @param dane ramka danych ZDAU zwrócona przez funkcję \code{\link{przygotuj_zdau}}
 #' @param data_badania data konca badanego okresu
 #' @return data.frame
 #' @export
 #' @import dplyr
-oblicz_stale_czasowe = function(dane, data_badania){
+konwertuj_daty = function(dane, data_badania){
   dane = dane %>%
     collect() %>%
     mutate_(

@@ -123,9 +123,9 @@ pre_przygotuj_zus_zdau = function(katalog) {
     select_('-zbior')
 
   ## zapisz
-  write.table(zdau, paste0(katalog, '/ZDAU.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
-  write.table(zdu1, paste0(katalog, '/ZDU1.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
-  write.table(zdu2, paste0(katalog, '/ZDU2.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
-  write.table(zdu3, paste0(katalog, '/ZDU3.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
-  write.table(zdu4, paste0(katalog, '/ZDU4.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
+  utils::write.table(zdau, paste0(katalog, '/ZDAU.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
+  utils::write.table(zdu1, paste0(katalog, '/ZDU1.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
+  utils::write.table(zdu2, paste0(katalog, '/ZDU2.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
+  utils::write.table(zdu3, paste0(katalog, '/ZDU3.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
+  utils::write.table(zdu4, paste0(katalog, '/ZDU4.csv'), sep = ';', dec = '.', na = '', row.names = FALSE, col.names = FALSE)
 }

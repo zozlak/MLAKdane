@@ -4,7 +4,8 @@
 \alias{okienko}
 \title{tworzy obiekt opisujący okienko czasu}
 \usage{
-okienko(offsetMin, offsetMax, zmiennaMin, zmiennaMax, sufiks, dataMin, dataMax)
+okienko(offsetMin, offsetMax, zmiennaMin, zmiennaMax, sufiks, dataMin,
+  dataMax)
 }
 \arguments{
 \item{offsetMin}{pierwszy miesiąc okienka względem wartości zmiennej

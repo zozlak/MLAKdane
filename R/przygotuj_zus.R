@@ -97,7 +97,7 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = 
     select_('-data_od', '-data_do')
   if (cacheTestow) {
     zusA = sparklyr::sdf_register(zusA, 'zus')
-    tbl_cache(polSparka, 'zus')
+    sparklyr::tbl_cache(polSparka, 'zus')
   }
   # {id, id_platnika, okres, id_tytulu} nie jest unikalne!
   stopifnot(
@@ -106,7 +106,7 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = 
     # nie zgubiliśmy żadnego okresu składkowego
     unlist(zusA %>% summarize(n = n()) %>% collect()) == unlist(zdu3 %>% summarize(n = n()) %>% collect()),
     # wszyscy płatnicy są znani
-    unlist(zusA %>% filter(is.na(id_platnika)) %>% summarise(n = n()) %>% collect()) == 0
+    unlist(zusA %>% filter_(~is.na(id_platnika)) %>% summarise(n = n()) %>% collect()) == 0
   )
   #zdu3 %>% anti_join(zus %>% select(id, id_platnika, okres, id_tytulu)) %>% head()
 
@@ -134,7 +134,7 @@ przygotuj_zus = function(katZr, dataMin, dataMax, pna, polSparka, cacheTestow = 
         mutate_(popr_pna = TRUE),
       copy = TRUE
     )
-  test = zusC %>% filter(is.na(popr_pna)) %>% select_('pna') %>% collect()
+  test = zusC %>% filter_(~is.na(popr_pna)) %>% select_('pna') %>% collect()
   if (nrow(test) > 0) {
     test = test %>% distinct() %>% arrange_('pna')
     warning('Błędne kody pocztowe w ', nrow(test), ' rekordach: ', paste0(test$pna, collapse = ', '))

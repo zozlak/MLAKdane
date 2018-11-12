@@ -4,8 +4,8 @@
 \alias{pokaz_roznice}
 \title{Odfiltrowuje rekordy z różnicami wartości wskazanej zmiennej}
 \usage{
-pokaz_roznice(dane, zmienna, zmienneId = c("id_zdau", "id", "ID_ZDAU", "ID",
-  "okres", "OKRES", "id_zdu3"), tolerancja = 1e-05)
+pokaz_roznice(dane, zmienna, zmienneId = c("id_zdau", "id", "ID_ZDAU",
+  "ID", "okres", "OKRES", "id_zdu3"), tolerancja = 1e-05)
 }
 \arguments{
 \item{dane}{zbiór danych}
