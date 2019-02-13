@@ -1,3 +1,8 @@
+# 0.13.0 (2019-02-13)
+
+* uporządkowanie pakietu - usunięcie przestarzałych funkcji, poprawki w
+  dokumentacji, przepisanie przygotuj_utrata_pracy() na Spark-a
+
 # 0.12.0 (2018-06-21)
 
 * rozszerzenie funkcji agreguj_do_miesiecy() oraz agreguj_do_okresu()

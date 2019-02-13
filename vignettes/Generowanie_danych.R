@@ -37,6 +37,7 @@ if (!file.exists(plikCache) | pominCache) {
   zapisz_dla_sparka(pnaPowiaty, 'pnaPowiaty')
   zus = przygotuj_zus(katZr, dataMin, dataMax, pnaPowiaty, sc)
   zapisz_ze_sparka(zus, 'zus')
+  zus = wczytaj_do_sparka(sc, 'zus') # z nieznanego powodu pierwsza operacja na "zus" po przygotuj_zus() (tu zapisz_ze_sparka()) czyści zmienną "okres" i trzeba ponownie wczytać zbiór, żeby ją odzyskać
   utrataPracy = przygotuj_utrata_pracy(zus, dataMax)
   zapisz_ze_sparka(utrataPracy, 'utrataPracy')
 }

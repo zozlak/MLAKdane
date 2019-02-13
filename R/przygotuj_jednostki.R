@@ -1,7 +1,7 @@
 #' Przygotowuje słownik jednostek
 #' @description
 #' Zwraca słownik jednostek
-#' @param katZr katalog, w którym znajduje się plik sl_instytucje.xlsx
+#' @param katZr katalog, w którym znajduje się plik JEDNOSTKI.xlsx
 #' @param zmiennaRok nazwa zmiennej z rokiem rekordu
 #' @return [data.frame] ramka danych opisująca jednostki
 #' @export

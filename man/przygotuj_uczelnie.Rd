@@ -7,7 +7,8 @@
 przygotuj_uczelnie(katZr)
 }
 \arguments{
-\item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
+\item{katZr}{katalog, w którym znajduje się pliki UCZELNIE.xlsx oraz
+UCZELNIE_MUNDUROWE.xlsx}
 }
 \value{
 [data.frame] ramka danych opisująca uczelnie

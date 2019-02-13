@@ -1,7 +1,7 @@
 #' Przygotowuje słownik kierunków
 #' @description
 #' Zwraca słownik kierunków studiów
-#' @param katZr katalog, w którym znajduje się plik sl_instytucje.xlsx
+#' @param katZr katalog, w którym znajduje się plik KIERUNKI.xlsx
 #' @param agregujDoKierunku czy agregować dane tak by {rok, kierunek_id} były
 #'   unikalne (jeśli FALSE, agregacja nastapi do unikalności na poziomie {rok,
 #'   kierunek_id, jednostka_id})

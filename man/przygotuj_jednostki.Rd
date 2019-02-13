@@ -7,7 +7,7 @@
 przygotuj_jednostki(katZr, zmiennaRok = "rok")
 }
 \arguments{
-\item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
+\item{katZr}{katalog, w którym znajduje się plik JEDNOSTKI.xlsx}
 
 \item{zmiennaRok}{nazwa zmiennej z rokiem rekordu}
 }

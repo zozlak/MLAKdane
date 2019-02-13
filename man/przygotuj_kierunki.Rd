@@ -8,7 +8,7 @@ przygotuj_kierunki(katZr, agregujDoKierunku = TRUE, jednostki = NULL,
   zmiennaRok = "rok")
 }
 \arguments{
-\item{katZr}{katalog, w którym znajduje się plik sl_instytucje.xlsx}
+\item{katZr}{katalog, w którym znajduje się plik KIERUNKI.xlsx}
 
 \item{agregujDoKierunku}{czy agregować dane tak by {rok, kierunek_id} były
 unikalne (jeśli FALSE, agregacja nastapi do unikalności na poziomie {rok,

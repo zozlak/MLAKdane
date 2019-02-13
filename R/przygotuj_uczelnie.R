@@ -1,7 +1,8 @@
 #' Przygotowuje słownik uczelni
 #' @description
 #' Zwraca słownik uczelni
-#' @param katZr katalog, w którym znajduje się plik sl_instytucje.xlsx
+#' @param katZr katalog, w którym znajduje się pliki UCZELNIE.xlsx oraz
+#'   UCZELNIE_MUNDUROWE.xlsx
 #' @return [data.frame] ramka danych opisująca uczelnie
 #' @export
 #' @import dplyr
