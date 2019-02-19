@@ -1,4 +1,4 @@
-# 0.13.0 (2019-02-13)
+# 0.13.1 (2019-02-19)
 
 * uporządkowanie pakietu - usunięcie przestarzałych funkcji, poprawki w
   dokumentacji, przepisanie przygotuj_utrata_pracy() na Spark-a

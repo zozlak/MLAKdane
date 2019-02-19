@@ -19,7 +19,7 @@ przygotuj_utrata_pracy = function(zus, dataMax){
       praca       = ~as.integer(sum(etat + netat + samoz, na.rm = TRUE)),
       prawnik     = ~as.integer(sum(prawnik, na.rm = TRUE)),
       mundur      = ~as.integer(sum(mundur, na.rm = TRUE)),
-      platnik_kon = ~first(platnik_kon)
+      platnik_kon = ~min(platnik_kon, na.rm = TRUE) # Spark nie zna first()/last()
     ) %>%
     arrange_('okres') %>%
     mutate_(dataMax = dataMaxOkres) %>%

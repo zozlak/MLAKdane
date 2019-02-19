@@ -18,9 +18,9 @@ porownaj = function(a, b, zmiennaA, zmiennaB = zmiennaA, id = c('ID_ZDAU', 'ID')
         select_(.dots = c(zmiennaB, id)) %>%
         rename_(b = zmiennaB)
     ) %>%
+    mutate_(ab = ~a - b) %>%
     mutate_(
-      d = ~a - b,
-      d = ~ifelse(is.na(d) & is.na(a) & is.na(b), 0, d)
+      ab = ~ifelse(is.na(ab) & is.na(a) & is.na(b), 0, ab)
     )
   return(wynik)
 }
